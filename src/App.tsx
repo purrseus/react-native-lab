@@ -1,12 +1,11 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { FC } from 'react';
+import RootNavigator from '@navigators/stacks/RootNavigator';
+import AppProvider from '@providers/AppProvider';
 
-const App = () => {
-  return (
-    <View>
-      <Text>App</Text>
-    </View>
-  );
-};
+const App: FC = () => (
+  <AppProvider>
+    <RootNavigator />
+  </AppProvider>
+);
 
 export default App;
