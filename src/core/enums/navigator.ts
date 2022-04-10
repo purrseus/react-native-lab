@@ -11,7 +11,7 @@ export enum AppRouteName {
 
 export enum TabRouteName {
   Home = 'Home',
-  Chats = 'Chats',
+  Messages = 'Messages',
   Notification = 'Notification',
   Profile = 'Profile',
 }
