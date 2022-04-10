@@ -6,6 +6,7 @@ import { UIManager } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import NavigationProvider from './NavigationProvider';
+import StoreProvider from './StoreProvider';
 
 if (isAndroid() && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -13,14 +14,16 @@ if (isAndroid() && UIManager.setLayoutAnimationEnabledExperimental) {
 
 const AppProvider: FC = ({ children }) => {
   return (
-    <SafeAreaProvider>
-      <GestureHandlerRootView style={commonStyles.flexFill}>
-        <NavigationProvider>
-          <StyledStatusBar />
-          {children}
-        </NavigationProvider>
-      </GestureHandlerRootView>
-    </SafeAreaProvider>
+    <StoreProvider>
+      <SafeAreaProvider>
+        <GestureHandlerRootView style={commonStyles.flexFill}>
+          <NavigationProvider>
+            <StyledStatusBar />
+            {children}
+          </NavigationProvider>
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
+    </StoreProvider>
   );
 };
 
