@@ -3,10 +3,13 @@ export const colors = {
   white: '#ffffff',
   transparent: 'transparent',
   darkGray: '#888888',
+  lightGray: '#DEDEDE',
   purple: '#4c37a6',
   orange: '#ff9e50',
   red: '#e14e50',
   blue: '#3593f7',
+  primary: '#06d283',
+  secondary: '#06e273',
 };
 
 export const lightTheme = {
@@ -16,6 +19,7 @@ export const lightTheme = {
   shadowTabBar: '#000000',
   background: '#FFFFFF',
   primaryText: '#3B3B3B',
+  backgroundImage: '#C4C4C4',
 };
 
 export const darkTheme = {
@@ -23,6 +27,7 @@ export const darkTheme = {
   tabBlur: '#888888',
   tabBarBackground: '#111111',
   shadowTabBar: '#EFEFEF',
-  background: '#222222',
+  background: '#000000',
   primaryText: '#FFFFFF',
+  backgroundImage: '#343434',
 };

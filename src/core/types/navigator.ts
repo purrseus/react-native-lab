@@ -14,7 +14,7 @@ export type AppStackParamList = {
 
 export type BottomTabParamList = {
   [TabRouteName.Home]: undefined;
-  [TabRouteName.Chats]: undefined;
+  [TabRouteName.Messages]: undefined;
   [TabRouteName.Notification]: undefined;
   [TabRouteName.Profile]: undefined;
 };
