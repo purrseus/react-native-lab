@@ -10,12 +10,12 @@ const Home: TabScreen<TabRouteName.Home> = ({ navigation }) => {
     <View style={commonStyles.flexCenter}>
       {/*  style={commonStyles.flexCenter} */}
       <StyledImage
-        cached
+        // cached
         source={{
           uri: 'https://images.pexels.com/photos/2486168/pexels-photo-2486168.jpeg',
         }}
         expectWidth={240}
-        expectHeight={200}
+        // expectHeight={200}
       />
       <Text>Home</Text>
       <Button

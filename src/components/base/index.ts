@@ -6,3 +6,4 @@ export { default as StyledText } from './StyledText';
 export { default as Divider } from './Divider';
 export { default as StyledActivityIndicator } from './StyledActivityIndicator';
 export { default as StyledImage } from './StyledImage';
+export { default as StyledIcon } from './StyledIcon';

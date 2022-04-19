@@ -1,11 +1,14 @@
+/* eslint-disable no-console */
 import { CommonSize } from '@core/interfaces';
 import { Language } from '@core/types';
+import { FC, memo } from 'react';
+import isEqual from 'react-fast-compare';
 import { ColorValue, Insets, Platform } from 'react-native';
 import { getLocales } from 'react-native-localize';
 
-export const isAndroid = () => Platform.OS === 'android';
+export const isAndroid = Platform.OS === 'android';
 
-export const isIos = () => Platform.OS === 'ios';
+export const isIos = Platform.OS === 'ios';
 
 export const randomColorGenerator = (): ColorValue => `#${Math.random().toString(16).slice(-6)}`;
 
@@ -41,4 +44,22 @@ export const resizeImage = (
   const dimensionTarget = (sizeType === 'width' ? currentWidth : currentHeight) || 1;
   const scale = expectSize / dimensionTarget;
   return { width: currentWidth * scale, height: currentHeight * scale };
+};
+
+export const comparedMemo = <T>(Component: FC<T>) => memo(Component, isEqual);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const logger = (message: any, ...optionalParams: any[]) => {
+  if (typeof message === 'object') {
+    console.log(
+      JSON.stringify(
+        { logger_message_key: message, logger_optionalParams_key: optionalParams },
+        null,
+        2,
+      ),
+    );
+    return;
+  }
+
+  console.log(message, ...optionalParams);
 };

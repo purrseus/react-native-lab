@@ -1,14 +1,12 @@
 import { CommonSize, StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { resizeImage } from '@utilities';
+import { logger, resizeImage } from '@utilities';
 import React, { useCallback, useState } from 'react';
 import {
   AccessibilityProps,
   Image,
   ImageLoadEventData,
   ImageProps,
-  ImageResizeMode,
-  ImageSourcePropType,
   ImageStyle,
   ImageURISource,
   NativeSyntheticEvent,
@@ -17,52 +15,61 @@ import {
 } from 'react-native';
 import FastImage, {
   FastImageProps,
-  OnLoadEvent,
-  ResizeMode,
-  Source,
   ImageStyle as FastImageStyle,
+  OnLoadEvent,
+  Source,
 } from 'react-native-fast-image';
 
-type ImageURI<T> = T extends true ? Source : ImageURISource;
-type ImageProp<T, K extends keyof FastImageProps & keyof ImageProps> = T extends true
-  ? FastImageProps[K]
-  : ImageProps[K];
-type OnlyFastImageProp<T, K extends keyof FastImageProps> = T extends true
-  ? FastImageProps[K]
-  : undefined;
+type RewrittenImagePropKeys =
+  | 'source'
+  | 'resizeMode'
+  | 'onLoadStart'
+  | 'onLoad'
+  | 'onError'
+  | 'onLoadEnd'
+  | 'style';
 
-export interface StyledImageProps<T extends boolean>
+type OnlyFastImagePropKeys = 'fallback' | 'tintColor';
+
+type ImageURI<C> = C extends true ? Source : ImageURISource;
+
+type RewrittenImageProps<C, Key extends keyof FastImageProps & keyof ImageProps> = {
+  [K in Key]: C extends true ? FastImageProps[K] : ImageProps[K];
+};
+
+type OnlyFastImageProps<C, Key extends keyof FastImageProps> = {
+  [K in Key]: C extends true ? FastImageProps[K] : undefined;
+};
+
+type RewrittenProps<C> = Partial<
+  RewrittenImageProps<C, RewrittenImagePropKeys> & OnlyFastImageProps<C, OnlyFastImagePropKeys>
+> &
+  RewrittenImageProps<C, 'source'>;
+
+interface StyledImageProps<C extends boolean>
   extends Omit<ImageProps, keyof FastImageProps>,
     AccessibilityProps,
     ViewProps {
   fullSize?: boolean;
   expectWidth?: number;
   expectHeight?: number;
-  cached?: T;
-  source: ImageProp<T, 'source'>;
-  resizeMode?: ImageProp<T, 'resizeMode'>;
-  onLoadStart?: ImageProp<T, 'onLoadStart'>;
-  onLoad?: ImageProp<T, 'onLoad'>;
-  onError?: ImageProp<T, 'onError'>;
-  onLoadEnd?: ImageProp<T, 'onLoadEnd'>;
-  style?: ImageProp<T, 'style'>;
-  fallback?: OnlyFastImageProp<T, 'fallback'>;
-  tintColor?: OnlyFastImageProp<T, 'tintColor'>;
+  cached?: C;
 }
 
-function StyledImage<T extends boolean = false>({
+export type RewrittenStyledImageProps<C extends boolean> = StyledImageProps<C> & RewrittenProps<C>;
+
+function StyledImage<C extends boolean = false>({
   style,
   expectWidth,
   expectHeight,
   fullSize = false,
   cached,
-  source,
-  resizeMode,
   onLoad,
   ...props
-}: StyledImageProps<T>) {
+}: RewrittenStyledImageProps<C>) {
   const fixedSize = typeof expectWidth === 'number' && typeof expectHeight === 'number';
-  const sourceImage = typeof source === 'number' ? source : { uri: (source as ImageURI<T>).uri };
+  const sourceImage =
+    typeof props.source === 'number' ? props.source : { uri: (props.source as ImageURI<C>).uri };
   const { uri: imageURI } = Image.resolveAssetSource(sourceImage);
 
   const styles = useStyle(styleCallback);
@@ -70,6 +77,17 @@ function StyledImage<T extends boolean = false>({
     width: 1,
     height: 1,
   });
+
+  const createImageStyle = useCallback(
+    function <T>() {
+      return [
+        fixedSize ? { width: expectWidth, height: expectHeight } : imageSize,
+        styles.image,
+        style as T,
+      ];
+    },
+    [expectWidth, expectHeight, fixedSize, imageSize, style, styles.image],
+  );
 
   const createDynamicSize = useCallback(
     (width: number, height: number) =>
@@ -88,7 +106,11 @@ function StyledImage<T extends boolean = false>({
     (event: OnLoadEvent | NativeSyntheticEvent<ImageLoadEventData>) => {
       onLoad?.(event as OnLoadEvent & NativeSyntheticEvent<ImageLoadEventData>);
       if (fixedSize) return;
-      Image.getSize(imageURI, (width, height) => setImageSize(createDynamicSize(width, height))); // TODO: logger
+      Image.getSize(
+        imageURI,
+        (width, height) => setImageSize(createDynamicSize(width, height)),
+        logger,
+      );
     },
     [imageURI, fixedSize, createDynamicSize, onLoad],
   );
@@ -96,27 +118,15 @@ function StyledImage<T extends boolean = false>({
   return cached ? (
     <FastImage
       {...(props as FastImageProps)}
-      source={source as FastImageProps['source']}
-      resizeMode={resizeMode as ResizeMode}
       onLoad={handleOnLoad as FastImageProps['onLoad']}
-      style={[
-        fixedSize ? { width: expectWidth, height: expectHeight } : imageSize,
-        styles.image,
-        style as StyleProp<FastImageStyle>,
-      ]}
+      style={createImageStyle<StyleProp<FastImageStyle>>()}
     />
   ) : (
     <Image
+      {...(props as ImageProps)}
       onLoad={handleOnLoad as ImageProps['onLoad']}
       progressiveRenderingEnabled
-      source={source as ImageSourcePropType}
-      resizeMode={resizeMode as ImageResizeMode}
-      {...props}
-      style={[
-        fixedSize ? { width: expectWidth, height: expectHeight } : imageSize,
-        styles.image,
-        style as StyleProp<ImageStyle>,
-      ]}
+      style={createImageStyle<StyleProp<ImageStyle>>()}
     />
   );
 }
