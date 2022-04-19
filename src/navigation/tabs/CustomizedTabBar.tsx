@@ -1,5 +1,5 @@
 import { icons } from '@assets';
-import { LocalizedText } from '@components/base';
+import { LocalizedText, StyledIcon } from '@components/base';
 import { TAB_BAR_HEIGHT } from '@core/constants';
 import { TabRouteName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
@@ -8,7 +8,7 @@ import { useStyle } from '@hooks';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { colors as Colors, commonStyles } from '@themes';
 import React, { FC } from 'react';
-import { ColorValue, Image, ImageRequireSource, TouchableOpacity, View } from 'react-native';
+import { ColorValue, ImageRequireSource, TouchableOpacity, View } from 'react-native';
 
 interface TabUI {
   icon: ImageRequireSource;
@@ -90,9 +90,11 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
               onLongPress={onLongPress}
               style={commonStyles.flexCenter}
             >
-              <Image
+              <StyledIcon
+                size={24}
                 source={isFocused ? focusedIcon : icon}
-                style={[styles.icon, isFocused && { tintColor: focusedColor }]}
+                tintColor={isFocused ? (focusedColor as string) : styles.icon.tintColor}
+                style={styles.icon}
               />
               <LocalizedText
                 style={[styles.label, isFocused && [{ color: focusedColor }, styles.focusedLabel]]}
@@ -127,8 +129,6 @@ const styleCallback = ({ colors, create, edgeInsets }: StyleCallbackParams) =>
       backgroundColor: colors.tabBarBackground,
     },
     icon: {
-      width: 24,
-      height: 24,
       tintColor: colors.tabBlur,
     },
     label: {

@@ -3,34 +3,26 @@ import { Keyboard, KeyboardEventListener } from 'react-native';
 import { isAndroid, isIos } from '@utilities';
 
 const useKeyboard = () => {
-  const android = isAndroid();
-  const ios = isIos();
   const [keyboardShown, setKeyboardShown] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
 
-  const handleKeyboardWillShow: KeyboardEventListener = useCallback(
-    event => {
-      if (ios) setKeyboardHeight(event.endCoordinates.height);
-    },
-    [ios],
-  );
+  const handleKeyboardWillShow: KeyboardEventListener = useCallback(event => {
+    if (isIos) setKeyboardHeight(event.endCoordinates.height);
+  }, []);
 
-  const handleKeyboardDidShow: KeyboardEventListener = useCallback(
-    event => {
-      setKeyboardShown(true);
-      if (android) setKeyboardHeight(event.endCoordinates.height);
-    },
-    [android],
-  );
+  const handleKeyboardDidShow: KeyboardEventListener = useCallback(event => {
+    setKeyboardShown(true);
+    if (isAndroid) setKeyboardHeight(event.endCoordinates.height);
+  }, []);
 
   const handleKeyboardWillHide: KeyboardEventListener = useCallback(() => {
-    if (ios) setKeyboardHeight(0);
-  }, [ios]);
+    if (isIos) setKeyboardHeight(0);
+  }, []);
 
   const handleKeyboardDidHide: KeyboardEventListener = useCallback(() => {
     setKeyboardShown(false);
-    if (android) setKeyboardHeight(0);
-  }, [android]);
+    if (isAndroid) setKeyboardHeight(0);
+  }, []);
 
   useEffect(() => {
     const subscriptions = [

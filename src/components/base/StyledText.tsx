@@ -1,6 +1,6 @@
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { createHitSlop } from '@utilities';
+import { comparedMemo, createHitSlop } from '@utilities';
 import React, { FC } from 'react';
 import { Text, TextProps, TouchableOpacity } from 'react-native';
 
@@ -9,7 +9,7 @@ export interface StyledTextProps extends TextProps {
   hitSlop?: number;
 }
 
-const StyledText: FC<StyledTextProps> = ({ text, style, onPress, hitSlop, ...props }) => {
+const StyledText = comparedMemo<StyledTextProps>(({ text, style, onPress, hitSlop, ...props }) => {
   const hitSlopInsets = createHitSlop(hitSlop);
   const styles = useStyle(styleCallback);
 
@@ -26,7 +26,7 @@ const StyledText: FC<StyledTextProps> = ({ text, style, onPress, hitSlop, ...pro
   ) : (
     <TextComponent />
   );
-};
+});
 
 const styleCallback = ({ create, colors }: StyleCallbackParams) =>
   create({
