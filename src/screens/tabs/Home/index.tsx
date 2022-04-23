@@ -1,32 +1,37 @@
-import { StyledImage, StyledText } from '@components/base';
-import { AppRouteName, TabRouteName } from '@core/enums';
+import { Divider, Image, Text } from '@components/base';
+import { AppScreenName, TabScreenName } from '@core/enums';
 import { TabScreen } from '@core/types';
 import { commonStyles } from '@themes';
+import { logger } from '@utilities';
 import React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, View } from 'react-native';
 
-const Home: TabScreen<TabRouteName.Home> = ({ navigation }) => {
+const Home: TabScreen<TabScreenName.Home> = ({ navigation }) => {
   return (
     <View style={commonStyles.flexCenter}>
-      {/*  style={commonStyles.flexCenter} */}
-      <StyledImage
+      <Image
         // cached
+        // fullSize
         source={{
           uri: 'https://images.pexels.com/photos/2486168/pexels-photo-2486168.jpeg',
         }}
         expectWidth={240}
-        // expectHeight={200}
+        expectHeight={200}
       />
-      <Text>Home</Text>
+
       <Button
         title="Navigate to Categories"
-        onPress={() => navigation.navigate(AppRouteName.Categories)}
+        onPress={() => navigation.navigate(AppScreenName.Categories)}
       />
+
       <Button
         title="Navigate to Settings"
-        onPress={() => navigation.navigate(AppRouteName.Settings)}
+        onPress={() => navigation.navigate(AppScreenName.Settings)}
       />
-      <StyledText text="sdsd" onPress={() => null} />
+
+      <Text text="Hello" onPress={() => logger([123, 'asd', true])} />
+
+      <Divider />
     </View>
   );
 };

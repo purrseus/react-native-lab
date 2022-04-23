@@ -1,4 +1,4 @@
-import { AppRouteName } from '@core/enums';
+import { AppScreenName } from '@core/enums';
 import { AppStackParamList } from '@core/types';
 import { useStyle } from '@hooks';
 import { stackScreenOptions } from '@navigation/options';
@@ -16,11 +16,11 @@ const AppNavigator: FC = () => {
   return (
     <RootStack.Navigator
       screenOptions={{ ...stackScreenOptions, contentStyle: styles.screenStyle }}
-      initialRouteName={AppRouteName.BottomTab}
+      initialRouteName={AppScreenName.BottomTab}
     >
-      <RootStack.Screen name={AppRouteName.BottomTab} component={BottomTabBar} />
-      <RootStack.Screen name={AppRouteName.Categories} component={Categories} />
-      <RootStack.Screen name={AppRouteName.Settings} component={Settings} />
+      <RootStack.Screen name={AppScreenName.BottomTab} component={BottomTabBar} />
+      <RootStack.Screen name={AppScreenName.Categories} component={Categories} />
+      <RootStack.Screen name={AppScreenName.Settings} component={Settings} />
     </RootStack.Navigator>
   );
 };

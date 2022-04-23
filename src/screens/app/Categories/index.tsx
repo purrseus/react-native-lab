@@ -1,10 +1,10 @@
-import { AppRouteName } from '@core/enums';
+import { AppScreenName } from '@core/enums';
 import { AppScreen } from '@core/types';
 import { commonStyles } from '@themes';
 import React from 'react';
 import { Button, Text, View } from 'react-native';
 
-const Categories: AppScreen<AppRouteName.Categories> = ({ navigation }) => {
+const Categories: AppScreen<AppScreenName.Categories> = ({ navigation }) => {
   return (
     <View style={commonStyles.flexCenter}>
       <Text>Categories</Text>

@@ -1,4 +1,4 @@
-import { AuthRouteName } from '@core/enums';
+import { AuthScreenName } from '@core/enums';
 import { AuthStackParamList } from '@core/types';
 import { useStyle } from '@hooks';
 import { stackScreenOptions } from '@navigation/options';
@@ -15,10 +15,10 @@ const AuthNavigator: FC = () => {
   return (
     <RootStack.Navigator
       screenOptions={{ ...stackScreenOptions, contentStyle: styles.screenStyle }}
-      initialRouteName={AuthRouteName.Login}
+      initialRouteName={AuthScreenName.Login}
     >
-      <RootStack.Screen name={AuthRouteName.Login} component={Login} />
-      <RootStack.Screen name={AuthRouteName.Register} component={Register} />
+      <RootStack.Screen name={AuthScreenName.Login} component={Login} />
+      <RootStack.Screen name={AuthScreenName.Register} component={Register} />
     </RootStack.Navigator>
   );
 };

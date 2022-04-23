@@ -1,4 +1,4 @@
-import { TabRouteName } from '@core/enums';
+import { TabScreenName } from '@core/enums';
 import { BottomTabParamList } from '@core/types';
 import { useStyle } from '@hooks';
 import { tabScreenOptions } from '@navigation/options';
@@ -15,15 +15,15 @@ const BottomTabBar: FC = () => {
 
   return (
     <BottomTab.Navigator
-      initialRouteName={TabRouteName.Home}
+      initialRouteName={TabScreenName.Home}
       screenOptions={tabScreenOptions}
       sceneContainerStyle={styles.screenStyle}
       tabBar={props => <CustomizedTabBar {...props} />}
     >
-      <BottomTab.Screen name={TabRouteName.Home} component={Home} />
-      <BottomTab.Screen name={TabRouteName.Messages} component={Messages} />
-      <BottomTab.Screen name={TabRouteName.Notification} component={Notification} />
-      <BottomTab.Screen name={TabRouteName.Profile} component={Profile} />
+      <BottomTab.Screen name={TabScreenName.Home} component={Home} />
+      <BottomTab.Screen name={TabScreenName.Messages} component={Messages} />
+      <BottomTab.Screen name={TabScreenName.Notification} component={Notification} />
+      <BottomTab.Screen name={TabScreenName.Profile} component={Profile} />
     </BottomTab.Navigator>
   );
 };

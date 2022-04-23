@@ -3,16 +3,16 @@ import { comparedMemo } from '@utilities';
 import { StringMap } from 'i18next';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import StyledText, { StyledTextProps } from './StyledText';
+import Text, { TextProps } from './Text';
 
-interface LocalizedTextProps extends StyledTextProps {
+interface LocalizedTextProps extends TextProps {
   text: I18nText;
   i18nOptions?: StringMap;
 }
 const LocalizedText = comparedMemo<LocalizedTextProps>(({ text, i18nOptions, ...props }) => {
   const { t } = useTranslation();
 
-  return <StyledText {...props} text={t(text as I18nText, i18nOptions) as string} />;
+  return <Text {...props} text={t(text as I18nText, i18nOptions) as string} />;
 });
 
 export default LocalizedText;

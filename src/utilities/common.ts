@@ -51,13 +51,8 @@ export const comparedMemo = <T>(Component: FC<T>) => memo(Component, isEqual);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const logger = (message: any, ...optionalParams: any[]) => {
   if (typeof message === 'object') {
-    console.log(
-      JSON.stringify(
-        { logger_message_key: message, logger_optionalParams_key: optionalParams },
-        null,
-        2,
-      ),
-    );
+    const params = optionalParams.length ? ['\n[Logger] Optional Params:', optionalParams] : [];
+    console.log('[Logger] Message:', JSON.stringify(message, null, 2), ...params);
     return;
   }
 

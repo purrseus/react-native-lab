@@ -2,31 +2,26 @@
 import { colors } from '@themes';
 import { comparedMemo } from '@utilities';
 import React from 'react';
-import { ColorValue, View, ViewProps } from 'react-native';
+import { ColorValue, View, ViewStyle } from 'react-native';
 
-export interface DividerProps extends ViewProps {
+type DividerPropKeys = 'width' | 'borderRadius' | 'marginHorizontal' | 'marginVertical';
+
+export interface DividerProps extends Pick<ViewStyle, DividerPropKeys> {
   color?: ColorValue;
-  width?: number;
   height?: number;
-  borderRadius?: number;
-  spacing?: number;
 }
 
-const Divider = comparedMemo<DividerProps>(
-  ({ color = colors.darkGray, width, height = 1, borderRadius = 0, spacing = 0 }) => {
-    return (
-      <View
-        style={{
-          width,
-          borderRadius,
-          borderColor: color,
-          borderTopWidth: height,
-          marginHorizontal: spacing,
-          alignSelf: 'stretch',
-        }}
-      />
-    );
-  },
-);
+const Divider = comparedMemo<DividerProps>(({ color = colors.darkGray, height = 1, ...props }) => {
+  return (
+    <View
+      style={{
+        borderColor: color,
+        borderWidth: height / 2,
+        alignSelf: 'stretch',
+        ...props,
+      }}
+    />
+  );
+});
 
 export default Divider;
