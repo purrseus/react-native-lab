@@ -1,9 +1,10 @@
 export { default as LocalizedText } from './LocalizedText';
 export { default as Row } from './Row';
 export { default as Spacer } from './Spacer';
-export { default as StyledStatusBar } from './StyledStatusBar';
-export { default as StyledText } from './StyledText';
+export { default as StatusBar } from './StatusBar';
+export { default as Text } from './Text';
 export { default as Divider } from './Divider';
-export { default as StyledActivityIndicator } from './StyledActivityIndicator';
-export { default as StyledImage } from './StyledImage';
-export { default as StyledIcon } from './StyledIcon';
+export { default as ActivityIndicator } from './ActivityIndicator';
+export { default as Image } from './Image';
+export { default as Icon } from './Icon';
+export { default as Touchable } from './Touchable';

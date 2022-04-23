@@ -4,9 +4,9 @@ import { logger, resizeImage } from '@utilities';
 import React, { useCallback, useState } from 'react';
 import {
   AccessibilityProps,
-  Image,
+  Image as RNImage,
   ImageLoadEventData,
-  ImageProps,
+  ImageProps as RNImageProps,
   ImageStyle,
   ImageURISource,
   NativeSyntheticEvent,
@@ -20,7 +20,7 @@ import FastImage, {
   Source,
 } from 'react-native-fast-image';
 
-type RewrittenImagePropKeys =
+type CombinedImagePropKeys =
   | 'source'
   | 'resizeMode'
   | 'onLoadStart'
@@ -29,25 +29,25 @@ type RewrittenImagePropKeys =
   | 'onLoadEnd'
   | 'style';
 
-type OnlyFastImagePropKeys = 'fallback' | 'tintColor';
+type CachedImagePropKeys = 'fallback' | 'tintColor';
 
 type ImageURI<C> = C extends true ? Source : ImageURISource;
 
-type RewrittenImageProps<C, Key extends keyof FastImageProps & keyof ImageProps> = {
-  [K in Key]: C extends true ? FastImageProps[K] : ImageProps[K];
+type CombinedImageProps<C, Key extends keyof FastImageProps & keyof RNImageProps> = {
+  [K in Key]: C extends true ? FastImageProps[K] : RNImageProps[K];
 };
 
-type OnlyFastImageProps<C, Key extends keyof FastImageProps> = {
+type CachedImageProps<C, Key extends keyof FastImageProps> = {
   [K in Key]: C extends true ? FastImageProps[K] : undefined;
 };
 
-type RewrittenProps<C> = Partial<
-  RewrittenImageProps<C, RewrittenImagePropKeys> & OnlyFastImageProps<C, OnlyFastImagePropKeys>
+type AdditionalImageProps<C> = Partial<
+  CombinedImageProps<C, CombinedImagePropKeys> & CachedImageProps<C, CachedImagePropKeys>
 > &
-  RewrittenImageProps<C, 'source'>;
+  CombinedImageProps<C, 'source'>;
 
-interface StyledImageProps<C extends boolean>
-  extends Omit<ImageProps, keyof FastImageProps>,
+interface CommonImageProps<C extends boolean>
+  extends Omit<RNImageProps, keyof FastImageProps>,
     AccessibilityProps,
     ViewProps {
   fullSize?: boolean;
@@ -56,9 +56,9 @@ interface StyledImageProps<C extends boolean>
   cached?: C;
 }
 
-export type RewrittenStyledImageProps<C extends boolean> = StyledImageProps<C> & RewrittenProps<C>;
+export type ImageProps<C extends boolean> = CommonImageProps<C> & AdditionalImageProps<C>;
 
-function StyledImage<C extends boolean = false>({
+function Image<C extends boolean = false>({
   style,
   expectWidth,
   expectHeight,
@@ -66,11 +66,11 @@ function StyledImage<C extends boolean = false>({
   cached,
   onLoad,
   ...props
-}: RewrittenStyledImageProps<C>) {
+}: ImageProps<C>) {
   const fixedSize = typeof expectWidth === 'number' && typeof expectHeight === 'number';
   const sourceImage =
     typeof props.source === 'number' ? props.source : { uri: (props.source as ImageURI<C>).uri };
-  const { uri: imageURI } = Image.resolveAssetSource(sourceImage);
+  const { uri: imageURI } = RNImage.resolveAssetSource(sourceImage);
 
   const styles = useStyle(styleCallback);
   const [imageSize, setImageSize] = useState<CommonSize>({
@@ -81,9 +81,9 @@ function StyledImage<C extends boolean = false>({
   const createImageStyle = useCallback(
     function <T>() {
       return [
-        fixedSize ? { width: expectWidth, height: expectHeight } : imageSize,
         styles.image,
         style as T,
+        fixedSize ? { width: expectWidth, height: expectHeight } : imageSize,
       ];
     },
     [expectWidth, expectHeight, fixedSize, imageSize, style, styles.image],
@@ -106,7 +106,7 @@ function StyledImage<C extends boolean = false>({
     (event: OnLoadEvent | NativeSyntheticEvent<ImageLoadEventData>) => {
       onLoad?.(event as OnLoadEvent & NativeSyntheticEvent<ImageLoadEventData>);
       if (fixedSize) return;
-      Image.getSize(
+      RNImage.getSize(
         imageURI,
         (width, height) => setImageSize(createDynamicSize(width, height)),
         logger,
@@ -122,9 +122,9 @@ function StyledImage<C extends boolean = false>({
       style={createImageStyle<StyleProp<FastImageStyle>>()}
     />
   ) : (
-    <Image
-      {...(props as ImageProps)}
-      onLoad={handleOnLoad as ImageProps['onLoad']}
+    <RNImage
+      {...(props as RNImageProps)}
+      onLoad={handleOnLoad as RNImageProps['onLoad']}
       progressiveRenderingEnabled
       style={createImageStyle<StyleProp<ImageStyle>>()}
     />
@@ -138,4 +138,4 @@ const styleCallback = ({ create, colors }: StyleCallbackParams) =>
     },
   });
 
-export default StyledImage;
+export default Image;

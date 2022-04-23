@@ -1,4 +1,4 @@
-import { StyledStatusBar } from '@components/base';
+import { StatusBar } from '@components/base';
 import { navigationRef } from '@navigation';
 import RootNavigator from '@navigation/stacks/RootNavigator';
 import { NavigationContainer } from '@react-navigation/native';
@@ -22,7 +22,7 @@ const App: FC = () => (
       <NavigationContainer ref={navigationRef}>
         <SafeAreaProvider>
           <GestureHandlerRootView style={commonStyles.flexFill}>
-            <StyledStatusBar />
+            <StatusBar />
             <RootNavigator />
           </GestureHandlerRootView>
         </SafeAreaProvider>

@@ -1,5 +1,5 @@
 import { comparedMemo } from '@utilities';
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { View, ViewStyle } from 'react-native';
 
 type SpacerPropPrefix = 'h' | 'v';
@@ -9,13 +9,13 @@ interface SpacerProps {
 }
 
 const Spacer = comparedMemo<SpacerProps>(props => {
-  const getSpacerDimensions = useCallback((): ViewStyle[] => {
-    return Object.keys(props).map(key => ({
-      [key[0] === 'v' ? 'height' : 'width']: +key.slice(1),
-    }));
-  }, [props]);
-
-  const styles = useMemo(getSpacerDimensions, [getSpacerDimensions]);
+  const styles: ViewStyle[] = useMemo(
+    () =>
+      Object.keys(props).map(key => ({
+        [key[0] === 'v' ? 'height' : 'width']: +key.slice(1),
+      })),
+    [props],
+  );
 
   return <View style={styles} />;
 });

@@ -2,17 +2,17 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { comparedMemo } from '@utilities';
 import React from 'react';
-import StyledImage, { RewrittenStyledImageProps } from './StyledImage';
+import Image, { ImageProps } from './Image';
 
-interface StyledIconProps extends RewrittenStyledImageProps<true> {
+interface IconProps extends ImageProps<true> {
   size?: number;
 }
 
-const StyledIcon = comparedMemo<StyledIconProps>(({ size, style, ...props }) => {
+const Icon = comparedMemo<IconProps>(({ size, style, ...props }) => {
   const styles = useStyle(styleCallback);
 
   return (
-    <StyledImage
+    <Image
       {...props}
       cached
       fullSize
@@ -30,4 +30,4 @@ const styleCallback = ({ create, colors }: StyleCallbackParams) =>
     },
   });
 
-export default StyledIcon;
+export default Icon;

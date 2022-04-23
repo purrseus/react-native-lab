@@ -1,14 +1,14 @@
 import { icons } from '@assets';
-import { LocalizedText, StyledIcon } from '@components/base';
+import { LocalizedText, Icon, Touchable } from '@components/base';
 import { TAB_BAR_HEIGHT } from '@core/constants';
-import { TabRouteName } from '@core/enums';
+import { TabScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { I18nText } from '@core/types';
 import { useStyle } from '@hooks';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { colors as Colors, commonStyles } from '@themes';
 import React, { FC } from 'react';
-import { ColorValue, ImageRequireSource, TouchableOpacity, View } from 'react-native';
+import { ColorValue, ImageRequireSource, View } from 'react-native';
 
 interface TabUI {
   icon: ImageRequireSource;
@@ -17,26 +17,26 @@ interface TabUI {
   label: I18nText;
 }
 
-const tabUI: Record<TabRouteName, TabUI> = {
-  [TabRouteName.Home]: {
+const tabUI: Record<TabScreenName, TabUI> = {
+  [TabScreenName.Home]: {
     icon: icons.home,
     focusedIcon: icons.homeFocused,
     focusedColor: Colors.purple,
     label: 'tab.home',
   },
-  [TabRouteName.Messages]: {
+  [TabScreenName.Messages]: {
     icon: icons.message,
     focusedIcon: icons.messageFocused,
     focusedColor: Colors.orange,
     label: 'tab.messages',
   },
-  [TabRouteName.Notification]: {
+  [TabScreenName.Notification]: {
     icon: icons.notification,
     focusedIcon: icons.notificationFocused,
     focusedColor: Colors.red,
     label: 'tab.notification',
   },
-  [TabRouteName.Profile]: {
+  [TabScreenName.Profile]: {
     icon: icons.profile,
     focusedIcon: icons.profileFocused,
     focusedColor: Colors.blue,
@@ -52,8 +52,8 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
       <View style={styles.container}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
-          const routeName = route.name as TabRouteName;
-          const { icon, focusedIcon, focusedColor, label } = tabUI[routeName];
+          const screenName = route.name as TabScreenName;
+          const { icon, focusedIcon, focusedColor, label } = tabUI[screenName];
           const isFocused = state.index === index;
 
           const onPress = () => {
@@ -65,7 +65,7 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
 
             if (!isFocused && !event.defaultPrevented) {
               navigation.navigate({
-                name: routeName,
+                name: screenName,
                 params: undefined,
                 merge: true,
               });
@@ -80,7 +80,7 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
           };
 
           return (
-            <TouchableOpacity
+            <Touchable
               key={index}
               accessibilityRole="button"
               accessibilityState={isFocused ? { selected: true } : {}}
@@ -90,7 +90,7 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
               onLongPress={onLongPress}
               style={commonStyles.flexCenter}
             >
-              <StyledIcon
+              <Icon
                 size={24}
                 source={isFocused ? focusedIcon : icon}
                 tintColor={isFocused ? (focusedColor as string) : styles.icon.tintColor}
@@ -100,7 +100,7 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
                 style={[styles.label, isFocused && [{ color: focusedColor }, styles.focusedLabel]]}
                 text={label}
               />
-            </TouchableOpacity>
+            </Touchable>
           );
         })}
       </View>
