@@ -10,6 +10,7 @@ export const colors = {
   blue: '#3593f7',
   primary: '#06d283',
   secondary: '#06e273',
+  blackOpacity: (opacity: number) => `rgba(0,0,0,${opacity})`,
 };
 
 export const lightTheme = {
@@ -20,6 +21,7 @@ export const lightTheme = {
   background: '#FFFFFF',
   primaryText: '#3B3B3B',
   backgroundImage: '#C4C4C4',
+  refreshControlBackground: '#FAFAFA',
 };
 
 export const darkTheme = {
@@ -30,4 +32,5 @@ export const darkTheme = {
   background: '#000000',
   primaryText: '#FFFFFF',
   backgroundImage: '#343434',
+  refreshControlBackground: '#222222',
 };

@@ -48,8 +48,8 @@ export const resizeImage = (
 
 export const comparedMemo = <T>(Component: FC<T>) => memo(Component, isEqual);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const logger = (message: any, ...optionalParams: any[]) => {
+export const logger: typeof console.log = (message, ...optionalParams) => {
+  if (!__DEV__) return;
   if (typeof message === 'object') {
     const params = optionalParams.length ? ['\n[Logger] Optional Params:', optionalParams] : [];
     console.log('[Logger] Message:', JSON.stringify(message, null, 2), ...params);
@@ -58,3 +58,7 @@ export const logger = (message: any, ...optionalParams: any[]) => {
 
   console.log(message, ...optionalParams);
 };
+
+export const wait = (timeout = 500) => new Promise<void>(resolve => setTimeout(resolve, timeout));
+
+export const createArray = (length = 1) => new Array(length).fill(0).map((_, i) => i);

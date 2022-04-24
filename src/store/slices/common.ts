@@ -5,12 +5,12 @@ import { createPersistReducer, getCurrentLanguage } from '@utilities';
 import { REHYDRATE } from 'redux-persist';
 
 export interface CommonState {
-  loading: boolean;
+  isLoading: boolean;
   language: Language;
 }
 
 const initialState: CommonState = {
-  loading: false,
+  isLoading: false,
   language: getCurrentLanguage(),
 };
 
@@ -18,8 +18,12 @@ const common = createSlice({
   name: 'common',
   initialState,
   reducers: {
-    changeLoadingState: (state, { payload }: PayloadAction<boolean>) => {
-      state.loading = payload;
+    toggleLoading: (state, { payload }: PayloadAction<boolean | undefined>) => {
+      if (payload === undefined) {
+        state.isLoading = !state.isLoading;
+        return;
+      }
+      state.isLoading = payload;
     },
     changeLanguage: (state, { payload }: PayloadAction<Language>) => {
       state.language = payload;
@@ -37,4 +41,4 @@ const common = createSlice({
 });
 
 export const commonActions = common.actions;
-export default createPersistReducer(common, { blacklist: ['loading'] });
+export default createPersistReducer(common, { blacklist: ['isLoading'] });

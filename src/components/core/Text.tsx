@@ -7,18 +7,16 @@ import Touchable, { TouchableProps } from './Touchable';
 
 export interface TextProps
   extends RNTextProps,
-    Pick<TouchableProps, 'hitSlop' | 'onPress' | 'wait'> {
-  text: string;
-}
+    Pick<TouchableProps, 'hitSlop' | 'onPress' | 'wait'> {}
 
 const DEFAULT_FONT_SIZE = 14;
 
-const Text = comparedMemo<TextProps>(({ text, style, onPress, hitSlop, wait, ...props }) => {
+const Text = comparedMemo<TextProps>(({ children, style, onPress, hitSlop, wait, ...props }) => {
   const styles = useStyle(styleCallback);
 
   const TextComponent: FC = () => (
     <RNText adjustsFontSizeToFit allowFontScaling={false} {...props} style={[styles.text, style]}>
-      {text}
+      {children}
     </RNText>
   );
 

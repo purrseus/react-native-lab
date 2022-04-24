@@ -7,19 +7,19 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Login, Register } from '@screens/auth';
 import React, { FC } from 'react';
 
-const RootStack = createNativeStackNavigator<AuthStackParamList>();
+const NativeStack = createNativeStackNavigator<AuthStackParamList>();
 
 const AuthNavigator: FC = () => {
   const styles = useStyle(styleCallback);
 
   return (
-    <RootStack.Navigator
+    <NativeStack.Navigator
       screenOptions={{ ...stackScreenOptions, contentStyle: styles.screenStyle }}
       initialRouteName={AuthScreenName.Login}
     >
-      <RootStack.Screen name={AuthScreenName.Login} component={Login} />
-      <RootStack.Screen name={AuthScreenName.Register} component={Register} />
-    </RootStack.Navigator>
+      <NativeStack.Screen name={AuthScreenName.Login} component={Login} />
+      <NativeStack.Screen name={AuthScreenName.Register} component={Register} />
+    </NativeStack.Navigator>
   );
 };
 

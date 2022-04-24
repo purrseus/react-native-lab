@@ -12,7 +12,7 @@ interface LocalizedTextProps extends TextProps {
 const LocalizedText = comparedMemo<LocalizedTextProps>(({ text, i18nOptions, ...props }) => {
   const { t } = useTranslation();
 
-  return <Text {...props} text={t(text as I18nText, i18nOptions) as string} />;
+  return <Text {...props} children={t(text as I18nText, i18nOptions) as string} />;
 });
 
 export default LocalizedText;
