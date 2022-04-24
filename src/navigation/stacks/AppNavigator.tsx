@@ -8,20 +8,20 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Categories, Settings } from '@screens/app';
 import React, { FC } from 'react';
 
-const RootStack = createNativeStackNavigator<AppStackParamList>();
+const NativeStack = createNativeStackNavigator<AppStackParamList>();
 
 const AppNavigator: FC = () => {
   const styles = useStyle(styleCallback);
 
   return (
-    <RootStack.Navigator
+    <NativeStack.Navigator
       screenOptions={{ ...stackScreenOptions, contentStyle: styles.screenStyle }}
       initialRouteName={AppScreenName.BottomTab}
     >
-      <RootStack.Screen name={AppScreenName.BottomTab} component={BottomTabBar} />
-      <RootStack.Screen name={AppScreenName.Categories} component={Categories} />
-      <RootStack.Screen name={AppScreenName.Settings} component={Settings} />
-    </RootStack.Navigator>
+      <NativeStack.Screen name={AppScreenName.BottomTab} component={BottomTabBar} />
+      <NativeStack.Screen name={AppScreenName.Categories} component={Categories} />
+      <NativeStack.Screen name={AppScreenName.Settings} component={Settings} />
+    </NativeStack.Navigator>
   );
 };
 

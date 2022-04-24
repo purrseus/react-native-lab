@@ -15,8 +15,8 @@ const Divider = comparedMemo<DividerProps>(({ color = colors.darkGray, height = 
   return (
     <View
       style={{
-        borderColor: color,
-        borderWidth: height / 2,
+        height,
+        backgroundColor: color,
         alignSelf: 'stretch',
         ...props,
       }}

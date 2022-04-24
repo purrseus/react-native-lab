@@ -14,6 +14,7 @@ module.exports = {
           '@i18n': './src/i18n',
           '@layouts': './src/layouts',
           '@navigation': './src/navigation',
+          '@providers': './src/providers',
           '@screens': './src/screens',
           '@services': './src/services',
           '@store': './src/store',

@@ -1,22 +1,29 @@
-import { Divider, Image, Text } from '@components/base';
+import { Image, Spacer, Text } from '@components/core';
 import { AppScreenName, TabScreenName } from '@core/enums';
 import { TabScreen } from '@core/types';
+import { useLoading } from '@hooks';
 import { commonStyles } from '@themes';
-import { logger } from '@utilities';
+import { wait } from '@utilities';
 import React from 'react';
 import { Button, View } from 'react-native';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 const Home: TabScreen<TabScreenName.Home> = ({ navigation }) => {
+  const { toggleLoading } = useLoading();
+  const netInfo = useNetInfo();
+
   return (
     <View style={commonStyles.flexCenter}>
+      <Text>{JSON.stringify(netInfo, null, 2)}</Text>
+
       <Image
         // cached
         // fullSize
         source={{
           uri: 'https://images.pexels.com/photos/2486168/pexels-photo-2486168.jpeg',
         }}
-        expectWidth={240}
-        expectHeight={200}
+        expectWidth={100}
+        // expectHeight={200}
       />
 
       <Button
@@ -29,9 +36,16 @@ const Home: TabScreen<TabScreenName.Home> = ({ navigation }) => {
         onPress={() => navigation.navigate(AppScreenName.Settings)}
       />
 
-      <Text text="Hello" onPress={() => logger([123, 'asd', true])} />
+      <Spacer h48 />
 
-      <Divider />
+      <Text
+        onPress={() => {
+          toggleLoading();
+          wait(3000).then(() => navigation.navigate(AppScreenName.Settings));
+        }}
+      >
+        Show modal and navigate to an other screen
+      </Text>
     </View>
   );
 };

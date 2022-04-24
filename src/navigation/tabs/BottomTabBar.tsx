@@ -4,7 +4,7 @@ import { useStyle } from '@hooks';
 import { tabScreenOptions } from '@navigation/options';
 import styleCallback from '@navigation/styles';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Messages, Home, Notification, Profile } from '@screens/tabs';
+import { Messages, Home, Notification, Profile } from '@screens/app/tabs';
 import React, { FC } from 'react';
 import CustomizedTabBar from './CustomizedTabBar';
 

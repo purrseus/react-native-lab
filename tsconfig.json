@@ -46,6 +46,7 @@
       "@i18n/*": ["i18n/*"],
       "@layouts/*": ["layouts/*"],
       "@navigation/*": ["navigation/*"],
+      "@providers/*": ["providers/*"],
       "@screens/*": ["screens/*"],
       "@services/*": ["services/*"],
       "@store/*": ["store/*"],

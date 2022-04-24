@@ -7,6 +7,7 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       rules: {
+        'no-duplicate-imports': 'error',
         '@typescript-eslint/no-shadow': ['error'],
         '@typescript-eslint/no-explicit-any': 'error',
         'no-shadow': 'off',
@@ -17,7 +18,6 @@ module.exports = {
         'react-native/split-platform-components': 'warn',
         'react-native/no-inline-styles': 'warn',
         'react-native/no-color-literals': 'warn',
-        'react-native/no-raw-text': 'error',
         'react-native/no-single-element-style-arrays': 'warn',
       },
     },

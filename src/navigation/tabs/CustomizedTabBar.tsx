@@ -1,5 +1,5 @@
 import { icons } from '@assets';
-import { LocalizedText, Icon, Touchable } from '@components/base';
+import { LocalizedText, Icon, Touchable, Spacer, BottomTabSpacer } from '@components/core';
 import { TAB_BAR_HEIGHT } from '@core/constants';
 import { TabScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
@@ -8,7 +8,8 @@ import { useStyle } from '@hooks';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { colors as Colors, commonStyles } from '@themes';
 import React, { FC } from 'react';
-import { ColorValue, ImageRequireSource, View } from 'react-native';
+import { ColorValue, ImageRequireSource, StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface TabUI {
   icon: ImageRequireSource;
@@ -48,7 +49,7 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
   const styles = useStyle(styleCallback);
 
   return (
-    <View style={styles.rootContainer}>
+    <SafeAreaView edges={['left', 'right']} style={styles.rootContainer}>
       <View style={styles.container}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
@@ -96,6 +97,7 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
                 tintColor={isFocused ? (focusedColor as string) : styles.icon.tintColor}
                 style={styles.icon}
               />
+              <Spacer h4 />
               <LocalizedText
                 style={[styles.label, isFocused && [{ color: focusedColor }, styles.focusedLabel]]}
                 text={label}
@@ -105,14 +107,16 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
         })}
       </View>
 
-      <View style={styles.bottomInset} />
-    </View>
+      <BottomTabSpacer bottomBarHeight={0} />
+    </SafeAreaView>
   );
 };
 
-const styleCallback = ({ colors, create, edgeInsets }: StyleCallbackParams) =>
+const styleCallback = ({ colors, create }: StyleCallbackParams) =>
   create({
     rootContainer: {
+      ...StyleSheet.absoluteFillObject,
+      top: undefined,
       shadowColor: colors.shadowTabBar,
       shadowOpacity: 0.1,
       shadowOffset: {
@@ -121,28 +125,25 @@ const styleCallback = ({ colors, create, edgeInsets }: StyleCallbackParams) =>
       },
       shadowRadius: 10,
       elevation: 20,
-      borderWidth: 0.1,
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+      backgroundColor: colors.tabBarBackground,
     },
     container: {
       flexDirection: 'row',
       height: TAB_BAR_HEIGHT,
-      backgroundColor: colors.tabBarBackground,
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
     },
     icon: {
       tintColor: colors.tabBlur,
     },
     label: {
       fontSize: 12,
-      marginTop: 4,
       color: colors.tabBlur,
     },
     focusedLabel: {
       fontWeight: 'bold',
-    },
-    bottomInset: {
-      height: edgeInsets.bottom / 2,
-      width: '100%',
-      backgroundColor: colors.tabBarBackground,
     },
   });
 
