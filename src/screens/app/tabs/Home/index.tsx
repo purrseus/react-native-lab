@@ -1,53 +1,76 @@
 import { Image, Spacer, Text } from '@components/core';
-import { AppScreenName, TabScreenName } from '@core/enums';
+import PaginatorList from '@components/core/PaginatorList';
+import { TabScreenName } from '@core/enums';
+import { StyleCallbackParams } from '@core/interfaces';
 import { TabScreen } from '@core/types';
-import { useLoading } from '@hooks';
-import { commonStyles } from '@themes';
-import { wait } from '@utilities';
-import React from 'react';
-import { Button, View } from 'react-native';
-import { useNetInfo } from '@react-native-community/netinfo';
+import { useStyle } from '@hooks';
+import { commonAPI } from '@services/requests';
+import { globalStyles } from '@themes';
+import { comparedMemo, logger } from '@utilities';
+import React, { useCallback } from 'react';
+import { ListRenderItem, View } from 'react-native';
 
-const Home: TabScreen<TabScreenName.Home> = ({ navigation }) => {
-  const { toggleLoading } = useLoading();
-  const netInfo = useNetInfo();
+const Item = comparedMemo<{
+  item: { id: string; download_url: string; author: string };
+}>(({ item }) => {
+  const styles = useStyle(styleCallback);
+  logger(`Item ${item?.id}`);
 
   return (
-    <View style={commonStyles.flexCenter}>
-      <Text>{JSON.stringify(netInfo, null, 2)}</Text>
-
+    <View style={styles.item}>
       <Image
-        // cached
-        // fullSize
-        source={{
-          uri: 'https://images.pexels.com/photos/2486168/pexels-photo-2486168.jpeg',
-        }}
-        expectWidth={100}
-        // expectHeight={200}
+        cached
+        source={{ uri: item.download_url.slice(0, -10) + '/180/180' }}
+        style={styles.photo}
       />
-
-      <Button
-        title="Navigate to Categories"
-        onPress={() => navigation.navigate(AppScreenName.Categories)}
-      />
-
-      <Button
-        title="Navigate to Settings"
-        onPress={() => navigation.navigate(AppScreenName.Settings)}
-      />
-
-      <Spacer h48 />
-
-      <Text
-        onPress={() => {
-          toggleLoading();
-          wait(3000).then(() => navigation.navigate(AppScreenName.Settings));
-        }}
-      >
-        Show modal and navigate to an other screen
+      <Spacer w8 />
+      <Text style={styles.title} onPress={() => null}>
+        {item.author}
       </Text>
     </View>
   );
+});
+
+const Home: TabScreen<TabScreenName.Home> = () => {
+  const renderItem: ListRenderItem<{ id: string; download_url: string; author: string }> =
+    useCallback(({ item }) => {
+      return <Item item={item} />;
+    }, []);
+
+  return (
+    <View style={globalStyles.flexFill}>
+      <PaginatorList
+        ItemSeparatorComponent={() => <Spacer h20 />}
+        requestCallback={commonAPI.fetchPhotos}
+        paginationConfig={{ accessProperties: [] }}
+        isTabScreen
+        renderItem={renderItem}
+      />
+    </View>
+  );
 };
+
+const styleCallback = ({ create, colors }: StyleCallbackParams) =>
+  create({
+    item: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      marginHorizontal: 16,
+      padding: 8,
+      backgroundColor: colors.lightGray,
+      borderRadius: 16,
+    },
+    photo: {
+      borderRadius: 16,
+      width: 100,
+      aspectRatio: 1,
+    },
+    title: {
+      flexShrink: 1,
+      textAlign: 'center',
+      fontSize: 14,
+      fontWeight: 'bold',
+    },
+  });
 
 export default Home;

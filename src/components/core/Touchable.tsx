@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { ONE_SECOND } from '@core/constants';
 import { comparedMemo, createHitSlop } from '@utilities';
 import { throttle } from 'lodash';
 import React, { useCallback } from 'react';
@@ -10,7 +11,7 @@ export interface TouchableProps extends Omit<TouchableOpacityProps, 'hitSlop'> {
 }
 
 const Touchable = comparedMemo<TouchableProps>(
-  ({ children, wait = 1000, onPress = () => null, hitSlop, ...props }) => {
+  ({ children, wait = ONE_SECOND, onPress = () => null, hitSlop, ...props }) => {
     const handleOnPress = useCallback(
       throttle(onPress, wait, {
         leading: true,

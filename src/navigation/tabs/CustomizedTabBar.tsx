@@ -6,7 +6,7 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { I18nText } from '@core/types';
 import { useStyle } from '@hooks';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { colors as Colors, commonStyles } from '@themes';
+import { colors as Colors, globalStyles } from '@themes';
 import React, { FC } from 'react';
 import { ColorValue, ImageRequireSource, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -89,7 +89,7 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
               testID={options.tabBarTestID}
               onPress={onPress}
               onLongPress={onLongPress}
-              style={commonStyles.flexCenter}
+              style={globalStyles.flexCenter}
             >
               <Icon
                 size={24}

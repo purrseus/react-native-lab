@@ -6,3 +6,4 @@ export { default as useColor } from './useColor';
 export { default as useKeyboard } from './useKeyboard';
 export { default as useLoading } from './useLoading';
 export { default as useStyle } from './useStyle';
+export { default as usePagination } from './usePagination';

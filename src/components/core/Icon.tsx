@@ -11,16 +11,7 @@ interface IconProps extends ImageProps<true> {
 const Icon = comparedMemo<IconProps>(({ size, style, ...props }) => {
   const styles = useStyle(styleCallback);
 
-  return (
-    <Image
-      {...props}
-      cached
-      fullSize
-      expectWidth={size}
-      expectHeight={size}
-      style={[styles.icon, style]}
-    />
-  );
+  return <Image {...props} cached style={[styles.icon, { width: size, height: size }, style]} />;
 });
 
 const styleCallback = ({ create, colors }: StyleCallbackParams) =>
