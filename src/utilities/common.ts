@@ -1,16 +1,27 @@
-/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ONE_SECOND } from '@core/constants';
 import { CommonSize } from '@core/interfaces';
 import { Language } from '@core/types';
 import { FC, memo } from 'react';
 import isEqual from 'react-fast-compare';
-import { ColorValue, Insets, Platform } from 'react-native';
+import { ColorValue, Insets } from 'react-native';
 import { getLocales } from 'react-native-localize';
 
-export const isAndroid = Platform.OS === 'android';
-
-export const isIos = Platform.OS === 'ios';
-
 export const randomColorGenerator = (): ColorValue => `#${Math.random().toString(16).slice(-6)}`;
+
+export const comparedMemo = <T>(Component: FC<T>) => memo(Component, isEqual);
+
+export const wait = (timeout = ONE_SECOND) =>
+  new Promise<void>(resolve => setTimeout(resolve, timeout));
+
+export const createArray = (length = 1) => new Array(length).fill(0).map((_, i) => i);
+
+export const createHitSlop = (insetValue = 8): Insets => ({
+  top: insetValue,
+  left: insetValue,
+  right: insetValue,
+  bottom: insetValue,
+});
 
 export const getCurrentLanguage = (): Language => {
   const [{ languageCode }] = getLocales();
@@ -27,13 +38,6 @@ export const getCurrentLanguage = (): Language => {
   }
 };
 
-export const createHitSlop = (insetValue = 8): Insets => ({
-  top: insetValue,
-  left: insetValue,
-  right: insetValue,
-  bottom: insetValue,
-});
-
 export const resizeImage = (
   sizeType: 'width' | 'height',
   expectSize: number,
@@ -46,19 +50,13 @@ export const resizeImage = (
   return { width: currentWidth * scale, height: currentHeight * scale };
 };
 
-export const comparedMemo = <T>(Component: FC<T>) => memo(Component, isEqual);
-
-export const logger: typeof console.log = (message, ...optionalParams) => {
-  if (!__DEV__) return;
-  if (typeof message === 'object') {
-    const params = optionalParams.length ? ['\n[Logger] Optional Params:', optionalParams] : [];
-    console.log('[Logger] Message:', JSON.stringify(message, null, 2), ...params);
-    return;
-  }
-
-  console.log(message, ...optionalParams);
+export const deepAccessObject = <V, T extends Record<string, any> = {}>(
+  arrKey: [keyof T],
+  target: T,
+): T | V => {
+  if (!arrKey.length) return target;
+  return arrKey.reduce((acc, cur) => {
+    if (!!acc && typeof acc === 'object' && acc.hasOwnProperty(cur)) return acc[cur];
+    return acc;
+  }, target);
 };
-
-export const wait = (timeout = 500) => new Promise<void>(resolve => setTimeout(resolve, timeout));
-
-export const createArray = (length = 1) => new Array(length).fill(0).map((_, i) => i);

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const commonStyles = StyleSheet.create({
+export const globalStyles = StyleSheet.create({
   flexFill: {
     flex: 1,
   },

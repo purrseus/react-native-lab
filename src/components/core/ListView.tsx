@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { nanoid } from '@reduxjs/toolkit';
-import React, { ForwardedRef, forwardRef } from 'react';
+import React, { ForwardedRef, forwardRef, useCallback } from 'react';
 import { FlatList, FlatListProps, RefreshControlProps, View } from 'react-native';
 import BottomTabSpacer from './BottomTabSpacer';
 import RefreshControl from './RefreshControl';
@@ -21,6 +21,13 @@ function ListViewBase<T>(
   }: ListViewProps<T>,
   ref: ForwardedRef<FlatList<T>>,
 ) {
+  const handleKeyExtractor = useCallback((item: any) => {
+    for (const key in item) {
+      if (key.match(/id/gi)?.length) return `${item[key]}`;
+    }
+    return nanoid();
+  }, []);
+
   return (
     <FlatList
       ref={ref}
@@ -31,7 +38,7 @@ function ListViewBase<T>(
       scrollEventThrottle={16}
       {...props}
       {...(!!onRefresh && { refreshControl: <RefreshControl {...{ refreshing, onRefresh }} /> })}
-      keyExtractor={() => nanoid()}
+      keyExtractor={handleKeyExtractor}
       ListFooterComponent={
         <View>
           {ListFooterComponent}
@@ -41,5 +48,7 @@ function ListViewBase<T>(
     />
   );
 }
+
 const ListView = forwardRef<FlatList, ListViewProps>(ListViewBase);
+
 export default ListView;

@@ -1,5 +1,5 @@
 import { OverlayLoading, StatusBar } from '@components/core';
-import { commonStyles } from '@themes';
+import { globalStyles } from '@themes';
 import { isAndroid } from '@utilities';
 import React, { FC } from 'react';
 import { UIManager } from 'react-native';
@@ -13,7 +13,7 @@ if (isAndroid && UIManager.setLayoutAnimationEnabledExperimental) {
 const UIProvider: FC = ({ children }) => {
   return (
     <SafeAreaProvider>
-      <GestureHandlerRootView style={commonStyles.flexFill}>
+      <GestureHandlerRootView style={globalStyles.flexFill}>
         <StatusBar />
         {children}
         <OverlayLoading />

@@ -9,13 +9,15 @@ export interface CommonState {
   language: Language;
 }
 
+const sliceName = 'common';
+
 const initialState: CommonState = {
   isLoading: false,
   language: getCurrentLanguage(),
 };
 
 const common = createSlice({
-  name: 'common',
+  name: sliceName,
   initialState,
   reducers: {
     toggleLoading: (state, { payload }: PayloadAction<boolean | undefined>) => {
