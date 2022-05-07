@@ -3,5 +3,6 @@ export * from './format';
 export * from './logger';
 export * from './os';
 export * from './permission';
+export * from './service';
 export * from './store';
 export * from './validate';

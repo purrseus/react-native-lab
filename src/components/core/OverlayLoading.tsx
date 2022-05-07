@@ -1,12 +1,12 @@
 import { StyleCallbackParams } from '@core/interfaces';
 import { useLoading, useStyle } from '@hooks';
-import { comparedMemo } from '@utilities';
+import { compareMemo } from '@utilities';
 import React from 'react';
 import { View } from 'react-native';
 import ActivityIndicator from './ActivityIndicator';
 import Modal from './Modal';
 
-const OverlayLoading = comparedMemo(() => {
+const OverlayLoading = compareMemo(() => {
   const { isLoading } = useLoading();
   const styles = useStyle(styleCallback);
 

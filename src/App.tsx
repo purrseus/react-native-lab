@@ -1,4 +1,4 @@
-import RootNavigator from '@navigation/stacks/RootNavigator';
+import { RootNavigator } from '@navigation';
 import AppProvider from '@providers/AppProvider';
 import React, { FC } from 'react';
 

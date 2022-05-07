@@ -1,4 +1,4 @@
-import { comparedMemo } from '@utilities';
+import { compareMemo } from '@utilities';
 import React, { useMemo } from 'react';
 import { View, ViewStyle } from 'react-native';
 
@@ -8,7 +8,7 @@ interface SpacerProps {
   [key: `${SpacerPropPrefix}${number}`]: true;
 }
 
-const Spacer = comparedMemo<SpacerProps>(props => {
+const Spacer = compareMemo<SpacerProps>(props => {
   const styles: ViewStyle[] = useMemo(
     () =>
       Object.keys(props).map(key => ({
