@@ -8,3 +8,4 @@ export { default as useLoading } from './useLoading';
 export { default as usePagination } from './usePagination';
 export { default as useStyle } from './useStyle';
 export { default as useThrottle } from './useThrottle';
+export { default as useFormat } from './useFormat';
