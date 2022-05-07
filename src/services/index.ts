@@ -37,7 +37,7 @@ const axiosLogger = (key: string, message: Parameters<typeof logger>[0]) => {
 };
 
 const axiosInstance = axios.create({
-  baseURL: 'https://picsum.photos/v2', // 'https://jsonplaceholder.typicode.com',
+  baseURL: 'https://picsum.photos/v2',
   timeout: 10_000,
 });
 
