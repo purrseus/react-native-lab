@@ -19,4 +19,4 @@ export type AppStackParamList = {
   [AppScreenName.Settings]: undefined;
 };
 
-export type RootStackParamList = AuthStackParamList & AppStackParamList;
+export type RootStackParamList = AppStackParamList & AuthStackParamList;

@@ -103,7 +103,7 @@ const usePagination = <T extends PaginationResponse<D>, D extends any[]>(
   }, [controller]);
 
   useEffect(() => {
-    if (isFirstCall.current) handleRequest();
+    handleRequest();
 
     return cancelRequest;
   }, []);

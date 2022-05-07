@@ -21,7 +21,7 @@ function ListViewBase<T>(
   }: ListViewProps<T>,
   ref: ForwardedRef<FlatList<T>>,
 ) {
-  const handleKeyExtractor = useCallback((item: any) => {
+  const handleKeyExtractor = useCallback((item: Record<string, any>) => {
     for (const key in item) {
       if (key.match(/id/gi)?.length) return `${item[key]}`;
     }

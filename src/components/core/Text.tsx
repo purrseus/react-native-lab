@@ -1,6 +1,7 @@
+import { DEFAULT_FONT_SIZE } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { comparedMemo } from '@utilities';
+import { compareMemo } from '@utilities';
 import React, { FC } from 'react';
 import { Text as RNText, TextProps as RNTextProps } from 'react-native';
 import Touchable, { TouchableProps } from './Touchable';
@@ -9,13 +10,11 @@ export interface TextProps
   extends RNTextProps,
     Pick<TouchableProps, 'hitSlop' | 'onPress' | 'wait'> {}
 
-const DEFAULT_FONT_SIZE = 14;
-
-const Text = comparedMemo<TextProps>(({ children, style, onPress, hitSlop, wait, ...props }) => {
+const Text = compareMemo<TextProps>(({ children, style, onPress, hitSlop, wait, ...props }) => {
   const styles = useStyle(styleCallback);
 
   const TextComponent: FC = () => (
-    <RNText adjustsFontSizeToFit allowFontScaling={false} {...props} style={[styles.text, style]}>
+    <RNText allowFontScaling={false} {...props} style={[styles.text, style]}>
       {children}
     </RNText>
   );
