@@ -1,5 +1,6 @@
 import { locales } from '@assets';
-import { Language } from '@core/types';
+import { languageMap } from '@core/constants';
+import { Language, LanguageMap } from '@core/types';
 import { getCurrentLanguage } from '@utilities';
 import dayjs from 'dayjs';
 import 'dayjs/locale/en-gb';
@@ -12,19 +13,10 @@ import 'numeral/locales/ja';
 import 'numeral/locales/vi';
 import { initReactI18next } from 'react-i18next';
 
-type Locale = 'en-gb' | 'ja' | 'vi';
-type LanguageMap<Value> = Record<Language, Value>;
-
 const { enUS, viVN, jaJP } = locales;
 const CURRENT_LANGUAGE = getCurrentLanguage();
 const FALLBACK_LANGUAGE: Language = 'en-US';
 export const DEFAULT_NAMESPACE = 'translation';
-
-const languageMap: LanguageMap<Locale> = {
-  'en-US': 'en-gb',
-  'ja-JP': 'ja',
-  'vi-VN': 'vi',
-};
 
 export const resources: LanguageMap<ResourceLanguage> = {
   'en-US': { [DEFAULT_NAMESPACE]: enUS },
