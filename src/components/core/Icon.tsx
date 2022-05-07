@@ -1,17 +1,18 @@
+import { DEFAULT_ICON_SIZE } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { comparedMemo } from '@utilities';
+import { compareMemo } from '@utilities';
 import React from 'react';
 import Image, { ImageProps } from './Image';
 
-interface IconProps extends ImageProps<true> {
+export interface IconProps extends ImageProps<true> {
   size?: number;
 }
 
-const Icon = comparedMemo<IconProps>(({ size, style, ...props }) => {
+const Icon = compareMemo<IconProps>(({ size = DEFAULT_ICON_SIZE, style, ...props }) => {
   const styles = useStyle(styleCallback);
 
-  return <Image {...props} cached style={[styles.icon, { width: size, height: size }, style]} />;
+  return <Image {...props} style={[styles.icon, { width: size, height: size }, style]} />;
 });
 
 const styleCallback = ({ create, colors }: StyleCallbackParams) =>

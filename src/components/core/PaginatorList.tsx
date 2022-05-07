@@ -1,12 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ONE_SECOND } from '@core/constants';
 import { PaginationConfig, StyleCallbackParams } from '@core/interfaces';
-import { usePagination, useStyle } from '@hooks';
+import { usePagination, useStyle, useThrottle } from '@hooks';
 import { globalStyles } from '@themes';
 import { AxiosRequestConfig } from 'axios';
-import { throttle } from 'lodash';
-import React, { forwardRef, useCallback } from 'react';
+import React, { forwardRef } from 'react';
 import { FlatList, RefreshControlProps, View } from 'react-native';
 import ActivityIndicator from './ActivityIndicator';
 import ListView, { ListViewProps } from './ListView';
@@ -26,13 +23,7 @@ const PaginatorList = forwardRef<FlatList, PaginatorListProps>(
       paginationConfig,
     );
 
-    const handleOnEndReached = useCallback(
-      throttle(onLoadMore, ONE_SECOND, {
-        leading: true,
-        trailing: true,
-      }),
-      [onLoadMore],
-    );
+    const handleOnEndReached = useThrottle(onLoadMore, [onLoadMore]);
 
     if (fetching)
       return (

@@ -1,6 +1,6 @@
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { comparedMemo } from '@utilities';
+import { compareMemo } from '@utilities';
 import React from 'react';
 import { useWindowDimensions } from 'react-native';
 import RNModal, { ModalProps as RNModalProps } from 'react-native-modal';
@@ -11,16 +11,25 @@ interface ModalProps extends CombinedModalProps {
   type?: 'modal' | 'bottomSheet';
 }
 
+type AnimationType = Record<
+  NonNullable<ModalProps['type']>,
+  Pick<ModalProps, 'animationIn' | 'animationOut'>
+>;
+
 const DEFAULT_BACKDROP_OPACITY = 1 / 3;
 
-const Modal = comparedMemo<ModalProps>(({ children, type = 'modal', style, ...props }) => {
+const animationType: AnimationType = {
+  modal: { animationIn: 'fadeIn', animationOut: 'fadeOut' },
+  bottomSheet: { animationIn: 'slideInDown', animationOut: 'slideOutDown' },
+};
+
+const Modal = compareMemo<ModalProps>(({ children, type = 'modal', style, ...props }) => {
   const { width, height } = useWindowDimensions();
   const styles = useStyle(styleCallback);
 
   return (
     <RNModal
-      animationIn="fadeIn"
-      animationOut="fadeOut"
+      {...animationType[type]}
       backdropOpacity={DEFAULT_BACKDROP_OPACITY}
       {...props}
       avoidKeyboard
@@ -39,13 +48,12 @@ const styleCallback = ({ create }: StyleCallbackParams) =>
     common: {
       padding: 0,
       margin: 0,
+      alignItems: 'center',
     },
     modal: {
-      alignItems: 'center',
       justifyContent: 'center',
     },
     bottomSheet: {
-      alignItems: 'center',
       justifyContent: 'flex-end',
     },
   });

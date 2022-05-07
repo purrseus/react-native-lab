@@ -1,5 +1,6 @@
 export { default as ActivityIndicator } from './ActivityIndicator';
 export { default as BottomTabSpacer } from './BottomTabSpacer';
+export { default as Button } from './Button';
 export { default as Divider } from './Divider';
 export { default as Icon } from './Icon';
 export { default as Image } from './Image';

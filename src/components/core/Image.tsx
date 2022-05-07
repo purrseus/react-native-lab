@@ -45,9 +45,10 @@ interface CommonImageProps<C extends boolean>
 export type ImageProps<C extends boolean> = CommonImageProps<C> & AdditionalImageProps<C>;
 
 function Image<C extends boolean = false>({ style, cached, ...props }: ImageProps<C>) {
+  const isLocalImage = typeof props.source === 'number';
   const styles = useStyle(styleCallback);
 
-  return cached ? (
+  return cached || isLocalImage ? (
     <FastImage
       {...(props as FastImageProps)}
       style={[styles.image, style as StyleProp<FastImageStyle>]}

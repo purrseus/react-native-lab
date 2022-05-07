@@ -9,7 +9,7 @@ import { getLocales } from 'react-native-localize';
 
 export const randomColorGenerator = (): ColorValue => `#${Math.random().toString(16).slice(-6)}`;
 
-export const comparedMemo = <T>(Component: FC<T>) => memo(Component, isEqual);
+export const compareMemo = <T>(Component: FC<T>) => memo(Component, isEqual);
 
 export const wait = (timeout = ONE_SECOND) =>
   new Promise<void>(resolve => setTimeout(resolve, timeout));

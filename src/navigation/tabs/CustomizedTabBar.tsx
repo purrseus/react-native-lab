@@ -100,7 +100,7 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
               <Spacer h4 />
               <LocalizedText
                 style={[styles.label, isFocused && [{ color: focusedColor }, styles.focusedLabel]]}
-                text={label}
+                t={label}
               />
             </Touchable>
           );

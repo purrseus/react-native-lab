@@ -6,11 +6,11 @@ import { TabScreen } from '@core/types';
 import { useStyle } from '@hooks';
 import { commonAPI } from '@services/requests';
 import { globalStyles } from '@themes';
-import { comparedMemo, logger } from '@utilities';
+import { compareMemo, logger } from '@utilities';
 import React, { useCallback } from 'react';
 import { ListRenderItem, View } from 'react-native';
 
-const Item = comparedMemo<{
+const Item = compareMemo<{
   item: { id: string; download_url: string; author: string };
 }>(({ item }) => {
   const styles = useStyle(styleCallback);
