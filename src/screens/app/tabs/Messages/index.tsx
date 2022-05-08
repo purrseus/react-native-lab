@@ -1,6 +1,6 @@
 import { icons } from '@assets';
 import { Button, Spacer, Text } from '@components/core';
-import { useAppDispatch, useFormat } from '@hooks';
+import { useAppDispatch, useBackHandler, useFormat } from '@hooks';
 import { commonActions } from '@store/slices/common';
 import React from 'react';
 import { View } from 'react-native';
@@ -8,6 +8,12 @@ import { View } from 'react-native';
 const Messages = () => {
   const dispatch = useAppDispatch();
   const { numberFormatter } = useFormat();
+
+  useBackHandler(BackHandler => {
+    BackHandler.exitApp();
+    return false;
+  });
+
   return (
     <View style={{ flex: 1, justifyContent: 'center' }}>
       {/* <Text>Messages</Text> */}
