@@ -105,9 +105,7 @@ const usePagination = <T extends PaginationResponse<D>, D extends any[]>(
     }
   }, [handleRequest, pagination.canLoadMore]);
 
-  const cancelRequest = useCallback(() => {
-    controller.abort();
-  }, [controller]);
+  const cancelRequest = useCallback(() => controller.abort(), [controller]);
 
   useEffect(() => {
     handleRequest();
