@@ -5,6 +5,7 @@ export { default as useAppSelector } from './useAppSelector';
 export { default as useAppState } from './useAppState';
 export { default as useBackHandler } from './useBackHandler';
 export { default as useColor } from './useColor';
+export { default as useDebounce } from './useDebounce';
 export { default as useFormat } from './useFormat';
 export { default as useKeyboard } from './useKeyboard';
 export { default as useLoading } from './useLoading';
