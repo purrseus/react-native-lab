@@ -6,6 +6,12 @@ import { AxiosRequestConfig } from 'axios';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import isEqual from 'react-fast-compare';
 
+interface PaginationRef<Params> {
+  isFirstCall: boolean;
+  paramsRef: Params;
+  pageIndex: number;
+}
+
 interface Pagination<Data> {
   fetching: boolean;
   refreshing: boolean;
@@ -19,13 +25,14 @@ const PAGE_SIZE_KEY = 'limit'; // pageSize, perPage, limit,...
 
 const usePagination = <T extends PaginationResponse<D>, D extends any[]>(
   requestCallback: (requestConfig: AxiosRequestConfig) => Promise<T>,
-  config: PaginationConfig = {},
+  { pageSize = DEFAULT_PAGE_SIZE, params = {}, accessProperties = ['data'] }: PaginationConfig = {},
 ): UsePaginationReturn => {
-  const { pageSize = DEFAULT_PAGE_SIZE, params = {}, accessProperties = ['data'] } = config;
   const controller = useRef(new AbortController()).current;
-  const isFirstCall = useRef(true);
-  const paramsRef = useRef(params);
-  const pageIndex = useRef(1);
+  const paginationRef = useRef<PaginationRef<PaginationConfig['params']>>({
+    isFirstCall: true,
+    paramsRef: params,
+    pageIndex: 1,
+  }).current;
   const [pagination, setPagination] = useState<Pagination<D | never[]>>({
     fetching: true,
     refreshing: false,
@@ -43,9 +50,9 @@ const usePagination = <T extends PaginationResponse<D>, D extends any[]>(
     try {
       const response = await requestCallback({
         params: {
-          [PAGE_INDEX_KEY]: pageIndex.current,
+          [PAGE_INDEX_KEY]: paginationRef.pageIndex,
           [PAGE_SIZE_KEY]: pageSize,
-          ...paramsRef.current,
+          ...paginationRef.paramsRef,
         },
         signal: controller.signal,
       });
@@ -54,7 +61,7 @@ const usePagination = <T extends PaginationResponse<D>, D extends any[]>(
 
       if (!Array.isArray(responseData)) return [];
       if (responseData.length < pageSize) setState({ canLoadMore: false });
-      if (isFirstCall.current) {
+      if (paginationRef.isFirstCall) {
         setState({ data: responseData });
       }
 
@@ -63,13 +70,13 @@ const usePagination = <T extends PaginationResponse<D>, D extends any[]>(
       logger(error);
     } finally {
       setState({ fetching: false });
-      isFirstCall.current = false;
+      paginationRef.isFirstCall = false;
     }
   }, [setState, accessProperties, controller.signal, pageSize, requestCallback]);
 
   const onRefresh = useCallback(async () => {
     try {
-      pageIndex.current = 1;
+      paginationRef.pageIndex = 1;
       setState({ canLoadMore: true, refreshing: true });
       const responseData = await handleRequest();
       if (Array.isArray(responseData)) {
@@ -85,7 +92,7 @@ const usePagination = <T extends PaginationResponse<D>, D extends any[]>(
   const onLoadMore = useCallback(async () => {
     if (!pagination.canLoadMore) return;
     try {
-      pageIndex.current += 1;
+      paginationRef.pageIndex += 1;
       const responseData = await handleRequest();
       if (Array.isArray(responseData)) {
         setPagination(previousState => ({
@@ -109,8 +116,8 @@ const usePagination = <T extends PaginationResponse<D>, D extends any[]>(
   }, []);
 
   useEffect(() => {
-    if (!isFirstCall.current && !isEqual(params, paramsRef.current)) {
-      paramsRef.current = params;
+    if (!paginationRef.isFirstCall && !isEqual(params, paginationRef.paramsRef)) {
+      paginationRef.paramsRef = params;
       onRefresh();
     }
   }, [params, onRefresh]);
