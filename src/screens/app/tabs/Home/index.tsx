@@ -3,7 +3,7 @@ import PaginatorList from '@components/core/PaginatorList';
 import { TabScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { TabScreen } from '@core/types';
-import { useStyle } from '@hooks';
+import { useAppState, useStyle } from '@hooks';
 import { commonAPI } from '@services/requests';
 import { globalStyles } from '@themes';
 import { compareMemo, logger } from '@utilities';
@@ -20,7 +20,7 @@ const Item = compareMemo<{
     <View style={styles.item}>
       <Image
         cached
-        source={{ uri: item.download_url.slice(0, -10) + '/180/180' }}
+        source={{ uri: item.download_url.slice(0, -10) + '/100/100' }}
         style={styles.photo}
       />
       <Spacer w8 />
@@ -36,6 +36,15 @@ const Home: TabScreen<TabScreenName.Home> = () => {
     useCallback(({ item }) => {
       return <Item item={item} />;
     }, []);
+
+  useAppState(
+    () => {
+      logger('active');
+    },
+    () => {
+      logger('inactive');
+    },
+  );
 
   return (
     <View style={globalStyles.flexFill}>

@@ -6,40 +6,40 @@ const useKeyboard = () => {
   const [keyboardShown, setKeyboardShown] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
 
-  const handleKeyboardWillShow: KeyboardEventListener = useCallback(event => {
+  const keyboardWillShowListener: KeyboardEventListener = useCallback(event => {
     if (isIos) setKeyboardHeight(event.endCoordinates.height);
   }, []);
 
-  const handleKeyboardDidShow: KeyboardEventListener = useCallback(event => {
+  const keyboardDidShowListener: KeyboardEventListener = useCallback(event => {
     setKeyboardShown(true);
     if (isAndroid) setKeyboardHeight(event.endCoordinates.height);
   }, []);
 
-  const handleKeyboardWillHide: KeyboardEventListener = useCallback(() => {
+  const keyboardWillHideListener: KeyboardEventListener = useCallback(() => {
     if (isIos) setKeyboardHeight(0);
   }, []);
 
-  const handleKeyboardDidHide: KeyboardEventListener = useCallback(() => {
+  const keyboardDidHideListener: KeyboardEventListener = useCallback(() => {
     setKeyboardShown(false);
     if (isAndroid) setKeyboardHeight(0);
   }, []);
 
   useEffect(() => {
     const subscriptions = [
-      Keyboard.addListener('keyboardWillShow', handleKeyboardWillShow),
-      Keyboard.addListener('keyboardDidShow', handleKeyboardDidShow),
-      Keyboard.addListener('keyboardWillHide', handleKeyboardWillHide),
-      Keyboard.addListener('keyboardDidHide', handleKeyboardDidHide),
+      Keyboard.addListener('keyboardWillShow', keyboardWillShowListener),
+      Keyboard.addListener('keyboardDidShow', keyboardDidShowListener),
+      Keyboard.addListener('keyboardWillHide', keyboardWillHideListener),
+      Keyboard.addListener('keyboardDidHide', keyboardDidHideListener),
     ];
 
     return () => {
       subscriptions.forEach(subscription => subscription.remove());
     };
   }, [
-    handleKeyboardWillShow,
-    handleKeyboardDidShow,
-    handleKeyboardWillHide,
-    handleKeyboardDidHide,
+    keyboardWillShowListener,
+    keyboardDidShowListener,
+    keyboardWillHideListener,
+    keyboardDidHideListener,
   ]);
 
   return { keyboardShown, keyboardHeight };
