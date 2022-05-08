@@ -1,13 +1,16 @@
 import { icons } from '@assets';
 import { Button, Spacer, Text } from '@components/core';
-import { useAppDispatch, useBackHandler, useFormat } from '@hooks';
+import { useAppDispatch, useBackHandler, useFormat, useLayout } from '@hooks';
 import { commonActions } from '@store/slices/common';
+import { logger } from '@utilities';
 import React from 'react';
 import { View } from 'react-native';
 
 const Messages = () => {
   const dispatch = useAppDispatch();
   const { numberFormatter } = useFormat();
+  const { handleLayout, ...layout } = useLayout();
+  logger(layout);
 
   useBackHandler(BackHandler => {
     BackHandler.exitApp();
@@ -26,6 +29,7 @@ const Messages = () => {
         iconSpacing={20}
         iconProps={{ tintColor: 'white' }}
         loading
+        onLayout={handleLayout}
       />
       <Spacer h40 />
       <Button
