@@ -1,6 +1,6 @@
 import { icons } from '@assets';
-import { LocalizedText, Icon, Touchable, Spacer, BottomTabSpacer } from '@components/core';
-import { TAB_BAR_HEIGHT } from '@core/constants';
+import { BottomTabSpacer, Icon, LocalizedText, Row, Spacer, Touchable } from '@components/core';
+import { HORIZONTAL_SAFETY_EDGES, TAB_BAR_HEIGHT } from '@core/constants';
 import { TabScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { I18nText } from '@core/types';
@@ -8,7 +8,7 @@ import { useStyle } from '@hooks';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { colors as Colors, globalStyles } from '@themes';
 import React, { FC } from 'react';
-import { ColorValue, ImageRequireSource, StyleSheet, View } from 'react-native';
+import { ColorValue, ImageRequireSource, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface TabUI {
@@ -49,8 +49,8 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
   const styles = useStyle(styleCallback);
 
   return (
-    <SafeAreaView edges={['left', 'right']} style={styles.rootContainer}>
-      <View style={styles.container}>
+    <SafeAreaView edges={HORIZONTAL_SAFETY_EDGES} style={styles.rootContainer}>
+      <Row style={styles.container}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
           const screenName = route.name as TabScreenName;
@@ -95,7 +95,6 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
                 size={24}
                 source={isFocused ? focusedIcon : icon}
                 tintColor={isFocused ? (focusedColor as string) : styles.icon.tintColor}
-                style={styles.icon}
               />
               <Spacer h4 />
               <LocalizedText
@@ -105,7 +104,7 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
             </Touchable>
           );
         })}
-      </View>
+      </Row>
 
       <BottomTabSpacer bottomBarHeight={0} />
     </SafeAreaView>
@@ -130,7 +129,6 @@ const styleCallback = ({ colors, create }: StyleCallbackParams) =>
       backgroundColor: colors.tabBarBackground,
     },
     container: {
-      flexDirection: 'row',
       height: TAB_BAR_HEIGHT,
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
