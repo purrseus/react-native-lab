@@ -30,7 +30,6 @@ function ListViewBase<T>(
 
   return (
     <FlatList
-      ref={ref}
       removeClippedSubviews
       keyboardDismissMode="on-drag"
       keyboardShouldPersistTaps="handled"
@@ -38,6 +37,7 @@ function ListViewBase<T>(
       scrollEventThrottle={16}
       {...props}
       {...(!!onRefresh && { refreshControl: <RefreshControl {...{ refreshing, onRefresh }} /> })}
+      ref={ref}
       keyExtractor={handleKeyExtractor}
       ListFooterComponent={
         <View>
