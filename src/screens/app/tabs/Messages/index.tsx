@@ -1,6 +1,6 @@
 import { icons } from '@assets';
 import { Button, Spacer, Text } from '@components/core';
-import { useAppDispatch, useBackHandler, useFormat, useLayout } from '@hooks';
+import { useAppDispatch, useBackHandler, useFormat, useMeasure } from '@hooks';
 import { commonActions } from '@store/slices/common';
 import { logger } from '@utilities';
 import React from 'react';
@@ -9,8 +9,8 @@ import { View } from 'react-native';
 const Messages = () => {
   const dispatch = useAppDispatch();
   const { numberFormatter } = useFormat();
-  const { handleLayout, ...layout } = useLayout();
-  logger(layout);
+  const { ref, measure } = useMeasure<View>();
+  logger(measure);
 
   useBackHandler(BackHandler => {
     BackHandler.exitApp();
@@ -19,18 +19,18 @@ const Messages = () => {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center' }}>
-      {/* <Text>Messages</Text> */}
-      <Button
-        title="tab.messages"
-        gradient
-        leftIcon={icons.home}
-        rightIcon={icons.message}
-        iconSize={24}
-        iconSpacing={20}
-        iconProps={{ tintColor: 'white' }}
-        loading
-        onLayout={handleLayout}
-      />
+      <View ref={ref}>
+        <Button
+          title="tab.messages"
+          gradient
+          leftIcon={icons.home}
+          rightIcon={icons.message}
+          iconSize={24}
+          iconSpacing={20}
+          iconProps={{ tintColor: 'white' }}
+          loading
+        />
+      </View>
       <Spacer h40 />
       <Button
         title="tab.messages"
@@ -41,7 +41,7 @@ const Messages = () => {
         // iconProps={{ tintColor: 'white' }}
         // loading
       />
-      <Text onPress={() => dispatch(commonActions.changeLanguage('ja-JP'))}>
+      <Text onPress={() => dispatch(commonActions.changeLanguage('en-US'))}>
         {numberFormatter(1_000_000_000, '0a')}
       </Text>
     </View>
