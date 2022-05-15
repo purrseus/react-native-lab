@@ -1,5 +1,5 @@
 import { RootNavigator } from '@navigation';
-import AppProvider from '@providers/AppProvider';
+import { AppProvider } from '@providers';
 import React, { FC } from 'react';
 
 const App: FC = () => (

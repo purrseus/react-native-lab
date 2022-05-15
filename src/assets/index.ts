@@ -5,6 +5,7 @@ import viVN from './locales/vi-VN.json';
 export const fonts = {};
 
 export const icons = {
+  // Tab icons
   home: require('@assets/icons/tabs/home/home.png'),
   message: require('@assets/icons/tabs/messages/message.png'),
   notification: require('@assets/icons/tabs/notification/notification.png'),

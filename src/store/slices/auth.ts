@@ -1,5 +1,6 @@
 import { CommonStatus } from '@core/types';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { setAccessToken } from '@services';
 import { handleRefreshToken } from '@services/requests/auth';
 import { createPersistReducer } from '@utilities';
 
@@ -15,7 +16,10 @@ const initialState: AuthState = {
   status: 'idle',
 };
 
-const resetState = () => initialState;
+const resetState = () => {
+  setAccessToken(null);
+  return initialState;
+};
 
 export const fetchNewAccessToken = createAsyncThunk(
   `${sliceName}/fetchNewAccessToken`,
@@ -34,7 +38,7 @@ export const fetchNewAccessToken = createAsyncThunk(
   },
 );
 
-const auth = createSlice({
+const authSlice = createSlice({
   name: sliceName,
   initialState,
   reducers: {
@@ -61,5 +65,5 @@ const auth = createSlice({
   },
 });
 
-export const authActions = auth.actions;
-export default createPersistReducer(auth, { blacklist: ['status'] });
+export const authActions = authSlice.actions;
+export default createPersistReducer(authSlice, { blacklist: ['status'] });
