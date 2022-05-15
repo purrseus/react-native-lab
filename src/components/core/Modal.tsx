@@ -2,12 +2,12 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
 import React from 'react';
-import { useWindowDimensions } from 'react-native';
+import { Dimensions } from 'react-native';
 import RNModal, { ModalProps as RNModalProps } from 'react-native-modal';
 
 type CombinedModalProps = Partial<RNModalProps> & Pick<RNModalProps, 'children' | 'isVisible'>;
 
-interface ModalProps extends CombinedModalProps {
+export interface ModalProps extends CombinedModalProps {
   type?: 'modal' | 'bottomSheet';
 }
 
@@ -16,15 +16,15 @@ type AnimationType = Record<
   Pick<ModalProps, 'animationIn' | 'animationOut'>
 >;
 
-const DEFAULT_BACKDROP_OPACITY = 1 / 3;
+const DEFAULT_BACKDROP_OPACITY = 1 / 5;
 
 const animationType: AnimationType = {
   modal: { animationIn: 'fadeIn', animationOut: 'fadeOut' },
-  bottomSheet: { animationIn: 'slideInDown', animationOut: 'slideOutDown' },
+  bottomSheet: { animationIn: 'slideInUp', animationOut: 'slideOutDown' },
 };
 
 const Modal = compareMemo<ModalProps>(({ children, type = 'modal', style, ...props }) => {
-  const { width, height } = useWindowDimensions();
+  const { width, height } = Dimensions.get('screen');
   const styles = useStyle(styleCallback);
 
   return (

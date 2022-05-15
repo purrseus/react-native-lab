@@ -19,7 +19,7 @@ export const DEFAULT_THROTTLE_SETTINGS: ThrottleSettings = {
   leading: true,
   trailing: false,
 };
-export const languageMap: LanguageMap<Locale> = {
+export const LANGUAGE_MAP: LanguageMap<Locale> = {
   'en-US': 'en-gb',
   'ja-JP': 'ja',
   'vi-VN': 'vi',

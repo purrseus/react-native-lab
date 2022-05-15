@@ -11,7 +11,7 @@ interface BottomTabSpacerProps {
 const BottomTabSpacer = compareMemo<BottomTabSpacerProps>(({ bottomBarHeight }) => {
   const { bottom } = useSafeAreaInsets();
 
-  return <Spacer {...{ [`h${bottom / 2 + (bottomBarHeight ?? TAB_BAR_HEIGHT)}`]: true }} />;
+  return <Spacer height={bottom / 2 + (bottomBarHeight ?? TAB_BAR_HEIGHT)} />;
 });
 
 export default BottomTabSpacer;

@@ -1,5 +1,5 @@
 import { locales } from '@assets';
-import { languageMap } from '@core/constants';
+import { LANGUAGE_MAP } from '@core/constants';
 import { Language, LanguageMap } from '@core/types';
 import { getCurrentLanguage } from '@utilities';
 import dayjs from 'dayjs';
@@ -25,7 +25,7 @@ export const resources: LanguageMap<ResourceLanguage> = {
 };
 
 const changeLocale = (language: Language) => {
-  const key = languageMap[language];
+  const key = LANGUAGE_MAP[language];
   dayjs.locale(key);
   numeral.locale(key);
 };
