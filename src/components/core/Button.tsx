@@ -2,7 +2,7 @@ import { DEFAULT_ICON_SIZE, HORIZONTAL_GRADIENT_COORDINATES } from '@core/consta
 import { StyleCallbackParams } from '@core/interfaces';
 import { I18nText } from '@core/types';
 import { useStyle } from '@hooks';
-import { compareMemo } from '@utilities';
+import { alphaHexColor, compareMemo } from '@utilities';
 import React from 'react';
 import {
   ColorValue,
@@ -20,7 +20,7 @@ import Spacer from './Spacer';
 import Touchable, { TouchableProps } from './Touchable';
 
 type SizeName = 'small' | 'medium' | 'large';
-type ButtonType = 'normal' | 'outline';
+type ButtonType = 'filled' | 'outlined' | 'tonal';
 type ButtonSize = number;
 type TitleSize = number;
 
@@ -31,6 +31,7 @@ interface ButtonProps extends TouchableProps {
   gradient?: boolean;
   gradientColors?: ColorValue[];
   color?: ColorValue;
+  titleCenter?: boolean;
   titleStyle?: StyleProp<TextStyle>;
   loading?: boolean;
   leftIcon?: ImageRequireSource;
@@ -48,13 +49,14 @@ const sizes: Record<SizeName, [ButtonSize, TitleSize]> = {
 
 const Button = compareMemo<ButtonProps>(
   ({
-    type = 'normal',
+    type = 'filled',
     size = 'medium',
     color,
     style,
     title,
     gradient = false,
     gradientColors,
+    titleCenter = true,
     titleStyle,
     loading = false,
     leftIcon,
@@ -76,6 +78,7 @@ const Button = compareMemo<ButtonProps>(
     return (
       <Touchable
         {...props}
+        activeOpacity={0.8}
         disabled={loading || disabled}
         style={[styles.container, styles[type], { height: buttonSize }, style]}
       >
@@ -99,8 +102,8 @@ const Button = compareMemo<ButtonProps>(
                 {...iconProps}
                 style={[{ marginRight: iconSpacing }, iconProps?.style]}
               />
-            ) : hasRightIcon ? (
-              <Spacer {...{ [`w${rightIconSize + iconSpacing}`]: true }} />
+            ) : hasRightIcon && titleCenter ? (
+              <Spacer width={rightIconSize + iconSpacing} />
             ) : null}
 
             <LocalizedText
@@ -117,8 +120,8 @@ const Button = compareMemo<ButtonProps>(
                 {...iconProps}
                 style={[{ marginLeft: iconSpacing }, iconProps?.style]}
               />
-            ) : hasLeftIcon ? (
-              <Spacer {...{ [`w${leftIconSize + iconSpacing}`]: true }} />
+            ) : hasLeftIcon && titleCenter ? (
+              <Spacer width={leftIconSize + iconSpacing} />
             ) : null}
           </>
         )}
@@ -139,18 +142,24 @@ const styleCallback =
         overflow: 'hidden',
       },
       gradient: [colors.primary, colors.blue] as ViewStyle,
-      normal: {
+      filled: {
         backgroundColor: customColor || colors.primary,
       },
-      outline: {
+      outlined: {
         backgroundColor: colors.white,
         borderColor: customColor || colors.primary,
         borderWidth: 1,
       },
-      normalColor: {
+      tonal: {
+        backgroundColor: customColor || alphaHexColor(colors.primary, 0.2),
+      },
+      filledColor: {
         color: colors.white,
       },
-      outlineColor: {
+      outlinedColor: {
+        color: customColor || colors.primary,
+      },
+      tonalColor: {
         color: customColor || colors.primary,
       },
       title: {

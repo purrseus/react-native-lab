@@ -8,14 +8,14 @@ import { FlatList, RefreshControlProps, View } from 'react-native';
 import ActivityIndicator from './ActivityIndicator';
 import ListView, { ListViewProps } from './ListView';
 
-interface PaginatorListProps
+interface InfiniteListProps
   extends Omit<ListViewProps, keyof RefreshControlProps | 'data'>,
     Partial<RefreshControlProps> {
   requestCallback: (requestConfig: AxiosRequestConfig) => Promise<any>;
   paginationConfig?: PaginationConfig;
 }
-
-const PaginatorList = forwardRef<FlatList, PaginatorListProps>(
+// TODO: InfiniteList
+const InfiniteList = forwardRef<FlatList, InfiniteListProps>(
   ({ requestCallback, paginationConfig, ...props }, ref) => {
     const styles = useStyle(styleCallback);
     const { canLoadMore, fetching, onLoadMore, ...listProps } = usePagination(
@@ -57,4 +57,4 @@ const styleCallback = ({ create }: StyleCallbackParams) =>
     },
   });
 
-export default PaginatorList;
+export default InfiniteList;
