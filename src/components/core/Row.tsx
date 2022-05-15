@@ -5,7 +5,7 @@ import { View, ViewProps } from 'react-native';
 
 const Row = compareMemo<ViewProps>(({ children, style, ...props }) => {
   return (
-    <View {...props} style={[{ flexDirection: 'row' }, style]}>
+    <View {...props} style={[style, { flexDirection: 'row' }]}>
       {children}
     </View>
   );

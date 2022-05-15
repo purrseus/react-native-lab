@@ -1,9 +1,11 @@
+export { default as ActionSheet } from './ActionSheet';
 export { default as ActivityIndicator } from './ActivityIndicator';
 export { default as BottomTabSpacer } from './BottomTabSpacer';
 export { default as Button } from './Button';
 export { default as Divider } from './Divider';
 export { default as Icon } from './Icon';
 export { default as Image } from './Image';
+export { default as InfiniteList } from './InfiniteList';
 export { default as ListView } from './ListView';
 export { default as LocalizedText } from './LocalizedText';
 export { default as Modal } from './Modal';

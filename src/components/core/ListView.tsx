@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { nanoid } from '@reduxjs/toolkit';
 import React, { ForwardedRef, forwardRef, useCallback } from 'react';
 import { FlatList, FlatListProps, RefreshControlProps, View } from 'react-native';
 import BottomTabSpacer from './BottomTabSpacer';
@@ -21,11 +20,11 @@ function ListViewBase<T>(
   }: ListViewProps<T>,
   ref: ForwardedRef<FlatList<T>>,
 ) {
-  const handleKeyExtractor = useCallback((item: Record<string, any>) => {
+  const handleKeyExtractor = useCallback((item: Record<string, any>, index: number) => {
     for (const key in item) {
       if (key.match(/id/gi)?.length) return `${item[key]}`;
     }
-    return nanoid();
+    return index.toString();
   }, []);
 
   return (

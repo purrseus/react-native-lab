@@ -16,7 +16,7 @@ const initialState: CommonState = {
   language: getCurrentLanguage(),
 };
 
-const common = createSlice({
+const commonSlice = createSlice({
   name: sliceName,
   initialState,
   reducers: {
@@ -42,5 +42,5 @@ const common = createSlice({
   },
 });
 
-export const commonActions = common.actions;
-export default createPersistReducer(common, { blacklist: ['isLoading'] });
+export const commonActions = commonSlice.actions;
+export default createPersistReducer(commonSlice, { blacklist: ['isLoading'] });

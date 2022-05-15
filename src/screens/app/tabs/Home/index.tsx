@@ -1,5 +1,4 @@
-import { Image, Spacer, Text } from '@components/core';
-import PaginatorList from '@components/core/PaginatorList';
+import { Image, Spacer, Text, InfiniteList } from '@components/core';
 import { TabScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { TabScreen } from '@core/types';
@@ -48,7 +47,7 @@ const Home: TabScreen<TabScreenName.Home> = () => {
 
   return (
     <View style={globalStyles.flexFill}>
-      <PaginatorList
+      <InfiniteList
         ItemSeparatorComponent={() => <Spacer h20 />}
         requestCallback={commonAPI.fetchPhotos}
         paginationConfig={{ accessProperties: [] }}

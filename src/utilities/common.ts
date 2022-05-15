@@ -7,7 +7,12 @@ import isEqual from 'react-fast-compare';
 import { ColorValue, Insets } from 'react-native';
 import { getLocales } from 'react-native-localize';
 
-export const randomColorGenerator = (): ColorValue => `#${Math.random().toString(16).slice(-6)}`;
+export const currentTimeStamp = () => +new Date();
+
+export const randomColor = (): ColorValue => `#${Math.random().toString(16).slice(-6)}`;
+
+export const alphaHexColor = (hexColor: string, opacity: number) =>
+  `${hexColor}${`${(Math.min(Math.max(opacity, 0), 1) * 255).toString(16)}0`.slice(0, 2)}`;
 
 export const compareMemo = <T>(Component: FC<T>) => memo(Component, isEqual);
 
