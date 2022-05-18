@@ -30,14 +30,12 @@ export interface ActionSheetRef {
   hide: () => void;
 }
 
-interface ActionSheetExtendedProps extends ActionSheetIOSOptions {
+interface ActionSheetProps extends ActionSheetIOSOptions {
   options: I18nText[];
   title?: I18nText;
   message?: I18nText;
   onSelect: (buttonIndex: number) => void;
 }
-
-interface ActionSheetProps extends ActionSheetExtendedProps {}
 
 const ACTION_SHEET_ANIMATION_TIMING = ONE_SECOND / 3;
 const DEFAULT_MARGIN = 8;
@@ -47,7 +45,7 @@ const ActionSheet = forwardRef<ActionSheetRef, ActionSheetProps>(
     const colors = useColor();
     const { t } = useTranslation();
     const colorScheme = useColorScheme();
-    const styles = useStyle(styleCallback);
+    const styles = useStyle(createStyles);
     const [isVisible, setIsVisible] = useState(false);
     const options = useMemo(
       () => props.options.filter((_, index) => index !== cancelButtonIndex),
@@ -179,7 +177,7 @@ const ActionSheet = forwardRef<ActionSheetRef, ActionSheetProps>(
   },
 );
 
-const styleCallback = ({ create, colors, edgeInsets, dimensions }: StyleCallbackParams) =>
+const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackParams) =>
   create({
     container: {
       width: dimensions.width - DEFAULT_MARGIN * 2 - edgeInsets.left - edgeInsets.right,

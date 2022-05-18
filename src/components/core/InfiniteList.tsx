@@ -17,7 +17,7 @@ interface InfiniteListProps
 // TODO: InfiniteList
 const InfiniteList = forwardRef<FlatList, InfiniteListProps>(
   ({ requestCallback, paginationConfig, ...props }, ref) => {
-    const styles = useStyle(styleCallback);
+    const styles = useStyle(createStyles);
     const { canLoadMore, fetching, onLoadMore, ...listProps } = usePagination(
       requestCallback,
       paginationConfig,
@@ -50,7 +50,7 @@ const InfiniteList = forwardRef<FlatList, InfiniteListProps>(
   },
 );
 
-const styleCallback = ({ create }: StyleCallbackParams) =>
+const createStyles = ({ create }: StyleCallbackParams) =>
   create({
     footer: {
       paddingVertical: 8,
