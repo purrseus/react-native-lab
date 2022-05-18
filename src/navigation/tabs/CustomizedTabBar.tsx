@@ -46,7 +46,7 @@ const tabUI: Record<TabScreenName, TabUI> = {
 };
 
 const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigation }) => {
-  const styles = useStyle(styleCallback);
+  const styles = useStyle(createStyles);
 
   return (
     <SafeAreaView edges={HORIZONTAL_SAFETY_EDGES} style={styles.rootContainer}>
@@ -111,12 +111,12 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
   );
 };
 
-const styleCallback = ({ colors, create }: StyleCallbackParams) =>
+const createStyles = ({ colors, create }: StyleCallbackParams) =>
   create({
     rootContainer: {
       ...StyleSheet.absoluteFillObject,
       top: undefined,
-      shadowColor: colors.shadowTabBar,
+      shadowColor: colors.shadow,
       shadowOpacity: 0.1,
       shadowOffset: {
         width: 0,

@@ -11,8 +11,7 @@ import {
 
 const StatusBar = compareMemo<StatusBarProps>(({ ...props }) => {
   const colorScheme = useColorScheme();
-  const isDarkMode = colorScheme === 'dark';
-  const barStyle: StatusBarStyle = isDarkMode ? 'light-content' : 'dark-content';
+  const barStyle: StatusBarStyle = colorScheme === 'dark' ? 'light-content' : 'dark-content';
   const backgroundColor: ColorValue = colors.transparent;
 
   return <RNStatusBar translucent {...{ barStyle, backgroundColor }} {...props} />;

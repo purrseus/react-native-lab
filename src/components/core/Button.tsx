@@ -73,7 +73,7 @@ const Button = compareMemo<ButtonProps>(
     const [leftIconSize, rightIconSize]: number[] = Array.isArray(iconSize)
       ? iconSize
       : new Array(2).fill(iconSize || DEFAULT_ICON_SIZE);
-    const styles = useStyle(styleCallback(color));
+    const styles = useStyle(createStyles(color));
 
     return (
       <Touchable
@@ -130,7 +130,7 @@ const Button = compareMemo<ButtonProps>(
   },
 );
 
-const styleCallback =
+const createStyles =
   (customColor?: ColorValue) =>
   ({ create, colors }: StyleCallbackParams) =>
     create({
