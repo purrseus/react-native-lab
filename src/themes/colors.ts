@@ -1,7 +1,7 @@
 export const colors = {
+  transparent: 'transparent',
   black: '#000000',
   white: '#ffffff',
-  transparent: 'transparent',
   darkGray: '#888888',
   lightGray: '#DEDEDE',
   purple: '#4c37a6',
@@ -10,27 +10,28 @@ export const colors = {
   blue: '#3593f7',
   primary: '#06d283',
   secondary: '#06e273',
-  blackOpacity: (opacity: number) => `rgba(0,0,0,${opacity})`,
 };
 
 export const lightTheme = {
   ...colors,
   tabBlur: '#888888',
   tabBarBackground: '#FFFFFF',
-  shadowTabBar: '#000000',
+  shadow: '#000000',
   background: '#FFFFFF',
   primaryText: '#3B3B3B',
   backgroundImage: '#C4C4C4',
   refreshControlBackground: '#FAFAFA',
+  switchTrackInactive: '#C4C4C4',
 };
 
 export const darkTheme = {
   ...colors,
   tabBlur: '#888888',
   tabBarBackground: '#111111',
-  shadowTabBar: '#EFEFEF',
+  shadow: '#EFEFEF',
   background: '#000000',
   primaryText: '#FFFFFF',
   backgroundImage: '#343434',
   refreshControlBackground: '#222222',
+  switchTrackInactive: '#C4C4C4',
 };

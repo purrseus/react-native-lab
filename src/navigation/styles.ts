@@ -1,10 +1,10 @@
 import { StyleCallbackParams } from '@core/interfaces';
 
-const styleCallback = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     screenStyle: {
       backgroundColor: colors.background,
     },
   });
 
-export default styleCallback;
+export default createStyles;

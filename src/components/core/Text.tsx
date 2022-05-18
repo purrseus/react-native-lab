@@ -11,7 +11,7 @@ export interface TextProps
     Pick<TouchableProps, 'hitSlop' | 'onPress' | 'wait'> {}
 
 const Text = compareMemo<TextProps>(({ children, style, onPress, hitSlop, wait, ...props }) => {
-  const styles = useStyle(styleCallback);
+  const styles = useStyle(createStyles);
 
   const TextComponent: FC = () => (
     <RNText allowFontScaling={false} {...props} style={[styles.text, style]}>
@@ -28,7 +28,7 @@ const Text = compareMemo<TextProps>(({ children, style, onPress, hitSlop, wait, 
   );
 });
 
-const styleCallback = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     text: {
       fontSize: DEFAULT_FONT_SIZE,
