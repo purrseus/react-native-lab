@@ -8,20 +8,20 @@ export type StyleCallback = (
   params: StyleCallbackParams,
 ) => ReturnType<StyleCallbackParams['create']>;
 
-const useStyle = <T extends StyleCallback>(styleCallback: T): ReturnType<T> => {
+const useStyle = <T extends StyleCallback>(createStyles: T): ReturnType<T> => {
   const dimensions = useWindowDimensions();
   const colors = useColor();
   const edgeInsets = useSafeAreaInsets();
 
   return useMemo(
     () =>
-      styleCallback({
+      createStyles({
         dimensions,
         colors,
         edgeInsets,
         create: StyleSheet.create,
       }) as ReturnType<T>,
-    [dimensions, edgeInsets, colors, styleCallback],
+    [dimensions, edgeInsets, colors, createStyles],
   );
 };
 

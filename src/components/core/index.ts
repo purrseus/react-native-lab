@@ -14,5 +14,6 @@ export { default as RefreshControl } from './RefreshControl';
 export { default as Row } from './Row';
 export { default as Spacer } from './Spacer';
 export { default as StatusBar } from './StatusBar';
+export { default as Switch } from './Switch';
 export { default as Text } from './Text';
 export { default as Touchable } from './Touchable';

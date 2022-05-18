@@ -1,6 +1,6 @@
 import { StyleCallbackParams } from '@core/interfaces';
 import { useLoading, useStyle } from '@hooks';
-import { compareMemo } from '@utilities';
+import { alphaHexColor, compareMemo } from '@utilities';
 import React from 'react';
 import { View } from 'react-native';
 import ActivityIndicator from './ActivityIndicator';
@@ -8,7 +8,7 @@ import Modal from './Modal';
 
 const OverlayLoading = compareMemo(() => {
   const { isLoading } = useLoading();
-  const styles = useStyle(styleCallback);
+  const styles = useStyle(createStyles);
 
   return (
     <Modal isVisible={isLoading}>
@@ -19,11 +19,11 @@ const OverlayLoading = compareMemo(() => {
   );
 });
 
-const styleCallback = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     activityIndicatorWrapper: {
       padding: 20,
-      backgroundColor: colors.blackOpacity(0.6),
+      backgroundColor: alphaHexColor(colors.black, 0.6),
       borderRadius: 12,
     },
   });

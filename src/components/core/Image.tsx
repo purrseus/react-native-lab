@@ -46,7 +46,7 @@ export type ImageProps<C extends boolean> = CommonImageProps<C> & AdditionalImag
 
 function Image<C extends boolean = false>({ style, cached, ...props }: ImageProps<C>) {
   const isLocalImage = typeof props.source === 'number';
-  const styles = useStyle(styleCallback);
+  const styles = useStyle(createStyles);
 
   return cached || isLocalImage ? (
     <FastImage
@@ -62,7 +62,7 @@ function Image<C extends boolean = false>({ style, cached, ...props }: ImageProp
   );
 }
 
-const styleCallback = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     image: {
       backgroundColor: colors.backgroundImage,

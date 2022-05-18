@@ -10,12 +10,12 @@ export interface IconProps extends ImageProps<true> {
 }
 
 const Icon = compareMemo<IconProps>(({ size = DEFAULT_ICON_SIZE, style, ...props }) => {
-  const styles = useStyle(styleCallback);
+  const styles = useStyle(createStyles);
 
   return <Image {...props} style={[styles.icon, { width: size, height: size }, style]} />;
 });
 
-const styleCallback = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     icon: {
       backgroundColor: colors.transparent,

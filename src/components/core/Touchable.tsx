@@ -1,7 +1,7 @@
 import { ONE_SECOND } from '@core/constants';
 import { useThrottle } from '@hooks';
-import { compareMemo, createHitSlop } from '@utilities';
-import React from 'react';
+import { createHitSlop } from '@utilities';
+import React, { forwardRef } from 'react';
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
 
 export interface TouchableProps extends Omit<TouchableOpacityProps, 'hitSlop'> {
@@ -9,14 +9,15 @@ export interface TouchableProps extends Omit<TouchableOpacityProps, 'hitSlop'> {
   hitSlop?: number;
 }
 
-const Touchable = compareMemo<TouchableProps>(
-  ({ children, wait = ONE_SECOND, onPress = () => null, hitSlop, ...props }) => {
+const Touchable = forwardRef<TouchableOpacity, TouchableProps>(
+  ({ children, wait = ONE_SECOND, onPress = () => null, hitSlop, ...props }, ref) => {
     const handleOnPress = useThrottle(onPress, [onPress], wait);
 
     return (
       <TouchableOpacity
         activeOpacity={0.5}
         {...props}
+        ref={ref}
         hitSlop={createHitSlop(hitSlop)}
         onPress={!wait ? onPress : handleOnPress}
       >

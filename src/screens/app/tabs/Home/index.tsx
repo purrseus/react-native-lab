@@ -12,7 +12,7 @@ import { ListRenderItem, View } from 'react-native';
 const Item = compareMemo<{
   item: { id: string; download_url: string; author: string };
 }>(({ item }) => {
-  const styles = useStyle(styleCallback);
+  const styles = useStyle(createStyles);
   logger(`Item ${item?.id}`);
 
   return (
@@ -58,7 +58,7 @@ const Home: TabScreen<TabScreenName.Home> = () => {
   );
 };
 
-const styleCallback = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     item: {
       alignItems: 'center',

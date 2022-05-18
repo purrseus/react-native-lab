@@ -25,7 +25,7 @@ const animationType: AnimationType = {
 
 const Modal = compareMemo<ModalProps>(({ children, type = 'modal', style, ...props }) => {
   const { width, height } = Dimensions.get('screen');
-  const styles = useStyle(styleCallback);
+  const styles = useStyle(createStyles);
 
   return (
     <RNModal
@@ -43,7 +43,7 @@ const Modal = compareMemo<ModalProps>(({ children, type = 'modal', style, ...pro
   );
 });
 
-const styleCallback = ({ create }: StyleCallbackParams) =>
+const createStyles = ({ create }: StyleCallbackParams) =>
   create({
     common: {
       padding: 0,
