@@ -61,7 +61,7 @@ export const deepAccessObject = <V, T extends Record<string, any> = {}>(
 ): T | V => {
   if (!arrKey.length) return target;
   return arrKey.reduce((acc, cur) => {
-    if (!!acc && typeof acc === 'object' && acc.hasOwnProperty(cur)) return acc[cur];
+    if (!!acc && typeof acc === 'object' && cur in acc) return acc[cur];
     return acc;
   }, target);
 };
