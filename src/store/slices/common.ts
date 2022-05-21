@@ -1,8 +1,10 @@
-import { Language, Theme } from '@core/types';
+import { Language } from '@core/types';
 import i18n from '@i18n';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createPersistReducer, getCurrentLanguage } from '@utilities';
 import { REHYDRATE } from 'redux-persist';
+
+type Theme = 'auto' | 'light' | 'dark';
 
 export interface CommonState {
   isLoading: boolean;

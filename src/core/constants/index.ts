@@ -10,16 +10,17 @@ export const DEFAULT_FONT_SIZE = 14;
 export const DEFAULT_ICON_SIZE = 24;
 export const DEFAULT_DATE_TIME_FORMAT_TEMPLATE = 'DD/MMM/YYYY HH:mm';
 export const DEFAULT_NUMBER_FORMAT_TEMPLATE = '0,0';
-export const HORIZONTAL_GRADIENT_COORDINATES: Required<Pick<LinearGradientProps, 'start' | 'end'>> =
-  {
-    start: { x: 0, y: 0 },
-    end: { x: 1, y: 0 },
-  };
-export const DEFAULT_THROTTLE_SETTINGS: ThrottleSettings = {
+export const HORIZONTAL_GRADIENT_COORDINATES: Readonly<
+  Required<Pick<LinearGradientProps, 'start' | 'end'>>
+> = {
+  start: { x: 0, y: 0 },
+  end: { x: 1, y: 0 },
+};
+export const DEFAULT_THROTTLE_SETTINGS: Readonly<ThrottleSettings> = {
   leading: true,
   trailing: false,
 };
-export const LANGUAGE_MAP: LanguageMap<Locale> = {
+export const LANGUAGE_MAP: Readonly<LanguageMap<Locale>> = {
   'en-US': 'en-gb',
   'ja-JP': 'ja',
   'vi-VN': 'vi',
