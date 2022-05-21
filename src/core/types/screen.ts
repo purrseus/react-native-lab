@@ -3,7 +3,7 @@ import { AppStackParamList } from '@core/types';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AuthStackParamList, BottomTabParamList } from './navigator';
+import { AuthStackParamList, BottomTabParamList } from './navigation';
 
 export type AuthScreen<Name extends AuthScreenName> = (
   props: NativeStackScreenProps<AuthStackParamList, Name>,

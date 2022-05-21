@@ -50,7 +50,7 @@ const Home: TabScreen<TabScreenName.Home> = () => {
       <InfiniteList
         ItemSeparatorComponent={() => <Spacer h20 />}
         requestCallback={commonAPI.fetchPhotos}
-        paginationConfig={{ accessProperties: [] }}
+        config={{ accessProperties: [] }}
         isTabScreen
         renderItem={renderItem}
       />

@@ -74,7 +74,7 @@ const Switch = compareMemo<SwitchProps>(
         thumbInactiveColor,
         disabled ? thumbInactiveColor : thumbActiveColor,
       ]);
-      const scale = interpolate(statusAnimated.value, INPUT_RANGE, [0.66, 1]);
+      const scale = interpolate(statusAnimated.value, INPUT_RANGE, [2 / 3, 1]);
 
       return {
         transform: [{ translateX }, { scale: thumbScaleAnimated && isAndroid ? scale : 1 }],

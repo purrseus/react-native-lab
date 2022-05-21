@@ -1,4 +1,4 @@
-import { Language } from '@core/types';
+import { Language, Theme } from '@core/types';
 import i18n from '@i18n';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createPersistReducer, getCurrentLanguage } from '@utilities';
@@ -7,17 +7,19 @@ import { REHYDRATE } from 'redux-persist';
 export interface CommonState {
   isLoading: boolean;
   language: Language;
+  theme: Theme;
 }
 
-const sliceName = 'common';
+const SLICE_NAME = 'common';
 
 const initialState: CommonState = {
   isLoading: false,
   language: getCurrentLanguage(),
+  theme: 'auto',
 };
 
 const commonSlice = createSlice({
-  name: sliceName,
+  name: SLICE_NAME,
   initialState,
   reducers: {
     toggleLoading: (state, { payload }: PayloadAction<boolean | undefined>) => {
@@ -31,11 +33,13 @@ const commonSlice = createSlice({
       state.language = payload;
       i18n.changeLanguage(payload);
     },
+    changeTheme: (state, { payload }: PayloadAction<Theme>) => {
+      state.theme = payload;
+    },
   },
   extraReducers: {
-    [REHYDRATE]: (state, { payload }: PayloadAction<Partial<CommonState>>) => {
+    [REHYDRATE]: (_, { payload }: PayloadAction<Partial<Omit<CommonState, 'isLoading'>>>) => {
       if (payload?.language) {
-        state.language = payload.language;
         i18n.changeLanguage(payload.language);
       }
     },

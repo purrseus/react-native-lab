@@ -1,3 +1,32 @@
+import { ColorValue } from 'react-native';
+
+/**
+ * @see lightTheme
+ * @see darkTheme
+ */
+type ColorName =
+  | 'transparent'
+  | 'black'
+  | 'white'
+  | 'darkGray'
+  | 'lightGray'
+  | 'purple'
+  | 'orange'
+  | 'red'
+  | 'blue'
+  | 'primary'
+  | 'secondary'
+  | 'tabBlur'
+  | 'tabBarBackground'
+  | 'shadow'
+  | 'background'
+  | 'primaryText'
+  | 'backgroundImage'
+  | 'refreshControlBackground'
+  | 'switchTrackInactive';
+
+type ThemeColors = Record<ColorName, ColorValue>;
+
 export const colors = {
   transparent: 'transparent',
   black: '#000000',
@@ -12,7 +41,10 @@ export const colors = {
   secondary: '#06e273',
 };
 
-export const lightTheme = {
+/**
+ * @see ColorName
+ */
+export const lightTheme: ThemeColors = {
   ...colors,
   tabBlur: '#888888',
   tabBarBackground: '#FFFFFF',
@@ -24,7 +56,10 @@ export const lightTheme = {
   switchTrackInactive: '#C4C4C4',
 };
 
-export const darkTheme = {
+/**
+ * @see ColorName
+ */
+export const darkTheme: ThemeColors = {
   ...colors,
   tabBlur: '#888888',
   tabBarBackground: '#111111',

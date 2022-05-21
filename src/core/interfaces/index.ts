@@ -1,3 +1,3 @@
 export * from './common';
 export * from './hook';
-export * from './services';
+export * from './service';

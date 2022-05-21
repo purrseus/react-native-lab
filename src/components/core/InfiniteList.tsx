@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PaginationConfig, StyleCallbackParams } from '@core/interfaces';
-import { usePagination, useStyle, useThrottle } from '@hooks';
+import { InfiniteScrollConfig, StyleCallbackParams } from '@core/interfaces';
+import { useInfiniteScroll, useStyle, useThrottle } from '@hooks';
 import { globalStyles } from '@themes';
 import { AxiosRequestConfig } from 'axios';
 import React, { forwardRef } from 'react';
@@ -12,15 +12,15 @@ interface InfiniteListProps
   extends Omit<ListViewProps, keyof RefreshControlProps | 'data'>,
     Partial<RefreshControlProps> {
   requestCallback: (requestConfig: AxiosRequestConfig) => Promise<any>;
-  paginationConfig?: PaginationConfig;
+  config?: InfiniteScrollConfig;
 }
 // TODO: InfiniteList
 const InfiniteList = forwardRef<FlatList, InfiniteListProps>(
-  ({ requestCallback, paginationConfig, ...props }, ref) => {
+  ({ requestCallback, config, ...props }, ref) => {
     const styles = useStyle(createStyles);
-    const { canLoadMore, fetching, onLoadMore, ...listProps } = usePagination(
+    const { canLoadMore, fetching, onLoadMore, ...listProps } = useInfiniteScroll(
       requestCallback,
-      paginationConfig,
+      config,
     );
 
     const handleOnEndReached = useThrottle(onLoadMore, [onLoadMore]);

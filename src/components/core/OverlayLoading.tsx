@@ -4,14 +4,14 @@ import { alphaHexColor, compareMemo } from '@utilities';
 import React from 'react';
 import { View } from 'react-native';
 import ActivityIndicator from './ActivityIndicator';
-import Modal from './Modal';
+import Modal, { ModalProps } from './Modal';
 
-const OverlayLoading = compareMemo(() => {
+const OverlayLoading = compareMemo<Partial<Pick<ModalProps, 'isVisible'>>>(({ isVisible }) => {
   const { isLoading } = useLoading();
   const styles = useStyle(createStyles);
 
   return (
-    <Modal isVisible={isLoading}>
+    <Modal isVisible={isVisible || isLoading}>
       <View style={styles.activityIndicatorWrapper}>
         <ActivityIndicator size="large" />
       </View>

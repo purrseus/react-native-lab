@@ -1,8 +1,9 @@
 import { CommonStatus } from '@core/types';
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { setAccessToken } from '@services';
 import { handleRefreshToken } from '@services/requests/auth';
 import { createPersistReducer } from '@utilities';
+import { REHYDRATE } from 'redux-persist';
 
 interface AuthState {
   status: CommonStatus;
@@ -10,19 +11,24 @@ interface AuthState {
   refreshToken?: string;
 }
 
-const sliceName = 'auth';
+const SLICE_NAME = 'auth';
 
 const initialState: AuthState = {
   status: 'idle',
 };
 
-const resetState = () => {
+const resetState = (): AuthState => {
   setAccessToken(null);
   return initialState;
 };
 
+const isRehydrateAction = (
+  action: AnyAction,
+): action is PayloadAction<Partial<Omit<AuthState, 'status'>> | undefined> =>
+  action.type === REHYDRATE;
+
 export const fetchNewAccessToken = createAsyncThunk(
-  `${sliceName}/fetchNewAccessToken`,
+  `${SLICE_NAME}/fetchNewAccessToken`,
   async (_, { rejectWithValue, getState }) => {
     try {
       const state = getState() as AuthState;
@@ -39,16 +45,12 @@ export const fetchNewAccessToken = createAsyncThunk(
 );
 
 const authSlice = createSlice({
-  name: sliceName,
+  name: SLICE_NAME,
   initialState,
   reducers: {
     setToken: (state, { payload }: PayloadAction<Omit<AuthState, 'status'>>) => {
-      if (payload.accessToken) {
-        state.accessToken = payload.accessToken;
-      }
-      if (payload.refreshToken) {
-        state.refreshToken = payload.refreshToken;
-      }
+      if (payload.accessToken) state.accessToken = payload.accessToken;
+      if (payload.refreshToken) state.refreshToken = payload.refreshToken;
     },
     logOut: resetState,
   },
@@ -58,10 +60,14 @@ const authSlice = createSlice({
         state.status = 'pending';
       })
       .addCase(fetchNewAccessToken.fulfilled, (state, { payload }) => {
+        setAccessToken(payload);
         state.status = 'succeeded';
         state.accessToken = payload;
       })
-      .addCase(fetchNewAccessToken.rejected, resetState);
+      .addCase(fetchNewAccessToken.rejected, resetState)
+      .addMatcher(isRehydrateAction, (_, { payload }) => {
+        if (payload?.accessToken) setAccessToken(payload?.accessToken);
+      });
   },
 });
 

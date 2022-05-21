@@ -1,14 +1,19 @@
 import { useCallback, useState } from 'react';
 import { LayoutChangeEvent, LayoutRectangle } from 'react-native';
 
-const useLayout = () => {
+interface Options {
+  flexibleLayout?: boolean;
+}
+
+const useLayout = ({ flexibleLayout = false }: Options) => {
   const [layout, setLayout] = useState<LayoutRectangle | null>(null);
 
   const handleLayout = useCallback(
     ({ nativeEvent: { layout: layoutRectangle } }: LayoutChangeEvent) => {
-      if (!layout) setLayout(layoutRectangle);
+      if (!!layout && !flexibleLayout) return;
+      setLayout(layoutRectangle);
     },
-    [layout],
+    [layout, flexibleLayout],
   );
 
   return { layout, handleLayout };
