@@ -48,7 +48,6 @@ const createStyles = ({ create }: StyleCallbackParams) =>
     common: {
       padding: 0,
       margin: 0,
-      alignItems: 'center',
     },
     modal: {
       justifyContent: 'center',

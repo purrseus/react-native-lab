@@ -18,7 +18,7 @@ const Touchable = forwardRef<TouchableOpacity, TouchableProps>(
         activeOpacity={0.5}
         {...props}
         ref={ref}
-        hitSlop={createHitSlop(hitSlop)}
+        hitSlop={hitSlop ? createHitSlop(hitSlop) : undefined}
         onPress={!wait ? onPress : handleOnPress}
       >
         {children}

@@ -10,7 +10,7 @@ export interface TextProps
   extends RNTextProps,
     Pick<TouchableProps, 'hitSlop' | 'onPress' | 'wait'> {}
 
-const Text = compareMemo<TextProps>(({ children, style, onPress, hitSlop, wait, ...props }) => {
+const Text = compareMemo<TextProps>(({ children, style, onPress, hitSlop = 8, wait, ...props }) => {
   const styles = useStyle(createStyles);
 
   const TextComponent: FC = () => (

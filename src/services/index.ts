@@ -103,9 +103,7 @@ axiosInstance.interceptors.response.use(
         const accessToken = unwrapResult(resultAction);
 
         if (accessToken) {
-          setAccessToken(accessToken);
           handlePromiseQueue(accessToken);
-
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
           return axiosInstance(originalRequest);

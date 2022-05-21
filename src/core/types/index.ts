@@ -1,5 +1,6 @@
 export * from './common';
 export * from './i18n';
-export * from './navigator';
+export * from './navigation';
 export * from './screen';
 export * from './store';
+export * from './style';

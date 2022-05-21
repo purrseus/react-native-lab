@@ -11,13 +11,21 @@ export interface StyleCallbackParams {
   create: typeof StyleSheet.create;
 }
 
-export interface PaginationConfig {
+export interface InfiniteScrollConfig {
   pageSize?: number;
   params?: Record<string, any>;
+  /**
+   * @example
+   * ```
+   * //                this is array
+   * //                     v
+   * ['data', 'property', 'key'] // -> data.property.key
+   * ```
+   */
   accessProperties?: string[];
 }
 
-export interface UsePaginationReturn
+export interface UseInfiniteScrollReturn
   extends Pick<ListViewProps, 'data' | 'refreshing' | 'onRefresh'> {
   fetching: boolean;
   canLoadMore: boolean;

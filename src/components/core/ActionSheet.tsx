@@ -93,7 +93,7 @@ const ActionSheet = forwardRef<ActionSheetRef, ActionSheetProps>(
     }));
 
     const ItemSeparatorComponent = useCallback(
-      () => <Divider height={0.3} color={styles.divider.color} />,
+      () => <Divider height={1 / 3} color={styles.divider.color} />,
       [],
     );
 
@@ -180,6 +180,7 @@ const ActionSheet = forwardRef<ActionSheetRef, ActionSheetProps>(
 const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackParams) =>
   create({
     container: {
+      alignSelf: 'center',
       width: dimensions.width - DEFAULT_MARGIN * 2 - edgeInsets.left - edgeInsets.right,
       marginBottom: edgeInsets.bottom || DEFAULT_MARGIN,
       marginTop: edgeInsets.top,
