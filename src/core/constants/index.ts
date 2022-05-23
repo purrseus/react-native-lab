@@ -22,6 +22,5 @@ export const DEFAULT_THROTTLE_SETTINGS: Readonly<ThrottleSettings> = {
 };
 export const LANGUAGE_MAP: Readonly<LanguageMap<Locale>> = {
   'en-US': 'en-gb',
-  'ja-JP': 'ja',
   'vi-VN': 'vi',
 };

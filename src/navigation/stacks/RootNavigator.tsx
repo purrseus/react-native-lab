@@ -11,6 +11,21 @@ import React, { FC } from 'react';
 
 export const NativeStack = createNativeStackNavigator<RootStackParamList>();
 
+const AuthStack = (
+  <NativeStack.Group>
+    <NativeStack.Screen name={AuthScreenName.Login} component={Login} />
+    <NativeStack.Screen name={AuthScreenName.Register} component={Register} />
+  </NativeStack.Group>
+);
+
+const AppStack = (
+  <NativeStack.Group>
+    <NativeStack.Screen name={AppScreenName.BottomTab} component={BottomTabBar} />
+    <NativeStack.Screen name={AppScreenName.Categories} component={Categories} />
+    <NativeStack.Screen name={AppScreenName.Settings} component={Settings} />
+  </NativeStack.Group>
+);
+
 const RootNavigator: FC = () => {
   const styles = useStyle(createStyles);
   const { accessToken, refreshToken } = useAppSelector(state => state.auth);
@@ -21,18 +36,7 @@ const RootNavigator: FC = () => {
       screenOptions={{ ...stackScreenOptions, contentStyle: styles.screenStyle }}
       initialRouteName={isAuthenticated ? AppScreenName.BottomTab : AuthScreenName.Login}
     >
-      {isAuthenticated ? (
-        <NativeStack.Group>
-          <NativeStack.Screen name={AppScreenName.BottomTab} component={BottomTabBar} />
-          <NativeStack.Screen name={AppScreenName.Categories} component={Categories} />
-          <NativeStack.Screen name={AppScreenName.Settings} component={Settings} />
-        </NativeStack.Group>
-      ) : (
-        <NativeStack.Group>
-          <NativeStack.Screen name={AuthScreenName.Login} component={Login} />
-          <NativeStack.Screen name={AuthScreenName.Register} component={Register} />
-        </NativeStack.Group>
-      )}
+      {isAuthenticated ? AppStack : AuthStack}
     </NativeStack.Navigator>
   );
 };
