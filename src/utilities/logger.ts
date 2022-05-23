@@ -10,7 +10,7 @@ const LOCALE: Language = 'en-US';
 export const logger = (message: any) => {
   if (!__DEV__) return;
   console.log(
-    `[${dayjs(new Date()).locale(LANGUAGE_MAP[LOCALE]).format('DD/MMM HH:mm:ss:SSS')}]`,
+    `[${dayjs(new Date()).locale(LANGUAGE_MAP[LOCALE]).format('DD/MM HH:mm:ss:SSS')}]`,
     typeof message === 'object' ? referenceTypeFormatter(message) : message,
   );
 };

@@ -1,10 +1,10 @@
-import { AppScreenName } from '@core/enums';
-import { AppScreen } from '@core/types';
+import { AuthScreenName } from '@core/enums';
+import { AuthScreen } from '@core/types';
 import { globalStyles } from '@themes';
 import React from 'react';
 import { Button, Text, View } from 'react-native';
 
-const Settings: AppScreen<AppScreenName.Settings> = ({ navigation }) => {
+const Settings: AuthScreen<AuthScreenName.Settings> = ({ navigation }) => {
   return (
     <View style={globalStyles.flexCenter}>
       <Text>Settings</Text>

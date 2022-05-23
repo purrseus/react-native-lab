@@ -1,10 +1,10 @@
-import { AppScreenName } from '@core/enums';
-import { AppScreen } from '@core/types';
+import { AuthScreenName } from '@core/enums';
+import { AuthScreen } from '@core/types';
 import { globalStyles } from '@themes';
 import React from 'react';
 import { Button, Text, View } from 'react-native';
 
-const Categories: AppScreen<AppScreenName.Categories> = ({ navigation }) => {
+const Categories: AuthScreen<AuthScreenName.Categories> = ({ navigation }) => {
   return (
     <View style={globalStyles.flexCenter}>
       <Text>Categories</Text>

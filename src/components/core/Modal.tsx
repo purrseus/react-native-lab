@@ -16,7 +16,7 @@ type AnimationType = Record<
   Pick<ModalProps, 'animationIn' | 'animationOut'>
 >;
 
-const DEFAULT_BACKDROP_OPACITY = 1 / 5;
+const DEFAULT_BACKDROP_OPACITY = 0.2;
 
 const animationType: AnimationType = {
   modal: { animationIn: 'fadeIn', animationOut: 'fadeOut' },
