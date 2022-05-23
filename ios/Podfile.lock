@@ -88,8 +88,6 @@ PODS:
   - OpenSSL-Universal (1.1.1100)
   - Permission-Camera (3.3.1):
     - RNPermissions
-  - Permission-MediaLibrary (3.3.1):
-    - RNPermissions
   - Permission-PhotoLibrary (3.3.1):
     - RNPermissions
   - Permission-PhotoLibraryAddOnly (3.3.1):
@@ -463,7 +461,6 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - OpenSSL-Universal (= 1.1.1100)
   - Permission-Camera (from `../node_modules/react-native-permissions/ios/Camera`)
-  - Permission-MediaLibrary (from `../node_modules/react-native-permissions/ios/MediaLibrary`)
   - Permission-PhotoLibrary (from `../node_modules/react-native-permissions/ios/PhotoLibrary`)
   - Permission-PhotoLibraryAddOnly (from `../node_modules/react-native-permissions/ios/PhotoLibraryAddOnly`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
@@ -543,8 +540,6 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   Permission-Camera:
     :path: "../node_modules/react-native-permissions/ios/Camera"
-  Permission-MediaLibrary:
-    :path: "../node_modules/react-native-permissions/ios/MediaLibrary"
   Permission-PhotoLibrary:
     :path: "../node_modules/react-native-permissions/ios/PhotoLibrary"
   Permission-PhotoLibraryAddOnly:
@@ -648,7 +643,6 @@ SPEC CHECKSUMS:
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   Permission-Camera: bae27a8503530770c35aadfecbb97ec71823382a
-  Permission-MediaLibrary: cbc1ee191cf0fe73282d2b3f197714941783d99d
   Permission-PhotoLibrary: ddb5a158725b29cb12e9e477e8a5f5151c66cc3c
   Permission-PhotoLibraryAddOnly: 104e42dbe894b0fccb370be26dd1b4a3c23578eb
   RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
@@ -694,6 +688,6 @@ SPEC CHECKSUMS:
   Yoga: 6671cf077f614314c22fd09ddf87d7abeee64e96
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 887aca3321e8eaf100bd159e7233391fa6f27189
+PODFILE CHECKSUM: b05df0952df8d593bb44e201b5e4582ebf853f47
 
 COCOAPODS: 1.11.3
