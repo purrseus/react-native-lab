@@ -86,6 +86,14 @@ PODS:
     - libwebp/demux
   - libwebp/webp (1.2.1)
   - OpenSSL-Universal (1.1.1100)
+  - Permission-Camera (3.3.1):
+    - RNPermissions
+  - Permission-MediaLibrary (3.3.1):
+    - RNPermissions
+  - Permission-PhotoLibrary (3.3.1):
+    - RNPermissions
+  - Permission-PhotoLibraryAddOnly (3.3.1):
+    - RNPermissions
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -293,6 +301,8 @@ PODS:
   - React-jsinspector (0.68.0)
   - React-logger (0.68.0):
     - glog
+  - react-native-image-picker (4.8.3):
+    - React-Core
   - react-native-netinfo (8.3.0):
     - React-Core
   - react-native-safe-area-context (4.2.4):
@@ -378,6 +388,8 @@ PODS:
     - React-Core
   - RNLocalize (2.2.1):
     - React-Core
+  - RNPermissions (3.3.1):
+    - React-Core
   - RNReanimated (2.7.0):
     - DoubleConversion
     - FBLazyVector
@@ -450,6 +462,10 @@ DEPENDENCIES:
   - FlipperKit/SKIOSNetworkPlugin (= 0.125.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - OpenSSL-Universal (= 1.1.1100)
+  - Permission-Camera (from `../node_modules/react-native-permissions/ios/Camera`)
+  - Permission-MediaLibrary (from `../node_modules/react-native-permissions/ios/MediaLibrary`)
+  - Permission-PhotoLibrary (from `../node_modules/react-native-permissions/ios/PhotoLibrary`)
+  - Permission-PhotoLibraryAddOnly (from `../node_modules/react-native-permissions/ios/PhotoLibraryAddOnly`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -465,6 +481,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -484,6 +501,7 @@ DEPENDENCIES:
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNLocalize (from `../node_modules/react-native-localize`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -523,6 +541,14 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  Permission-Camera:
+    :path: "../node_modules/react-native-permissions/ios/Camera"
+  Permission-MediaLibrary:
+    :path: "../node_modules/react-native-permissions/ios/MediaLibrary"
+  Permission-PhotoLibrary:
+    :path: "../node_modules/react-native-permissions/ios/PhotoLibrary"
+  Permission-PhotoLibraryAddOnly:
+    :path: "../node_modules/react-native-permissions/ios/PhotoLibraryAddOnly"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -549,6 +575,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-safe-area-context:
@@ -587,6 +615,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNLocalize:
     :path: "../node_modules/react-native-localize"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -617,6 +647,10 @@ SPEC CHECKSUMS:
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
+  Permission-Camera: bae27a8503530770c35aadfecbb97ec71823382a
+  Permission-MediaLibrary: cbc1ee191cf0fe73282d2b3f197714941783d99d
+  Permission-PhotoLibrary: ddb5a158725b29cb12e9e477e8a5f5151c66cc3c
+  Permission-PhotoLibraryAddOnly: 104e42dbe894b0fccb370be26dd1b4a3c23578eb
   RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
   RCTRequired: bab4a7c3d7eb9553b13773ee190f279712efd1fc
   RCTTypeSafety: efbeb6e450ff6cef8e19c2cb5314c6d8bfeeef77
@@ -630,6 +664,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 010a66edf644339f6da72b34208b070089680415
   React-jsinspector: 90f0bfd5d04e0b066c29216a110ffb9a6c34f23f
   React-logger: 8474fefa09d05f573a13c044cb0dfd751d4e52e3
+  react-native-image-picker: e95b4785b685cfc06609bc50ed6fb55b59990c99
   react-native-netinfo: 3671b091c4843fda5e153612866ef4024b8f5d62
   react-native-safe-area-context: f98b0b16d1546d208fc293b4661e3f81a895afd9
   React-perflogger: 15cb741d6c2379f4d3fc8f9e4d4e1110ef3020cb
@@ -649,6 +684,7 @@ SPEC CHECKSUMS:
   RNFastImage: 1f2cab428712a4baaf78d6169eaec7f622556dd7
   RNGestureHandler: 6e757e487a4834e7280e98e9bac66d2d9c575e9c
   RNLocalize: cbcb55d0e19c78086ea4eea20e03fe8000bbbced
+  RNPermissions: 34d678157c800b25b22a488e4d8babb57456e796
   RNReanimated: e42de406edd11350af29016cf6802ef16ee364d0
   RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
@@ -658,6 +694,6 @@ SPEC CHECKSUMS:
   Yoga: 6671cf077f614314c22fd09ddf87d7abeee64e96
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 2c8fd2bc47a61a17a70c08c8b1cea6559fe17317
+PODFILE CHECKSUM: 887aca3321e8eaf100bd159e7233391fa6f27189
 
 COCOAPODS: 1.11.3

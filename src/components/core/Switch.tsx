@@ -1,22 +1,16 @@
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
-import { compareMemo, isAndroid } from '@utilities';
+import { compareMemo, isAndroid, platformSelect } from '@utilities';
 import React, { ReactNode, useCallback, useEffect } from 'react';
-import {
-  ActivityIndicatorProps,
-  ColorValue,
-  Platform,
-  StyleProp,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { ActivityIndicatorProps, ColorValue, StyleProp, View, ViewStyle } from 'react-native';
 import Animated, {
   interpolate,
   interpolateColor,
   useAnimatedStyle,
   useSharedValue,
-  withTiming,
+  withSpring,
+  WithSpringConfig,
 } from 'react-native-reanimated';
 import ActivityIndicator from './ActivityIndicator';
 import Touchable from './Touchable';
@@ -37,6 +31,7 @@ interface SwitchProps {
 const TRACK_WIDTH = 52;
 const TRACK_HEIGHT = 32;
 const THUMB_SIZE = TRACK_HEIGHT;
+const THUMB_SPRING: WithSpringConfig = { damping: 8, mass: 0.5 };
 const INPUT_RANGE: ReadonlyArray<number> = [0, 1];
 
 const AnimatedTouchable = Animated.createAnimatedComponent(Touchable);
@@ -85,7 +80,7 @@ const Switch = compareMemo<SwitchProps>(
     const handleChangeValue = useCallback(() => onChange(!value), [onChange, value]);
 
     useEffect(() => {
-      statusAnimated.value = withTiming(+value);
+      statusAnimated.value = withSpring(+value, THUMB_SPRING);
     }, [value, statusAnimated]);
 
     return (
@@ -101,10 +96,7 @@ const Switch = compareMemo<SwitchProps>(
               {loading ? (
                 <ActivityIndicator
                   color={(value ? thumbInactiveColor : thumbActiveColor) as ColorValue}
-                  size={Platform.select<ActivityIndicatorProps['size']>({
-                    ios: 'small',
-                    android: THUMB_SIZE - 16,
-                  })}
+                  size={platformSelect<ActivityIndicatorProps['size']>(THUMB_SIZE - 16, 'small')}
                 />
               ) : (
                 ActiveIcon

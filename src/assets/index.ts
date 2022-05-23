@@ -1,5 +1,4 @@
 import enUS from './locales/en-US.json';
-import jaJP from './locales/ja-JP.json';
 import viVN from './locales/vi-VN.json';
 
 export const fonts = {};
@@ -18,4 +17,4 @@ export const icons = {
 
 export const images = {};
 
-export const locales = { enUS, jaJP, viVN };
+export const locales = { enUS, viVN };

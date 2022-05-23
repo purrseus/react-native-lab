@@ -34,8 +34,6 @@ export const getCurrentLanguage = (): Language => {
   switch (languageCode) {
     case 'en':
       return 'en-US';
-    case 'ja':
-      return 'ja-JP';
     case 'vi':
       return 'vi-VN';
     default:
