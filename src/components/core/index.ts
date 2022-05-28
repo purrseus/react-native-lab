@@ -5,6 +5,7 @@ export { default as Button } from './Button';
 export { default as Divider } from './Divider';
 export { default as Icon } from './Icon';
 export { default as Image } from './Image';
+export { default as ImagePicker } from './ImagePicker';
 export { default as InfiniteList } from './InfiniteList';
 export { default as ListView } from './ListView';
 export { default as LocalizedText } from './LocalizedText';

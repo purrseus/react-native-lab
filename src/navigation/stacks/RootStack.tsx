@@ -9,7 +9,7 @@ import { Categories, Settings } from '@screens/auth';
 import { Login, Register } from '@screens/un-auth';
 import React, { FC } from 'react';
 
-export const NativeStack = createNativeStackNavigator<RootStackParamList>();
+const NativeStack = createNativeStackNavigator<RootStackParamList>();
 
 const UnAuthStack = (
   <NativeStack.Group>
