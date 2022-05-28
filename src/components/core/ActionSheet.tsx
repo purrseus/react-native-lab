@@ -4,7 +4,7 @@ import { ONE_SECOND } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { I18nText } from '@core/types';
 import { useColor, useStyle } from '@hooks';
-import { alphaHexColor, isAndroid, isIos } from '@utilities';
+import { alphaHexColor, isAndroid, isIos, wait } from '@utilities';
 import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -30,14 +30,15 @@ export interface ActionSheetRef {
   hide: () => void;
 }
 
-interface ActionSheetProps extends ActionSheetIOSOptions {
+export interface ActionSheetProps extends ActionSheetIOSOptions {
   options: I18nText[];
   title?: I18nText;
   message?: I18nText;
   onSelect: (buttonIndex: number) => void;
 }
 
-const ACTION_SHEET_ANIMATION_TIMING = ONE_SECOND / 3;
+const ACTION_SHEET_ANIMATION_IN_TIMING = ONE_SECOND / 3;
+const ACTION_SHEET_ANIMATION_OUT_TIMING = ACTION_SHEET_ANIMATION_IN_TIMING * 2;
 const DEFAULT_MARGIN = 8;
 
 const ActionSheet = forwardRef<ActionSheetRef, ActionSheetProps>(
@@ -72,14 +73,15 @@ const ActionSheet = forwardRef<ActionSheetRef, ActionSheetProps>(
       setIsVisible(true);
     };
 
-    const onHide = (isBackdropPress = true) => {
+    const onHide = async (isBackdropPress = true) => {
       if (!isAndroid) return;
       setIsVisible(false);
+      await wait(ACTION_SHEET_ANIMATION_IN_TIMING);
       if (isBackdropPress) onSelect(cancelButtonIndex);
     };
 
-    const handleSelectOption = (buttonIndex: number, isCancel?: boolean) => () => {
-      onHide(false);
+    const handleSelectOption = (buttonIndex: number, isCancel?: boolean) => async () => {
+      await onHide(false);
       onSelect(
         buttonIndex === cancelButtonIndex && isCancel
           ? cancelButtonIndex
@@ -145,8 +147,8 @@ const ActionSheet = forwardRef<ActionSheetRef, ActionSheetProps>(
       <Modal
         type="bottomSheet"
         isVisible={isVisible}
-        animationInTiming={ACTION_SHEET_ANIMATION_TIMING}
-        animationOutTiming={ACTION_SHEET_ANIMATION_TIMING}
+        animationInTiming={ACTION_SHEET_ANIMATION_IN_TIMING}
+        animationOutTiming={ACTION_SHEET_ANIMATION_OUT_TIMING}
         onBackdropPress={onHide}
       >
         <View style={styles.container}>
@@ -187,7 +189,7 @@ const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackP
     },
     optionContainer: {
       borderRadius: 12,
-      backgroundColor: colors.white,
+      backgroundColor: alphaHexColor(colors.white, 0.95),
     },
     header: {
       paddingVertical: 16,

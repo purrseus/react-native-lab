@@ -1,8 +1,15 @@
 {
+  "common": {
+    "cancel": "Hủy"
+  },
   "tab": {
     "home": "Trang chủ",
     "messages": "Tin nhắn",
     "notification": "Thông báo",
     "profile": "Trang cá nhân"
+  },
+  "imagePicker": {
+    "takePhoto": "Chụp ảnh",
+    "chooseFromLibrary": "Chọn ảnh từ Thư viện"
   }
 }
