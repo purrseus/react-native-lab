@@ -14,7 +14,7 @@ interface InfiniteListProps
   requestCallback: (requestConfig: AxiosRequestConfig) => Promise<any>;
   config?: InfiniteScrollConfig;
 }
-// TODO: InfiniteList
+
 const InfiniteList = forwardRef<FlatList, InfiniteListProps>(
   ({ requestCallback, config, ...props }, ref) => {
     const styles = useStyle(createStyles);

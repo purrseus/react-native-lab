@@ -1,10 +1,12 @@
 import { Switch } from '@components/core';
+import { TabScreenName } from '@core/enums';
+import { TabScreen } from '@core/types';
 import { useBackHandler } from '@hooks';
 import { globalStyles } from '@themes';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
-const Messages = () => {
+const Messages: TabScreen<TabScreenName.Messages> = () => {
   const [isActive, setIsActive] = useState(false);
 
   useBackHandler(BackHandler => {
