@@ -24,9 +24,7 @@ import Touchable from './Touchable';
 
 export interface ActionSheetRef {
   show: () => void;
-  /**
-   * Android only
-   */
+  /** @platform android */
   hide: () => void;
 }
 
