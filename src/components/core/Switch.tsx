@@ -20,9 +20,7 @@ interface SwitchProps {
   onChange: (value: boolean) => void;
   disabled?: boolean;
   ActiveIcon?: ReactNode;
-  /**
-   * Android only
-   */
+  /** @platform android */
   thumbScaleAnimated?: boolean;
   loading?: boolean;
   style?: StyleProp<ViewStyle>;

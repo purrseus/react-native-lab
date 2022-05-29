@@ -2,6 +2,14 @@
   "common": {
     "cancel": "Cancel"
   },
+  "permission": {
+    "camera": "Camera",
+    "photoGallery": "Photo Gallery",
+    "blockedTitle": "{{permissionName}} Permission Blocked",
+    "blockedMessage": "Please allow permission from settings screen to use this feature",
+    "unavailableTitle": "This feature is not available on your device",
+    "openSettings": "Settings"
+  },
   "tab": {
     "home": "Home",
     "messages": "Messages",

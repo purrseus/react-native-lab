@@ -1,13 +1,13 @@
 import { I18nText } from '@core/types';
 import { compareMemo } from '@utilities';
-import { StringMap } from 'i18next';
+import { TOptions } from 'i18next';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Text, { TextProps } from './Text';
 
 interface LocalizedTextProps extends TextProps {
   t: I18nText;
-  i18nOptions?: StringMap;
+  i18nOptions?: TOptions;
 }
 const LocalizedText = compareMemo<LocalizedTextProps>(({ t, i18nOptions, ...props }) => {
   const { t: translate } = useTranslation();

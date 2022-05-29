@@ -35,6 +35,9 @@ i18n.use(initReactI18next).init({
   ns: DEFAULT_NAMESPACE,
   resources,
   compatibilityJSON: 'v3',
+  interpolation: {
+    skipOnVariables: false,
+  },
 });
 
 i18n.on('languageChanged', changeLocale);
