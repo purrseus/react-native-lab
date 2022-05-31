@@ -140,6 +140,7 @@ const createStyles =
         alignItems: 'center',
         borderRadius: 10,
         overflow: 'hidden',
+        paddingHorizontal: 16,
       },
       gradient: [colors.primary, colors.blue] as ViewStyle,
       filled: {
