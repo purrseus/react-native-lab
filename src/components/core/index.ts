@@ -18,4 +18,5 @@ export { default as Spacer } from './Spacer';
 export { default as StatusBar } from './StatusBar';
 export { default as Switch } from './Switch';
 export { default as Text } from './Text';
+export { default as TextInput } from './TextInput';
 export { default as Touchable } from './Touchable';

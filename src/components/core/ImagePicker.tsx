@@ -1,6 +1,6 @@
 import { File } from '@core/interfaces';
 import { I18nText } from '@core/types';
-import { checkCameraPermission, checkGalleryPermissions, logger } from '@utilities';
+import { checkCameraPermission, checkPhotoGalleryPermissions, logger } from '@utilities';
 import React, { forwardRef, useCallback, useImperativeHandle, useRef } from 'react';
 import {
   CameraOptions,
@@ -21,8 +21,8 @@ export interface ImagePickerRef {
 
 interface ImagePickerProps extends Omit<ActionSheetProps, 'onSelect' | 'options'> {
   images: Image[];
-  maximumImages?: number;
   onChangeImage: (images: Image[]) => void;
+  maximumImages?: number;
   cameraOptions?: CameraOptions;
   imageLibraryOptions?: ImageLibraryOptions;
 }
@@ -124,7 +124,7 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
         const hasCameraPermission = await checkCameraPermission();
         if (!hasCameraPermission) return;
 
-        const hasGalleryPermission = await checkGalleryPermissions();
+        const hasGalleryPermission = await checkPhotoGalleryPermissions();
         if (!hasGalleryPermission) return;
 
         const canNotPick = type === 'pick' && images.length >= maximumImages;
