@@ -18,8 +18,8 @@ const useCountdownTimer = ({ duration, autoStart = true, onTimeout }: Options) =
   const stop = useCallback(
     (callback?: () => void) => {
       const isReplay = !!callback;
-      timer.current = null;
       if (timer.current) clearInterval(timer.current);
+      timer.current = null;
       if (isReplay) endTime.current = getTimeEnd();
       setCurrentTime(isReplay ? duration : 0);
       callback?.();

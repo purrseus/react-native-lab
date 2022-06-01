@@ -67,10 +67,10 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
     const replaceIndex = useRef<number>(-1);
     const actionSheetRef = useRef<ActionSheetRef | null>(null);
 
-    const resetValue = useCallback(() => {
+    const resetValue = () => {
       pickType.current = null;
       replaceIndex.current = -1;
-    }, []);
+    };
 
     const onSelect = useCallback(
       async (buttonIndex: 0 | PickerOptions) => {
@@ -116,7 +116,7 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
           resetValue();
         }
       },
-      [cameraOptions, imageLibraryOptions, images, onChangeImage, resetValue],
+      [cameraOptions, imageLibraryOptions, images, onChangeImage],
     );
 
     const pickImage = useCallback(

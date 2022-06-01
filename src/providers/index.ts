@@ -1,1 +1,2 @@
-export { default as AppProvider } from './AppProvider';
+import AppProvider from './AppProvider';
+export default AppProvider;

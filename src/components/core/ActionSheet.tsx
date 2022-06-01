@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/split-platform-components */
 import { ONE_SECOND } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
@@ -48,10 +47,10 @@ const ActionSheet = forwardRef<ActionSheetRef, ActionSheetProps>(
     const [isVisible, setIsVisible] = useState(false);
     const options = useMemo(
       () => props.options.filter((_, index) => index !== cancelButtonIndex),
-      [],
+      [cancelButtonIndex, props.options],
     );
 
-    const onShow = () => {
+    const onShow = useCallback(() => {
       if (isIos()) {
         ActionSheetIOS.showActionSheetWithOptions(
           {
@@ -69,32 +68,52 @@ const ActionSheet = forwardRef<ActionSheetRef, ActionSheetProps>(
       }
 
       setIsVisible(true);
-    };
+    }, [
+      cancelButtonIndex,
+      colorScheme,
+      colors.primaryText,
+      message,
+      onSelect,
+      props,
+      t,
+      tintColor,
+      title,
+    ]);
 
-    const onHide = async (isBackdropPress = true) => {
-      if (isIos()) return;
-      setIsVisible(false);
-      await wait(ACTION_SHEET_ANIMATION_IN_TIMING);
-      if (isBackdropPress) onSelect(cancelButtonIndex);
-    };
+    const onHide = useCallback(
+      async (isBackdropPress = true) => {
+        if (isIos()) return;
+        setIsVisible(false);
+        await wait(ACTION_SHEET_ANIMATION_IN_TIMING);
+        if (isBackdropPress) onSelect(cancelButtonIndex);
+      },
+      [cancelButtonIndex, onSelect],
+    );
 
-    const handleSelectOption = (buttonIndex: number, isCancel?: boolean) => async () => {
-      await onHide(false);
-      onSelect(
-        buttonIndex === cancelButtonIndex && isCancel
-          ? cancelButtonIndex
-          : props.options.indexOf(options[buttonIndex]),
-      );
-    };
+    const handleSelectOption = useCallback(
+      (buttonIndex: number, isCancel?: boolean) => async () => {
+        await onHide(false);
+        onSelect(
+          buttonIndex === cancelButtonIndex && isCancel
+            ? cancelButtonIndex
+            : props.options.indexOf(options[buttonIndex]),
+        );
+      },
+      [cancelButtonIndex, onHide, onSelect, options, props.options],
+    );
 
-    useImperativeHandle(ref, () => ({
-      show: onShow,
-      hide: onHide,
-    }));
+    useImperativeHandle(
+      ref,
+      () => ({
+        show: onShow,
+        hide: onHide,
+      }),
+      [onShow, onHide],
+    );
 
     const ItemSeparatorComponent = useCallback(
       () => <Divider height={1 / 3} color={styles.divider.color} />,
-      [],
+      [styles.divider.color],
     );
 
     const ListHeaderComponent = useMemo(
@@ -115,7 +134,15 @@ const ActionSheet = forwardRef<ActionSheetRef, ActionSheetProps>(
             <Divider height={0.5} color={styles.divider.color} />
           </View>
         ) : null,
-      [],
+      [
+        message,
+        styles.boldedTitle,
+        styles.divider.color,
+        styles.header,
+        styles.headerText,
+        t,
+        title,
+      ],
     );
 
     const renderOptionItem: ListRenderItem<I18nText> = useCallback(
@@ -137,7 +164,17 @@ const ActionSheet = forwardRef<ActionSheetRef, ActionSheetProps>(
           </Text>
         </Touchable>
       ),
-      [options],
+      [
+        options,
+        handleSelectOption,
+        props.destructiveButtonIndex,
+        props.options,
+        t,
+        tintColor,
+        styles.destructiveTitle,
+        styles.option,
+        styles.optionTitle,
+      ],
     );
 
     if (isIos()) return null;

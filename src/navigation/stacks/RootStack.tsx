@@ -11,14 +11,14 @@ import React, { FC } from 'react';
 
 const NativeStack = createNativeStackNavigator<RootStackParamList>();
 
-const UnAuthStack = (
+const UnAuthScreens = (
   <NativeStack.Group>
     <NativeStack.Screen name={UnAuthScreenName.Login} component={Login} />
     <NativeStack.Screen name={UnAuthScreenName.Register} component={Register} />
   </NativeStack.Group>
 );
 
-const AuthStack = (
+const AuthScreens = (
   <NativeStack.Group>
     <NativeStack.Screen name={AuthScreenName.BottomTab} component={BottomTabBar} />
     <NativeStack.Screen name={AuthScreenName.Categories} component={Categories} />
@@ -36,7 +36,7 @@ const RootNavigator: FC = () => {
       screenOptions={{ ...stackScreenOptions, contentStyle: styles.screenStyle }}
       initialRouteName={isAuthenticated ? UnAuthScreenName.Login : AuthScreenName.BottomTab}
     >
-      {isAuthenticated ? AuthStack : UnAuthStack}
+      {isAuthenticated ? AuthScreens : UnAuthScreens}
     </NativeStack.Navigator>
   );
 };
