@@ -7,21 +7,21 @@ const useKeyboard = () => {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
 
   const keyboardWillShowListener: KeyboardEventListener = useCallback(event => {
-    if (isIos) setKeyboardHeight(event.endCoordinates.height);
+    if (isIos()) setKeyboardHeight(event.endCoordinates.height);
   }, []);
 
   const keyboardDidShowListener: KeyboardEventListener = useCallback(event => {
     setKeyboardShown(true);
-    if (isAndroid) setKeyboardHeight(event.endCoordinates.height);
+    if (isAndroid()) setKeyboardHeight(event.endCoordinates.height);
   }, []);
 
   const keyboardWillHideListener: KeyboardEventListener = useCallback(() => {
-    if (isIos) setKeyboardHeight(0);
+    if (isIos()) setKeyboardHeight(0);
   }, []);
 
   const keyboardDidHideListener: KeyboardEventListener = useCallback(() => {
     setKeyboardShown(false);
-    if (isAndroid) setKeyboardHeight(0);
+    if (isAndroid()) setKeyboardHeight(0);
   }, []);
 
   useEffect(() => {
