@@ -4,7 +4,7 @@ import { ONE_SECOND } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { I18nText } from '@core/types';
 import { useColor, useStyle } from '@hooks';
-import { alphaHexColor, isAndroid, isIos, wait } from '@utilities';
+import { alphaHexColor, isIos, wait } from '@utilities';
 import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -52,7 +52,7 @@ const ActionSheet = forwardRef<ActionSheetRef, ActionSheetProps>(
     );
 
     const onShow = () => {
-      if (isIos) {
+      if (isIos()) {
         ActionSheetIOS.showActionSheetWithOptions(
           {
             ...props,
@@ -72,7 +72,7 @@ const ActionSheet = forwardRef<ActionSheetRef, ActionSheetProps>(
     };
 
     const onHide = async (isBackdropPress = true) => {
-      if (!isAndroid) return;
+      if (isIos()) return;
       setIsVisible(false);
       await wait(ACTION_SHEET_ANIMATION_IN_TIMING);
       if (isBackdropPress) onSelect(cancelButtonIndex);
@@ -140,7 +140,7 @@ const ActionSheet = forwardRef<ActionSheetRef, ActionSheetProps>(
       [options],
     );
 
-    if (isIos) return null;
+    if (isIos()) return null;
     return (
       <Modal
         type="bottomSheet"

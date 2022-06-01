@@ -70,7 +70,7 @@ const Switch = compareMemo<SwitchProps>(
       const scale = interpolate(statusAnimated.value, INPUT_RANGE, [2 / 3, 1]);
 
       return {
-        transform: [{ translateX }, { scale: thumbScaleAnimated && isAndroid ? scale : 1 }],
+        transform: [{ translateX }, { scale: thumbScaleAnimated && isAndroid() ? scale : 1 }],
         backgroundColor: backgroundColor as ColorValue,
       };
     }, [disabled]);

@@ -21,7 +21,7 @@ const BLOCKED_BUTTONS: AlertButton[] = [
   },
   {
     text: 'permission.openSettings',
-    onPress: () => openSettings().catch(() => logger('[usePermission] Cannot open settings!')),
+    onPress: () => openSettings().catch(() => logger('[permission] Cannot open settings!')),
     style: 'default',
   },
 ];
