@@ -113,7 +113,7 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
     }
   }, [handleRequest, infiniteScroll.canLoadMore]);
 
-  const cancelRequest = useCallback(() => controller.abort(), [controller]);
+  const cancelRequest = () => controller.abort();
 
   useEffect(() => {
     handleRequest();

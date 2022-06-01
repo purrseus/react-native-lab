@@ -7,7 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 const StoreProvider: FC = ({ children }) => {
   return (
     <Provider store={store}>
-      <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
+      <PersistGate persistor={persistor} loading={<ActivityIndicator />}>
         {children}
       </PersistGate>
     </Provider>

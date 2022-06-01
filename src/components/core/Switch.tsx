@@ -2,7 +2,7 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
 import { compareMemo, isAndroid, platformSelect } from '@utilities';
-import React, { ReactNode, useCallback, useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { ActivityIndicatorProps, ColorValue, StyleProp, View, ViewStyle } from 'react-native';
 import Animated, {
   interpolate,
@@ -75,7 +75,7 @@ const Switch = compareMemo<SwitchProps>(
       };
     }, [disabled]);
 
-    const handleChangeValue = useCallback(() => onChange(!value), [onChange, value]);
+    const handleChangeValue = () => onChange(!value);
 
     useEffect(() => {
       statusAnimated.value = withSpring(+value, THUMB_SPRING);
