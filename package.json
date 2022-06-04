@@ -32,7 +32,7 @@
     "react": "17.0.2",
     "react-fast-compare": "^3.2.0",
     "react-i18next": "^11.16.3",
-    "react-native": "0.68.0",
+    "react-native": "0.68.2",
     "react-native-device-info": "^8.7.0",
     "react-native-fast-image": "^8.5.11",
     "react-native-gesture-handler": "^2.3.2",
@@ -97,7 +97,7 @@
     ]
   },
   "lint-staged": {
-    "*": [
+    "{src,scripts,__tests__}/**/*.{ts,tsx,js,jsx}": [
       "yarn lint",
       "yarn format"
     ]
