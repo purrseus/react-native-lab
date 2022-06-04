@@ -13,7 +13,6 @@ const Item = compareMemo<{
   item: { id: string; download_url: string; author: string };
 }>(({ item }) => {
   const styles = useStyle(createStyles);
-  logger(`Item ${item?.id}`);
 
   return (
     <View style={styles.item}>
