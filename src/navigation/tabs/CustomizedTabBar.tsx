@@ -4,11 +4,12 @@ import { HORIZONTAL_SAFETY_EDGES, TAB_BAR_HEIGHT } from '@core/constants';
 import { TabScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { I18nText } from '@core/types';
-import { useStyle } from '@hooks';
+import { useKeyboard, useStyle } from '@hooks';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { colors as Colors, globalStyles } from '@themes';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { ColorValue, ImageRequireSource, StyleSheet } from 'react-native';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface TabUI {
@@ -45,11 +46,29 @@ const tabUI: Record<TabScreenName, TabUI> = {
   },
 };
 
+const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
+
 const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigation }) => {
   const styles = useStyle(createStyles);
+  const { keyboardShown } = useKeyboard();
+  const tabBarTranslate = useSharedValue(0);
+
+  const tabBarAnimatedStyle = useAnimatedStyle(
+    () => ({
+      transform: [{ translateY: tabBarTranslate.value }],
+    }),
+    [],
+  );
+
+  useEffect(() => {
+    tabBarTranslate.value = withTiming(keyboardShown ? 100 : 0);
+  }, [keyboardShown, tabBarTranslate]);
 
   return (
-    <SafeAreaView edges={HORIZONTAL_SAFETY_EDGES} style={styles.rootContainer}>
+    <AnimatedSafeAreaView
+      edges={HORIZONTAL_SAFETY_EDGES}
+      style={[styles.rootContainer, tabBarAnimatedStyle]}
+    >
       <Row style={styles.container}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
@@ -107,7 +126,7 @@ const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigatio
       </Row>
 
       <BottomTabSpacer bottomBarHeight={0} />
-    </SafeAreaView>
+    </AnimatedSafeAreaView>
   );
 };
 

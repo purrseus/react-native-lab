@@ -1,41 +1,38 @@
 import { isAndroid, isIos } from '@utilities';
-import { useEffect, useState } from 'react';
-import { Keyboard, KeyboardEventListener } from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
+import { Keyboard, KeyboardEventListener, KeyboardEventName } from 'react-native';
+
+const keyboardEventNames: KeyboardEventName[] = [
+  'keyboardWillShow',
+  'keyboardDidShow',
+  'keyboardWillHide',
+  'keyboardDidHide',
+];
 
 const useKeyboard = () => {
   const [keyboardShown, setKeyboardShown] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
 
-  const keyboardWillShowListener: KeyboardEventListener = event => {
-    if (isIos()) setKeyboardHeight(event.endCoordinates.height);
-  };
+  const keyboardEventListener = useCallback(
+    (eventName: KeyboardEventName): KeyboardEventListener =>
+      event => {
+        const androidKeyboardHeightChanged = eventName.includes('Did') && isAndroid();
+        const iosKeyboardHeightChanged = eventName.includes('Will') && isIos();
 
-  const keyboardDidShowListener: KeyboardEventListener = event => {
-    setKeyboardShown(true);
-    if (isAndroid()) setKeyboardHeight(event.endCoordinates.height);
-  };
-
-  const keyboardWillHideListener: KeyboardEventListener = () => {
-    if (isIos()) setKeyboardHeight(0);
-  };
-
-  const keyboardDidHideListener: KeyboardEventListener = () => {
-    setKeyboardShown(false);
-    if (isAndroid()) setKeyboardHeight(0);
-  };
+        setKeyboardShown(eventName.endsWith('DidShow'));
+        if (androidKeyboardHeightChanged || iosKeyboardHeightChanged)
+          setKeyboardHeight(eventName.endsWith('Show') ? event.endCoordinates.height : 0);
+      },
+    [],
+  );
 
   useEffect(() => {
-    const subscriptions = [
-      Keyboard.addListener('keyboardWillShow', keyboardWillShowListener),
-      Keyboard.addListener('keyboardDidShow', keyboardDidShowListener),
-      Keyboard.addListener('keyboardWillHide', keyboardWillHideListener),
-      Keyboard.addListener('keyboardDidHide', keyboardDidHideListener),
-    ];
+    const subscriptions = keyboardEventNames.map(eventName =>
+      Keyboard.addListener(eventName, keyboardEventListener(eventName)),
+    );
 
-    return () => {
-      subscriptions.forEach(subscription => subscription.remove());
-    };
-  }, []);
+    return () => subscriptions.forEach(subscription => subscription.remove());
+  }, [keyboardEventListener]);
 
   return { keyboardShown, keyboardHeight };
 };
