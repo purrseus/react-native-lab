@@ -8,4 +8,5 @@ export const stackScreenOptions: NativeStackNavigationOptions = {
 
 export const tabScreenOptions: BottomTabNavigationOptions = {
   headerShown: false,
+  tabBarHideOnKeyboard: true,
 };
