@@ -66,7 +66,7 @@ const authSlice = createSlice({
       })
       .addCase(fetchNewAccessToken.rejected, resetState)
       .addMatcher(isRehydrateAction, (_, { payload }) => {
-        if (payload?.accessToken) setAccessToken(payload?.accessToken);
+        if (payload?.accessToken) setAccessToken(payload.accessToken);
       });
   },
 });

@@ -104,9 +104,9 @@ const ImagePicker = forwardRef<ImagePickerRef, ImagePickerProps>(
                 break;
 
               case 'replace':
-                const _images = [...images];
-                _images[replaceIndex.current] = image;
-                onChangeImage(_images);
+                const clonedImages = [...images];
+                clonedImages[replaceIndex.current] = image;
+                onChangeImage(clonedImages);
                 break;
             }
           }

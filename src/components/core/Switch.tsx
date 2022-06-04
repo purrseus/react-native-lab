@@ -1,7 +1,7 @@
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
-import { compareMemo, isAndroid, platformSelect } from '@utilities';
+import { compareMemo, isAndroid as isAndroidOS, platformSelect } from '@utilities';
 import React, { ReactNode, useEffect } from 'react';
 import { ActivityIndicatorProps, ColorValue, StyleProp, View, ViewStyle } from 'react-native';
 import Animated, {
@@ -45,6 +45,7 @@ const Switch = compareMemo<SwitchProps>(
     style,
   }) => {
     const styles = useStyle(createStyles);
+    const isAndroid = isAndroidOS();
     const [trackActiveColor, trackInactiveColor] = styles.trackColor as (string | number)[];
     const [thumbActiveColor, thumbInactiveColor] = styles.thumbColor as (string | number)[];
     const statusAnimated = useSharedValue(+value);
@@ -70,7 +71,7 @@ const Switch = compareMemo<SwitchProps>(
       const scale = interpolate(statusAnimated.value, INPUT_RANGE, [2 / 3, 1]);
 
       return {
-        transform: [{ translateX }, { scale: thumbScaleAnimated && isAndroid() ? scale : 1 }],
+        transform: [{ translateX }, { scale: thumbScaleAnimated && isAndroid ? scale : 1 }],
         backgroundColor: backgroundColor as ColorValue,
       };
     }, [disabled]);
