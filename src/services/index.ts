@@ -4,11 +4,12 @@ import store from '@store';
 import { fetchNewAccessToken } from '@store/slices/auth';
 import { logger, referenceTypeFormatter } from '@utilities';
 import axios, { AxiosRequestConfig } from 'axios';
+import Config from 'react-native-config';
 
 type OriginalRequest = (AxiosRequestConfig & { retry?: boolean }) | undefined;
 interface RequestPromise {
-  resolve: (value: string) => void;
-  reject: (reason: any) => void;
+  resolve: (value: string | PromiseLike<string>) => void;
+  reject: (reason?: any) => void;
 }
 
 const LOGGER_ENABLED = false;
@@ -30,6 +31,7 @@ const handlePromiseQueue = async (accessToken?: string, error?: any) => {
 
 let isTokenRefreshing = false;
 
+// TODO: remake logger
 const axiosLogger = (key: string, message: Parameters<typeof logger>[0]) => {
   if (LOGGER_ENABLED) {
     logger(`[Axios] ${key} ${referenceTypeFormatter(message)}`);
@@ -37,20 +39,26 @@ const axiosLogger = (key: string, message: Parameters<typeof logger>[0]) => {
 };
 
 const axiosInstance = axios.create({
-  baseURL: 'https://picsum.photos/v2',
+  baseURL: Config.API_URL,
   timeout: 10_000,
 });
 
 export const setAccessToken = (accessToken: string | null) => {
-  if (!accessToken) {
-    delete axiosInstance.defaults.headers.common.Authorization;
-    return;
-  }
-  axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+  !accessToken
+    ? delete axiosInstance.defaults.headers.common.Authorization
+    : (axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`);
 };
 
 axiosInstance.interceptors.request.use(
   requestConfig => {
+    const { accessToken } = store.getState().auth;
+    setAccessToken(accessToken || null);
+    if (requestConfig.headers) {
+      !accessToken
+        ? delete requestConfig.headers.Authorization
+        : (requestConfig.headers.Authorization = `Bearer ${accessToken}`);
+    }
+
     axiosLogger('requestConfig', requestConfig);
 
     return requestConfig;
@@ -103,12 +111,14 @@ axiosInstance.interceptors.response.use(
         const accessToken = unwrapResult(resultAction);
 
         if (accessToken) {
+          setAccessToken(accessToken);
           handlePromiseQueue(accessToken);
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
           return axiosInstance(originalRequest);
         }
       } catch (error) {
+        setAccessToken(null);
         handlePromiseQueue(undefined, error);
 
         return Promise.reject(error);

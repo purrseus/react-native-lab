@@ -1,7 +1,7 @@
 import { locales } from '@assets';
 import { LANGUAGE_MAP } from '@core/constants';
 import { Language, LanguageMap } from '@core/types';
-import { getCurrentLanguage } from '@utilities';
+import { getCurrentLanguage } from '@utilities/common';
 import dayjs from 'dayjs';
 import 'dayjs/locale/en-gb';
 import 'dayjs/locale/vi';

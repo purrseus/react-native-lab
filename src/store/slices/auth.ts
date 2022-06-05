@@ -1,9 +1,8 @@
+import { RefreshTokenResponse } from '@core/interfaces';
 import { CommonStatus } from '@core/types';
-import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { setAccessToken } from '@services';
-import { handleRefreshToken } from '@services/requests/auth';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createPersistReducer } from '@utilities';
-import { REHYDRATE } from 'redux-persist';
+import axios, { AxiosResponse } from 'axios';
 
 interface AuthState {
   status: CommonStatus;
@@ -17,15 +16,14 @@ const initialState: AuthState = {
   status: 'idle',
 };
 
-const resetState = (): AuthState => {
-  setAccessToken(null);
-  return initialState;
-};
+export const handleRefreshToken = (
+  refreshToken: string,
+): Promise<AxiosResponse<RefreshTokenResponse>> =>
+  axios.post(`/auth/refresh-token`, {
+    refreshToken,
+  });
 
-const isRehydrateAction = (
-  action: AnyAction,
-): action is PayloadAction<Partial<Omit<AuthState, 'status'>> | undefined> =>
-  action.type === REHYDRATE;
+const resetState = (): AuthState => initialState;
 
 export const fetchNewAccessToken = createAsyncThunk(
   `${SLICE_NAME}/fetchNewAccessToken`,
@@ -60,14 +58,10 @@ const authSlice = createSlice({
         state.status = 'pending';
       })
       .addCase(fetchNewAccessToken.fulfilled, (state, { payload }) => {
-        setAccessToken(payload);
         state.status = 'succeeded';
         state.accessToken = payload;
       })
-      .addCase(fetchNewAccessToken.rejected, resetState)
-      .addMatcher(isRehydrateAction, (_, { payload }) => {
-        if (payload?.accessToken) setAccessToken(payload.accessToken);
-      });
+      .addCase(fetchNewAccessToken.rejected, resetState);
   },
 });
 
