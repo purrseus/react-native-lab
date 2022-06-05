@@ -4,18 +4,39 @@
   "private": true,
   "author": "thiendo261",
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
     "start": "watchman watch-del-all && react-native start --reset-cache",
-    "clean": "node scripts/clean.js",
-    "log": "node scripts/log.js",
     "xcode": "open ios/ReactNativeLab.xcworkspace",
-    "test": "jest",
     "lint": "eslint \"{src,scripts,__tests__}/**/*.{ts,tsx,js,jsx}\" --fix",
     "format": "prettier --check \"{src,scripts,__tests__}/**/*.{ts,tsx,js,jsx,svg}\" --write",
     "commit": "cz",
     "postinstall": "patch-package && pod-install",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "jest",
+
+    "android:clean": "cd android && ./gradlew clean && cd ..",
+    "ios:clean": "cd ios && xcodebuild clean -scheme ReactNativeLab && cd ..",
+    "clean:all": "android:clean && ios:clean",
+
+    "android:dev:debug": "react-native run-android --variant developmentDebug --appId com.reactnativelab.dev",
+    "android:stag:debug": "react-native run-android --variant stagingDebug --appId com.reactnativelab.stag",
+    "android:prod:debug": "react-native run-android --variant productionDebug --appId com.reactnativelab",
+
+    "android:dev:release": "react-native run-android --variant developmentRelease --appId com.reactnativelab.dev",
+    "android:stag:release": "react-native run-android --variant stagingRelease --appId com.reactnativelab.stag",
+    "android:prod:release": "react-native run-android --variant productionRelease --appId com.reactnativelab",
+
+    "android:dev:apk": "android:clean && cd android && ./gradlew assembleDevelopmentRelease && cd ..",
+    "android:stag:apk": "android:clean && cd android && ./gradlew assembleStagingRelease && cd ..",
+    "android:prod:apk": "android:clean && cd android && ./gradlew assembleProductionRelease && cd ..",
+    "android:prod:aab": "android:clean && cd android && ./gradlew bundleProductionRelease && cd ..",
+
+    "ios:dev:debug": "react-native run-ios --configuration Debug --scheme 'ReactNativeLab (dev)'",
+    "ios:stag:debug": "react-native run-ios --configuration Debug --scheme 'ReactNativeLab (stag)'",
+    "ios:prod:debug": "react-native run-ios --configuration Debug --scheme 'ReactNativeLab (prod)'",
+
+    "ios:dev:release": "react-native run-ios --configuration Release --scheme 'ReactNativeLab (dev)'",
+    "ios:stag:release": "react-native run-ios --configuration Release --scheme 'ReactNativeLab (stag)'",
+    "ios:prod:release": "react-native run-ios --configuration Release --scheme 'ReactNativeLab (prod)'"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.3",
@@ -33,6 +54,7 @@
     "react-fast-compare": "^3.2.0",
     "react-i18next": "^11.16.3",
     "react-native": "0.68.2",
+    "react-native-config": "^1.4.5",
     "react-native-device-info": "^8.7.0",
     "react-native-fast-image": "^8.5.11",
     "react-native-gesture-handler": "^2.3.2",
@@ -60,7 +82,6 @@
     "@types/numeral": "^2.0.2",
     "@types/react-native": "^0.67.3",
     "@types/react-test-renderer": "^17.0.1",
-    "@types/readline-sync": "^1.4.4",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
     "babel-jest": "^26.6.3",
@@ -79,7 +100,6 @@
     "prettier": "^2.6.2",
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "17.0.2",
-    "readline-sync": "^1.4.10",
     "typescript": "^4.4.4"
   },
   "resolutions": {
