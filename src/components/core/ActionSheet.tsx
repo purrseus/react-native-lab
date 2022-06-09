@@ -3,7 +3,7 @@ import { ONE_SECOND } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { I18nText } from '@core/types';
 import { useColor, useStyle } from '@hooks';
-import { alphaHexColor, isIos, wait } from '@utilities';
+import { alphaHexColor, compareMemo, isIos, wait } from '@utilities';
 import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -38,180 +38,189 @@ const ACTION_SHEET_ANIMATION_IN_TIMING = ONE_SECOND / 3;
 const ACTION_SHEET_ANIMATION_OUT_TIMING = ACTION_SHEET_ANIMATION_IN_TIMING * 2;
 const DEFAULT_MARGIN = 8;
 
-const ActionSheet = forwardRef<ActionSheetRef, ActionSheetProps>(
-  ({ onSelect, cancelButtonIndex = 0, tintColor, title, message, ...props }, ref) => {
-    const colors = useColor();
-    const { t } = useTranslation();
-    const colorScheme = useColorScheme();
-    const styles = useStyle(createStyles);
-    const [isVisible, setIsVisible] = useState(false);
-    const options = useMemo(
-      () => props.options.filter((_, index) => index !== cancelButtonIndex),
-      [cancelButtonIndex, props.options],
-    );
+const ActionSheet = compareMemo(
+  forwardRef<ActionSheetRef, ActionSheetProps>(
+    ({ onSelect, cancelButtonIndex = 0, tintColor, title, message, ...props }, ref) => {
+      const colors = useColor();
+      const { t } = useTranslation();
+      const colorScheme = useColorScheme();
+      const styles = useStyle(createStyles);
+      const [isVisible, setIsVisible] = useState(false);
+      const options = useMemo(
+        () => props.options.filter((_, index) => index !== cancelButtonIndex),
+        [cancelButtonIndex, props.options],
+      );
 
-    const onShow = useCallback(() => {
-      if (isIos()) {
-        ActionSheetIOS.showActionSheetWithOptions(
-          {
-            ...props,
-            title: title ? (t(title) as string) : undefined,
-            message: message ? (t(message) as string) : undefined,
-            options: props.options.map(t) as string[],
-            userInterfaceStyle: colorScheme || 'light',
-            tintColor: tintColor || colors.primaryText,
-            cancelButtonIndex,
-          },
-          onSelect,
-        );
-        return;
-      }
+      const onShow = useCallback(() => {
+        if (isIos()) {
+          ActionSheetIOS.showActionSheetWithOptions(
+            {
+              ...props,
+              title: title ? (t(title) as string) : undefined,
+              message: message ? (t(message) as string) : undefined,
+              options: props.options.map(t) as string[],
+              userInterfaceStyle: colorScheme || 'light',
+              tintColor: tintColor || colors.primaryText,
+              cancelButtonIndex,
+            },
+            onSelect,
+          );
+          return;
+        }
 
-      setIsVisible(true);
-    }, [
-      cancelButtonIndex,
-      colorScheme,
-      colors.primaryText,
-      message,
-      onSelect,
-      props,
-      t,
-      tintColor,
-      title,
-    ]);
-
-    const onHide = useCallback(
-      async (isBackdropPress = true) => {
-        if (isIos()) return;
-        setIsVisible(false);
-        await wait(ACTION_SHEET_ANIMATION_IN_TIMING);
-        if (isBackdropPress) onSelect(cancelButtonIndex);
-      },
-      [cancelButtonIndex, onSelect],
-    );
-
-    const handleSelectOption = useCallback(
-      (buttonIndex: number, isCancel?: boolean) => async () => {
-        await onHide(false);
-        onSelect(
-          buttonIndex === cancelButtonIndex && isCancel
-            ? cancelButtonIndex
-            : props.options.indexOf(options[buttonIndex]),
-        );
-      },
-      [cancelButtonIndex, onHide, onSelect, options, props.options],
-    );
-
-    useImperativeHandle(
-      ref,
-      () => ({
-        show: onShow,
-        hide: onHide,
-      }),
-      [onShow, onHide],
-    );
-
-    const ItemSeparatorComponent = useCallback(
-      () => <Divider height={1 / 3} color={styles.divider.color} />,
-      [styles.divider.color],
-    );
-
-    const ListHeaderComponent = useMemo(
-      () =>
-        !!title || !!message ? (
-          <View>
-            <View style={styles.header}>
-              {!!title && (
-                <Text style={[styles.headerText, !!message && styles.boldedTitle]}>{t(title)}</Text>
-              )}
-              {!!title && !!message && <Spacer h4 />}
-              {!!message && (
-                <Text style={[styles.headerText, !title && styles.boldedTitle]}>{t(message)}</Text>
-              )}
-              {!!title && !!message && <Spacer h8 />}
-            </View>
-
-            <Divider height={0.5} color={styles.divider.color} />
-          </View>
-        ) : null,
-      [
+        setIsVisible(true);
+      }, [
+        cancelButtonIndex,
+        colorScheme,
+        colors.primaryText,
         message,
-        styles.boldedTitle,
-        styles.divider.color,
-        styles.header,
-        styles.headerText,
-        t,
-        title,
-      ],
-    );
-
-    const renderOptionItem: ListRenderItem<I18nText> = useCallback(
-      ({ item, index }) => (
-        <Touchable onPress={handleSelectOption(index)} style={styles.option}>
-          <Text
-            adjustsFontSizeToFit
-            numberOfLines={1}
-            ellipsizeMode="middle"
-            style={[
-              styles.optionTitle,
-              !!tintColor && { color: tintColor as ColorValue },
-              typeof props.destructiveButtonIndex === 'number' &&
-                props.destructiveButtonIndex === props.options.indexOf(options[index]) &&
-                styles.destructiveTitle,
-            ]}
-          >
-            {t(item)}
-          </Text>
-        </Touchable>
-      ),
-      [
-        options,
-        handleSelectOption,
-        props.destructiveButtonIndex,
-        props.options,
+        onSelect,
+        props,
         t,
         tintColor,
-        styles.destructiveTitle,
-        styles.option,
-        styles.optionTitle,
-      ],
-    );
+        title,
+      ]);
 
-    if (isIos()) return null;
-    return (
-      <Modal
-        type="bottomSheet"
-        isVisible={isVisible}
-        animationInTiming={ACTION_SHEET_ANIMATION_IN_TIMING}
-        animationOutTiming={ACTION_SHEET_ANIMATION_OUT_TIMING}
-        onBackdropPress={onHide}
-      >
-        <View style={styles.container}>
-          <ListView
-            data={options}
-            scrollEnabled={false}
-            renderItem={renderOptionItem}
-            style={styles.optionContainer}
-            {...{ ListHeaderComponent, ItemSeparatorComponent }}
-          />
-          <Spacer height={DEFAULT_MARGIN} />
-          <View style={styles.optionContainer}>
-            <Touchable onPress={handleSelectOption(cancelButtonIndex, true)} style={styles.option}>
-              <Text
-                style={[
-                  styles.optionTitle,
-                  styles.cancelTitle,
-                  !!tintColor && { color: tintColor as ColorValue },
-                ]}
+      const onHide = useCallback(
+        async (isBackdropPress = true) => {
+          if (isIos()) return;
+          setIsVisible(false);
+          await wait(ACTION_SHEET_ANIMATION_IN_TIMING);
+          if (isBackdropPress) onSelect(cancelButtonIndex);
+        },
+        [cancelButtonIndex, onSelect],
+      );
+
+      const handleSelectOption = useCallback(
+        (buttonIndex: number, isCancel?: boolean) => async () => {
+          await onHide(false);
+          onSelect(
+            buttonIndex === cancelButtonIndex && isCancel
+              ? cancelButtonIndex
+              : props.options.indexOf(options[buttonIndex]),
+          );
+        },
+        [cancelButtonIndex, onHide, onSelect, options, props.options],
+      );
+
+      useImperativeHandle(
+        ref,
+        () => ({
+          show: onShow,
+          hide: onHide,
+        }),
+        [onShow, onHide],
+      );
+
+      const ItemSeparatorComponent = useCallback(
+        () => <Divider height={1 / 3} color={styles.divider.color} />,
+        [styles.divider.color],
+      );
+
+      const ListHeaderComponent = useMemo(
+        () =>
+          !!title || !!message ? (
+            <View>
+              <View style={styles.header}>
+                {!!title && (
+                  <Text style={[styles.headerText, !!message && styles.boldedTitle]}>
+                    {t(title)}
+                  </Text>
+                )}
+                {!!title && !!message && <Spacer h4 />}
+                {!!message && (
+                  <Text style={[styles.headerText, !title && styles.boldedTitle]}>
+                    {t(message)}
+                  </Text>
+                )}
+                {!!title && !!message && <Spacer h8 />}
+              </View>
+
+              <Divider height={0.5} color={styles.divider.color} />
+            </View>
+          ) : null,
+        [
+          message,
+          styles.boldedTitle,
+          styles.divider.color,
+          styles.header,
+          styles.headerText,
+          t,
+          title,
+        ],
+      );
+
+      const renderOptionItem: ListRenderItem<I18nText> = useCallback(
+        ({ item, index }) => (
+          <Touchable onPress={handleSelectOption(index)} style={styles.option}>
+            <Text
+              adjustsFontSizeToFit
+              numberOfLines={1}
+              ellipsizeMode="middle"
+              style={[
+                styles.optionTitle,
+                !!tintColor && { color: tintColor as ColorValue },
+                typeof props.destructiveButtonIndex === 'number' &&
+                  props.destructiveButtonIndex === props.options.indexOf(options[index]) &&
+                  styles.destructiveTitle,
+              ]}
+            >
+              {t(item)}
+            </Text>
+          </Touchable>
+        ),
+        [
+          options,
+          handleSelectOption,
+          props.destructiveButtonIndex,
+          props.options,
+          t,
+          tintColor,
+          styles.destructiveTitle,
+          styles.option,
+          styles.optionTitle,
+        ],
+      );
+
+      if (isIos()) return null;
+      return (
+        <Modal
+          type="bottomSheet"
+          isVisible={isVisible}
+          animationInTiming={ACTION_SHEET_ANIMATION_IN_TIMING}
+          animationOutTiming={ACTION_SHEET_ANIMATION_OUT_TIMING}
+          onBackdropPress={onHide}
+        >
+          <View style={styles.container}>
+            <ListView
+              data={options}
+              scrollEnabled={false}
+              renderItem={renderOptionItem}
+              style={styles.optionContainer}
+              {...{ ListHeaderComponent, ItemSeparatorComponent }}
+            />
+            <Spacer height={DEFAULT_MARGIN} />
+            <View style={styles.optionContainer}>
+              <Touchable
+                onPress={handleSelectOption(cancelButtonIndex, true)}
+                style={styles.option}
               >
-                {t(props.options[cancelButtonIndex])}
-              </Text>
-            </Touchable>
+                <Text
+                  style={[
+                    styles.optionTitle,
+                    styles.cancelTitle,
+                    !!tintColor && { color: tintColor as ColorValue },
+                  ]}
+                >
+                  {t(props.options[cancelButtonIndex])}
+                </Text>
+              </Touchable>
+            </View>
           </View>
-        </View>
-      </Modal>
-    );
-  },
+        </Modal>
+      );
+    },
+  ),
 );
 
 const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackParams) =>

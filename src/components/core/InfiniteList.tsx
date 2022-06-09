@@ -2,6 +2,7 @@
 import { InfiniteScrollConfig, StyleCallbackParams } from '@core/interfaces';
 import { useInfiniteScroll, useStyle, useThrottle } from '@hooks';
 import { globalStyles } from '@themes';
+import { compareMemo } from '@utilities';
 import { AxiosRequestConfig } from 'axios';
 import React, { forwardRef } from 'react';
 import { FlatList, RefreshControlProps, View } from 'react-native';
@@ -15,8 +16,8 @@ interface InfiniteListProps
   config?: InfiniteScrollConfig;
 }
 
-const InfiniteList = forwardRef<FlatList, InfiniteListProps>(
-  ({ requestCallback, config, ...props }, ref) => {
+const InfiniteList = compareMemo(
+  forwardRef<FlatList, InfiniteListProps>(({ requestCallback, config, ...props }, ref) => {
     const styles = useStyle(createStyles);
     const { canLoadMore, fetching, onLoadMore, ...listProps } = useInfiniteScroll(
       requestCallback,
@@ -47,7 +48,7 @@ const InfiniteList = forwardRef<FlatList, InfiniteListProps>(
         })}
       />
     );
-  },
+  }),
 );
 
 const createStyles = ({ create }: StyleCallbackParams) =>
