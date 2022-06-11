@@ -36,8 +36,8 @@ const InfiniteList = compareMemo(
     return (
       <ListView
         ref={ref}
-        {...listProps}
         {...props}
+        {...listProps}
         onEndReached={handleOnEndReached}
         {...(canLoadMore && {
           ListFooterComponent: (

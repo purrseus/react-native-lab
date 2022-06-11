@@ -1,7 +1,18 @@
 import enUS from './locales/en-US.json';
 import viVN from './locales/vi-VN.json';
 
-export const fonts = {};
+type FontName = 'Quicksand';
+type FontStyle = 'Light' | 'Regular' | 'Medium' | 'SemiBold' | 'Bold';
+type FontFamily = `${FontName}-${FontStyle}`;
+type FontKey = Uncapitalize<`${FontName}${FontStyle}`>;
+
+export const fonts: Readonly<Record<FontKey, FontFamily>> = {
+  quicksandLight: 'Quicksand-Light',
+  quicksandRegular: 'Quicksand-Regular',
+  quicksandMedium: 'Quicksand-Medium',
+  quicksandSemiBold: 'Quicksand-SemiBold',
+  quicksandBold: 'Quicksand-Bold',
+};
 
 export const icons = {
   // Tab icons
