@@ -1,3 +1,4 @@
+import { DEFAULT_FONT_SIZE } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { I18nText } from '@core/types';
 import { useStyle } from '@hooks';
@@ -11,7 +12,7 @@ interface TextInputProps extends RNTextInputProps {
 }
 
 const TextInput = compareMemo(
-  forwardRef<RNTextInput, TextInputProps>(({ placeholder, ...props }, ref) => {
+  forwardRef<RNTextInput, TextInputProps>(({ placeholder, style, ...props }, ref) => {
     const { t } = useTranslation();
     const styles = useStyle(createStyle);
 
@@ -23,15 +24,18 @@ const TextInput = compareMemo(
         selectionColor={styles.selection.color}
         {...props}
         placeholder={placeholder ? (t(placeholder) as string) : undefined}
+        style={[styles.input, style]}
       />
     );
   }),
 );
 
-const createStyle = ({ create, colors }: StyleCallbackParams) =>
+const createStyle = ({ create, colors, fonts }: StyleCallbackParams) =>
   create({
-    text: {
+    input: {
       color: colors.primaryText,
+      fontSize: DEFAULT_FONT_SIZE,
+      fontFamily: fonts.quicksandRegular,
     },
     placeholder: {
       color: colors.lightGray,

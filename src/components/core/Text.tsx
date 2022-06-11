@@ -28,11 +28,12 @@ const Text = compareMemo<TextProps>(({ children, style, onPress, hitSlop = 8, wa
   );
 });
 
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, colors, fonts }: StyleCallbackParams) =>
   create({
     text: {
       fontSize: DEFAULT_FONT_SIZE,
       color: colors.primaryText,
+      fontFamily: fonts.quicksandRegular,
     },
     touchable: {
       flexWrap: 'wrap',
