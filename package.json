@@ -8,32 +8,26 @@
     "xcode": "open ios/ReactNativeLab.xcworkspace",
     "lint": "eslint \"{src,scripts,__tests__}/**/*.{ts,tsx,js,jsx}\" --fix",
     "format": "prettier --check \"{src,scripts,__tests__}/**/*.{ts,tsx,js,jsx,svg}\" --write",
-    "commit": "cz",
+    "cm": "cz",
     "postinstall": "patch-package && pod-install",
     "prepare": "husky install",
     "test": "jest",
-
     "android:clean": "cd android && ./gradlew clean && cd ..",
     "ios:clean": "cd ios && xcodebuild clean -scheme ReactNativeLab && cd ..",
     "clean:all": "android:clean && ios:clean",
-
     "android:dev:debug": "react-native run-android --variant developmentDebug --appId com.reactnativelab.dev",
     "android:stag:debug": "react-native run-android --variant stagingDebug --appId com.reactnativelab.stag",
     "android:prod:debug": "react-native run-android --variant productionDebug --appId com.reactnativelab",
-
     "android:dev:release": "react-native run-android --variant developmentRelease --appId com.reactnativelab.dev",
     "android:stag:release": "react-native run-android --variant stagingRelease --appId com.reactnativelab.stag",
     "android:prod:release": "react-native run-android --variant productionRelease --appId com.reactnativelab",
-
     "android:dev:apk": "android:clean && cd android && ./gradlew assembleDevelopmentRelease && cd ..",
     "android:stag:apk": "android:clean && cd android && ./gradlew assembleStagingRelease && cd ..",
     "android:prod:apk": "android:clean && cd android && ./gradlew assembleProductionRelease && cd ..",
     "android:prod:aab": "android:clean && cd android && ./gradlew bundleProductionRelease && cd ..",
-
     "ios:dev:debug": "react-native run-ios --configuration Debug --scheme 'ReactNativeLab (dev)'",
     "ios:stag:debug": "react-native run-ios --configuration Debug --scheme 'ReactNativeLab (stag)'",
     "ios:prod:debug": "react-native run-ios --configuration Debug --scheme 'ReactNativeLab (prod)'",
-
     "ios:dev:release": "react-native run-ios --configuration Release --scheme 'ReactNativeLab (dev)'",
     "ios:stag:release": "react-native run-ios --configuration Release --scheme 'ReactNativeLab (stag)'",
     "ios:prod:release": "react-native run-ios --configuration Release --scheme 'ReactNativeLab (prod)'"
@@ -90,9 +84,9 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "husky": ">=6",
+    "husky": "^8.0.1",
     "jest": "^26.6.3",
-    "lint-staged": ">=10",
+    "lint-staged": "^13.0.1",
     "metro-react-native-babel-preset": "^0.67.0",
     "patch-package": "^6.4.7",
     "pod-install": "^0.1.36",
@@ -115,16 +109,5 @@
       "json",
       "node"
     ]
-  },
-  "lint-staged": {
-    "{src,scripts,__tests__}/**/*.{ts,tsx,js,jsx}": [
-      "yarn lint",
-      "yarn format"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }
