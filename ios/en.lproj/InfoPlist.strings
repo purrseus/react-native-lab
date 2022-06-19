@@ -6,3 +6,6 @@
   
 */
 NSLocationWhenInUseUsageDescription = "NSLocationWhenInUseUsageDescription English";
+NSCameraUsageDescription = "NSCameraUsageDescription English";
+NSPhotoLibraryAddUsageDescription = "NSPhotoLibraryAddUsageDescription English";
+NSPhotoLibraryUsageDescription = "NSPhotoLibraryUsageDescription English";

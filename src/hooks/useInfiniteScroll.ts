@@ -65,7 +65,7 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
         signal: controller.signal,
       });
 
-      const responseData = deepAccessObject<D, T>(accessProperties as [keyof T], response);
+      const responseData = deepAccessObject<T, D>(response, accessProperties);
 
       if (!Array.isArray(responseData)) return [];
       if (responseData.length < pageSize) setState({ canLoadMore: false });
@@ -113,7 +113,7 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
     }
   }, [handleRequest, infiniteScroll.canLoadMore]);
 
-  const cancelRequest = () => controller.abort();
+  const cancelRequest = useCallback(() => controller.abort(), []);
 
   useEffect(() => {
     handleRequest();

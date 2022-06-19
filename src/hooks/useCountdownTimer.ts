@@ -41,7 +41,7 @@ const useCountdownTimer = ({ duration, autoStart = true, onTimeout }: Options) =
     }, ONE_SECOND);
   }, [stop, onTimeout, autoStart, getTimeEnd]);
 
-  const replay = () => stop(play);
+  const replay = useCallback(() => stop(play), [stop, play]);
 
   useEffect(() => {
     if (autoStart) play();

@@ -4,10 +4,10 @@ import { PersistConfig, persistReducer } from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 export const createPersistReducer = <
-  T extends Slice,
-  State extends ReturnType<T['getInitialState']>,
+  S extends Slice,
+  State extends ReturnType<S['getInitialState']>,
 >(
-  slice: T,
+  slice: S,
   config?: Partial<PersistConfig<State>>,
 ) => {
   const persistConfig: PersistConfig<State> = {
