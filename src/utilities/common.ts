@@ -53,9 +53,9 @@ export const resizeImage = (
   return { width: currentWidth * scale, height: currentHeight * scale };
 };
 
-export const deepAccessObject = <V, T extends Record<string, any> = {}>(
-  arrKey: [keyof T],
+export const deepAccessObject = <T extends Record<string, any>, V>(
   target: T,
+  arrKey: string[],
 ): T | V => {
   if (!arrKey.length) return target;
   return arrKey.reduce((acc, cur) => {

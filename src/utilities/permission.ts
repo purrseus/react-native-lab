@@ -45,7 +45,7 @@ const showBlockedPermissionAlert = (permissionName?: I18nText): false => {
   if (permissionName)
     Alert(
       {
-        key: 'permission.blockedTitle' as I18nText,
+        key: 'permission.blockedTitle',
         options: { permissionName: `$t(${permissionName})` },
       },
       'permission.blockedMessage',
