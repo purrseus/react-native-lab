@@ -2,7 +2,7 @@
 import { ONE_SECOND } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { I18nText } from '@core/types';
-import { useColor, useStyle } from '@hooks';
+import { useAppSelector, useColor, useStyle } from '@hooks';
 import { alphaHexColor, compareMemo, isIos, wait } from '@utilities';
 import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -21,7 +21,7 @@ import Spacer from './Spacer';
 import Text from './Text';
 import Touchable from './Touchable';
 
-export interface ActionSheetRef {
+export interface ActionSheetMethods {
   show: () => void;
   /** @platform android */
   hide: () => void;
@@ -39,13 +39,15 @@ const ACTION_SHEET_ANIMATION_OUT_TIMING = ACTION_SHEET_ANIMATION_IN_TIMING * 2;
 const DEFAULT_MARGIN = 8;
 
 const ActionSheet = compareMemo(
-  forwardRef<ActionSheetRef, ActionSheetProps>(
+  forwardRef<ActionSheetMethods, ActionSheetProps>(
     ({ onSelect, cancelButtonIndex = 0, tintColor, title, message, ...props }, ref) => {
       const colors = useColor();
       const { t } = useTranslation();
-      const colorScheme = useColorScheme();
       const styles = useStyle(createStyles);
+      const { theme } = useAppSelector(state => state.common);
+      const colorScheme = useColorScheme();
       const [isVisible, setIsVisible] = useState(false);
+
       const options = useMemo(
         () => props.options.filter((_, index) => index !== cancelButtonIndex),
         [cancelButtonIndex, props.options],
@@ -58,8 +60,8 @@ const ActionSheet = compareMemo(
               ...props,
               title: title ? (t(title) as string) : undefined,
               message: message ? (t(message) as string) : undefined,
-              options: props.options.map(t) as string[],
-              userInterfaceStyle: colorScheme || 'light',
+              options: props.options.map<string>(t),
+              userInterfaceStyle: theme === 'auto' ? colorScheme || 'light' : theme,
               tintColor: tintColor || colors.primaryText,
               cancelButtonIndex,
             },
@@ -77,30 +79,30 @@ const ActionSheet = compareMemo(
         onSelect,
         props,
         t,
+        theme,
         tintColor,
         title,
       ]);
 
       const onHide = useCallback(
-        async (isBackdropPress = true) => {
+        async (buttonIndex = cancelButtonIndex) => {
           if (isIos()) return;
           setIsVisible(false);
           await wait(ACTION_SHEET_ANIMATION_IN_TIMING);
-          if (isBackdropPress) onSelect(cancelButtonIndex);
+          onSelect(buttonIndex);
         },
         [cancelButtonIndex, onSelect],
       );
 
       const handleSelectOption = useCallback(
         (buttonIndex: number, isCancel?: boolean) => async () => {
-          await onHide(false);
-          onSelect(
+          await onHide(
             buttonIndex === cancelButtonIndex && isCancel
               ? cancelButtonIndex
               : props.options.indexOf(options[buttonIndex]),
           );
         },
-        [cancelButtonIndex, onHide, onSelect, options, props.options],
+        [cancelButtonIndex, onHide, options, props.options],
       );
 
       useImperativeHandle(
