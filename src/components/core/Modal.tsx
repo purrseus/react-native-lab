@@ -23,7 +23,7 @@ const animationType: AnimationType = {
   bottomSheet: { animationIn: 'slideInUp', animationOut: 'slideOutDown' },
 };
 
-const Modal = compareMemo<ModalProps>(({ children, type = 'modal', style, ...props }) => {
+const Modal = compareMemo<ModalProps>(({ type = 'modal', style, ...props }) => {
   const { width, height } = Dimensions.get('screen');
   const styles = useStyle(createStyles);
 
@@ -37,9 +37,7 @@ const Modal = compareMemo<ModalProps>(({ children, type = 'modal', style, ...pro
       deviceWidth={width}
       deviceHeight={height}
       style={[styles.common, styles[type], style]}
-    >
-      {children}
-    </RNModal>
+    />
   );
 });
 

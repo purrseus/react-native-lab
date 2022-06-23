@@ -13,7 +13,7 @@ export interface TouchableProps extends Omit<TouchableOpacityProps, 'hitSlop'> {
 
 const Touchable = compareMemo(
   forwardRef<TouchableOpacity, TouchableProps>(
-    ({ children, wait = ONE_SECOND, onPress, row = false, hitSlop, style, ...props }, ref) => {
+    ({ wait = ONE_SECOND, onPress, row = false, hitSlop, style, ...props }, ref) => {
       const handleOnPress = useThrottle(onPress || (() => null), [onPress], wait);
 
       return (
@@ -24,9 +24,7 @@ const Touchable = compareMemo(
           hitSlop={hitSlop ? createHitSlop(hitSlop) : undefined}
           onPress={!wait ? onPress : handleOnPress}
           style={[style, row && { flexDirection: 'row' }]}
-        >
-          {children}
-        </TouchableOpacity>
+        />
       );
     },
   ),

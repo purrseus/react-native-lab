@@ -13,12 +13,12 @@ import {
   launchCamera,
   launchImageLibrary,
 } from 'react-native-image-picker';
-import ActionSheet, { ActionSheetProps, ActionSheetRef } from './ActionSheet';
+import ActionSheet, { ActionSheetProps, ActionSheetMethods } from './ActionSheet';
 
 export type Image = string | File;
 type PickType = 'pick' | 'replace';
 
-export interface ImagePickerRef {
+export interface ImagePickerMethods {
   pick: () => void;
   replace: (replaceIndex: number) => void;
   delete: (deleteIndex?: number) => void;
@@ -57,7 +57,7 @@ const selectOptions = {
 };
 
 const ImagePicker = compareMemo(
-  forwardRef<ImagePickerRef, ImagePickerProps>(
+  forwardRef<ImagePickerMethods, ImagePickerProps>(
     (
       {
         images,
@@ -71,7 +71,7 @@ const ImagePicker = compareMemo(
     ) => {
       const pickType = useRef<PickType | null>(null);
       const replaceIndex = useRef<number>(-1);
-      const actionSheetRef = useRef<ActionSheetRef | null>(null);
+      const actionSheetRef = useRef<ActionSheetMethods | null>(null);
 
       const resetValue = () => {
         pickType.current = null;

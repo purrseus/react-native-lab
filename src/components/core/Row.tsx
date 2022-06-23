@@ -5,10 +5,8 @@ import { View, ViewProps } from 'react-native';
 
 type RowProps = ViewProps & { reverse?: boolean };
 
-const Row = compareMemo<RowProps>(({ reverse = false, children, style, ...props }) => (
-  <View {...props} style={[style, { flexDirection: reverse ? 'row-reverse' : 'row' }]}>
-    {children}
-  </View>
+const Row = compareMemo<RowProps>(({ reverse = false, style, ...props }) => (
+  <View {...props} style={[style, { flexDirection: reverse ? 'row-reverse' : 'row' }]} />
 ));
 
 export default Row;
