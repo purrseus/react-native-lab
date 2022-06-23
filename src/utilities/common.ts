@@ -1,10 +1,11 @@
+/* eslint-disable react-native/split-platform-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ONE_SECOND } from '@core/constants';
 import { CommonSize } from '@core/interfaces';
 import { Language } from '@core/types';
-import { FC, memo } from 'react';
+import { FC, ForwardRefExoticComponent, memo } from 'react';
 import isEqual from 'react-fast-compare';
-import { ColorValue, Insets } from 'react-native';
+import { ColorValue, Insets, ShadowStyleIOS, ViewStyle } from 'react-native';
 import { getLocales } from 'react-native-localize';
 
 export const currentTimeStamp = () => +new Date();
@@ -14,18 +15,33 @@ export const randomColor = (): ColorValue => `#${Math.random().toString(16).slic
 export const alphaHexColor = (hexColor: string, opacity: number) =>
   `${hexColor}${`${(Math.min(Math.max(opacity, 0), 1) * 255).toString(16)}0`.slice(0, 2)}`;
 
-export const compareMemo = <T>(Component: FC<T>) => memo(Component, isEqual);
+export const compareMemo = <T>(Component: T extends ForwardRefExoticComponent<any> ? T : FC<T>) =>
+  memo(Component, isEqual);
 
 export const wait = (timeout = ONE_SECOND) =>
   new Promise<void>(resolve => setTimeout(resolve, timeout));
 
-export const createArray = (length = 1) => new Array(length).fill(0).map((_, i) => i);
+export const createArray = (length = 0) => new Array(length).fill(0).map((_, i) => i);
 
 export const createHitSlop = (insetValue = 8): Insets => ({
   top: insetValue,
   left: insetValue,
   right: insetValue,
   bottom: insetValue,
+});
+
+export const createShadow = (
+  shadowColor = 'transparent',
+  shadowOffset = [0, 0],
+  shadowOpacity = 0,
+  shadowRadius = 0,
+  elevation = 0,
+): Required<ShadowStyleIOS & Pick<ViewStyle, 'elevation'>> => ({
+  shadowColor,
+  shadowOffset: { width: shadowOffset[0], height: shadowOffset[1] },
+  shadowOpacity,
+  shadowRadius,
+  elevation,
 });
 
 export const getCurrentLanguage = (): Language => {
