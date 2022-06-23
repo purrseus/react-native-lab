@@ -7,9 +7,10 @@ import { I18nText } from '@core/types';
 import { useKeyboard, useStyle } from '@hooks';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { colors as Colors, globalStyles } from '@themes';
-import React, { FC, useEffect } from 'react';
+import { createShadow } from '@utilities';
+import React, { FC } from 'react';
 import { ColorValue, ImageRequireSource, StyleSheet } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface TabUI {
@@ -51,18 +52,13 @@ const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 const CustomizedTabBar: FC<BottomTabBarProps> = ({ state, descriptors, navigation }) => {
   const styles = useStyle(createStyles);
   const { keyboardShown } = useKeyboard();
-  const tabBarTranslate = useSharedValue(0);
 
   const tabBarAnimatedStyle = useAnimatedStyle(
     () => ({
-      transform: [{ translateY: tabBarTranslate.value }],
+      transform: [{ translateY: withTiming(keyboardShown ? 100 : 0) }],
     }),
-    [],
+    [keyboardShown],
   );
-
-  useEffect(() => {
-    tabBarTranslate.value = withTiming(keyboardShown ? 100 : 0);
-  }, [keyboardShown, tabBarTranslate]);
 
   return (
     <AnimatedSafeAreaView
@@ -135,14 +131,7 @@ const createStyles = ({ colors, create }: StyleCallbackParams) =>
     rootContainer: {
       ...StyleSheet.absoluteFillObject,
       top: undefined,
-      shadowColor: colors.shadow,
-      shadowOpacity: 0.1,
-      shadowOffset: {
-        width: 0,
-        height: 0,
-      },
-      shadowRadius: 10,
-      elevation: 20,
+      ...createShadow(colors.shadow, [0, 0], 0.2, 10, 20),
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
       backgroundColor: colors.tabBarBackground,

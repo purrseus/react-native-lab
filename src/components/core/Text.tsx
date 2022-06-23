@@ -10,13 +10,11 @@ export interface TextProps
   extends RNTextProps,
     Pick<TouchableProps, 'hitSlop' | 'onPress' | 'wait'> {}
 
-const Text = compareMemo<TextProps>(({ children, style, onPress, hitSlop = 8, wait, ...props }) => {
+const Text = compareMemo<TextProps>(({ style, onPress, hitSlop = 8, wait, ...props }) => {
   const styles = useStyle(createStyles);
 
   const TextComponent: FC = () => (
-    <RNText allowFontScaling={false} {...props} style={[styles.text, style]}>
-      {children}
-    </RNText>
+    <RNText allowFontScaling={false} {...props} style={[styles.text, style]} />
   );
 
   return onPress ? (
@@ -33,7 +31,7 @@ const createStyles = ({ create, colors, fonts }: StyleCallbackParams) =>
     text: {
       fontSize: DEFAULT_FONT_SIZE,
       color: colors.primaryText,
-      fontFamily: fonts.quicksandRegular,
+      fontFamily: fonts.quicksandMedium,
     },
     touchable: {
       flexWrap: 'wrap',

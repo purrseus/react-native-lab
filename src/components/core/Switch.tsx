@@ -1,7 +1,7 @@
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
-import { compareMemo, isAndroid as isAndroidOS, platformSelect } from '@utilities';
+import { compareMemo, createShadow, isAndroid as isAndroidOS, platformSelect } from '@utilities';
 import React, { ReactNode, useEffect } from 'react';
 import { ActivityIndicatorProps, ColorValue, StyleProp, View, ViewStyle } from 'react-native';
 import Animated, {
@@ -133,14 +133,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
     thumb: {
       ...globalStyles.flexCenter,
       borderRadius: 100,
-      shadowColor: colors.shadow,
-      shadowOffset: {
-        width: 0,
-        height: 4,
-      },
-      shadowOpacity: 0.4,
-      shadowRadius: 4,
-      elevation: 8,
+      ...createShadow(colors.shadow, [0, 4], 0.4, 4, 8),
     },
   });
 

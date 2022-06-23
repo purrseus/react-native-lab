@@ -1,6 +1,7 @@
 export { default as ActionSheet } from './ActionSheet';
 export { default as ActivityIndicator } from './ActivityIndicator';
 export { default as Alert } from './Alert';
+export { default as BottomSheet } from './BottomSheet';
 export { default as BottomTabSpacer } from './BottomTabSpacer';
 export { default as Button } from './Button';
 export { default as Divider } from './Divider';
