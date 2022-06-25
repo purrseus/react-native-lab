@@ -1,51 +1,34 @@
+import { DEFAULT_BACKDROP_OPACITY } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import RNBottomSheet, {
-  BottomSheetBackdropProps,
+  BottomSheetBackdrop,
   BottomSheetProps as RNBottomSheetProps,
 } from '@gorhom/bottom-sheet';
+import { BottomSheetDefaultBackdropProps } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { useStyle } from '@hooks';
 import { compareMemo, createShadow } from '@utilities';
-import React, { FC, forwardRef, useCallback, useMemo } from 'react';
-import Animated, { Extrapolate, interpolate, useAnimatedStyle } from 'react-native-reanimated';
+import React, { forwardRef, useCallback } from 'react';
 
-interface BottomSheetProps extends RNBottomSheetProps {
+interface BottomSheetProps
+  extends RNBottomSheetProps,
+    Pick<BottomSheetDefaultBackdropProps, 'enableTouchThrough'> {
   backdropOpacity?: number;
+  pressBackdropBehavior?: BottomSheetDefaultBackdropProps['pressBehavior'];
   hasHandle?: boolean;
 }
-
-const CustomBackdrop: FC<BottomSheetBackdropProps & Pick<BottomSheetProps, 'backdropOpacity'>> = ({
-  animatedIndex,
-  style,
-  backdropOpacity = 0,
-}) => {
-  const styles = useStyle(createStyle);
-
-  const containerAnimatedStyle = useAnimatedStyle(
-    () => ({
-      opacity: interpolate(animatedIndex.value, [-1, 0], [0, backdropOpacity], Extrapolate.CLAMP),
-    }),
-    [backdropOpacity],
-  );
-
-  const containerStyle = useMemo(
-    () => [style, styles.backdrop, containerAnimatedStyle],
-    [style, styles.backdrop, containerAnimatedStyle],
-  );
-
-  return <Animated.View style={containerStyle} />;
-};
 
 const BottomSheet = compareMemo(
   forwardRef<BottomSheetMethods, BottomSheetProps>(
     (
       {
-        backdropOpacity = 0.3,
+        backdropOpacity = DEFAULT_BACKDROP_OPACITY,
+        enableTouchThrough,
+        pressBackdropBehavior,
         hasHandle = true,
         handleStyle,
         handleIndicatorStyle,
         backgroundStyle,
-        snapPoints,
         ...props
       },
       ref,
@@ -53,15 +36,24 @@ const BottomSheet = compareMemo(
       const styles = useStyle(createStyle);
 
       const backdropComponent = useCallback(
-        (backdropProps: BottomSheetBackdropProps) =>
-          CustomBackdrop({ ...backdropProps, backdropOpacity }),
-        [backdropOpacity],
+        (backdropProps: BottomSheetDefaultBackdropProps) => (
+          <BottomSheetBackdrop
+            {...backdropProps}
+            enableTouchThrough={enableTouchThrough}
+            pressBehavior={pressBackdropBehavior}
+            opacity={backdropOpacity}
+            disappearsOnIndex={-1}
+            appearsOnIndex={0}
+          />
+        ),
+        [backdropOpacity, enableTouchThrough, pressBackdropBehavior],
       );
 
       return (
         <RNBottomSheet
           {...props}
-          {...{ ref, snapPoints, backdropComponent }}
+          {...{ ref, backdropComponent }}
+          keyboardBlurBehavior="restore"
           topInset={styles.inset.top}
           handleStyle={[styles.handle, !hasHandle && styles.hidedHandle, handleStyle]}
           handleIndicatorStyle={[styles.indicator, handleIndicatorStyle]}
@@ -90,7 +82,7 @@ const createStyle = ({ create, edgeInsets, colors }: StyleCallbackParams) =>
       backgroundColor: colors.bottomSheetBackground,
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
-      ...createShadow(colors.shadow, [0, 0], 0.2, 8, 16),
+      ...createShadow(colors.shadow, [0, 0], 0.1, 8, 16),
     },
     backdrop: {
       backgroundColor: colors.black,

@@ -191,7 +191,7 @@ const ActionSheet = compareMemo(
           isVisible={isVisible}
           animationInTiming={ACTION_SHEET_ANIMATION_IN_TIMING}
           animationOutTiming={ACTION_SHEET_ANIMATION_OUT_TIMING}
-          onBackdropPress={onHide}
+          onBackdropPress={() => onHide()}
         >
           <View style={styles.container}>
             <ListView
@@ -235,7 +235,7 @@ const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackP
     },
     optionContainer: {
       borderRadius: 12,
-      backgroundColor: alphaHexColor(colors.white, 0.95),
+      backgroundColor: colors.white,
     },
     header: {
       paddingVertical: 16,

@@ -13,7 +13,7 @@ export interface TouchableProps extends Omit<TouchableOpacityProps, 'hitSlop'> {
 
 const Touchable = compareMemo(
   forwardRef<TouchableOpacity, TouchableProps>(
-    ({ wait = ONE_SECOND, onPress, row = false, hitSlop, style, ...props }, ref) => {
+    ({ wait = ONE_SECOND / 2, onPress, row = false, hitSlop, style, ...props }, ref) => {
       const handleOnPress = useThrottle(onPress || (() => null), [onPress], wait);
 
       return (

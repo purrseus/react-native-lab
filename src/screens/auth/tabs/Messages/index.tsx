@@ -2,30 +2,30 @@ import { Button, ImagePicker, Switch } from '@components/core';
 import { Image, ImagePickerMethods } from '@components/core/ImagePicker';
 import { TabScreenName } from '@core/enums';
 import { TabScreen } from '@core/types';
-import { useAppDispatch, useBackHandler } from '@hooks';
+import { useAppDispatch, useAppSelector, useBackHandler } from '@hooks';
 import { commonActions } from '@store/slices/common';
 import { globalStyles } from '@themes';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { View } from 'react-native';
 
 const Messages: TabScreen<TabScreenName.Messages> = () => {
   const dispatch = useAppDispatch();
-  const [isActive, setIsActive] = useState(false);
+  const { language } = useAppSelector(state => state.common);
   const imagePickerRef = useRef<ImagePickerMethods | null>(null);
   const [image, setImage] = useState<Image[]>([]);
+
+  const handleActive = (value: boolean) => {
+    dispatch(commonActions.changeLanguage(value ? 'en-US' : 'vi-VN'));
+  };
 
   useBackHandler(BackHandler => {
     BackHandler.exitApp();
     return false;
   });
 
-  useEffect(() => {
-    dispatch(commonActions.changeLanguage(isActive ? 'en-US' : 'vi-VN'));
-  }, [isActive, dispatch]);
-
   return (
     <View style={globalStyles.flexCenter}>
-      <Switch value={isActive} onChange={setIsActive} />
+      <Switch value={language === 'en-US'} onChange={handleActive} />
       <Button title="common.cancel" onPress={() => imagePickerRef.current?.pick()} />
       <ImagePicker ref={imagePickerRef} onChangeImage={setImage} images={image} />
     </View>

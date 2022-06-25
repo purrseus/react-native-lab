@@ -1,7 +1,4 @@
-export interface CommonSize {
-  width: number;
-  height: number;
-}
+import { CommonSize } from '@core/types';
 
 export interface Measure extends CommonSize {
   x: number;

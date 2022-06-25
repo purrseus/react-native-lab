@@ -1,7 +1,9 @@
+import { DEFAULT_BACKDROP_OPACITY } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
+import { CommonSize } from '@core/types';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 import RNModal, { ModalProps as RNModalProps } from 'react-native-modal';
 
@@ -16,16 +18,25 @@ type AnimationType = Record<
   Pick<ModalProps, 'animationIn' | 'animationOut'>
 >;
 
-const DEFAULT_BACKDROP_OPACITY = 0.2;
-
 const animationType: AnimationType = {
   modal: { animationIn: 'fadeIn', animationOut: 'fadeOut' },
   bottomSheet: { animationIn: 'slideInUp', animationOut: 'slideOutDown' },
 };
 
 const Modal = compareMemo<ModalProps>(({ type = 'modal', style, ...props }) => {
-  const { width, height } = Dimensions.get('screen');
   const styles = useStyle(createStyles);
+  const [dimensions, setDimensions] = useState<CommonSize>({
+    width: Dimensions.get('screen').width,
+    height: Dimensions.get('screen').height,
+  });
+
+  useEffect(() => {
+    const subscription = Dimensions.addEventListener('change', ({ screen }) => {
+      setDimensions({ width: screen.width, height: screen.height });
+    });
+
+    return () => subscription.remove();
+  }, []);
 
   return (
     <RNModal
@@ -34,8 +45,8 @@ const Modal = compareMemo<ModalProps>(({ type = 'modal', style, ...props }) => {
       {...props}
       avoidKeyboard
       statusBarTranslucent
-      deviceWidth={width}
-      deviceHeight={height}
+      deviceWidth={dimensions.width}
+      deviceHeight={dimensions.height}
       style={[styles.common, styles[type], style]}
     />
   );

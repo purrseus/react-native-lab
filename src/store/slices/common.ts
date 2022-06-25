@@ -40,7 +40,10 @@ const commonSlice = createSlice({
     },
   },
   extraReducers: {
-    [REHYDRATE]: (_, { payload }: PayloadAction<Partial<Omit<CommonState, 'isLoading'>>>) => {
+    [REHYDRATE]: (
+      _,
+      { payload }: PayloadAction<Partial<Omit<CommonState, 'isLoading'>> | undefined>,
+    ) => {
       if (payload?.language) {
         i18n.changeLanguage(payload.language);
       }
