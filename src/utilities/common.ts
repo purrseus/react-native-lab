@@ -1,8 +1,7 @@
 /* eslint-disable react-native/split-platform-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ONE_SECOND } from '@core/constants';
-import { CommonSize } from '@core/interfaces';
-import { Language } from '@core/types';
+import { CommonSize, Language } from '@core/types';
 import { FC, ForwardRefExoticComponent, memo } from 'react';
 import isEqual from 'react-fast-compare';
 import { ColorValue, Insets, ShadowStyleIOS, ViewStyle } from 'react-native';

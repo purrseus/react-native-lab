@@ -131,7 +131,7 @@ const createStyles = ({ colors, create }: StyleCallbackParams) =>
     rootContainer: {
       ...StyleSheet.absoluteFillObject,
       top: undefined,
-      ...createShadow(colors.shadow, [0, 0], 0.2, 10, 20),
+      ...createShadow(colors.shadow, [0, 0], 0.1, 10, 20),
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
       backgroundColor: colors.tabBarBackground,

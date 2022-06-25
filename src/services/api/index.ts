@@ -51,15 +51,12 @@ export const setAccessToken = (accessToken: string | null) => {
 
 axiosInstance.interceptors.request.use(
   requestConfig => {
-    const { accessToken } = store.getState().auth;
-    setAccessToken(accessToken || null);
-    if (requestConfig.headers) {
-      !accessToken
-        ? delete requestConfig.headers.Authorization
-        : (requestConfig.headers.Authorization = `Bearer ${accessToken}`);
-    }
-
-    axiosLogger('requestConfig', requestConfig);
+    axiosLogger('requestConfig', {
+      method: requestConfig.method,
+      url: requestConfig.url,
+      headers: requestConfig.headers,
+      data: requestConfig.data,
+    });
 
     return requestConfig;
   },
@@ -73,14 +70,21 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   response => {
     axiosLogger('response', {
+      method: response.config.method,
+      url: response.config.url,
       status: response.status,
-      statusText: response.statusText,
+      data: response.data,
     });
 
     return response.data;
   },
   async responseError => {
-    axiosLogger('responseError', responseError);
+    axiosLogger('responseError', {
+      method: responseError.config.method,
+      url: responseError.config.url,
+      status: responseError.status,
+      config: responseError.config,
+    });
 
     const originalRequest: OriginalRequest = responseError?.config;
 
@@ -89,6 +93,16 @@ axiosInstance.interceptors.response.use(
     const isUnauthorized = responseError?.response?.status === UNAUTHORIZED_STATUS;
 
     if (isUnauthorized && !!originalRequest?.headers) {
+      // Use accessToken from global state if originalRequest.headers.Authorization is undefined
+      if (!originalRequest.headers.Authorization) {
+        const { accessToken } = store.getState().auth;
+        if (accessToken) {
+          setAccessToken(accessToken);
+          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+          return axiosInstance(originalRequest);
+        }
+      }
+
       // Handle requests while refreshing accessToken
       if (isTokenRefreshing) {
         try {
@@ -112,9 +126,9 @@ axiosInstance.interceptors.response.use(
 
         if (accessToken) {
           setAccessToken(accessToken);
-          handlePromiseQueue(accessToken);
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
+          handlePromiseQueue(accessToken);
           return axiosInstance(originalRequest);
         }
       } catch (error) {

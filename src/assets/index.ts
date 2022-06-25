@@ -3,10 +3,11 @@ import viVN from './locales/vi-VN.json';
 
 type FontName = 'Quicksand';
 type FontStyle = 'Light' | 'Regular' | 'Medium' | 'SemiBold' | 'Bold';
-type FontFamily = `${FontName}-${FontStyle}`;
-type FontKey = Uncapitalize<`${FontName}${FontStyle}`>;
+type Font<Name extends FontName, Style extends FontStyle> = Readonly<
+  Record<Uncapitalize<`${Name}${Style}`>, `${Name}-${Style}`>
+>;
 
-export const fonts: Readonly<Record<FontKey, FontFamily>> = {
+export const fonts: Font<FontName, FontStyle> = {
   quicksandLight: 'Quicksand-Light',
   quicksandRegular: 'Quicksand-Regular',
   quicksandMedium: 'Quicksand-Medium',
@@ -15,7 +16,7 @@ export const fonts: Readonly<Record<FontKey, FontFamily>> = {
 };
 
 export const icons = {
-  // Tab icons
+  /* ================ BottomTabBar icons ================ */
   home: require('@assets/icons/tabs/home/home.png'),
   message: require('@assets/icons/tabs/messages/message.png'),
   notification: require('@assets/icons/tabs/notification/notification.png'),
