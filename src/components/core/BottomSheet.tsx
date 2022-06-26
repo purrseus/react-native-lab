@@ -18,8 +18,8 @@ interface BottomSheetProps
   hasHandle?: boolean;
 }
 
-const BottomSheet = compareMemo(
-  forwardRef<BottomSheetMethods, BottomSheetProps>(
+const BottomSheet = compareMemo<BottomSheetMethods, BottomSheetProps>(
+  forwardRef(
     (
       {
         backdropOpacity = DEFAULT_BACKDROP_OPACITY,

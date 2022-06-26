@@ -16,8 +16,8 @@ interface InfiniteListProps
   config?: InfiniteScrollConfig;
 }
 
-const InfiniteList = compareMemo(
-  forwardRef<FlatList, InfiniteListProps>(({ requestCallback, config, ...props }, ref) => {
+const InfiniteList = compareMemo<FlatList, InfiniteListProps>(
+  forwardRef(({ requestCallback, config, ...props }, ref) => {
     const styles = useStyle(createStyles);
     const { canLoadMore, fetching, onLoadMore, ...listProps } = useInfiniteScroll(
       requestCallback,

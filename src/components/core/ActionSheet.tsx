@@ -38,192 +38,187 @@ const ACTION_SHEET_ANIMATION_IN_TIMING = ONE_SECOND / 3;
 const ACTION_SHEET_ANIMATION_OUT_TIMING = ACTION_SHEET_ANIMATION_IN_TIMING * 2;
 const DEFAULT_MARGIN = 8;
 
-const ActionSheet = compareMemo(
-  forwardRef<ActionSheetMethods, ActionSheetProps>(
-    ({ onSelect, cancelButtonIndex = 0, tintColor, title, message, ...props }, ref) => {
-      const colors = useColor();
-      const { t } = useTranslation();
-      const styles = useStyle(createStyles);
-      const { theme } = useAppSelector(state => state.common);
-      const colorScheme = useColorScheme();
-      const [isVisible, setIsVisible] = useState(false);
+const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
+  forwardRef(({ onSelect, cancelButtonIndex = 0, tintColor, title, message, ...props }, ref) => {
+    const colors = useColor();
+    const { t } = useTranslation();
+    const styles = useStyle(createStyles);
+    const { theme } = useAppSelector(state => state.common);
+    const colorScheme = useColorScheme();
+    const [isVisible, setIsVisible] = useState(false);
 
-      const options = useMemo(
-        () => props.options.filter((_, index) => index !== cancelButtonIndex),
-        [cancelButtonIndex, props.options],
-      );
+    const options = useMemo(
+      () => props.options.filter((_, index) => index !== cancelButtonIndex),
+      [cancelButtonIndex, props.options],
+    );
 
-      const onShow = useCallback(() => {
-        if (isIos()) {
-          // TODO: Add dismissActionSheet method to ActionSheetIOS
-          ActionSheetIOS.showActionSheetWithOptions(
-            {
-              ...props,
-              title: title ? (t(title) as string) : undefined,
-              message: message ? (t(message) as string) : undefined,
-              options: props.options.map<string>(t),
-              userInterfaceStyle: theme === 'auto' ? colorScheme || 'light' : theme,
-              tintColor: tintColor || colors.primaryText,
-              cancelButtonIndex,
-            },
-            onSelect,
-          );
-          return;
-        }
+    const onShow = useCallback(() => {
+      if (isIos()) {
+        // TODO: Add dismissActionSheet method to ActionSheetIOS
+        ActionSheetIOS.showActionSheetWithOptions(
+          {
+            ...props,
+            title: title ? (t(title) as string) : undefined,
+            message: message ? (t(message) as string) : undefined,
+            options: props.options.map<string>(t),
+            userInterfaceStyle: theme === 'auto' ? colorScheme || 'light' : theme,
+            tintColor: tintColor || colors.primaryText,
+            cancelButtonIndex,
+          },
+          onSelect,
+        );
+        return;
+      }
 
-        setIsVisible(true);
-      }, [
-        cancelButtonIndex,
-        colorScheme,
-        colors.primaryText,
-        message,
-        onSelect,
-        props,
-        t,
-        theme,
-        tintColor,
-        title,
-      ]);
+      setIsVisible(true);
+    }, [
+      cancelButtonIndex,
+      colorScheme,
+      colors.primaryText,
+      message,
+      onSelect,
+      props,
+      t,
+      theme,
+      tintColor,
+      title,
+    ]);
 
-      const onHide = useCallback(
-        async (buttonIndex = cancelButtonIndex) => {
-          if (isIos()) return;
-          setIsVisible(false);
-          await wait(ACTION_SHEET_ANIMATION_IN_TIMING);
-          onSelect(buttonIndex);
-        },
-        [cancelButtonIndex, onSelect],
-      );
+    const onHide = useCallback(
+      async (buttonIndex = cancelButtonIndex) => {
+        if (isIos()) return;
+        setIsVisible(false);
+        await wait(ACTION_SHEET_ANIMATION_IN_TIMING);
+        onSelect(buttonIndex);
+      },
+      [cancelButtonIndex, onSelect],
+    );
 
-      const handleSelectOption = useCallback(
-        (buttonIndex: number, isCancel?: boolean) => async () => {
-          await onHide(
-            buttonIndex === cancelButtonIndex && isCancel
-              ? cancelButtonIndex
-              : props.options.indexOf(options[buttonIndex]),
-          );
-        },
-        [cancelButtonIndex, onHide, options, props.options],
-      );
+    const handleSelectOption = useCallback(
+      (buttonIndex: number, isCancel?: boolean) => async () => {
+        await onHide(
+          buttonIndex === cancelButtonIndex && isCancel
+            ? cancelButtonIndex
+            : props.options.indexOf(options[buttonIndex]),
+        );
+      },
+      [cancelButtonIndex, onHide, options, props.options],
+    );
 
-      useImperativeHandle(
-        ref,
-        () => ({
-          show: onShow,
-          hide: onHide,
-        }),
-        [onShow, onHide],
-      );
+    useImperativeHandle(
+      ref,
+      () => ({
+        show: onShow,
+        hide: onHide,
+      }),
+      [onShow, onHide],
+    );
 
-      const ItemSeparatorComponent = useCallback(
-        () => <Divider height={1 / 3} color={styles.divider.color} />,
-        [styles.divider.color],
-      );
+    const ItemSeparatorComponent = useCallback(
+      () => <Divider height={1 / 3} color={styles.divider.color} />,
+      [styles.divider.color],
+    );
 
-      const ListHeaderComponent = useMemo(
-        () =>
-          !!title || !!message ? (
-            <View>
-              <View style={styles.header}>
-                {!!title && (
-                  <Text style={[styles.headerText, !!message && styles.boldedTitle]}>
-                    {t(title) as string}
-                  </Text>
-                )}
-                {!!title && !!message && <Spacer h4 />}
-                {!!message && (
-                  <Text style={[styles.headerText, !title && styles.boldedTitle]}>
-                    {t(message) as string}
-                  </Text>
-                )}
-                {!!title && !!message && <Spacer h8 />}
-              </View>
-
-              <Divider height={0.5} color={styles.divider.color} />
-            </View>
-          ) : null,
-        [
-          message,
-          styles.boldedTitle,
-          styles.divider.color,
-          styles.header,
-          styles.headerText,
-          t,
-          title,
-        ],
-      );
-
-      const renderOptionItem: ListRenderItem<I18nText> = useCallback(
-        ({ item, index }) => (
-          <Touchable onPress={handleSelectOption(index)} style={styles.option}>
-            <Text
-              adjustsFontSizeToFit
-              numberOfLines={1}
-              ellipsizeMode="middle"
-              style={[
-                styles.optionTitle,
-                !!tintColor && { color: tintColor as ColorValue },
-                typeof props.destructiveButtonIndex === 'number' &&
-                  props.destructiveButtonIndex === props.options.indexOf(options[index]) &&
-                  styles.destructiveTitle,
-              ]}
-            >
-              {t(item) as string}
-            </Text>
-          </Touchable>
-        ),
-        [
-          options,
-          handleSelectOption,
-          props.destructiveButtonIndex,
-          props.options,
-          t,
-          tintColor,
-          styles.destructiveTitle,
-          styles.option,
-          styles.optionTitle,
-        ],
-      );
-
-      if (isIos()) return null;
-      return (
-        <Modal
-          type="bottomSheet"
-          isVisible={isVisible}
-          animationInTiming={ACTION_SHEET_ANIMATION_IN_TIMING}
-          animationOutTiming={ACTION_SHEET_ANIMATION_OUT_TIMING}
-          onBackdropPress={() => onHide()}
-        >
-          <View style={styles.container}>
-            <ListView
-              data={options}
-              scrollEnabled={false}
-              renderItem={renderOptionItem}
-              style={styles.optionContainer}
-              {...{ ListHeaderComponent, ItemSeparatorComponent }}
-            />
-            <Spacer height={DEFAULT_MARGIN} />
-            <View style={styles.optionContainer}>
-              <Touchable
-                onPress={handleSelectOption(cancelButtonIndex, true)}
-                style={styles.option}
-              >
-                <Text
-                  style={[
-                    styles.optionTitle,
-                    styles.cancelTitle,
-                    !!tintColor && { color: tintColor as ColorValue },
-                  ]}
-                >
-                  {t(props.options[cancelButtonIndex]) as string}
+    const ListHeaderComponent = useMemo(
+      () =>
+        !!title || !!message ? (
+          <View>
+            <View style={styles.header}>
+              {!!title && (
+                <Text style={[styles.headerText, !!message && styles.boldedTitle]}>
+                  {t(title) as string}
                 </Text>
-              </Touchable>
+              )}
+              {!!title && !!message && <Spacer h4 />}
+              {!!message && (
+                <Text style={[styles.headerText, !title && styles.boldedTitle]}>
+                  {t(message) as string}
+                </Text>
+              )}
+              {!!title && !!message && <Spacer h8 />}
             </View>
+
+            <Divider height={0.5} color={styles.divider.color} />
           </View>
-        </Modal>
-      );
-    },
-  ),
+        ) : null,
+      [
+        message,
+        styles.boldedTitle,
+        styles.divider.color,
+        styles.header,
+        styles.headerText,
+        t,
+        title,
+      ],
+    );
+
+    const renderOptionItem: ListRenderItem<I18nText> = useCallback(
+      ({ item, index }) => (
+        <Touchable onPress={handleSelectOption(index)} style={styles.option}>
+          <Text
+            adjustsFontSizeToFit
+            numberOfLines={1}
+            ellipsizeMode="middle"
+            style={[
+              styles.optionTitle,
+              !!tintColor && { color: tintColor as ColorValue },
+              typeof props.destructiveButtonIndex === 'number' &&
+                props.destructiveButtonIndex === props.options.indexOf(options[index]) &&
+                styles.destructiveTitle,
+            ]}
+          >
+            {t(item) as string}
+          </Text>
+        </Touchable>
+      ),
+      [
+        options,
+        handleSelectOption,
+        props.destructiveButtonIndex,
+        props.options,
+        t,
+        tintColor,
+        styles.destructiveTitle,
+        styles.option,
+        styles.optionTitle,
+      ],
+    );
+
+    if (isIos()) return null;
+    return (
+      <Modal
+        type="bottomSheet"
+        isVisible={isVisible}
+        animationInTiming={ACTION_SHEET_ANIMATION_IN_TIMING}
+        animationOutTiming={ACTION_SHEET_ANIMATION_OUT_TIMING}
+        onBackdropPress={() => onHide()}
+      >
+        <View style={styles.container}>
+          <ListView
+            data={options}
+            scrollEnabled={false}
+            renderItem={renderOptionItem}
+            style={styles.optionContainer}
+            {...{ ListHeaderComponent, ItemSeparatorComponent }}
+          />
+          <Spacer height={DEFAULT_MARGIN} />
+          <View style={styles.optionContainer}>
+            <Touchable onPress={handleSelectOption(cancelButtonIndex, true)} style={styles.option}>
+              <Text
+                style={[
+                  styles.optionTitle,
+                  styles.cancelTitle,
+                  !!tintColor && { color: tintColor as ColorValue },
+                ]}
+              >
+                {t(props.options[cancelButtonIndex]) as string}
+              </Text>
+            </Touchable>
+          </View>
+        </View>
+      </Modal>
+    );
+  }),
 );
 
 const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackParams) =>

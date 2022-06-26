@@ -2,7 +2,7 @@ import { DEFAULT_FONT_SIZE } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
-import React, { FC } from 'react';
+import React from 'react';
 import { Text as RNText, TextProps as RNTextProps } from 'react-native';
 import Touchable, { TouchableProps } from './Touchable';
 
@@ -13,7 +13,7 @@ export interface TextProps
 const Text = compareMemo<TextProps>(({ style, onPress, hitSlop = 8, wait, ...props }) => {
   const styles = useStyle(createStyles);
 
-  const TextComponent: FC = () => (
+  const TextComponent = () => (
     <RNText allowFontScaling={false} {...props} style={[styles.text, style]} />
   );
 

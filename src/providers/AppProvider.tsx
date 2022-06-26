@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import React, { PropsWithChildren } from 'react';
 import NavigationProvider from './NavigationProvider';
 import StoreProvider from './StoreProvider';
 import UIProvider from './UIProvider';
 
-const AppProvider: FC = ({ children }) => {
+const AppProvider = ({ children }: PropsWithChildren) => {
   return (
     <StoreProvider>
       <NavigationProvider>
