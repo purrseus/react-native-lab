@@ -1,11 +1,11 @@
-const inquirer = require('inquirer');
-const {
+import inquirer from 'inquirer';
+import {
   createBuildQuestionCollections,
   execSyncInherit,
   uncapitalized,
   platformBuildTypes,
   commands,
-} = require('./utils');
+} from './utils.mjs';
 
 const buildVariantPrefix = {
   APK: 'assemble',

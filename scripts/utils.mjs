@@ -1,23 +1,23 @@
-const { execSync } = require('child_process');
+import { execSync } from 'child_process';
 
-const PLACEHOLDER_NAME = 'ReactNativeLab';
+export const PLACEHOLDER_NAME = 'ReactNativeLab';
 
-const execSyncInherit = command => execSync(command, { stdio: 'inherit' });
+export const execSyncInherit = command => execSync(command, { stdio: 'inherit' });
 
-const uncapitalized = text =>
+export const uncapitalized = text =>
   typeof text !== 'string' || !text.length ? '' : `${text[0].toLowerCase()}${text.slice(1)}`;
 
-const platformBuildTypes = {
+export const platformBuildTypes = {
   android: ['APK', 'ABB'],
   ios: ['Archive'],
 };
 
-const platformName = {
+export const platformName = {
   android: 'Android',
   ios: 'iOS',
 };
 
-const createBuildQuestionCollections = platform => [
+export const createBuildQuestionCollections = platform => [
   {
     type: 'list',
     name: 'env',
@@ -32,7 +32,7 @@ const createBuildQuestionCollections = platform => [
   },
 ];
 
-const commands = {
+export const commands = {
   runAndroid: (buildVariant, suffixAppId) =>
     `yarn react-native run-android --variant ${buildVariant} --appId com.${PLACEHOLDER_NAME.toLowerCase()}${suffixAppId}`,
 
@@ -43,13 +43,4 @@ const commands = {
     `ENVFILE=environments/.env.${env} yarn react-native run-ios --configuration ${buildType} --scheme '${PLACEHOLDER_NAME} (${envShort})'`,
 
   openXcode: () => `echo 'Opening Xcode... 🔨' && open ios/${PLACEHOLDER_NAME}.xcworkspace`,
-};
-
-module.exports = {
-  PLACEHOLDER_NAME,
-  platformBuildTypes,
-  commands,
-  execSyncInherit,
-  uncapitalized,
-  createBuildQuestionCollections,
 };

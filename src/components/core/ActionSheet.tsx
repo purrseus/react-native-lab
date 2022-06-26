@@ -55,6 +55,7 @@ const ActionSheet = compareMemo(
 
       const onShow = useCallback(() => {
         if (isIos()) {
+          // TODO: Add dismissActionSheet method to ActionSheetIOS
           ActionSheetIOS.showActionSheetWithOptions(
             {
               ...props,
@@ -126,13 +127,13 @@ const ActionSheet = compareMemo(
               <View style={styles.header}>
                 {!!title && (
                   <Text style={[styles.headerText, !!message && styles.boldedTitle]}>
-                    {t(title)}
+                    {t(title) as string}
                   </Text>
                 )}
                 {!!title && !!message && <Spacer h4 />}
                 {!!message && (
                   <Text style={[styles.headerText, !title && styles.boldedTitle]}>
-                    {t(message)}
+                    {t(message) as string}
                   </Text>
                 )}
                 {!!title && !!message && <Spacer h8 />}
@@ -167,7 +168,7 @@ const ActionSheet = compareMemo(
                   styles.destructiveTitle,
               ]}
             >
-              {t(item)}
+              {t(item) as string}
             </Text>
           </Touchable>
         ),
@@ -214,7 +215,7 @@ const ActionSheet = compareMemo(
                     !!tintColor && { color: tintColor as ColorValue },
                   ]}
                 >
-                  {t(props.options[cancelButtonIndex])}
+                  {t(props.options[cancelButtonIndex]) as string}
                 </Text>
               </Touchable>
             </View>

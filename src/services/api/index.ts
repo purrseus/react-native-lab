@@ -31,7 +31,6 @@ const handlePromiseQueue = async (accessToken?: string, error?: any) => {
 
 let isTokenRefreshing = false;
 
-// TODO: remake logger
 const axiosLogger = (key: string, message: Parameters<typeof logger>[0]) => {
   if (LOGGER_ENABLED) {
     logger(`[Axios] ${key} ${referenceTypeFormatter(message)}`);
