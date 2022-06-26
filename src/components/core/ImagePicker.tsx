@@ -56,8 +56,8 @@ const selectOptions = {
   [PickerOptions.IMAGE_LIBRARY]: launchImageLibrary,
 };
 
-const ImagePicker = compareMemo(
-  forwardRef<ImagePickerMethods, ImagePickerProps>(
+const ImagePicker = compareMemo<ImagePickerMethods, ImagePickerProps>(
+  forwardRef(
     (
       {
         images,

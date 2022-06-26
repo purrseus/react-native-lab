@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ONE_SECOND } from '@core/constants';
 import { CommonSize, Language } from '@core/types';
-import { FC, ForwardRefExoticComponent, memo } from 'react';
+import { ForwardRefExoticComponent, memo, PropsWithoutRef, RefAttributes } from 'react';
 import isEqual from 'react-fast-compare';
 import { ColorValue, Insets, ShadowStyleIOS, ViewStyle } from 'react-native';
 import { getLocales } from 'react-native-localize';
@@ -14,8 +14,11 @@ export const randomColor = (): ColorValue => `#${Math.random().toString(16).slic
 export const alphaHexColor = (hexColor: string, opacity: number) =>
   `${hexColor}${`${(Math.min(Math.max(opacity, 0), 1) * 255).toString(16)}0`.slice(0, 2)}`;
 
-export const compareMemo = <T>(Component: T extends ForwardRefExoticComponent<any> ? T : FC<T>) =>
-  memo(Component, isEqual);
+export const compareMemo = <T, P = undefined>(
+  Component: P extends undefined
+    ? (props: T) => JSX.Element
+    : ForwardRefExoticComponent<PropsWithoutRef<P> & RefAttributes<T>>,
+) => memo(Component, isEqual);
 
 export const wait = (timeout = ONE_SECOND) =>
   new Promise<void>(resolve => setTimeout(resolve, timeout));

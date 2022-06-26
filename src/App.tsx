@@ -1,8 +1,8 @@
 import RootNavigator from '@navigation';
 import AppProvider from '@providers';
-import React, { FC } from 'react';
+import React from 'react';
 
-const App: FC = () => (
+const App = () => (
   <AppProvider>
     <RootNavigator />
   </AppProvider>

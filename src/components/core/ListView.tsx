@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { compareMemo } from '@utilities';
 import React, { forwardRef } from 'react';
-import { FlatList, FlatListProps, RefreshControlProps, View } from 'react-native';
+import { FlatList, FlatListProps, RefreshControlProps } from 'react-native';
 import BottomTabSpacer from './BottomTabSpacer';
 import RefreshControl from './RefreshControl';
 
@@ -11,8 +11,8 @@ export interface ListViewProps<T = any>
   isTabScreen?: boolean;
 }
 
-const ListView = compareMemo(
-  forwardRef<FlatList, ListViewProps>(
+const ListView = compareMemo<FlatList, ListViewProps>(
+  forwardRef(
     (
       { refreshing = false, onRefresh, ListFooterComponent, isTabScreen = false, ...props },
       ref,
@@ -38,10 +38,10 @@ const ListView = compareMemo(
           ref={ref}
           keyExtractor={handleKeyExtractor}
           ListFooterComponent={
-            <View>
+            <>
               {ListFooterComponent}
               {isTabScreen && <BottomTabSpacer />}
-            </View>
+            </>
           }
         />
       );

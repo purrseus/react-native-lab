@@ -11,8 +11,8 @@ interface TextInputProps extends RNTextInputProps {
   placeholder?: I18nText;
 }
 
-const TextInput = compareMemo(
-  forwardRef<RNTextInput, TextInputProps>(({ placeholder, style, ...props }, ref) => {
+const TextInput = compareMemo<RNTextInput, TextInputProps>(
+  forwardRef(({ placeholder, style, ...props }, ref) => {
     const { t } = useTranslation();
     const styles = useStyle(createStyle);
 

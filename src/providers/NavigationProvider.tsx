@@ -1,8 +1,8 @@
 import { navigationRef } from '@navigation';
 import { NavigationContainer } from '@react-navigation/native';
-import React, { FC } from 'react';
+import React, { PropsWithChildren } from 'react';
 
-const NavigationProvider: FC = ({ children }) => {
+const NavigationProvider = ({ children }: PropsWithChildren) => {
   return <NavigationContainer ref={navigationRef}>{children}</NavigationContainer>;
 };
 
