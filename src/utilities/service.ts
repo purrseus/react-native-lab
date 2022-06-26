@@ -10,6 +10,7 @@ type FormDataObject = Record<
 const FILE_PREFIX = 'file://';
 const FILE_KEYS: (keyof File)[] = ['uri', 'name', 'type'];
 
+// TODO: test array FromData
 export const createFormData = (data: FormDataObject): FormData => {
   const formData = new FormData();
   const arrayData = Object.entries(data);

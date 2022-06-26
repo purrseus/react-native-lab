@@ -9,8 +9,7 @@ import Animated, {
   interpolateColor,
   useAnimatedStyle,
   useSharedValue,
-  withSpring,
-  WithSpringConfig,
+  withTiming,
 } from 'react-native-reanimated';
 import ActivityIndicator from './ActivityIndicator';
 import Touchable from './Touchable';
@@ -29,7 +28,6 @@ interface SwitchProps {
 const TRACK_WIDTH = 52;
 const TRACK_HEIGHT = 32;
 const THUMB_SIZE = TRACK_HEIGHT;
-const THUMB_SPRING: WithSpringConfig = { damping: 8, mass: 0.4 };
 const INPUT_RANGE: ReadonlyArray<number> = [0, 1];
 
 const AnimatedTouchable = Animated.createAnimatedComponent(Touchable);
@@ -77,8 +75,8 @@ const Switch = compareMemo<SwitchProps>(
     }, [disabled, value]);
 
     const handleChangeValue = () => {
+      statusAnimated.value = withTiming(+!value);
       onChange(!value);
-      statusAnimated.value = withSpring(+!value, THUMB_SPRING);
     };
 
     return (

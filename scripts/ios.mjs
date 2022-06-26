@@ -1,11 +1,11 @@
-const inquirer = require('inquirer');
-const {
+import inquirer from 'inquirer';
+import {
   createBuildQuestionCollections,
   execSyncInherit,
   platformBuildTypes,
   commands,
   uncapitalized,
-} = require('./utils');
+} from './utils.mjs';
 
 const environment = {
   Development: 'dev',
