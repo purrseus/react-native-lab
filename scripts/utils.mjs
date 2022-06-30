@@ -13,8 +13,8 @@ export const platformBuildTypes = {
 };
 
 export const platformName = {
-  android: 'Android',
-  ios: 'iOS',
+  android: '🤖 Android',
+  ios: '🍎 iOS',
 };
 
 export const createBuildQuestionCollections = platform => [
@@ -42,5 +42,5 @@ export const commands = {
   runIos: (env, buildType, envShort) =>
     `ENVFILE=environments/.env.${env} yarn react-native run-ios --configuration ${buildType} --scheme '${PLACEHOLDER_NAME} (${envShort})'`,
 
-  openXcode: () => `echo 'Opening Xcode... 🔨' && open ios/${PLACEHOLDER_NAME}.xcworkspace`,
+  openXcode: () => `echo '\nOpening Xcode... 🔨\n' && open ios/${PLACEHOLDER_NAME}.xcworkspace`,
 };
