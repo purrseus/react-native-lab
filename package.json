@@ -6,7 +6,7 @@
   "scripts": {
     "android": "node scripts/android.mjs",
     "ios": "node scripts/ios.mjs",
-    "start": "watchman watch-del-all && react-native start --reset-cache",
+    "start": "react-native start --reset-cache",
     "xcode": "node scripts/ios.mjs xcode",
     "lint": "eslint \"{src,scripts,__tests__}/**/*.{ts,tsx,js,jsx}\" --fix",
     "format": "prettier --check \"{src,scripts,__tests__}/**/*.{ts,tsx,js,jsx,svg}\" --write",

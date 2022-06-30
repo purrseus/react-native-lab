@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { File } from '@core/interfaces';
 import { platformSelect } from './os';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 type FormDataObject = Record<
   string,
   string | number | boolean | Record<string, any> | File | File[]
