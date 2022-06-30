@@ -4,12 +4,12 @@ import { ONE_SECOND } from '@core/constants';
 import { CommonSize, Language } from '@core/types';
 import { ForwardRefExoticComponent, memo, PropsWithoutRef, RefAttributes } from 'react';
 import isEqual from 'react-fast-compare';
-import { ColorValue, Insets, ShadowStyleIOS, ViewStyle } from 'react-native';
+import { Insets, ShadowStyleIOS, ViewStyle } from 'react-native';
 import { getLocales } from 'react-native-localize';
 
 export const currentTimeStamp = () => +new Date();
 
-export const randomColor = (): ColorValue => `#${Math.random().toString(16).slice(-6)}`;
+export const randomColor = () => `#${Math.random().toString(16).slice(-6)}`;
 
 export const alphaHexColor = (hexColor: string, opacity: number) =>
   `${hexColor}${`${(Math.min(Math.max(opacity, 0), 1) * 255).toString(16)}0`.slice(0, 2)}`;
