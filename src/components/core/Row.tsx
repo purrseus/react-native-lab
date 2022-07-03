@@ -3,7 +3,9 @@ import { compareMemo } from '@utilities';
 import React from 'react';
 import { View, ViewProps } from 'react-native';
 
-type RowProps = ViewProps & { reverse?: boolean };
+interface RowProps extends ViewProps {
+  reverse?: boolean;
+}
 
 const Row = compareMemo<RowProps>(({ reverse = false, style, ...props }) => (
   <View {...props} style={[style, { flexDirection: reverse ? 'row-reverse' : 'row' }]} />

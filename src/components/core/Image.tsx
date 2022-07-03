@@ -1,5 +1,6 @@
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
+import { compareMemo } from '@utilities';
 import React from 'react';
 import {
   AccessibilityProps,
@@ -42,9 +43,9 @@ interface CommonImageProps<C extends boolean>
   cached?: C;
 }
 
-export type ImageProps<C extends boolean> = CommonImageProps<C> & AdditionalImageProps<C>;
+export type ImageProps<C extends boolean = false> = CommonImageProps<C> & AdditionalImageProps<C>;
 
-function Image<C extends boolean = false>({ style, cached, ...props }: ImageProps<C>) {
+const _Image = ({ style, cached, ...props }: ImageProps) => {
   const isLocalImage = typeof props.source === 'number';
   const styles = useStyle(createStyles);
 
@@ -60,7 +61,7 @@ function Image<C extends boolean = false>({ style, cached, ...props }: ImageProp
       style={[styles.image, style as StyleProp<ImageStyle>]}
     />
   );
-}
+};
 
 const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
@@ -68,5 +69,9 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
       backgroundColor: colors.backgroundImage,
     },
   });
+
+const Image = compareMemo<ImageProps>(_Image) as <T extends boolean>(
+  props: ImageProps<T>,
+) => JSX.Element;
 
 export default Image;

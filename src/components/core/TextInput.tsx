@@ -7,7 +7,7 @@ import React, { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TextInput as RNTextInput, TextInputProps as RNTextInputProps } from 'react-native';
 
-interface TextInputProps extends RNTextInputProps {
+export interface TextInputProps extends RNTextInputProps {
   placeholder?: I18nText;
 }
 
@@ -35,7 +35,7 @@ const createStyle = ({ create, colors, fonts }: StyleCallbackParams) =>
     input: {
       color: colors.primaryText,
       fontSize: DEFAULT_FONT_SIZE,
-      fontFamily: fonts.quicksandRegular,
+      fontFamily: fonts.quicksandMedium,
     },
     placeholder: {
       color: colors.lightGray,
