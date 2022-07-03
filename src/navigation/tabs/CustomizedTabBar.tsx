@@ -121,7 +121,7 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
         })}
       </Row>
 
-      <BottomTabSpacer bottomBarHeight={0} />
+      <BottomTabSpacer heightOffset={0} />
     </AnimatedSafeAreaView>
   );
 };

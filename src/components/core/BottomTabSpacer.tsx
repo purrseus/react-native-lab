@@ -5,13 +5,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Spacer from './Spacer';
 
 interface BottomTabSpacerProps {
-  bottomBarHeight?: number;
+  heightOffset?: number;
 }
 
-const BottomTabSpacer = compareMemo<BottomTabSpacerProps>(({ bottomBarHeight }) => {
+const BottomTabSpacer = compareMemo<BottomTabSpacerProps>(({ heightOffset }) => {
   const { bottom } = useSafeAreaInsets();
 
-  return <Spacer height={bottom / 2 + (bottomBarHeight ?? TAB_BAR_HEIGHT)} />;
+  return <Spacer height={bottom / 2 + (heightOffset ?? TAB_BAR_HEIGHT)} />;
 });
 
 export default BottomTabSpacer;
