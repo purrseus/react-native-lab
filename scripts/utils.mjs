@@ -1,11 +1,14 @@
 import { execSync } from 'child_process';
+import { readFileSync } from 'fs';
+import path from 'path';
 
 export const PLACEHOLDER_NAME = 'ReactNativeLab';
+const APP_CENTER_OWNER_NAME = '';
 
-export const execSyncInherit = command => execSync(command, { stdio: 'inherit' });
-
-export const uncapitalized = text =>
-  typeof text !== 'string' || !text.length ? '' : `${text[0].toLowerCase()}${text.slice(1)}`;
+const appCenterAppName = {
+  '🤖 Android': 'Android app name',
+  '🍎 iOS': 'iOS app name',
+};
 
 export const platformBuildTypes = {
   android: ['APK', 'ABB'],
@@ -17,12 +20,19 @@ export const platformName = {
   ios: '🍎 iOS',
 };
 
+export const envs = ['Development', 'Staging', 'Production'];
+
+export const execSyncInherit = command => execSync(command, { stdio: 'inherit' });
+
+export const uncapitalized = text =>
+  typeof text !== 'string' || !text.length ? '' : `${text[0].toLowerCase()}${text.slice(1)}`;
+
 export const createBuildQuestionCollections = platform => [
   {
     type: 'list',
     name: 'env',
     message: `[${platformName[platform]}] Select the environment you want to use:`,
-    choices: ['Development', 'Staging', 'Production'],
+    choices: envs,
   },
   {
     type: 'list',
@@ -43,4 +53,26 @@ export const commands = {
     `ENVFILE=environments/.env.${env} yarn react-native run-ios --configuration ${buildType} --scheme '${PLACEHOLDER_NAME} (${envShort})'`,
 
   openXcode: () => `echo '\nOpening Xcode... 🔨\n' && open ios/${PLACEHOLDER_NAME}.xcworkspace`,
+
+  codePush: (os, env, version) =>
+    `appcenter codepush release-react -a ${APP_CENTER_OWNER_NAME}/${appCenterAppName[os]} -d ${env} -t ${version}`,
+};
+
+export const loadEnvFile = envSuffix => {
+  const env = readFileSync(path.join(`environments/.env.${envSuffix}`), 'utf8');
+
+  return Object.fromEntries(
+    env
+      .split('\n')
+      .filter(line => !!line.length && !line.startsWith('#'))
+      .map(line => {
+        const firstEqualIndex = line.indexOf('=');
+        if (firstEqualIndex < 0) throw new Error('[env] Syntax error! ❌❌❌');
+
+        return [
+          line.slice(0, firstEqualIndex),
+          line.slice(firstEqualIndex + 1).replace(/(^"|"$)/g, ''),
+        ];
+      }),
+  );
 };

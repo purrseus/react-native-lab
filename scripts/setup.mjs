@@ -1,17 +1,17 @@
 import { writeFileSync } from 'fs';
-import { execSyncInherit } from './utils.mjs';
+import { execSyncInherit, loadEnvFile } from './utils.mjs';
 
-const androidAppSecret = '';
-const iosAppSecret = '';
+// Same value in all environments
+const { ANDROID_APP_SECRET_KEY, IOS_APP_SECRET_KEY } = loadEnvFile('development');
 
-const json = JSON.stringify({ app_secret: androidAppSecret }, null, 2);
+const json = JSON.stringify({ app_secret: ANDROID_APP_SECRET_KEY }, null, 2);
 
 const plist = `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
     <key>AppSecret</key>
-    <string>${iosAppSecret}</string>
+    <string>${IOS_APP_SECRET_KEY}</string>
   </dict>
 </plist>
 `;
