@@ -253,12 +253,10 @@ android {
         development {
             dimension "environment"
             applicationIdSuffix ".dev"
-            versionNameSuffix "-dev"
         }
         staging {
             dimension "environment"
             applicationIdSuffix ".stag"
-            versionNameSuffix "-stag"
         }
         production {
             dimension "environment"

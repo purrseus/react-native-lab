@@ -9,9 +9,10 @@
     "ios": "node scripts/ios.mjs",
     "start": "react-native start --reset-cache",
     "xcode": "node scripts/ios.mjs xcode",
-    "lint": "eslint \"{src,scripts,__tests__}/**/*.{ts,tsx,js,jsx}\" --fix",
-    "format": "prettier --check \"{src,scripts,__tests__}/**/*.{ts,tsx,js,jsx,svg}\" --write",
-    "cm": "cz",
+    "code-push": "node scripts/code-push.mjs",
+    "lint": "eslint \"{src,scripts,__tests__}/**/*.{ts,tsx,js,mjs,jsx}\" --fix",
+    "format": "prettier --check \"{src,scripts,__tests__}/**/*.{ts,tsx,js,mjs,jsx,svg}\" --write",
+    "commit": "cz",
     "postinstall": "patch-package && pod-install",
     "prepare": "husky install",
     "test": "jest"
