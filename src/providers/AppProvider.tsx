@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from 'react';
+import CodePush from 'react-native-code-push';
 import NavigationProvider from './NavigationProvider';
 import StoreProvider from './StoreProvider';
 import UIProvider from './UIProvider';
@@ -13,4 +14,4 @@ const AppProvider = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default AppProvider;
+export default __DEV__ ? AppProvider : CodePush(AppProvider);

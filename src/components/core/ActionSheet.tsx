@@ -47,10 +47,11 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
     const colorScheme = useColorScheme();
     const [isVisible, setIsVisible] = useState(false);
 
-    const options = useMemo(
-      () => props.options.filter((_, index) => index !== cancelButtonIndex),
-      [cancelButtonIndex, props.options],
-    );
+    const options = useMemo(() => {
+      const clonedOptions = [...props.options];
+      clonedOptions.splice(cancelButtonIndex, 1);
+      return clonedOptions;
+    }, [cancelButtonIndex, props.options]);
 
     const onShow = useCallback(() => {
       if (isIos()) {
