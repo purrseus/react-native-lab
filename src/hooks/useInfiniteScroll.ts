@@ -7,8 +7,9 @@ import {
 } from '@core/interfaces';
 import { deepAccessObject, logger } from '@utilities';
 import { AxiosRequestConfig } from 'axios';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import isEqual from 'react-fast-compare';
+import { useImmer } from 'use-immer';
 
 interface InfiniteScrollRef<Params> {
   isFirstCall: boolean;
@@ -36,23 +37,19 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
   }: InfiniteScrollConfig = {},
 ): UseInfiniteScrollReturn => {
   const controller = useRef(new AbortController()).current;
+
   const infiniteScrollRef = useRef<InfiniteScrollRef<InfiniteScrollConfig['params']>>({
     isFirstCall: true,
     paramsRef: params,
     pageIndex: 1,
   }).current;
-  const [infiniteScroll, setInfiniteScroll] = useState<InfiniteScroll<D | never[]>>({
+
+  const [infiniteScroll, updateInfiniteScroll] = useImmer<InfiniteScroll<D>>({
     fetching: true,
     refreshing: false,
     canLoadMore: true,
-    data: [],
+    data: [] as unknown as D,
   });
-
-  const setState = useCallback(
-    (partialState: Partial<InfiniteScroll<D | never[]>>) =>
-      setInfiniteScroll(previousState => ({ ...previousState, ...partialState })),
-    [],
-  );
 
   const handleRequest = useCallback(async () => {
     try {
@@ -68,52 +65,66 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
       const responseData = deepAccessObject<T, D>(response, accessProperties);
 
       if (!Array.isArray(responseData)) return [];
-      if (responseData.length < pageSize) setState({ canLoadMore: false });
+
+      if (responseData.length < pageSize)
+        updateInfiniteScroll(draft => (draft.canLoadMore = false));
+
       if (infiniteScrollRef.isFirstCall) {
-        setState({ data: responseData });
+        updateInfiniteScroll(draft => {
+          draft.data.length = 0;
+          draft.data.concat(responseData);
+        });
       }
 
       return responseData;
     } catch (error) {
       logger(error);
     } finally {
-      setState({ fetching: false });
+      updateInfiniteScroll(draft => (draft.fetching = false));
       infiniteScrollRef.isFirstCall = false;
     }
-  }, [setState, accessProperties, controller.signal, pageSize, requestCallback]);
+  }, [accessProperties, controller.signal, pageSize, requestCallback]);
 
   const onRefresh = useCallback(async () => {
     try {
       infiniteScrollRef.pageIndex = 1;
-      setState({ canLoadMore: true, refreshing: true });
+
+      updateInfiniteScroll(draft => {
+        draft.canLoadMore = true;
+        draft.refreshing = true;
+      });
+
       const responseData = await handleRequest();
-      if (Array.isArray(responseData)) {
-        setState({ data: responseData });
-      }
+
+      if (Array.isArray(responseData))
+        updateInfiniteScroll(draft => {
+          draft.data.length = 0;
+          draft.data.concat(responseData);
+        });
     } catch (error) {
       logger(error);
     } finally {
-      setState({ refreshing: false });
+      updateInfiniteScroll(draft => (draft.fetching = false));
     }
-  }, [handleRequest, setState]);
+  }, [handleRequest]);
 
   const onLoadMore = useCallback(async () => {
     if (!infiniteScroll.canLoadMore) return;
+
     try {
       infiniteScrollRef.pageIndex += 1;
       const responseData = await handleRequest();
-      if (Array.isArray(responseData)) {
-        setInfiniteScroll(previousState => ({
-          ...previousState,
-          data: [...previousState.data, ...responseData] as D,
-        }));
-      }
+
+      if (Array.isArray(responseData))
+        updateInfiniteScroll(draft => {
+          draft.data.concat(responseData);
+        });
     } catch (error) {
       logger(error);
     }
   }, [handleRequest, infiniteScroll.canLoadMore]);
 
-  const cancelRequest = useCallback(() => controller.abort(), []);
+  const cancelRequest = useCallback(controller.abort, []);
 
   useEffect(() => {
     handleRequest();

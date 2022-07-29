@@ -1,9 +1,9 @@
-export enum UnAuthScreenName {
+export enum UnprotectedScreenName {
   Login = 'Login',
   Register = 'Register',
 }
 
-export enum AuthScreenName {
+export enum ProtectedScreenName {
   BottomTab = 'BottomTab',
   Categories = 'Categories',
   Settings = 'Settings',

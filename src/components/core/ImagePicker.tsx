@@ -156,9 +156,7 @@ const ImagePicker = compareMemo<ImagePickerMethods, ImagePickerProps>(
 
           const canDeleteImage = !!images.length && deleteIndex >= 0 && deleteIndex < images.length;
           if (canDeleteImage) {
-            const clonedImages = [...images];
-            clonedImages.splice(deleteIndex, 1);
-            onChangeImage(clonedImages);
+            onChangeImage(images.filter((_, i) => i !== deleteIndex));
           }
         },
         [images, onChangeImage],

@@ -1,9 +1,9 @@
-import { AuthScreenName, TabScreenName, UnAuthScreenName } from '@core/enums';
+import { ProtectedScreenName, TabScreenName, UnprotectedScreenName } from '@core/enums';
 import { NavigatorScreenParams } from '@react-navigation/native';
 
-export type UnAuthParamList = {
-  [UnAuthScreenName.Login]: undefined;
-  [UnAuthScreenName.Register]: undefined;
+export type UnprotectedParamList = {
+  [UnprotectedScreenName.Login]: undefined;
+  [UnprotectedScreenName.Register]: undefined;
 };
 
 export type BottomTabParamList = {
@@ -13,10 +13,10 @@ export type BottomTabParamList = {
   [TabScreenName.Profile]: undefined;
 };
 
-export type AuthParamList = {
-  [AuthScreenName.BottomTab]: NavigatorScreenParams<BottomTabParamList>;
-  [AuthScreenName.Categories]: undefined;
-  [AuthScreenName.Settings]: undefined;
+export type ProtectedParamList = {
+  [ProtectedScreenName.BottomTab]: NavigatorScreenParams<BottomTabParamList>;
+  [ProtectedScreenName.Categories]: undefined;
+  [ProtectedScreenName.Settings]: undefined;
 };
 
-export type RootStackParamList = UnAuthParamList & AuthParamList;
+export type RootStackParamList = UnprotectedParamList & ProtectedParamList;

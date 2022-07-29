@@ -1,20 +1,20 @@
-import { AuthScreenName, TabScreenName, UnAuthScreenName } from '@core/enums';
+import { ProtectedScreenName, TabScreenName, UnprotectedScreenName } from '@core/enums';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AuthParamList, BottomTabParamList, UnAuthParamList } from './navigation';
+import { BottomTabParamList, ProtectedParamList, UnprotectedParamList } from './navigation';
 
-export type AuthScreen<Name extends AuthScreenName> = (
-  props: NativeStackScreenProps<AuthParamList, Name>,
+export type ProtectedScreen<Name extends ProtectedScreenName> = (
+  props: NativeStackScreenProps<ProtectedParamList, Name>,
 ) => JSX.Element;
 
-export type UnAuthScreen<Name extends UnAuthScreenName> = (
-  props: NativeStackScreenProps<UnAuthParamList, Name>,
+export type UnprotectedScreen<Name extends UnprotectedScreenName> = (
+  props: NativeStackScreenProps<UnprotectedParamList, Name>,
 ) => JSX.Element;
 
 export type TabScreen<Name extends TabScreenName> = (
   props: CompositeScreenProps<
     BottomTabScreenProps<BottomTabParamList, Name>,
-    NativeStackScreenProps<AuthParamList>
+    NativeStackScreenProps<ProtectedParamList>
   >,
 ) => JSX.Element;
