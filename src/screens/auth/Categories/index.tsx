@@ -1,10 +1,10 @@
-import { AuthScreenName } from '@core/enums';
-import { AuthScreen } from '@core/types';
+import { ProtectedScreenName } from '@core/enums';
+import { ProtectedScreen } from '@core/types';
 import { globalStyles } from '@themes';
 import React from 'react';
 import { Button, Text, View } from 'react-native';
 
-const Categories: AuthScreen<AuthScreenName.Categories> = ({ navigation }) => {
+const Categories: ProtectedScreen<ProtectedScreenName.Categories> = ({ navigation }) => {
   return (
     <View style={globalStyles.flexCenter}>
       <Text>Categories</Text>

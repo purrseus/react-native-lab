@@ -10,11 +10,14 @@ const Login = () => {
 
   return (
     <View style={globalStyles.flexCenter}>
-      <Text>Login</Text>
       <Touchable
-        onPress={() => dispatch(authActions.setToken({ accessToken: 'adsd', refreshToken: 'asd' }))}
+        onPress={() =>
+          dispatch(
+            authActions.setToken({ accessToken: 'accessToken', refreshToken: 'refreshToken' }),
+          )
+        }
       >
-        <Text>asdsdad</Text>
+        <Text>Login</Text>
       </Touchable>
     </View>
   );

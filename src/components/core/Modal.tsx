@@ -18,6 +18,8 @@ type AnimationType = Record<
   Pick<ModalProps, 'animationIn' | 'animationOut'>
 >;
 
+const { width, height } = Dimensions.get('screen');
+
 const animationType: AnimationType = {
   modal: { animationIn: 'fadeIn', animationOut: 'fadeOut' },
   bottomSheet: { animationIn: 'slideInUp', animationOut: 'slideOutDown' },
@@ -25,17 +27,14 @@ const animationType: AnimationType = {
 
 const Modal = compareMemo<ModalProps>(({ type = 'modal', style, ...props }) => {
   const styles = useStyle(createStyles);
-  const [dimensions, setDimensions] = useState<CommonSize>({
-    width: Dimensions.get('screen').width,
-    height: Dimensions.get('screen').height,
-  });
+  const [dimensions, setDimensions] = useState<CommonSize>({ width, height });
 
   useEffect(() => {
     const subscription = Dimensions.addEventListener('change', ({ screen }) => {
       setDimensions({ width: screen.width, height: screen.height });
     });
 
-    return () => subscription.remove();
+    return subscription.remove;
   }, []);
 
   return (

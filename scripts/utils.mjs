@@ -3,11 +3,11 @@ import { readFileSync } from 'fs';
 import path from 'path';
 
 export const PLACEHOLDER_NAME = 'ReactNativeLab';
-const APP_CENTER_OWNER_NAME = '';
+const APP_CENTER_OWNER_NAME = '<Your_owner_name>';
 
 const appCenterAppName = {
-  '🤖 Android': 'Android app name',
-  '🍎 iOS': 'iOS app name',
+  '🤖 Android': '<Your_Android_app_name>',
+  '🍎 iOS': '<Your_iOS_app_name>',
 };
 
 export const platformBuildTypes = {
@@ -67,7 +67,7 @@ export const loadEnvFile = envSuffix => {
       .filter(line => !!line.length && !line.startsWith('#'))
       .map(line => {
         const firstEqualIndex = line.indexOf('=');
-        if (firstEqualIndex < 0) throw new Error('[env] Syntax error! ❌❌❌');
+        if (firstEqualIndex < 0) throw new Error(`.env.${envSuffix} Syntax error! ❌❌❌`);
 
         return [
           line.slice(0, firstEqualIndex),

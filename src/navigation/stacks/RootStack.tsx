@@ -1,4 +1,4 @@
-import { AuthScreenName, UnAuthScreenName } from '@core/enums';
+import { ProtectedScreenName, UnprotectedScreenName } from '@core/enums';
 import { RootStackParamList } from '@core/types';
 import { useAppSelector, useStyle } from '@hooks';
 import { stackScreenOptions } from '@navigation/options';
@@ -11,18 +11,18 @@ import React from 'react';
 
 const NativeStack = createNativeStackNavigator<RootStackParamList>();
 
-const UnAuthScreens = (
+const UnprotectedScreens = (
   <NativeStack.Group>
-    <NativeStack.Screen name={UnAuthScreenName.Login} component={Login} />
-    <NativeStack.Screen name={UnAuthScreenName.Register} component={Register} />
+    <NativeStack.Screen name={UnprotectedScreenName.Login} component={Login} />
+    <NativeStack.Screen name={UnprotectedScreenName.Register} component={Register} />
   </NativeStack.Group>
 );
 
-const AuthScreens = (
+const ProtectedScreens = (
   <NativeStack.Group>
-    <NativeStack.Screen name={AuthScreenName.BottomTab} component={BottomTabBar} />
-    <NativeStack.Screen name={AuthScreenName.Categories} component={Categories} />
-    <NativeStack.Screen name={AuthScreenName.Settings} component={Settings} />
+    <NativeStack.Screen name={ProtectedScreenName.BottomTab} component={BottomTabBar} />
+    <NativeStack.Screen name={ProtectedScreenName.Categories} component={Categories} />
+    <NativeStack.Screen name={ProtectedScreenName.Settings} component={Settings} />
   </NativeStack.Group>
 );
 
@@ -34,9 +34,11 @@ const RootNavigator = () => {
   return (
     <NativeStack.Navigator
       screenOptions={{ ...stackScreenOptions, contentStyle: styles.screenStyle }}
-      initialRouteName={isAuthenticated ? UnAuthScreenName.Login : AuthScreenName.BottomTab}
+      initialRouteName={
+        isAuthenticated ? UnprotectedScreenName.Login : ProtectedScreenName.BottomTab
+      }
     >
-      {isAuthenticated ? AuthScreens : UnAuthScreens}
+      {isAuthenticated ? ProtectedScreens : UnprotectedScreens}
     </NativeStack.Navigator>
   );
 };

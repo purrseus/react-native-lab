@@ -31,9 +31,9 @@ const handlePromiseQueue = async (accessToken?: string, error?: any) => {
 
 let isTokenRefreshing = false;
 
-const axiosLogger = (key: string, message: Parameters<typeof logger>[0]) => {
+const apiLogger = (key: string, message: Parameters<typeof logger>[0]) => {
   if (LOGGER_ENABLED) {
-    logger(`[Axios] ${key} ${referenceTypeFormatter(message)}`);
+    logger(`[API] ${key} ${referenceTypeFormatter(message)}`);
   }
 };
 
@@ -50,7 +50,7 @@ export const setAccessToken = (accessToken: string | null) => {
 
 axiosInstance.interceptors.request.use(
   requestConfig => {
-    axiosLogger('requestConfig', {
+    apiLogger('requestConfig', {
       method: requestConfig.method,
       url: requestConfig.url,
       headers: requestConfig.headers,
@@ -60,7 +60,7 @@ axiosInstance.interceptors.request.use(
     return requestConfig;
   },
   requestError => {
-    axiosLogger('requestError', { requestError });
+    apiLogger('requestError', { requestError });
 
     return Promise.reject(requestError);
   },
@@ -68,7 +68,7 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   response => {
-    axiosLogger('response', {
+    apiLogger('response', {
       method: response.config.method,
       url: response.config.url,
       status: response.status,
@@ -78,7 +78,7 @@ axiosInstance.interceptors.response.use(
     return response.data;
   },
   async responseError => {
-    axiosLogger('responseError', {
+    apiLogger('responseError', {
       method: responseError.config.method,
       url: responseError.config.url,
       status: responseError.status,
