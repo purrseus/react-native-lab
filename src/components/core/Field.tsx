@@ -1,9 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { compareMemo } from '@utilities';
-import React, { ForwardedRef, forwardRef, RefAttributes, useMemo } from 'react';
+import React, {
+  ForwardedRef,
+  forwardRef,
+  RefAttributes,
+  RefCallback,
+  useCallback,
+  useMemo,
+} from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { TextInput as RNTextInput } from 'react-native';
 import TextInput, { TextInputProps } from './TextInput';
+
+// [ ] Add error message under cpn
+// [ ] Focus ref for other cpn
 
 type FieldType = 'textInput';
 
@@ -28,7 +38,6 @@ const _Field = ({ type, name, ...props }: Props, ref: ForwardedRef<FieldRef[type
   const { control } = useFormContext();
   const {
     field: { onChange, value, ref: controllerRef },
-    fieldState: { error },
   } = useController({ name, control });
 
   const fieldProps = useMemo<Omit<Props, 'type'>>(
@@ -40,11 +49,19 @@ const _Field = ({ type, name, ...props }: Props, ref: ForwardedRef<FieldRef[type
     [onChange, type, value, name],
   );
 
+  const refCallback = useCallback<RefCallback<FieldRef[typeof type]>>(
+    instance => {
+      if (ref) 'current' in ref ? (ref.current = instance) : ref(instance);
+      controllerRef(instance);
+    },
+    [controllerRef, ref],
+  );
+
   const FieldComponent = useMemo<
     (p: Omit<Props, 'type'> & RefAttributes<FieldRef[typeof type]>) => JSX.Element
   >(() => Components[type], [type]);
 
-  return <FieldComponent {...props} {...fieldProps} ref={error ? controllerRef : ref} />;
+  return <FieldComponent {...props} {...fieldProps} ref={refCallback} />;
 };
 
 const Field = compareMemo<any, Props>(forwardRef(_Field)) as <
