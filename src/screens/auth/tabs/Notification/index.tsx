@@ -30,7 +30,7 @@ const Notification = () => {
 
   return (
     <View style={globalStyles.flexFill}>
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView style={{ paddingHorizontal: 16 }}>
         <FormProvider {...form}>
           <Spacer h40 />
           <Field<Form> name="name" type="textInput" style={{ borderWidth: 1 }} />

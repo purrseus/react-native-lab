@@ -132,7 +132,7 @@ const Button = compareMemo<ButtonProps>(
 
 const createStyles =
   (customColor?: ColorValue) =>
-  ({ create, colors }: StyleCallbackParams) =>
+  ({ create, colors, fonts }: StyleCallbackParams) =>
     create({
       container: {
         flexDirection: 'row',
@@ -164,7 +164,7 @@ const createStyles =
         color: customColor || colors.primary,
       },
       title: {
-        fontWeight: 'bold',
+        fontFamily: fonts.quicksandBold,
         maxWidth: '80%',
       },
     });
