@@ -222,7 +222,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
   }),
 );
 
-const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackParams) =>
+const createStyles = ({ create, colors, edgeInsets, dimensions, fonts }: StyleCallbackParams) =>
   create({
     container: {
       alignSelf: 'center',
@@ -243,7 +243,7 @@ const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackP
       color: alphaHexColor(colors.darkGray, 0.8),
     },
     boldedTitle: {
-      fontWeight: 'bold',
+      fontFamily: fonts.quicksandBold,
     },
     option: {
       alignItems: 'center',
@@ -256,7 +256,7 @@ const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackP
       color: colors.red,
     },
     cancelTitle: {
-      fontWeight: 'bold',
+      fontFamily: fonts.quicksandBold,
     },
     divider: {
       color: alphaHexColor(colors.darkGray, 0.5),

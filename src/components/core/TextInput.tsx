@@ -33,6 +33,8 @@ const TextInput = compareMemo<RNTextInput, TextInputProps>(
 const createStyle = ({ create, colors, fonts }: StyleCallbackParams) =>
   create({
     input: {
+      paddingVertical: 0,
+      paddingHorizontal: 0,
       color: colors.primaryText,
       fontSize: DEFAULT_FONT_SIZE,
       fontFamily: fonts.quicksandMedium,

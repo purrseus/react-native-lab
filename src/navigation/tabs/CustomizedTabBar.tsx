@@ -126,7 +126,7 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
   );
 };
 
-const createStyles = ({ colors, create }: StyleCallbackParams) =>
+const createStyles = ({ colors, create, fonts }: StyleCallbackParams) =>
   create({
     rootContainer: {
       ...StyleSheet.absoluteFillObject,
@@ -149,7 +149,7 @@ const createStyles = ({ colors, create }: StyleCallbackParams) =>
       color: colors.tabBlur,
     },
     focusedLabel: {
-      fontWeight: 'bold',
+      fontFamily: fonts.quicksandBold,
     },
   });
 
