@@ -37,7 +37,7 @@ const Home: TabScreen<TabScreenName.Home> = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 16,
     // backgroundColor: 'grey',
   },
   contentContainer: {

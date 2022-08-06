@@ -109,7 +109,7 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
               <Icon
                 size={24}
                 source={isFocused ? focusedIcon : icon}
-                tintColor={isFocused ? (focusedColor as string) : styles.icon.tintColor}
+                style={[styles.icon, isFocused && { tintColor: focusedColor as string }]}
               />
               <Spacer h4 />
               <LocalizedText
