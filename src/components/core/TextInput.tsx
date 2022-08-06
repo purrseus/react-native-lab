@@ -37,6 +37,7 @@ const createStyle = ({ create, colors, fonts }: StyleCallbackParams) =>
       paddingHorizontal: 0,
       color: colors.primaryText,
       fontSize: DEFAULT_FONT_SIZE,
+      height: DEFAULT_FONT_SIZE + 6,
       fontFamily: fonts.quicksandMedium,
     },
     placeholder: {

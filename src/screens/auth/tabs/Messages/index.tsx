@@ -2,7 +2,7 @@ import { Button, ImagePicker, Switch } from '@components/core';
 import { Image, ImagePickerMethods } from '@components/core/ImagePicker';
 import { TabScreenName } from '@core/enums';
 import { TabScreen } from '@core/types';
-import { useAppDispatch, useAppSelector, useBackHandler } from '@hooks';
+import { useAppDispatch, useAppSelector, useBackHandler, useNotFirstTime } from '@hooks';
 import { commonActions } from '@store/slices/common';
 import { globalStyles } from '@themes';
 import React, { useRef, useState } from 'react';
@@ -22,6 +22,11 @@ const Messages: TabScreen<TabScreenName.Messages> = () => {
     BackHandler.exitApp();
     return false;
   });
+
+  useNotFirstTime(() => {
+    console.log('alo');
+    return () => console.log('clean');
+  }, [language]);
 
   return (
     <View style={globalStyles.flexCenter}>
