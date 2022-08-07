@@ -1,4 +1,4 @@
-import Alert, { AlertButton } from '@components/core/Alert';
+import Alert, { AlertButton } from '@components/core/modals/Alert';
 import { I18nText } from '@core/types';
 import {
   check,

@@ -6,7 +6,7 @@ import { compareMemo } from '@utilities';
 import { AxiosRequestConfig } from 'axios';
 import React, { ForwardedRef, forwardRef, RefAttributes } from 'react';
 import { FlatList, RefreshControlProps, View } from 'react-native';
-import ActivityIndicator from './ActivityIndicator';
+import ActivityIndicator from '../loaders/ActivityIndicator';
 import ListView, { ListViewProps } from './ListView';
 
 interface InfiniteListProps<T = any>

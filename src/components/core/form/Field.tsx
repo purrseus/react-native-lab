@@ -10,43 +10,43 @@ import React, {
 } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { TextInput as RNTextInput } from 'react-native';
-import TextInput, { TextInputProps } from './TextInput';
+import TextField, { TextFieldProps } from './TextField';
 
-// [ ] Add error message under cpn
-// [ ] Focus ref for other cpn
-
-type FieldType = 'textInput';
+type FieldType = 'text';
 
 type FieldProps = {
-  textInput: TextInputProps;
+  text: TextFieldProps;
 };
 
 type FieldRef = {
-  textInput: RNTextInput;
+  text: RNTextInput;
 };
 
-type Props<F extends Record<string, any> = {}, T extends FieldType = 'textInput'> = {
+type Props<F extends Record<string, any> = {}, T extends FieldType = 'text'> = {
   type: T;
   name: keyof F;
 } & FieldProps[T];
 
 const Components: Record<FieldType, any> = {
-  textInput: TextInput,
+  text: TextField,
 };
 
 const _Field = ({ type, name, ...props }: Props, ref: ForwardedRef<FieldRef[typeof type]>) => {
   const { control } = useFormContext();
+
   const {
     field: { onChange, value, ref: controllerRef },
+    formState: { errors },
   } = useController({ name, control });
 
   const fieldProps = useMemo<Omit<Props, 'type'>>(
     () => ({
-      [type === 'textInput' ? 'onChangeText' : 'onChange']: onChange,
+      [type === 'text' ? 'onChangeText' : 'onChange']: onChange,
+      errorText: (errors[name] as any)?.message,
       value,
       name,
     }),
-    [onChange, type, value, name],
+    [onChange, type, value, name, errors],
   );
 
   const refCallback = useCallback<RefCallback<FieldRef[typeof type]>>(
@@ -66,7 +66,7 @@ const _Field = ({ type, name, ...props }: Props, ref: ForwardedRef<FieldRef[type
 
 const Field = compareMemo<any, Props>(forwardRef(_Field)) as <
   F extends Record<string, any> = {},
-  T extends FieldType = 'textInput',
+  T extends FieldType = 'text',
 >(
   props: Props<F, T> & RefAttributes<FieldRef[T]>,
 ) => JSX.Element;
