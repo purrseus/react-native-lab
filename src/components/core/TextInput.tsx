@@ -41,7 +41,7 @@ const createStyle = ({ create, colors, fonts }: StyleCallbackParams) =>
       fontFamily: fonts.quicksandMedium,
     },
     placeholder: {
-      color: colors.lightGray,
+      color: colors.darkGray,
     },
     selection: {
       color: colors.primary,

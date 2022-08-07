@@ -14,12 +14,12 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import Divider from './Divider';
-import ListView from './ListView';
-import Modal from './Modal';
-import Spacer from './Spacer';
-import Text from './Text';
-import Touchable from './Touchable';
+import Touchable from '../buttons/Touchable';
+import Divider from '../Divider';
+import ListView from '../lists/ListView';
+import Modal from '../modals/Modal';
+import Spacer from '../spacers/Spacer';
+import Text from '../texts/Text';
 
 export interface ActionSheetMethods {
   show: () => void;

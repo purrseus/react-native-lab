@@ -26,6 +26,7 @@ const Notification = () => {
       [],
     ),
   );
+
   const { handleSubmit } = form;
 
   return (
@@ -33,9 +34,19 @@ const Notification = () => {
       <KeyboardAwareScrollView style={{ paddingHorizontal: 16 }}>
         <FormProvider {...form}>
           <Spacer h40 />
-          <Field<Form> name="name" type="textInput" style={{ borderWidth: 1 }} />
+          <Field<Form>
+            name="name"
+            label="common.cancel"
+            placeholder="imagePicker.chooseFromLibrary"
+            type="text"
+          />
           <Spacer h40 />
-          <Field<Form> name="password" type="textInput" style={{ borderWidth: 1 }} />
+          <Field<Form>
+            name="password"
+            label="common.cancel"
+            placeholder="imagePicker.chooseFromLibrary"
+            type="text"
+          />
           <Spacer h800 />
           <Button title="common.cancel" onPress={handleSubmit(values => console.log(values))} />
         </FormProvider>

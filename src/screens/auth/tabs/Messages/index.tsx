@@ -1,5 +1,5 @@
 import { Button, ImagePicker, Switch } from '@components/core';
-import { Image, ImagePickerMethods } from '@components/core/ImagePicker';
+import { Image, ImagePickerMethods } from '@components/core/bottom-sheets/ImagePicker';
 import { TabScreenName } from '@core/enums';
 import { TabScreen } from '@core/types';
 import { useAppDispatch, useAppSelector, useBackHandler, useNotFirstTime } from '@hooks';

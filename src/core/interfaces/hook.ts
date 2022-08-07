@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { fonts } from '@assets';
-import { ListViewProps } from '@components/core/ListView';
+import { ListViewProps } from '@components/core/lists/ListView';
 import { darkTheme, lightTheme } from '@themes';
 import { ScaledSize, StyleSheet } from 'react-native';
 import { EdgeInsets } from 'react-native-safe-area-context';

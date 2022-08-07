@@ -6,7 +6,7 @@ import { alphaHexColor, compareMemo } from '@utilities';
 import React, { useCallback } from 'react';
 import { View } from 'react-native';
 import ActivityIndicator from './ActivityIndicator';
-import Modal, { ModalProps } from './Modal';
+import Modal, { ModalProps } from '../modals/Modal';
 
 const OverlayLoading = compareMemo<Partial<Pick<ModalProps, 'isVisible'>>>(({ isVisible }) => {
   const { isLoading, toggleLoading } = useLoading();

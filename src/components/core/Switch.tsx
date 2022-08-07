@@ -11,8 +11,8 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import ActivityIndicator from './ActivityIndicator';
-import Touchable from './Touchable';
+import ActivityIndicator from './loaders/ActivityIndicator';
+import Touchable from './buttons/Touchable';
 
 interface SwitchProps {
   value: boolean;

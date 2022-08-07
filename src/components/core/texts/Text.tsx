@@ -4,7 +4,7 @@ import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
 import React from 'react';
 import { Text as RNText, TextProps as RNTextProps } from 'react-native';
-import Touchable, { TouchableProps } from './Touchable';
+import Touchable, { TouchableProps } from '../buttons/Touchable';
 
 export interface TextProps
   extends RNTextProps,
