@@ -1,10 +1,10 @@
 import { TabScreenName } from '@core/enums';
 import { BottomTabParamList } from '@core/types';
+import { Home, Messages, Notification, Profile } from '@features/tab/screens';
 import { useStyle } from '@hooks';
 import { tabScreenOptions } from '@navigation/options';
 import createStyles from '@navigation/styles';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home, Messages, Notification, Profile } from '@screens/auth/tabs';
 import React from 'react';
 import CustomizedTabBar from './CustomizedTabBar';
 

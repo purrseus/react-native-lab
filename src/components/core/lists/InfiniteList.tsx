@@ -30,7 +30,7 @@ const _InfiniteList = (
 
   if (fetching)
     return (
-      <View style={globalStyles.flexCenter}>
+      <View style={globalStyles.flexFillCenter}>
         <ActivityIndicator size="large" />
       </View>
     );

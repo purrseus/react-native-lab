@@ -5,8 +5,6 @@ export enum UnprotectedScreenName {
 
 export enum ProtectedScreenName {
   BottomTab = 'BottomTab',
-  Categories = 'Categories',
-  Settings = 'Settings',
 }
 
 export enum TabScreenName {

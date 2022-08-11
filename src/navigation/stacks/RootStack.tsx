@@ -1,12 +1,11 @@
 import { ProtectedScreenName, UnprotectedScreenName } from '@core/enums';
 import { RootStackParamList } from '@core/types';
+import { Login, Register } from '@features/authentication/screens';
 import { useAppSelector, useStyle } from '@hooks';
 import { stackScreenOptions } from '@navigation/options';
 import createStyles from '@navigation/styles';
 import BottomTabBar from '@navigation/tabs/BottomTabBar';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Categories, Settings } from '@screens/auth';
-import { Login, Register } from '@screens/un-auth';
 import React from 'react';
 
 const NativeStack = createNativeStackNavigator<RootStackParamList>();
@@ -21,8 +20,6 @@ const UnprotectedScreens = (
 const ProtectedScreens = (
   <NativeStack.Group>
     <NativeStack.Screen name={ProtectedScreenName.BottomTab} component={BottomTabBar} />
-    <NativeStack.Screen name={ProtectedScreenName.Categories} component={Categories} />
-    <NativeStack.Screen name={ProtectedScreenName.Settings} component={Settings} />
   </NativeStack.Group>
 );
 

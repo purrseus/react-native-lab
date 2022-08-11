@@ -104,7 +104,7 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
               testID={options.tabBarTestID}
               onPress={onPress}
               onLongPress={onLongPress}
-              style={globalStyles.flexCenter}
+              style={globalStyles.flexFillCenter}
             >
               <Icon
                 size={24}

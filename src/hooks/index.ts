@@ -13,6 +13,5 @@ export { default as useKeyboard } from './useKeyboard';
 export { default as useLayout } from './useLayout';
 export { default as useLoading } from './useLoading';
 export { default as useMeasure } from './useMeasure';
-export { default as useNotFirstTime } from './useNotFirstTime';
 export { default as useStyle } from './useStyle';
 export { default as useThrottle } from './useThrottle';
