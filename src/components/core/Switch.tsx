@@ -128,7 +128,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
       height: THUMB_SIZE,
     },
     thumb: {
-      ...globalStyles.flexCenter,
+      ...globalStyles.flexFillCenter,
       borderRadius: 100,
       ...createShadow(colors.shadow, [0, 4], 0.4, 4, 8),
     },
