@@ -130,13 +130,13 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
                   {t(title) as string}
                 </Text>
               )}
-              {!!title && !!message && <Spacer h4 />}
+              {!!title && !!message && <Spacer h={4} />}
               {!!message && (
                 <Text style={[styles.headerText, !title && styles.boldedTitle]}>
                   {t(message) as string}
                 </Text>
               )}
-              {!!title && !!message && <Spacer h8 />}
+              {!!title && !!message && <Spacer h={4} />}
             </View>
 
             <Divider height={0.5} color={styles.divider.color} />
@@ -202,7 +202,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
             style={styles.optionContainer}
             {...{ ListHeaderComponent, ItemSeparatorComponent }}
           />
-          <Spacer height={DEFAULT_MARGIN} />
+          <Spacer h={DEFAULT_MARGIN} />
           <View style={styles.optionContainer}>
             <Touchable onPress={handleSelectOption(cancelButtonIndex, true)} style={styles.option}>
               <Text

@@ -17,7 +17,7 @@ const Touchable = compareMemo<TouchableOpacity, TouchableProps>(
 
     return (
       <TouchableOpacity
-        activeOpacity={0.5}
+        activeOpacity={0.8}
         {...props}
         ref={ref}
         hitSlop={hitSlop ? createHitSlop(hitSlop) : undefined}

@@ -34,7 +34,7 @@ const Modal = compareMemo<ModalProps>(({ type = 'modal', style, ...props }) => {
       setDimensions({ width: screen.width, height: screen.height });
     });
 
-    return subscription.remove;
+    return () => subscription.remove();
   }, []);
 
   return (

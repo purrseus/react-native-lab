@@ -15,7 +15,7 @@ const Login: UnprotectedScreen<UnprotectedScreenName.Login> = props => {
         <Text>Login</Text>
       </Touchable>
 
-      <Spacer h32 />
+      <Spacer h={32} />
 
       <Touchable onPress={loginContainer.navigateToRegister}>
         <Text>Go to Register</Text>

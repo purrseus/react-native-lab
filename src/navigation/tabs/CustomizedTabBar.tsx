@@ -22,26 +22,26 @@ interface TabUI {
 
 const tabUI: Record<TabScreenName, TabUI> = {
   [TabScreenName.Home]: {
-    icon: icons.home,
-    focusedIcon: icons.homeFocused,
+    icon: icons.bottomTab.home,
+    focusedIcon: icons.bottomTab.homeFocused,
     focusedColor: Colors.purple,
     label: 'tab.home',
   },
   [TabScreenName.Messages]: {
-    icon: icons.message,
-    focusedIcon: icons.messageFocused,
+    icon: icons.bottomTab.message,
+    focusedIcon: icons.bottomTab.messageFocused,
     focusedColor: Colors.orange,
     label: 'tab.messages',
   },
   [TabScreenName.Notification]: {
-    icon: icons.notification,
-    focusedIcon: icons.notificationFocused,
+    icon: icons.bottomTab.notification,
+    focusedIcon: icons.bottomTab.notificationFocused,
     focusedColor: Colors.red,
     label: 'tab.notification',
   },
   [TabScreenName.Profile]: {
-    icon: icons.profile,
-    focusedIcon: icons.profileFocused,
+    icon: icons.bottomTab.profile,
+    focusedIcon: icons.bottomTab.profileFocused,
     focusedColor: Colors.blue,
     label: 'tab.profile',
   },
@@ -111,7 +111,7 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
                 source={isFocused ? focusedIcon : icon}
                 style={[styles.icon, isFocused && { tintColor: focusedColor as string }]}
               />
-              <Spacer h4 />
+              <Spacer h={4} />
               <LocalizedText
                 style={[styles.label, isFocused && [{ color: focusedColor }, styles.focusedLabel]]}
                 t={label}

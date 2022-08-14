@@ -3,7 +3,7 @@ import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
 import React, { forwardRef } from 'react';
 import { StyleProp, TextInput as RNTextInput, View, ViewStyle } from 'react-native';
-import TextInput, { TextInputProps } from '../TextInput';
+import TextInput, { TextInputProps } from '../text-inputs/TextInput';
 import LocalizedText from '../texts/LocalizedText';
 
 export interface TextFieldProps extends CommonFieldProps, TextInputProps {

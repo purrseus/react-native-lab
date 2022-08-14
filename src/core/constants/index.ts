@@ -4,9 +4,12 @@ import { LinearGradientProps } from 'react-native-linear-gradient';
 import { Edge } from 'react-native-safe-area-context';
 
 export const TAB_BAR_HEIGHT = 70;
+export const HEADER_HEIGHT = 50;
 export const ONE_SECOND = 1000;
 export const DEFAULT_FONT_SIZE = 14;
 export const DEFAULT_ICON_SIZE = 24;
+export const DEFAULT_HEADER_ICON_SIZE = 24;
+export const DEFAULT_HORIZONTAL_EDGE_SPACING = 16;
 export const DEFAULT_BACKDROP_OPACITY = 0.2;
 
 export const DEFAULT_DATE_TIME_FORMAT_TEMPLATE = 'DD/MMM/YYYY HH:mm';

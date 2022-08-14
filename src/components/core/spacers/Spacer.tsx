@@ -1,27 +1,12 @@
 import { compareMemo } from '@utilities';
-import React, { useMemo } from 'react';
-import { View, ViewStyle } from 'react-native';
-
-type SpacerPropPrefix = 'w' | 'h';
+import React from 'react';
+import { View } from 'react-native';
 
 interface SpacerProps {
-  [key: `${SpacerPropPrefix}${number}`]: true;
-  width?: number;
-  height?: number;
+  w?: number;
+  h?: number;
 }
 
-const Spacer = compareMemo<SpacerProps>(props => {
-  const styles: ViewStyle[] = useMemo(
-    () =>
-      Object.keys(props)
-        .filter(key => Number.isInteger(+key.slice(-1)))
-        .map(key => ({
-          [key[0] === 'h' ? 'height' : 'width']: +key.slice(1),
-        })),
-    [props],
-  );
-
-  return <View style={[{ width: props.width, height: props.height }, styles]} />;
-});
+const Spacer = compareMemo<SpacerProps>(({ w, h }) => <View style={{ width: w, height: h }} />);
 
 export default Spacer;

@@ -8,14 +8,22 @@ interface Options {
 
 const useMeasure = <T extends TouchableOpacity | View>({ flexiblePosition = true }: Options) => {
   const ref = useRef<T | null>(null);
-  const [measure, setMeasure] = useState<Measure | null>(null);
+  const [measure, setMeasure] = useState<Measure>({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+    pageX: 0,
+    pageY: 0,
+  });
+  const hasMeasureValue = Object.values(measure).some(Boolean);
 
   useEffect(() => {
     ref.current?.measure((x, y, width, height, pageX, pageY) => {
-      if (!!measure && !flexiblePosition) return;
+      if (hasMeasureValue && !flexiblePosition) return;
       setMeasure({ x, y, width, height, pageX, pageY });
     });
-  }, [measure, flexiblePosition]);
+  }, [hasMeasureValue, flexiblePosition]);
 
   return { measure, ref };
 };

@@ -1,0 +1,113 @@
+import { icons } from '@assets';
+import { Icon, LocalizedText, Row, Spacer, Touchable } from '@components/core';
+import {
+  DEFAULT_HEADER_ICON_SIZE,
+  DEFAULT_HORIZONTAL_EDGE_SPACING,
+  HEADER_HEIGHT,
+} from '@core/constants';
+import { HeaderAction, StyleCallbackParams } from '@core/interfaces';
+import { I18nText } from '@core/types';
+import { useLayout, useStyle } from '@hooks';
+import { useNavigation } from '@react-navigation/native';
+import { globalStyles } from '@themes';
+import { compareMemo, createShadow } from '@utilities';
+import React, { Fragment, useMemo } from 'react';
+import { View, ViewProps } from 'react-native';
+
+export interface NavigationHeaderProps extends ViewProps {
+  title: I18nText;
+  hasBackAction?: boolean;
+  rightActions?: HeaderAction[];
+  actionSeparator?: number;
+}
+
+const NavigationHeader = compareMemo<NavigationHeaderProps>(
+  ({ title, hasBackAction = true, rightActions = [], actionSeparator = 8, ...props }) => {
+    const styles = useStyle(createStyles);
+    const { canGoBack, goBack } = useNavigation();
+    const { layout: sideLayout, handleLayout: handleSideLayout } = useLayout({
+      flexibleLayout: false,
+    });
+
+    const handleGoBack = canGoBack() && hasBackAction ? goBack : undefined;
+
+    const RightActions = useMemo(
+      () =>
+        rightActions.map(({ onPress, icon, size }: HeaderAction, index, array) => {
+          const showSeparator = index !== array.length - 1;
+
+          return (
+            <Fragment key={index}>
+              <Touchable hitSlop={actionSeparator / 2} onPress={onPress}>
+                <Icon source={icon} size={size || DEFAULT_HEADER_ICON_SIZE} />
+              </Touchable>
+              {showSeparator && <Spacer w={actionSeparator} />}
+            </Fragment>
+          );
+        }),
+      [rightActions, actionSeparator],
+    );
+
+    return (
+      <View {...props} style={styles.rootContainer}>
+        <Row style={styles.safeAreaContainer}>
+          <Row
+            style={[
+              styles.sideWrapper,
+              styles.leftWrapper,
+              sideLayout.width ? { width: sideLayout.width } : undefined,
+            ]}
+          >
+            {handleGoBack && (
+              <Touchable hitSlop={8} onPress={handleGoBack}>
+                <Icon source={icons.header.back} size={DEFAULT_HEADER_ICON_SIZE} />
+              </Touchable>
+            )}
+          </Row>
+
+          <Row style={globalStyles.flexFillCenter}>
+            <LocalizedText t={title} numberOfLines={1} style={styles.title} />
+          </Row>
+
+          <Row
+            onLayout={rightActions.length ? handleSideLayout : undefined}
+            style={[styles.sideWrapper, styles.rightWrapper]}
+          >
+            {RightActions}
+          </Row>
+        </Row>
+      </View>
+    );
+  },
+);
+
+const createStyles = ({ create, edgeInsets, colors, fonts }: StyleCallbackParams) =>
+  create({
+    rootContainer: {
+      backgroundColor: colors.headerBackground,
+      paddingTop: edgeInsets.top,
+      paddingLeft: edgeInsets.left,
+      paddingRight: edgeInsets.right,
+      ...createShadow(colors.shadow, [0, 4], 0.1, 8, 16),
+    },
+    safeAreaContainer: {
+      height: HEADER_HEIGHT,
+    },
+    sideWrapper: {
+      minWidth: '20%',
+      alignItems: 'center',
+      paddingHorizontal: DEFAULT_HORIZONTAL_EDGE_SPACING,
+    },
+    leftWrapper: {
+      justifyContent: 'flex-start',
+    },
+    rightWrapper: {
+      justifyContent: 'flex-end',
+    },
+    title: {
+      fontFamily: fonts.quicksandBold,
+      fontSize: 20,
+    },
+  });
+
+export default NavigationHeader;

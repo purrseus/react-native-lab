@@ -13,7 +13,7 @@ const useAppState = (onActive?: () => void, onInactive?: () => void) => {
       currentAppState.current = nextAppState;
     });
 
-    return subscription.remove;
+    return () => subscription.remove();
   }, [onActive, onInactive]);
 };
 
