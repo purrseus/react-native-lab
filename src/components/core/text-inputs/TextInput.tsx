@@ -18,11 +18,11 @@ const TextInput = compareMemo<RNTextInput, TextInputProps>(
 
     return (
       <RNTextInput
-        ref={ref}
-        allowFontScaling={false}
         placeholderTextColor={styles.placeholder.color}
         selectionColor={styles.selection.color}
         {...props}
+        ref={ref}
+        allowFontScaling={false}
         placeholder={placeholder ? (t(placeholder) as string) : undefined}
         style={[styles.input, style]}
       />

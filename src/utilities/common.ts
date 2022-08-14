@@ -7,7 +7,7 @@ import isEqual from 'react-fast-compare';
 import { Insets, ShadowStyleIOS, ViewStyle } from 'react-native';
 import { getLocales } from 'react-native-localize';
 
-export const currentTimeStamp = () => +new Date();
+export const currentTimestamp = () => +new Date();
 
 export const randomColor = () => `#${Math.random().toString(16).slice(-6)}`;
 
@@ -23,7 +23,7 @@ export const compareMemo = <T, P = undefined>(
 export const wait = (timeout = ONE_SECOND) =>
   new Promise<void>(resolve => setTimeout(resolve, timeout));
 
-export const createArray = (length = 0) => new Array(length).fill(0).map((_, i) => i);
+export const createArray = (length = 0) => Array.from({ length }, (_, i) => i);
 
 export const createHitSlop = (insetValue = 8): Insets => ({
   top: insetValue,
@@ -76,8 +76,8 @@ export const deepAccessObject = <T extends Record<string, any>, V>(
   arrKey: string[],
 ): T | V => {
   if (!arrKey.length) return target;
-  return arrKey.reduce((acc, cur) => {
-    if (!!acc && typeof acc === 'object' && cur in acc) return acc[cur];
-    return acc;
+  return arrKey.reduce((previous, current) => {
+    if (!!previous && typeof previous === 'object' && current in previous) return previous[current];
+    return previous;
   }, target);
 };

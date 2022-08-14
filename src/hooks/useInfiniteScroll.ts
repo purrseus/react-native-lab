@@ -13,6 +13,7 @@ import { useImmer } from 'use-immer';
 
 interface InfiniteScrollRef<Params> {
   isFirstCall: boolean;
+  loadingMore: boolean;
   paramsRef: Params;
   pageIndex: number;
 }
@@ -41,6 +42,7 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
   const infiniteScrollRef = useRef<InfiniteScrollRef<InfiniteScrollConfig['params']>>({
     isFirstCall: true,
     paramsRef: params,
+    loadingMore: false,
     pageIndex: 1,
   }).current;
 
@@ -69,23 +71,24 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
       if (responseData.length < pageSize)
         updateInfiniteScroll(draft => (draft.canLoadMore = false));
 
-      if (infiniteScrollRef.isFirstCall) {
+      if (infiniteScrollRef.isFirstCall)
         updateInfiniteScroll(draft => {
           draft.data.length = 0;
           draft.data.concat(responseData);
         });
-      }
 
       return responseData;
     } catch (error) {
       logger(error);
     } finally {
       updateInfiniteScroll(draft => (draft.fetching = false));
-      infiniteScrollRef.isFirstCall = false;
+      if (infiniteScrollRef.isFirstCall) infiniteScrollRef.isFirstCall = false;
     }
-  }, [accessProperties, controller.signal, pageSize, requestCallback]);
+  }, [accessProperties, controller.signal, pageSize, requestCallback, updateInfiniteScroll]);
 
   const onRefresh = useCallback(async () => {
+    if (infiniteScrollRef.loadingMore) return;
+
     try {
       infiniteScrollRef.pageIndex = 1;
 
@@ -103,16 +106,15 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
         });
     } catch (error) {
       logger(error);
-    } finally {
-      updateInfiniteScroll(draft => (draft.fetching = false));
     }
-  }, [handleRequest]);
+  }, [handleRequest, updateInfiniteScroll]);
 
   const onLoadMore = useCallback(async () => {
-    if (!infiniteScroll.canLoadMore) return;
+    if (!infiniteScroll.canLoadMore || infiniteScrollRef.loadingMore) return;
 
     try {
       infiniteScrollRef.pageIndex += 1;
+      infiniteScrollRef.loadingMore = true;
       const responseData = await handleRequest();
 
       if (Array.isArray(responseData))
@@ -121,15 +123,15 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
         });
     } catch (error) {
       logger(error);
+    } finally {
+      infiniteScrollRef.loadingMore = false;
     }
-  }, [handleRequest, infiniteScroll.canLoadMore]);
-
-  const cancelRequest = useCallback(controller.abort, []);
+  }, [handleRequest, infiniteScroll.canLoadMore, updateInfiniteScroll]);
 
   useEffect(() => {
     handleRequest();
 
-    return cancelRequest;
+    return () => controller.abort();
   }, []);
 
   useEffect(() => {

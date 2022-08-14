@@ -24,6 +24,7 @@ export const lightTheme = {
   backgroundImage: '#C4C4C4',
   refreshControlBackground: '#FAFAFA',
   switchTrackInactive: '#C4C4C4',
+  headerBackground: '#FFFFFF',
 } as const;
 
 export const darkTheme = {
@@ -38,4 +39,5 @@ export const darkTheme = {
   backgroundImage: '#343434',
   refreshControlBackground: '#222222',
   switchTrackInactive: '#C4C4C4',
+  headerBackground: '#111111',
 } as const;

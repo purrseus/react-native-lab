@@ -1,23 +1,14 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { StyleCallbackParams } from '@core/interfaces';
 import { useLoading, useStyle } from '@hooks';
-import { useFocusEffect, useNavigationState } from '@react-navigation/native';
 import { alphaHexColor, compareMemo } from '@utilities';
-import React, { useCallback } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import ActivityIndicator from './ActivityIndicator';
 import Modal, { ModalProps } from '../modals/Modal';
+import ActivityIndicator from './ActivityIndicator';
 
 const OverlayLoading = compareMemo<Partial<Pick<ModalProps, 'isVisible'>>>(({ isVisible }) => {
-  const { isLoading, toggleLoading } = useLoading();
+  const { isLoading } = useLoading();
   const styles = useStyle(createStyles);
-  const navigationState = useNavigationState(state => state);
-
-  useFocusEffect(
-    useCallback(() => {
-      if (typeof isVisible === 'undefined') toggleLoading(false);
-    }, [navigationState]),
-  );
 
   return (
     <Modal isVisible={isVisible || isLoading}>

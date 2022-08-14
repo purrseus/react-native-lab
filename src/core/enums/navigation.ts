@@ -5,6 +5,11 @@ export enum UnprotectedScreenName {
 
 export enum ProtectedScreenName {
   BottomTab = 'BottomTab',
+  // Showcase
+  ShowcaseList = 'ShowcaseList',
+  InfiniteList = 'InfiniteList',
+  Form = 'Form',
+  Button = 'Button',
 }
 
 export enum TabScreenName {

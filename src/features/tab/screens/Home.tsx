@@ -1,13 +1,17 @@
+import { Text } from '@components/core';
 import { TabScreenName } from '@core/enums';
 import { TabScreen } from '@core/types';
 import { globalStyles } from '@themes';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { useHome } from '../hooks';
 
-const Home: TabScreen<TabScreenName.Home> = () => {
+const Home: TabScreen<TabScreenName.Home> = props => {
+  const homeContainer = useHome(props);
+
   return (
     <View style={globalStyles.flexFillCenter}>
-      <Text>Home</Text>
+      <Text onPress={homeContainer.goToShowcase}>Home</Text>
     </View>
   );
 };

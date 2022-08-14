@@ -78,7 +78,6 @@ const Button = compareMemo<ButtonProps>(
     return (
       <Touchable
         {...props}
-        activeOpacity={0.8}
         disabled={loading || disabled}
         style={[styles.container, styles[type], { height: buttonSize }, style]}
       >
@@ -103,7 +102,7 @@ const Button = compareMemo<ButtonProps>(
                 style={[{ marginRight: iconSpacing }, iconProps?.style]}
               />
             ) : hasRightIcon && titleCenter ? (
-              <Spacer width={rightIconSize + iconSpacing} />
+              <Spacer w={rightIconSize + iconSpacing} />
             ) : null}
 
             <LocalizedText
@@ -121,7 +120,7 @@ const Button = compareMemo<ButtonProps>(
                 style={[{ marginLeft: iconSpacing }, iconProps?.style]}
               />
             ) : hasLeftIcon && titleCenter ? (
-              <Spacer width={leftIconSize + iconSpacing} />
+              <Spacer w={leftIconSize + iconSpacing} />
             ) : null}
           </>
         )}
