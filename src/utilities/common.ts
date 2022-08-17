@@ -2,10 +2,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ONE_SECOND } from '@core/constants';
 import { CommonSize, Language } from '@core/types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ForwardRefExoticComponent, memo, PropsWithoutRef, RefAttributes } from 'react';
 import isEqual from 'react-fast-compare';
-import { Insets, ShadowStyleIOS, ViewStyle } from 'react-native';
+import { DevSettings, Insets, ShadowStyleIOS, UIManager, ViewStyle } from 'react-native';
 import { getLocales } from 'react-native-localize';
+import { isAndroid } from './os';
 
 export const currentTimestamp = () => +new Date();
 
@@ -80,4 +82,23 @@ export const deepAccessObject = <T extends Record<string, any>, V>(
     if (!!previous && typeof previous === 'object' && current in previous) return previous[current];
     return previous;
   }, target);
+};
+
+export const onAppBootstrap = () => {
+  if (isAndroid() && UIManager.setLayoutAnimationEnabledExperimental)
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+
+  if (__DEV__) {
+    const devSettingItems: { title: string; handler: () => void }[] = [
+      {
+        title: 'Clear AsyncStorage and reload',
+        handler: async () => {
+          await AsyncStorage.clear();
+          DevSettings.reload();
+        },
+      },
+    ];
+
+    devSettingItems.forEach(item => DevSettings.addMenuItem(item.title, item.handler));
+  }
 };

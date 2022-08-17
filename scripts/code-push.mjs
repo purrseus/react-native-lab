@@ -7,7 +7,7 @@ import { commands, envs, execSyncInherit, loadEnvFile, uncapitalized } from './u
       type: 'list',
       name: 'os',
       message: 'Select the OS to release:',
-      choices: ['🤖 Android', '🍎 iOS', 'All'],
+      choices: ['🤖 Android', '🍎 iOS', 'Both'],
     },
     {
       type: 'list',
@@ -19,7 +19,7 @@ import { commands, envs, execSyncInherit, loadEnvFile, uncapitalized } from './u
 
   const { ANDROID_VERSION_NAME, IOS_VERSION } = loadEnvFile(uncapitalized(env));
 
-  if (os === 'All') {
+  if (os === 'Both') {
     execSyncInherit(
       `${commands.codePush('🤖 Android', env, ANDROID_VERSION_NAME)} && ${commands.codePush(
         '🍎 iOS',
