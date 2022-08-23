@@ -18,11 +18,11 @@ export interface NavigationHeaderProps extends ViewProps {
   title: I18nText;
   hasBackAction?: boolean;
   rightActions?: HeaderAction[];
-  actionSeparator?: number;
+  actionSeparatorWidth?: number;
 }
 
 const NavigationHeader = compareMemo<NavigationHeaderProps>(
-  ({ title, hasBackAction = true, rightActions = [], actionSeparator = 8, ...props }) => {
+  ({ title, hasBackAction = true, rightActions = [], actionSeparatorWidth = 8, ...props }) => {
     const styles = useStyle(createStyles);
     const { canGoBack, goBack } = useNavigation();
     const { layout: sideLayout, handleLayout: handleSideLayout } = useLayout({
@@ -34,18 +34,18 @@ const NavigationHeader = compareMemo<NavigationHeaderProps>(
     const RightActions = useMemo(
       () =>
         rightActions.map(({ onPress, icon, size }: HeaderAction, index, array) => {
-          const showSeparator = index !== array.length - 1;
+          const showSpacerSeparator = index !== array.length - 1;
 
           return (
             <Fragment key={index}>
-              <Touchable hitSlop={actionSeparator / 2} onPress={onPress}>
+              <Touchable hitSlop={actionSeparatorWidth / 2} onPress={onPress}>
                 <Icon source={icon} size={size || DEFAULT_HEADER_ICON_SIZE} />
               </Touchable>
-              {showSeparator && <Spacer w={actionSeparator} />}
+              {showSpacerSeparator && <Spacer w={actionSeparatorWidth} />}
             </Fragment>
           );
         }),
-      [rightActions, actionSeparator],
+      [rightActions, actionSeparatorWidth],
     );
 
     return (

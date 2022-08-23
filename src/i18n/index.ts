@@ -21,13 +21,13 @@ export const resources: LanguageMap<ResourceLanguage> = {
   'vi-VN': { [DEFAULT_NAMESPACE]: viVN },
 };
 
-const changeLocale = (language: Language) => {
+const changeLocaleFormatters = (language: Language) => {
   const key = LANGUAGE_MAP[language];
   dayjs.locale(key);
   numeral.locale(key);
 };
 
-changeLocale(CURRENT_LANGUAGE);
+changeLocaleFormatters(CURRENT_LANGUAGE);
 
 i18n.use(initReactI18next).init({
   lng: CURRENT_LANGUAGE,
@@ -40,6 +40,6 @@ i18n.use(initReactI18next).init({
   },
 });
 
-i18n.on('languageChanged', changeLocale);
+i18n.on('languageChanged', changeLocaleFormatters);
 
 export default i18n;

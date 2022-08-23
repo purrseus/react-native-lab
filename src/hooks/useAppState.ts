@@ -1,9 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { EffectCallback, useEffect, useRef } from 'react';
 import { AppState } from 'react-native';
 
 const INACTIVE_REGEX = /inactive|background/;
 
-const useAppState = (onActive?: () => void, onInactive?: () => void) => {
+const useAppState = (onActive?: EffectCallback, onInactive?: EffectCallback) => {
   const currentAppState = useRef(AppState.currentState);
 
   useEffect(() => {

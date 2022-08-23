@@ -13,10 +13,10 @@ import {
   ViewStyle,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import ActivityIndicator from '../loaders/ActivityIndicator';
-import Icon, { IconProps } from '../images/Icon';
-import LocalizedText from '../texts/LocalizedText';
-import Spacer from '../spacers/Spacer';
+import ActivityIndicator from '../Loader/ActivityIndicator';
+import Icon, { IconProps } from '../Image/Icon';
+import LocalizedText from '../Text/LocalizedText';
+import Spacer from '../Spacer/Spacer';
 import Touchable, { TouchableProps } from './Touchable';
 
 type SizeName = 'small' | 'medium' | 'large';

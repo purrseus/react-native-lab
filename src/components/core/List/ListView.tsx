@@ -2,8 +2,8 @@
 import { compareMemo } from '@utilities';
 import React, { ForwardedRef, forwardRef, RefAttributes, useCallback, useRef } from 'react';
 import { FlatList, FlatListProps, RefreshControlProps } from 'react-native';
-import BottomTabSpacer from '../spacers/BottomTabSpacer';
-import RefreshControl from '../loaders/RefreshControl';
+import BottomTabSpacer from '../Spacer/BottomTabSpacer';
+import RefreshControl from '../Loader/RefreshControl';
 
 export interface ListViewProps<T = any>
   extends Omit<FlatListProps<T>, keyof RefreshControlProps>,

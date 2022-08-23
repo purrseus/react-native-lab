@@ -3,7 +3,7 @@ import { useLoading, useStyle } from '@hooks';
 import { alphaHexColor, compareMemo } from '@utilities';
 import React from 'react';
 import { View } from 'react-native';
-import Modal, { ModalProps } from '../modals/Modal';
+import Modal, { ModalProps } from '../Modal/Modal';
 import ActivityIndicator from './ActivityIndicator';
 
 const OverlayLoading = compareMemo<Partial<Pick<ModalProps, 'isVisible'>>>(({ isVisible }) => {
