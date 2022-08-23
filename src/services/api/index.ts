@@ -42,7 +42,7 @@ const axiosInstance = axios.create({
   timeout: 10_000,
 });
 
-export const setAccessToken = (accessToken: string | null) => {
+export const setDefaultAccessToken = (accessToken: string | null) => {
   !accessToken
     ? delete axiosInstance.defaults.headers.common.Authorization
     : (axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`);
@@ -96,7 +96,7 @@ axiosInstance.interceptors.response.use(
       if (!originalRequest.headers.Authorization) {
         const { accessToken } = store.getState().auth;
         if (accessToken) {
-          setAccessToken(accessToken);
+          setDefaultAccessToken(accessToken);
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
           return axiosInstance(originalRequest);
         }
@@ -124,14 +124,14 @@ axiosInstance.interceptors.response.use(
         const accessToken = unwrapResult(resultAction);
 
         if (accessToken) {
-          setAccessToken(accessToken);
+          setDefaultAccessToken(accessToken);
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
           handlePromiseQueue(accessToken);
           return axiosInstance(originalRequest);
         }
       } catch (error) {
-        setAccessToken(null);
+        setDefaultAccessToken(null);
         handlePromiseQueue(undefined, error);
 
         return Promise.reject(error);
