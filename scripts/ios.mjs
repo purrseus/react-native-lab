@@ -5,19 +5,20 @@ import {
   platformBuildTypes,
   commands,
   uncapitalized,
+  getArguments,
 } from './utils.mjs';
 
-const environment = {
-  Development: 'dev',
-  Staging: 'stag',
-  Production: 'prod',
-};
-
 (async () => {
-  const _arguments = process.argv.slice(2);
+  const environment = {
+    Development: 'dev',
+    Staging: 'stag',
+    Production: 'prod',
+  };
+
+  const [arg] = getArguments();
   const openXCode = () => execSyncInherit(commands.openXcode());
 
-  if (_arguments.includes('xcode')) {
+  if (arg === 'xcode') {
     openXCode();
     return;
   }

@@ -34,8 +34,8 @@ interface ButtonProps extends TouchableProps {
   titleCenter?: boolean;
   titleStyle?: StyleProp<TextStyle>;
   loading?: boolean;
-  leftIcon?: ImageRequireSource;
-  rightIcon?: ImageRequireSource;
+  iconLeft?: ImageRequireSource;
+  iconRight?: ImageRequireSource;
   iconSpacing?: number;
   iconSize?: number | [number, number];
   iconProps?: Partial<IconProps>;
@@ -59,8 +59,8 @@ const Button = compareMemo<ButtonProps>(
     titleCenter = true,
     titleStyle,
     loading = false,
-    leftIcon,
-    rightIcon,
+    iconLeft,
+    iconRight,
     iconSpacing = 0,
     iconSize,
     iconProps,
@@ -68,8 +68,8 @@ const Button = compareMemo<ButtonProps>(
     ...props
   }) => {
     const [buttonSize, titleSize] = sizes[size];
-    const hasLeftIcon = typeof leftIcon === 'number';
-    const hasRightIcon = typeof rightIcon === 'number';
+    const hasLeftIcon = typeof iconLeft === 'number';
+    const hasRightIcon = typeof iconRight === 'number';
     const [leftIconSize, rightIconSize]: number[] = Array.isArray(iconSize)
       ? iconSize
       : new Array(2).fill(iconSize || DEFAULT_ICON_SIZE);
@@ -95,7 +95,7 @@ const Button = compareMemo<ButtonProps>(
           <>
             {hasLeftIcon ? (
               <Icon
-                source={leftIcon}
+                source={iconLeft}
                 size={leftIconSize}
                 tintColor={styles[`${type}Color`].color as string}
                 {...iconProps}
@@ -113,7 +113,7 @@ const Button = compareMemo<ButtonProps>(
 
             {hasRightIcon ? (
               <Icon
-                source={rightIcon}
+                source={iconRight}
                 size={rightIconSize}
                 tintColor={styles[`${type}Color`].color as string}
                 {...iconProps}

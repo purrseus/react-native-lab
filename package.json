@@ -10,6 +10,7 @@
     "start": "react-native start --reset-cache",
     "xcode": "node scripts/ios.mjs xcode",
     "code-push": "node scripts/code-push.mjs",
+    "generate": "node scripts/generate.mjs",
     "lint": "eslint \"{src,scripts,__tests__}/**/*.{ts,tsx,js,mjs,jsx}\" --fix",
     "format": "prettier --check \"{src,scripts,__tests__}/**/*.{ts,tsx,js,mjs,jsx,svg,md}\" --write",
     "commit": "cz",
