@@ -11,7 +11,7 @@ interface LocalizedTextProps extends TextProps {
 }
 const LocalizedText = compareMemo<LocalizedTextProps>(({ t, i18nOptions, ...props }) => {
   const { t: translate } = useTranslation();
-  // TODO: multiText
+
   return <Text {...props} children={translate(t, i18nOptions) as string} />;
 });
 

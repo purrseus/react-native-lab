@@ -27,6 +27,8 @@ export const execSyncInherit = command => execSync(command, { stdio: 'inherit' }
 export const uncapitalized = text =>
   typeof text !== 'string' || !text.length ? '' : `${text[0].toLowerCase()}${text.slice(1)}`;
 
+export const getArguments = () => process.argv.slice(2);
+
 export const createBuildQuestionCollections = platform => [
   {
     type: 'list',
@@ -67,7 +69,7 @@ export const loadEnvFile = envSuffix => {
       .filter(line => !!line.length && !line.startsWith('#'))
       .map(line => {
         const firstEqualIndex = line.indexOf('=');
-        if (firstEqualIndex < 0) throw new Error(`.env.${envSuffix} Syntax error! ❌❌❌`);
+        if (firstEqualIndex < 0) throw new SyntaxError(`.env.${envSuffix}`);
 
         return [
           line.slice(0, firstEqualIndex),
