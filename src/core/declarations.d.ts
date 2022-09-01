@@ -1,8 +1,8 @@
 import { Language, Resource, RootStackParamList } from '@core/types';
-import { DEFAULT_NAMESPACE } from '@i18n';
 import { PropsWithChildren } from 'react';
 import 'react-i18next';
 import { SvgProps } from 'react-native-svg';
+import { DEFAULT_NAMESPACE } from './constants';
 
 declare global {
   namespace ReactNavigation {

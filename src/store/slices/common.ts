@@ -6,7 +6,7 @@ import { REHYDRATE } from 'redux-persist';
 
 type Theme = 'auto' | 'light' | 'dark';
 
-export interface CommonState {
+interface CommonState {
   isLoading: boolean;
   language: Language;
   theme: Theme;

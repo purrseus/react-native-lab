@@ -33,7 +33,7 @@ const BottomSheet = compareMemo<BottomSheetMethods, BottomSheetProps>(
       },
       ref,
     ) => {
-      const styles = useStyle(createStyle);
+      const styles = useStyle(createStyles);
 
       const backdropComponent = useCallback(
         (backdropProps: BottomSheetDefaultBackdropProps) => (
@@ -64,7 +64,7 @@ const BottomSheet = compareMemo<BottomSheetMethods, BottomSheetProps>(
   ),
 );
 
-const createStyle = ({ create, edgeInsets, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, edgeInsets, colors }: StyleCallbackParams) =>
   create({
     inset: {
       top: edgeInsets.top,

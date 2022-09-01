@@ -16,9 +16,7 @@ const initialState: AuthState = {
   status: 'idle',
 };
 
-export const handleRefreshToken = (
-  refreshToken: string,
-): Promise<AxiosResponse<RefreshTokenResponse>> =>
+const handleRefreshToken = (refreshToken: string): Promise<AxiosResponse<RefreshTokenResponse>> =>
   axios.post(`/auth/refresh-token`, {
     refreshToken,
   });

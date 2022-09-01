@@ -42,7 +42,7 @@ const axiosInstance = axios.create({
   timeout: 10_000,
 });
 
-export const setDefaultAccessToken = (accessToken: string | null) => {
+const setDefaultAccessToken = (accessToken: string | null) => {
   !accessToken
     ? delete axiosInstance.defaults.headers.common.Authorization
     : (axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`);

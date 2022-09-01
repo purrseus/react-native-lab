@@ -1,5 +1,5 @@
 import { locales } from '@assets';
-import { LANGUAGE_MAP } from '@core/constants';
+import { DEFAULT_NAMESPACE, LANGUAGE_MAP } from '@core/constants';
 import { Language, LanguageMap } from '@core/types';
 import { getCurrentLanguage } from '@utilities/common';
 import dayjs from 'dayjs';
@@ -14,9 +14,8 @@ import { initReactI18next } from 'react-i18next';
 const { enUS, viVN } = locales;
 const CURRENT_LANGUAGE = getCurrentLanguage();
 const FALLBACK_LANGUAGE: Language = 'en-US';
-export const DEFAULT_NAMESPACE = 'translation';
 
-export const resources: LanguageMap<ResourceLanguage> = {
+const resources: LanguageMap<ResourceLanguage> = {
   'en-US': { [DEFAULT_NAMESPACE]: enUS },
   'vi-VN': { [DEFAULT_NAMESPACE]: viVN },
 };

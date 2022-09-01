@@ -6,7 +6,7 @@ import { ColorValue, StyleSheet, View, ViewStyle } from 'react-native';
 
 type DividerPropKeys = 'width' | 'borderRadius' | 'marginHorizontal' | 'marginVertical';
 
-export interface DividerProps extends Pick<ViewStyle, DividerPropKeys> {
+interface DividerProps extends Pick<ViewStyle, DividerPropKeys> {
   color?: ColorValue;
   height?: number;
 }
