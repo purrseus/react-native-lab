@@ -22,4 +22,6 @@ export { default as StatusBar } from './StatusBar';
 export { default as Switch } from './Switch';
 export { default as LocalizedText } from './Text/LocalizedText';
 export { default as Text } from './Text/Text';
-export { default as TextInput } from './TextInput/TextInput';
+export { default as MultilineTextInput } from './TextInput/Multiline/MultilineTextInput';
+export { default as IconTextInput } from './TextInput/Singleline/IconTextInput';
+export { default as TextInput } from './TextInput/Singleline/TextInput';

@@ -1,4 +1,4 @@
-import { DEFAULT_FONT_SIZE } from '@core/constants';
+import { DEFAULT_FONT_SIZE, MIN_HEIGHT_INPUT } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { I18nText } from '@core/types';
 import { useStyle } from '@hooks';
@@ -14,7 +14,7 @@ export interface TextInputProps extends RNTextInputProps {
 const TextInput = compareMemo<RNTextInput, TextInputProps>(
   forwardRef(({ placeholder, style, ...props }, ref) => {
     const { t } = useTranslation();
-    const styles = useStyle(createStyle);
+    const styles = useStyle(createStyles);
 
     return (
       <RNTextInput
@@ -30,14 +30,14 @@ const TextInput = compareMemo<RNTextInput, TextInputProps>(
   }),
 );
 
-const createStyle = ({ create, colors, fonts }: StyleCallbackParams) =>
+const createStyles = ({ create, colors, fonts }: StyleCallbackParams) =>
   create({
     input: {
-      paddingVertical: 0,
-      paddingHorizontal: 0,
+      padding: 0,
+      margin: 0,
       color: colors.primaryText,
       fontSize: DEFAULT_FONT_SIZE,
-      height: DEFAULT_FONT_SIZE + 6,
+      height: MIN_HEIGHT_INPUT,
       fontFamily: fonts.quicksandMedium,
     },
     placeholder: {

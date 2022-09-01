@@ -3,6 +3,7 @@ export { default as useAppNavigation } from './useAppNavigation';
 export { default as useAppRoute } from './useAppRoute';
 export { default as useAppSelector } from './useAppSelector';
 export { default as useAppState } from './useAppState';
+export { default as useAppTranslation } from './useAppTranslation';
 export { default as useBackHandler } from './useBackHandler';
 export { default as useColor } from './useColor';
 export { default as useCountdownTimer } from './useCountdownTimer';

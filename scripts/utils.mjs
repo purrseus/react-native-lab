@@ -2,7 +2,7 @@ import { execSync } from 'child_process';
 import { readFileSync } from 'fs';
 import path from 'path';
 
-export const PLACEHOLDER_NAME = 'ReactNativeLab';
+const PLACEHOLDER_NAME = 'ReactNativeLab';
 const APP_CENTER_OWNER_NAME = '<Your_owner_name>';
 
 const appCenterAppName = {
@@ -10,14 +10,14 @@ const appCenterAppName = {
   '🍎 iOS': '<Your_iOS_app_name>',
 };
 
+const platformName = {
+  android: '🤖 Android',
+  ios: '🍎 iOS',
+};
+
 export const platformBuildTypes = {
   android: ['APK', 'ABB'],
   ios: ['Archive'],
-};
-
-export const platformName = {
-  android: '🤖 Android',
-  ios: '🍎 iOS',
 };
 
 export const envs = ['Development', 'Staging', 'Production'];

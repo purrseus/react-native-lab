@@ -16,20 +16,19 @@ import { View, ViewProps } from 'react-native';
 
 export interface NavigationHeaderProps extends ViewProps {
   title: I18nText;
-  hasBackAction?: boolean;
   rightActions?: HeaderAction[];
   actionSeparatorWidth?: number;
 }
 
 const NavigationHeader = compareMemo<NavigationHeaderProps>(
-  ({ title, hasBackAction = true, rightActions = [], actionSeparatorWidth = 8, ...props }) => {
+  ({ title, rightActions = [], actionSeparatorWidth = 8, ...props }) => {
     const styles = useStyle(createStyles);
     const { canGoBack, goBack } = useNavigation();
     const { layout: sideLayout, handleLayout: handleSideLayout } = useLayout({
       flexibleLayout: false,
     });
 
-    const handleGoBack = canGoBack() && hasBackAction ? goBack : undefined;
+    const handleGoBack = canGoBack() ? goBack : undefined;
 
     const RightActions = useMemo(
       () =>
@@ -59,7 +58,7 @@ const NavigationHeader = compareMemo<NavigationHeaderProps>(
             ]}
           >
             {handleGoBack && (
-              <Touchable hitSlop={8} onPress={handleGoBack}>
+              <Touchable hitSlop={actionSeparatorWidth / 2} onPress={handleGoBack}>
                 <Icon source={icons.header.back} size={DEFAULT_HEADER_ICON_SIZE} />
               </Touchable>
             )}

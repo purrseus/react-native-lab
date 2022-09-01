@@ -1,32 +1,39 @@
 import { CommonFieldProps, StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
-import React, { forwardRef } from 'react';
+import React, { ForwardedRef, forwardRef, RefAttributes } from 'react';
 import { StyleProp, TextInput as RNTextInput, View, ViewStyle } from 'react-native';
-import TextInput, { TextInputProps } from '../TextInput/TextInput';
 import LocalizedText from '../Text/LocalizedText';
+import MultilineTextInput, {
+  MultilineTextInputProps,
+} from '../TextInput/Multiline/MultilineTextInput';
+import IconTextInput, { IconTextInputProps } from '../TextInput/Singleline/IconTextInput';
 
-export interface TextFieldProps extends CommonFieldProps, TextInputProps {
-  containerStyle?: StyleProp<ViewStyle>;
-}
+type CombinedTextInputProps<T extends boolean = false> = (T extends true
+  ? MultilineTextInputProps
+  : IconTextInputProps) &
+  CommonFieldProps;
 
-const TextField = compareMemo<RNTextInput, TextFieldProps>(
-  forwardRef(({ label, errorText, containerStyle, style, ...props }, ref) => {
-    const styles = useStyle(createStyles);
+export type TextFieldProps<T extends boolean = false> = {
+  multiline?: T;
+  wrapperStyle?: StyleProp<ViewStyle>;
+} & CombinedTextInputProps<T>;
 
-    return (
-      <View style={containerStyle}>
-        {!!label && <LocalizedText t={label} style={styles.label} />}
+const _TextField = (
+  { label, errorText, multiline, containerStyle, wrapperStyle, ...props }: TextFieldProps,
+  ref: ForwardedRef<RNTextInput>,
+) => {
+  const styles = useStyle(createStyles);
+  const TextInputComponent = multiline ? MultilineTextInput : IconTextInput;
 
-        <View style={styles.wrapperInput}>
-          <TextInput {...props} ref={ref} style={[styles.input, style]} />
-        </View>
-
-        {!!errorText && <LocalizedText t={errorText} style={styles.errorText} />}
-      </View>
-    );
-  }),
-);
+  return (
+    <View style={containerStyle}>
+      {!!label && <LocalizedText t={label} style={styles.label} />}
+      <TextInputComponent {...props} ref={ref} containerStyle={wrapperStyle} />
+      {!!errorText && <LocalizedText t={errorText} style={styles.errorText} />}
+    </View>
+  );
+};
 
 const createStyles = ({ create, colors, fonts }: StyleCallbackParams) =>
   create({
@@ -35,17 +42,16 @@ const createStyles = ({ create, colors, fonts }: StyleCallbackParams) =>
       fontFamily: fonts.quicksandBold,
       marginBottom: 4,
     },
-    wrapperInput: {
-      paddingHorizontal: 8,
-      paddingVertical: 12,
-      backgroundColor: colors.lightGray,
-      borderRadius: 12,
-    },
-    input: {},
     errorText: {
       color: colors.red,
       marginTop: 4,
     },
   });
+
+const TextField = compareMemo<RNTextInput, TextFieldProps>(forwardRef(_TextField)) as <
+  T extends boolean,
+>(
+  props: TextFieldProps<T> & RefAttributes<RNTextInput>,
+) => JSX.Element;
 
 export default TextField;
