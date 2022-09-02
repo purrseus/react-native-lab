@@ -4,13 +4,12 @@ import { platformSelect } from './os';
 
 type FormDataObject = Record<
   string,
-  string | number | boolean | Record<string, any> | File | File[]
+  string | number | boolean | Record<string, any> | File | File[] | any[]
 >;
 
 const FILE_PREFIX = 'file://';
 const FILE_KEYS: (keyof File)[] = ['uri', 'name', 'type'];
 
-// TODO: test array FromData
 export const createFormData = (data: FormDataObject): FormData => {
   const formData = new FormData();
   const arrayData = Object.entries(data);
@@ -24,16 +23,15 @@ export const createFormData = (data: FormDataObject): FormData => {
     uri: platformSelect(file.uri, file.uri.replace(FILE_PREFIX, '')) || '',
   });
 
+  const append = (key: string, value: any) =>
+    formData.append(key, isFile(value) ? platformFile(value) : value);
+
   for (const [key, value] of arrayData) {
     if (Array.isArray(value)) {
       const formDataKey = key.endsWith('[]') ? key : `${key}[]`;
-      value.forEach(val => {
-        formData.append(formDataKey, platformFile(val));
-      });
-    } else if (isFile(value)) {
-      formData.append(key, platformFile(value));
+      value.forEach(val => append(formDataKey, val));
     } else {
-      formData.append(key, value);
+      append(key, value);
     }
   }
 

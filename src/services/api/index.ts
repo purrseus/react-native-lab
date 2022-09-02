@@ -37,27 +37,32 @@ const apiLogger = (key: string, message: Parameters<typeof logger>[0]) => {
   }
 };
 
-const axiosInstance = axios.create({
+const http = axios.create({
   baseURL: Config.API_URL,
   timeout: 10_000,
 });
 
 const setDefaultAccessToken = (accessToken: string | null) => {
   !accessToken
-    ? delete axiosInstance.defaults.headers.common.Authorization
-    : (axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`);
+    ? delete http.defaults.headers.common.Authorization
+    : (http.defaults.headers.common.Authorization = `Bearer ${accessToken}`);
 };
 
-axiosInstance.interceptors.request.use(
-  requestConfig => {
-    apiLogger('requestConfig', {
-      method: requestConfig.method,
-      url: requestConfig.url,
-      headers: requestConfig.headers,
-      data: requestConfig.data,
+http.interceptors.request.use(
+  config => {
+    apiLogger('config', {
+      method: config.method,
+      url: config.url,
+      headers: config.headers,
+      data: config.data,
     });
 
-    return requestConfig;
+    if (config.data instanceof FormData) {
+      if (!config.headers) config.headers = {};
+      config.headers['Content-Type'] = 'multipart/form-data';
+    }
+
+    return config;
   },
   requestError => {
     apiLogger('requestError', { requestError });
@@ -66,7 +71,7 @@ axiosInstance.interceptors.request.use(
   },
 );
 
-axiosInstance.interceptors.response.use(
+http.interceptors.response.use(
   response => {
     apiLogger('response', {
       method: response.config.method,
@@ -98,7 +103,7 @@ axiosInstance.interceptors.response.use(
         if (accessToken) {
           setDefaultAccessToken(accessToken);
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-          return axiosInstance(originalRequest);
+          return http(originalRequest);
         }
       }
 
@@ -110,7 +115,7 @@ axiosInstance.interceptors.response.use(
           });
 
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-          return axiosInstance(originalRequest);
+          return http(originalRequest);
         } catch (error) {
           return Promise.reject(error);
         }
@@ -128,7 +133,7 @@ axiosInstance.interceptors.response.use(
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
           handlePromiseQueue(accessToken);
-          return axiosInstance(originalRequest);
+          return http(originalRequest);
         }
       } catch (error) {
         setDefaultAccessToken(null);
@@ -144,4 +149,4 @@ axiosInstance.interceptors.response.use(
   },
 );
 
-export default axiosInstance;
+export default http;
