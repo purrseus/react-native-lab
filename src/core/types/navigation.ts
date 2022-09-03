@@ -17,9 +17,7 @@ export type ProtectedParamList = {
   [ProtectedScreenName.BottomTab]: NavigatorScreenParams<BottomTabParamList>;
   // Showcase
   [ProtectedScreenName.ShowcaseList]: undefined;
-  [ProtectedScreenName.InfiniteList]: undefined;
-  [ProtectedScreenName.Button]: undefined;
-  [ProtectedScreenName.Form]: undefined;
+  [ProtectedScreenName.BottomSheets]: undefined;
 };
 
 export type RootStackParamList = UnprotectedParamList & ProtectedParamList;

@@ -2,7 +2,7 @@
 import { ONE_SECOND } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { I18nText } from '@core/types';
-import { useAppSelector, useColor, useStyle } from '@hooks';
+import { useAppSelector, useColor, useStyle, useThrottle } from '@hooks';
 import { alphaHexColor, compareMemo, isIos, wait } from '@utilities';
 import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -53,46 +53,52 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
       return clonedOptions;
     }, [cancelButtonIndex, props.options]);
 
-    const onShow = useCallback(() => {
-      if (isIos()) {
-        // TODO: Add dismissActionSheet method to ActionSheetIOS
-        ActionSheetIOS.showActionSheetWithOptions(
-          {
-            ...props,
-            title: title ? (t(title) as string) : undefined,
-            message: message ? (t(message) as string) : undefined,
-            options: props.options.map<string>(t),
-            userInterfaceStyle: theme === 'auto' ? colorScheme || 'light' : theme,
-            tintColor: tintColor || colors.primaryText,
-            cancelButtonIndex,
-          },
-          onSelect,
-        );
-        return;
-      }
+    const onShow = useThrottle(
+      () => {
+        if (isIos()) {
+          // TODO: Add dismissActionSheet method to ActionSheetIOS
+          ActionSheetIOS.showActionSheetWithOptions(
+            {
+              ...props,
+              title: title ? (t(title) as string) : undefined,
+              message: message ? (t(message) as string) : undefined,
+              options: props.options.map<string>(t),
+              userInterfaceStyle: theme === 'auto' ? colorScheme || 'light' : theme,
+              tintColor: tintColor || colors.primaryText,
+              cancelButtonIndex,
+            },
+            onSelect,
+          );
+          return;
+        }
 
-      setIsVisible(true);
-    }, [
-      cancelButtonIndex,
-      colorScheme,
-      colors.primaryText,
-      message,
-      onSelect,
-      props,
-      t,
-      theme,
-      tintColor,
-      title,
-    ]);
+        setIsVisible(true);
+      },
+      [
+        cancelButtonIndex,
+        colorScheme,
+        colors.primaryText,
+        message,
+        onSelect,
+        props,
+        t,
+        theme,
+        tintColor,
+        title,
+      ],
+      ONE_SECOND / 2,
+    );
 
-    const onHide = useCallback(
+    const onHide = useThrottle(
       async (buttonIndex = cancelButtonIndex) => {
-        if (isIos()) return;
-        setIsVisible(false);
-        await wait(ACTION_SHEET_ANIMATION_IN_TIMING);
-        onSelect(buttonIndex);
+        if (!isIos()) {
+          setIsVisible(false);
+          await wait(ACTION_SHEET_ANIMATION_IN_TIMING);
+          onSelect(buttonIndex);
+        }
       },
       [cancelButtonIndex, onSelect],
+      ONE_SECOND / 2,
     );
 
     const handleSelectOption = useCallback(

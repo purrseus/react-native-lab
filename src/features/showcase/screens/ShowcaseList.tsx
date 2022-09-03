@@ -1,21 +1,33 @@
-import { MultilineTextInput, Spacer, Text, TextField } from '@components/core';
-import { ScreenContainer } from '@components/custom';
+import { ListView, Spacer } from '@components/core';
+import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
 import { I18nText, ProtectedScreen } from '@core/types';
+import { useStyle } from '@hooks';
 import React from 'react';
+import { ListRenderItem } from 'react-native';
+import { ShowcaseItem } from '../components';
+import { createShowcaseListStyles } from '../styles';
 
-const ShowcaseList: ProtectedScreen<ProtectedScreenName.ShowcaseList> = () => {
+const data = [ProtectedScreenName.BottomSheets];
+
+const ShowcaseList: ProtectedScreen<ProtectedScreenName.ShowcaseList> = ({
+  navigation: { navigate },
+}) => {
+  const styles = useStyle(createShowcaseListStyles);
+
+  const renderItem: ListRenderItem<ProtectedScreenName> = ({ item }) => (
+    <ShowcaseItem title={item} onPress={() => navigate(item)} />
+  );
+
   return (
-    <ScreenContainer headerTitle={'Showcase list' as I18nText}>
-      <Text>ShowcaseList</Text>
-      <MultilineTextInput placeholder="common.cancel" />
-      <Spacer h={20} />
-      <TextField
-        label="common.cancel"
-        errorText="imagePicker.chooseFromLibrary"
-        placeholder="imagePicker.takePhoto"
+    <StackContainer headerTitle={'ShowcaseList' as I18nText}>
+      <ListView
+        data={data}
+        renderItem={renderItem}
+        contentContainerStyle={styles.scrollView}
+        ItemSeparatorComponent={() => <Spacer h={16} />}
       />
-    </ScreenContainer>
+    </StackContainer>
   );
 };
 
