@@ -5,10 +5,15 @@ import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
 import { compareMemo } from '@utilities';
 import React, { forwardRef, ReactNode } from 'react';
-import { StyleProp, TextInput as RNTextInput, ViewStyle } from 'react-native';
-import TextInput, { TextInputProps } from './TextInput';
+import {
+  StyleProp,
+  TextInput as RNTextInput,
+  TextInputProps as RNTextInputProps,
+  ViewStyle,
+} from 'react-native';
+import TextInput from './TextInput';
 
-export interface IconTextInputProps extends TextInputProps {
+export interface IconTextInputProps extends RNTextInputProps {
   IconLeftComponent?: ReactNode;
   IconRightComponent?: ReactNode;
   containerStyle?: StyleProp<ViewStyle>;

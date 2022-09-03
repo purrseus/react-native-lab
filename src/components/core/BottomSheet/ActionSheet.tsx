@@ -1,11 +1,9 @@
 /* eslint-disable react-native/split-platform-components */
 import { ONE_SECOND } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
-import { I18nText } from '@core/types';
 import { useAppSelector, useColor, useStyle, useThrottle } from '@hooks';
 import { alphaHexColor, compareMemo, isIos, wait } from '@utilities';
 import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import {
   ActionSheetIOS,
   ActionSheetIOSOptions,
@@ -28,9 +26,9 @@ export interface ActionSheetMethods {
 }
 
 export interface ActionSheetProps extends ActionSheetIOSOptions {
-  options: I18nText[];
-  title?: I18nText;
-  message?: I18nText;
+  options: string[];
+  title?: string;
+  message?: string;
   onSelect: (buttonIndex: number) => void;
 }
 
@@ -41,7 +39,6 @@ const DEFAULT_MARGIN = 8;
 const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
   forwardRef(({ onSelect, cancelButtonIndex = 0, tintColor, title, message, ...props }, ref) => {
     const colors = useColor();
-    const { t } = useTranslation();
     const styles = useStyle(createStyles);
     const { theme } = useAppSelector(state => state.common);
     const colorScheme = useColorScheme();
@@ -60,9 +57,9 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
           ActionSheetIOS.showActionSheetWithOptions(
             {
               ...props,
-              title: title ? (t(title) as string) : undefined,
-              message: message ? (t(message) as string) : undefined,
-              options: props.options.map<string>(t),
+              title: title ? title : undefined,
+              message: message ? message : undefined,
+              options: props.options,
               userInterfaceStyle: theme === 'auto' ? colorScheme || 'light' : theme,
               tintColor: tintColor || colors.primaryText,
               cancelButtonIndex,
@@ -81,7 +78,6 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
         message,
         onSelect,
         props,
-        t,
         theme,
         tintColor,
         title,
@@ -132,15 +128,11 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
           <View>
             <View style={styles.header}>
               {!!title && (
-                <Text style={[styles.headerText, !!message && styles.boldedTitle]}>
-                  {t(title) as string}
-                </Text>
+                <Text style={[styles.headerText, !!message && styles.boldedTitle]}>{title}</Text>
               )}
               {!!title && !!message && <Spacer h={4} />}
               {!!message && (
-                <Text style={[styles.headerText, !title && styles.boldedTitle]}>
-                  {t(message) as string}
-                </Text>
+                <Text style={[styles.headerText, !title && styles.boldedTitle]}>{message}</Text>
               )}
               {!!title && !!message && <Spacer h={4} />}
             </View>
@@ -148,18 +140,10 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
             <Divider height={0.5} color={styles.divider.color} />
           </View>
         ) : null,
-      [
-        message,
-        styles.boldedTitle,
-        styles.divider.color,
-        styles.header,
-        styles.headerText,
-        t,
-        title,
-      ],
+      [message, styles.boldedTitle, styles.divider.color, styles.header, styles.headerText, title],
     );
 
-    const renderOptionItem: ListRenderItem<I18nText> = useCallback(
+    const renderOptionItem: ListRenderItem<string> = useCallback(
       ({ item, index }) => (
         <Touchable onPress={handleSelectOption(index)} style={styles.option}>
           <Text
@@ -174,7 +158,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
                 styles.destructiveTitle,
             ]}
           >
-            {t(item) as string}
+            {item}
           </Text>
         </Touchable>
       ),
@@ -183,7 +167,6 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
         handleSelectOption,
         props.destructiveButtonIndex,
         props.options,
-        t,
         tintColor,
         styles.destructiveTitle,
         styles.option,
@@ -218,7 +201,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
                   !!tintColor && { color: tintColor as ColorValue },
                 ]}
               >
-                {t(props.options[cancelButtonIndex]) as string}
+                {props.options[cancelButtonIndex]}
               </Text>
             </Touchable>
           </View>

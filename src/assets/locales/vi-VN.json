@@ -18,6 +18,7 @@
   },
   "imagePicker": {
     "takePhoto": "Chụp ảnh",
-    "chooseFromLibrary": "Chọn ảnh từ Thư viện"
+    "chooseFromLibrary": "Chọn ảnh từ Thư viện",
+    "cancel": "Hủy"
   }
 }

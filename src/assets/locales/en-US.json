@@ -18,6 +18,7 @@
   },
   "imagePicker": {
     "takePhoto": "Take Photo...",
-    "chooseFromLibrary": "Choose from Library..."
+    "chooseFromLibrary": "Choose from Library...",
+    "cancel": "Cancel"
   }
 }

@@ -4,10 +4,10 @@ import { TabScreen } from '@core/types';
 import { globalStyles } from '@themes';
 import React from 'react';
 import { View } from 'react-native';
-import { useProfile } from '../hooks';
+import { useProfileContainer } from '../containers';
 
 const Profile: TabScreen<TabScreenName.Profile> = () => {
-  const profileContainer = useProfile();
+  const profileContainer = useProfileContainer();
 
   return (
     <View style={globalStyles.flexFillCenter}>

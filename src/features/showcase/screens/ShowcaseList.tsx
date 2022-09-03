@@ -1,34 +1,33 @@
-import { ListView, Spacer } from '@components/core';
+import { ListView } from '@components/core';
 import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
-import { I18nText, ProtectedScreen } from '@core/types';
+import { StyleCallbackParams } from '@core/interfaces';
+import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
 import React from 'react';
-import { ListRenderItem } from 'react-native';
-import { ShowcaseItem } from '../components';
-import { createShowcaseListStyles } from '../styles';
+import useShowcaseListContainer from '../containers/useShowcaseListContainer';
 
-const data = [ProtectedScreenName.BottomSheets];
-
-const ShowcaseList: ProtectedScreen<ProtectedScreenName.ShowcaseList> = ({
-  navigation: { navigate },
-}) => {
-  const styles = useStyle(createShowcaseListStyles);
-
-  const renderItem: ListRenderItem<ProtectedScreenName> = ({ item }) => (
-    <ShowcaseItem title={item} onPress={() => navigate(item)} />
-  );
+const ShowcaseList: ProtectedScreen<ProtectedScreenName.ShowcaseList> = props => {
+  const styles = useStyle(createStyles);
+  const { data, renderItem, ItemSeparatorComponent } = useShowcaseListContainer(props);
 
   return (
-    <StackContainer headerTitle={'ShowcaseList' as I18nText}>
+    <StackContainer headerTitle="ShowcaseList">
       <ListView
         data={data}
         renderItem={renderItem}
         contentContainerStyle={styles.scrollView}
-        ItemSeparatorComponent={() => <Spacer h={16} />}
+        ItemSeparatorComponent={ItemSeparatorComponent}
       />
     </StackContainer>
   );
 };
+
+const createStyles = ({ create }: StyleCallbackParams) =>
+  create({
+    scrollView: {
+      paddingVertical: 16,
+    },
+  });
 
 export default ShowcaseList;

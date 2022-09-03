@@ -4,14 +4,14 @@ import { UnprotectedScreen } from '@core/types';
 import { globalStyles } from '@themes';
 import React from 'react';
 import { Text, View } from 'react-native';
-import { useRegister } from '../hooks';
+import { useRegisterContainer } from '../containers';
 
 const Register: UnprotectedScreen<UnprotectedScreenName.Register> = props => {
-  const registerContainer = useRegister(props);
+  const { goBack } = useRegisterContainer(props);
 
   return (
     <View style={globalStyles.flexFillCenter}>
-      <Touchable onPress={registerContainer.goBack}>
+      <Touchable onPress={goBack}>
         <Text>Register</Text>
       </Touchable>
     </View>

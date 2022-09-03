@@ -1,19 +1,19 @@
 import { File } from '@core/interfaces';
-import { I18nText } from '@core/types';
+import { useAppTranslation } from '@hooks';
 import {
   checkCameraPermission,
   checkPhotoGalleryPermissions,
   compareMemo,
   logger,
 } from '@utilities';
-import React, { forwardRef, useCallback, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import {
   CameraOptions,
   ImageLibraryOptions,
   launchCamera,
   launchImageLibrary,
 } from 'react-native-image-picker';
-import ActionSheet, { ActionSheetProps, ActionSheetMethods } from './ActionSheet';
+import ActionSheet, { ActionSheetMethods, ActionSheetProps } from './ActionSheet';
 
 export type Image = string | File;
 type PickType = 'pick' | 'replace';
@@ -38,11 +38,7 @@ enum PickerOptions {
 }
 
 const DEFAULT_MAXIMUM_IMAGES = 10;
-const DEFAULT_OPTIONS: I18nText[] = [
-  'common.cancel',
-  'imagePicker.takePhoto',
-  'imagePicker.chooseFromLibrary',
-];
+
 const CAMERA_OPTIONS: CameraOptions & ImageLibraryOptions = {
   mediaType: 'photo',
   quality: 1,
@@ -69,9 +65,12 @@ const ImagePicker = compareMemo<ImagePickerMethods, ImagePickerProps>(
       },
       ref,
     ) => {
+      const { t } = useAppTranslation('imagePicker');
       const pickType = useRef<PickType | null>(null);
       const replaceIndex = useRef<number>(-1);
       const actionSheetRef = useRef<ActionSheetMethods | null>(null);
+
+      const options = useMemo(() => [t('cancel'), t('takePhoto'), t('chooseFromLibrary')], [t]);
 
       const resetValue = () => {
         pickType.current = null;
@@ -89,13 +88,13 @@ const ImagePicker = compareMemo<ImagePickerMethods, ImagePickerProps>(
             return;
           }
 
-          const options = {
+          const imageOptions = {
             ...CAMERA_OPTIONS,
             ...(buttonIndex === PickerOptions.CAMERA ? cameraOptions : imageLibraryOptions),
           };
 
           try {
-            const result = await selectOptions[buttonIndex](options);
+            const result = await selectOptions[buttonIndex](imageOptions);
             if (!result?.assets?.length) {
               throw result;
             } else {
@@ -176,7 +175,7 @@ const ImagePicker = compareMemo<ImagePickerMethods, ImagePickerProps>(
         <ActionSheet
           {...props}
           ref={actionSheetRef}
-          options={DEFAULT_OPTIONS}
+          options={options}
           onSelect={onSelect as (buttonIndex: number) => void}
         />
       );

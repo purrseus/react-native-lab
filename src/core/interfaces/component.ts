@@ -1,9 +1,8 @@
-import { I18nText } from '@core/types';
 import { ImageRequireSource } from 'react-native';
 
 export interface CommonFieldProps {
-  label?: I18nText;
-  errorText?: I18nText;
+  label?: string;
+  errorText?: string;
 }
 
 export interface HeaderAction {
