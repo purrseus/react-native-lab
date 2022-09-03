@@ -6,17 +6,17 @@ import React from 'react';
 import { ScrollView, StyleProp, View, ViewProps, ViewStyle } from 'react-native';
 import NavigationHeader, { NavigationHeaderProps } from './NavigationHeader';
 
-interface ScreenContainerProps extends ViewProps {
+interface StackContainerProps extends ViewProps {
   wrapperType?: 'scrollView' | 'view';
   headerTitle?: NavigationHeaderProps['title'];
   navigationHeaderProps?: NavigationHeaderProps;
   wrapperStyle?: StyleProp<ViewStyle>;
 }
 
-const ScreenContainer = compareMemo<ScreenContainerProps>(
+const StackContainer = compareMemo<StackContainerProps>(
   ({
     headerTitle,
-    wrapperType = 'scrollView',
+    wrapperType = 'view',
     navigationHeaderProps,
     wrapperStyle,
     style,
@@ -54,4 +54,4 @@ const createStyles = ({ create, edgeInsets }: StyleCallbackParams) =>
     },
   });
 
-export default ScreenContainer;
+export default StackContainer;

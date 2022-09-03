@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import { globalStyles } from '@themes';
 import { compareMemo, createShadow } from '@utilities';
 import React, { Fragment, useMemo } from 'react';
-import { View, ViewProps } from 'react-native';
+import { StatusBar, View, ViewProps } from 'react-native';
 
 export interface NavigationHeaderProps extends ViewProps {
   title: I18nText;
@@ -84,7 +84,7 @@ const createStyles = ({ create, edgeInsets, colors, fonts }: StyleCallbackParams
   create({
     rootContainer: {
       backgroundColor: colors.headerBackground,
-      paddingTop: edgeInsets.top,
+      paddingTop: edgeInsets.top || StatusBar.currentHeight || 0,
       paddingLeft: edgeInsets.left,
       paddingRight: edgeInsets.right,
       ...createShadow(colors.shadow, [0, 4], 0.1, 8, 16),
