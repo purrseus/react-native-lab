@@ -1,5 +1,6 @@
 import Alert, { AlertButton } from '@components/core/Modal/Alert';
 import { I18nText } from '@core/types';
+import i18n from '@i18n';
 import {
   check,
   checkMultiple,
@@ -36,7 +37,7 @@ const photoGalleryPermissions = platformSelect<Permission[]>(
 const cameraPermission = platformSelect(PERMISSIONS.ANDROID.CAMERA, PERMISSIONS.IOS.CAMERA);
 
 const showUnavailablePermissionAlert = (): false => {
-  Alert('permission.unavailableTitle');
+  Alert(i18n.t('permission.unavailableTitle'));
 
   return false;
 };
@@ -44,11 +45,8 @@ const showUnavailablePermissionAlert = (): false => {
 const showBlockedPermissionAlert = (permissionName?: I18nText): false => {
   if (permissionName)
     Alert(
-      {
-        key: 'permission.blockedTitle',
-        options: { permissionName: `$t(${permissionName})` },
-      },
-      'permission.blockedMessage',
+      i18n.t('permission.blockedTitle', { permissionName: `$t(${permissionName})` }),
+      i18n.t('permission.blockedMessage'),
       BLOCKED_BUTTONS,
     );
 

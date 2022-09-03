@@ -3,11 +3,11 @@ import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
 import React, { ForwardedRef, forwardRef, RefAttributes } from 'react';
 import { StyleProp, TextInput as RNTextInput, View, ViewStyle } from 'react-native';
-import LocalizedText from '../Text/LocalizedText';
 import MultilineTextInput, {
   MultilineTextInputProps,
-} from '../TextInput/Multiline/MultilineTextInput';
-import IconTextInput, { IconTextInputProps } from '../TextInput/Singleline/IconTextInput';
+} from '../Text/Input/Multiline/MultilineTextInput';
+import IconTextInput, { IconTextInputProps } from '../Text/Input/Singleline/IconTextInput';
+import Text from '../Text/Text';
 
 type CombinedTextInputProps<T extends boolean = false> = (T extends true
   ? MultilineTextInputProps
@@ -28,9 +28,9 @@ const _TextField = (
 
   return (
     <View style={containerStyle}>
-      {!!label && <LocalizedText t={label} style={styles.label} />}
+      {!!label && <Text style={styles.label}>{label}</Text>}
       <TextInputComponent {...props} ref={ref} containerStyle={wrapperStyle} />
-      {!!errorText && <LocalizedText t={errorText} style={styles.errorText} />}
+      {!!errorText && <Text style={styles.errorText}>{errorText}</Text>}
     </View>
   );
 };

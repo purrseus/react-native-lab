@@ -1,6 +1,5 @@
 import { DEFAULT_ICON_SIZE, HORIZONTAL_GRADIENT_COORDINATES } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
-import { I18nText } from '@core/types';
 import { useStyle } from '@hooks';
 import { alphaHexColor, compareMemo } from '@utilities';
 import React from 'react';
@@ -13,10 +12,10 @@ import {
   ViewStyle,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import ActivityIndicator from '../Loader/ActivityIndicator';
 import Icon, { IconProps } from '../Image/Icon';
-import LocalizedText from '../Text/LocalizedText';
+import ActivityIndicator from '../Loader/ActivityIndicator';
 import Spacer from '../Spacer/Spacer';
+import Text from '../Text/Text';
 import Touchable, { TouchableProps } from './Touchable';
 
 type SizeName = 'small' | 'medium' | 'large';
@@ -25,7 +24,7 @@ type ButtonSize = number;
 type TitleSize = number;
 
 interface ButtonProps extends TouchableProps {
-  title: I18nText;
+  title: string;
   size?: SizeName;
   type?: ButtonType;
   gradient?: boolean;
@@ -105,11 +104,12 @@ const Button = compareMemo<ButtonProps>(
               <Spacer w={rightIconSize + iconSpacing} />
             ) : null}
 
-            <LocalizedText
-              t={title}
+            <Text
               numberOfLines={1}
               style={[styles.title, styles[`${type}Color`], { fontSize: titleSize }, titleStyle]}
-            />
+            >
+              {title}
+            </Text>
 
             {hasRightIcon ? (
               <Icon

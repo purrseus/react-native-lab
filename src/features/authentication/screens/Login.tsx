@@ -4,20 +4,20 @@ import { UnprotectedScreen } from '@core/types';
 import { globalStyles } from '@themes';
 import React from 'react';
 import { View } from 'react-native';
-import { useLogin } from '../hooks';
+import { useLoginContainer } from '../containers';
 
 const Login: UnprotectedScreen<UnprotectedScreenName.Login> = props => {
-  const loginContainer = useLogin(props);
+  const { handleLogin, navigateToRegister } = useLoginContainer(props);
 
   return (
     <View style={globalStyles.flexFillCenter}>
-      <Touchable onPress={loginContainer.handleLogin}>
+      <Touchable onPress={handleLogin}>
         <Text>Login</Text>
       </Touchable>
 
       <Spacer h={32} />
 
-      <Touchable onPress={loginContainer.navigateToRegister}>
+      <Touchable onPress={navigateToRegister}>
         <Text>Go to Register</Text>
       </Touchable>
     </View>

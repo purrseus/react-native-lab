@@ -4,10 +4,10 @@ import { TabScreen } from '@core/types';
 import { globalStyles } from '@themes';
 import React from 'react';
 import { View } from 'react-native';
-import { useHome } from '../hooks';
+import { useHomeContainer } from '../containers';
 
 const Home: TabScreen<TabScreenName.Home> = props => {
-  const homeContainer = useHome(props);
+  const homeContainer = useHomeContainer(props);
 
   return (
     <View style={globalStyles.flexFillCenter}>

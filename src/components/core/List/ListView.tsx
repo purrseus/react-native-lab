@@ -21,23 +21,27 @@ const _ListView = (
   }: ListViewProps,
   ref: ForwardedRef<FlatList>,
 ) => {
-  const keyRef = useRef<string | undefined>();
+  const keyRef = useRef<string | null>(null);
 
   const handleKeyExtractor = useCallback((item: Record<string, any>, index: number) => {
+    // Use key if it exists
     if (keyRef.current) {
       return item[keyRef.current];
     }
 
-    if (keyRef.current === undefined) {
+    // Find the key matching "id" in the first run
+    if (keyRef.current === null) {
       for (const key in item) {
         if (key.match(/id/gi)?.length) {
           keyRef.current = key;
           return `${item[key]}`;
         }
       }
+
+      // If any key is not matched, always return the index
+      keyRef.current = '';
     }
 
-    if (keyRef.current === undefined) keyRef.current = '';
     return `${index}`;
   }, []);
 

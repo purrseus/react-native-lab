@@ -1,14 +1,13 @@
 import { icons } from '@assets';
-import { BottomTabSpacer, Icon, LocalizedText, Row, Spacer, Touchable } from '@components/core';
+import { BottomTabSpacer, Icon, Row, Spacer, Text, Touchable } from '@components/core';
 import { HORIZONTAL_SAFETY_EDGES, TAB_BAR_HEIGHT } from '@core/constants';
 import { TabScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
-import { I18nText } from '@core/types';
-import { useKeyboard, useStyle } from '@hooks';
+import { useAppTranslation, useKeyboard, useStyle } from '@hooks';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { colors as Colors, globalStyles } from '@themes';
 import { createShadow } from '@utilities';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ColorValue, ImageRequireSource, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -17,41 +16,45 @@ interface TabUI {
   icon: ImageRequireSource;
   focusedIcon: ImageRequireSource;
   focusedColor: ColorValue;
-  label: I18nText;
+  label: string;
 }
-
-const tabUI: Record<TabScreenName, TabUI> = {
-  [TabScreenName.Home]: {
-    icon: icons.bottomTab.home,
-    focusedIcon: icons.bottomTab.homeFocused,
-    focusedColor: Colors.purple,
-    label: 'tab.home',
-  },
-  [TabScreenName.Messages]: {
-    icon: icons.bottomTab.message,
-    focusedIcon: icons.bottomTab.messageFocused,
-    focusedColor: Colors.orange,
-    label: 'tab.messages',
-  },
-  [TabScreenName.Notification]: {
-    icon: icons.bottomTab.notification,
-    focusedIcon: icons.bottomTab.notificationFocused,
-    focusedColor: Colors.red,
-    label: 'tab.notification',
-  },
-  [TabScreenName.Profile]: {
-    icon: icons.bottomTab.profile,
-    focusedIcon: icons.bottomTab.profileFocused,
-    focusedColor: Colors.blue,
-    label: 'tab.profile',
-  },
-};
 
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 
 const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
   const styles = useStyle(createStyles);
+  const { t } = useAppTranslation('tab');
   const { keyboardShown } = useKeyboard();
+
+  const tabUI: Record<TabScreenName, TabUI> = useMemo(
+    () => ({
+      [TabScreenName.Home]: {
+        icon: icons.bottomTab.home,
+        focusedIcon: icons.bottomTab.homeFocused,
+        focusedColor: Colors.purple,
+        label: t('home'),
+      },
+      [TabScreenName.Messages]: {
+        icon: icons.bottomTab.message,
+        focusedIcon: icons.bottomTab.messageFocused,
+        focusedColor: Colors.orange,
+        label: t('messages'),
+      },
+      [TabScreenName.Notification]: {
+        icon: icons.bottomTab.notification,
+        focusedIcon: icons.bottomTab.notificationFocused,
+        focusedColor: Colors.red,
+        label: t('notification'),
+      },
+      [TabScreenName.Profile]: {
+        icon: icons.bottomTab.profile,
+        focusedIcon: icons.bottomTab.profileFocused,
+        focusedColor: Colors.blue,
+        label: t('profile'),
+      },
+    }),
+    [t],
+  );
 
   const tabBarAnimatedStyle = useAnimatedStyle(
     () => ({
@@ -112,10 +115,11 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
                 style={[styles.icon, isFocused && { tintColor: focusedColor as string }]}
               />
               <Spacer h={4} />
-              <LocalizedText
+              <Text
                 style={[styles.label, isFocused && [{ color: focusedColor }, styles.focusedLabel]]}
-                t={label}
-              />
+              >
+                {label}
+              </Text>
             </Touchable>
           );
         })}

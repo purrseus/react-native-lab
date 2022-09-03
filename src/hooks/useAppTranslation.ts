@@ -1,11 +1,14 @@
-import { DEFAULT_NAMESPACE } from '@core/constants';
-import { I18nText, Language } from '@core/types';
-import { useTranslation } from 'react-i18next';
+import { Language } from '@core/types';
+import { DefaultNamespace, KeyPrefix, Namespace, useTranslation } from 'react-i18next';
 
-const useAppTranslation = (keyPrefix?: I18nText) =>
-  useTranslation(
-    keyPrefix ? (DEFAULT_NAMESPACE as Language) : undefined,
-    keyPrefix ? { keyPrefix } : undefined,
-  );
+const useAppTranslation = <
+  N extends Namespace = DefaultNamespace<Language>,
+  TKPrefix extends KeyPrefix<N> = undefined,
+>(
+  keyPrefix: TKPrefix,
+) =>
+  useTranslation<N, TKPrefix>('en-US' as N, {
+    keyPrefix,
+  });
 
 export default useAppTranslation;

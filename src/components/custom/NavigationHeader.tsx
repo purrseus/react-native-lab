@@ -1,12 +1,11 @@
 import { icons } from '@assets';
-import { Icon, LocalizedText, Row, Spacer, Touchable } from '@components/core';
+import { Icon, Row, Spacer, Text, Touchable } from '@components/core';
 import {
   DEFAULT_HEADER_ICON_SIZE,
   DEFAULT_HORIZONTAL_EDGE_SPACING,
   HEADER_HEIGHT,
 } from '@core/constants';
 import { HeaderAction, StyleCallbackParams } from '@core/interfaces';
-import { I18nText } from '@core/types';
 import { useLayout, useStyle } from '@hooks';
 import { useNavigation } from '@react-navigation/native';
 import { globalStyles } from '@themes';
@@ -15,7 +14,7 @@ import React, { Fragment, useMemo } from 'react';
 import { StatusBar, View, ViewProps } from 'react-native';
 
 export interface NavigationHeaderProps extends ViewProps {
-  title: I18nText;
+  title: string;
   rightActions?: HeaderAction[];
   actionSeparatorWidth?: number;
 }
@@ -27,8 +26,6 @@ const NavigationHeader = compareMemo<NavigationHeaderProps>(
     const { layout: sideLayout, handleLayout: handleSideLayout } = useLayout({
       flexibleLayout: false,
     });
-
-    const handleGoBack = canGoBack() ? goBack : undefined;
 
     const RightActions = useMemo(
       () =>
@@ -46,6 +43,8 @@ const NavigationHeader = compareMemo<NavigationHeaderProps>(
         }),
       [rightActions, actionSeparatorWidth],
     );
+
+    const handleGoBack = canGoBack() ? goBack : undefined;
 
     return (
       <View {...props} style={styles.rootContainer}>
@@ -65,7 +64,9 @@ const NavigationHeader = compareMemo<NavigationHeaderProps>(
           </Row>
 
           <Row style={globalStyles.flexFillCenter}>
-            <LocalizedText t={title} numberOfLines={1} style={styles.title} />
+            <Text numberOfLines={1} style={styles.title}>
+              {title}
+            </Text>
           </Row>
 
           <Row

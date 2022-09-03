@@ -3,7 +3,7 @@ import { UnprotectedScreen } from '@core/types';
 import { useAppDispatch } from '@hooks';
 import { authActions } from '@store/slices/auth';
 
-const useLogin = ({
+const useLoginContainer = ({
   navigation,
 }: Parameters<UnprotectedScreen<UnprotectedScreenName.Login>>[0]) => {
   const dispatch = useAppDispatch();
@@ -22,4 +22,4 @@ const useLogin = ({
   return { handleLogin, navigateToRegister };
 };
 
-export default useLogin;
+export default useLoginContainer;

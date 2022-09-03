@@ -1,12 +1,18 @@
-import { compareMemo, platformSelect } from '@utilities';
-import React, { forwardRef } from 'react';
-import TextInput, { TextInputProps } from '../Singleline/TextInput';
-import { StyleProp, TextInput as RNTextInput, View, ViewStyle } from 'react-native';
+import { MAX_HEIGHT_INPUT, MIN_HEIGHT_INPUT } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { MAX_HEIGHT_INPUT, MIN_HEIGHT_INPUT } from '@core/constants';
+import { compareMemo, platformSelect } from '@utilities';
+import React, { forwardRef } from 'react';
+import {
+  StyleProp,
+  TextInput as RNTextInput,
+  TextInputProps as RNTextInputProps,
+  View,
+  ViewStyle,
+} from 'react-native';
+import TextInput from '../Singleline/TextInput';
 
-export interface MultilineTextInputProps extends TextInputProps {
+export interface MultilineTextInputProps extends RNTextInputProps {
   dynamicHeight?: boolean;
   containerStyle?: StyleProp<ViewStyle>;
 }

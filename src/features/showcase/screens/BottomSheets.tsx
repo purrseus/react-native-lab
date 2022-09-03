@@ -1,31 +1,23 @@
-import { Alert, BottomSheet, Divider, ImagePicker, Spacer, Text } from '@components/core';
-import ActionSheet, { ActionSheetMethods } from '@components/core/BottomSheet/ActionSheet';
-import { Image, ImagePickerMethods } from '@components/core/BottomSheet/ImagePicker';
+import { BottomSheet, ImagePicker, Text } from '@components/core';
+import ActionSheet from '@components/core/BottomSheet/ActionSheet';
 import { StackContainer } from '@components/custom';
-import { I18nText } from '@core/types';
-import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
+import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { logger, referenceTypeFormatter } from '@utilities';
-import React, { useEffect, useRef, useState } from 'react';
+import { logger } from '@utilities';
+import React from 'react';
 import { ShowcaseItem } from '../components';
-import { createBottomSheetsStyles } from '../styles';
+import useBottomSheetContainer from '../containers/useBottomSheetContainer';
 
 const BottomSheets = () => {
-  const styles = useStyle(createBottomSheetsStyles);
-  const bottomSheetRef = useRef<BottomSheetMethods | null>(null);
-  const actionSheetRef = useRef<ActionSheetMethods | null>(null);
-  const imagePickerRef = useRef<ImagePickerMethods | null>(null);
-  const [images, setImages] = useState<Image[]>([]);
-
-  useEffect(() => {
-    if (images.length) Alert(referenceTypeFormatter(images) as I18nText);
-  }, [images]);
+  const styles = useStyle(createStyles);
+  const { bottomSheetRef, actionSheetRef, imagePickerRef, images, setImages, Separator } =
+    useBottomSheetContainer();
 
   return (
     <>
       <StackContainer
         wrapperType="scrollView"
-        headerTitle={'BottomSheet' as I18nText}
+        headerTitle="BottomSheet"
         wrapperStyle={styles.scrollView}
       >
         <ShowcaseItem
@@ -33,15 +25,11 @@ const BottomSheets = () => {
           onPress={() => bottomSheetRef.current?.snapToIndex(0)}
         />
 
-        <Spacer h={16} />
-        <Divider />
-        <Spacer h={16} />
+        <Separator />
 
         <ShowcaseItem title="Show ActionSheet" onPress={() => actionSheetRef.current?.show()} />
 
-        <Spacer h={16} />
-        <Divider />
-        <Spacer h={16} />
+        <Separator />
 
         <ShowcaseItem title="Show ImagePicker" onPress={() => imagePickerRef.current?.pick()} />
       </StackContainer>
@@ -50,15 +38,18 @@ const BottomSheets = () => {
         <Text>This is a BottomSheet</Text>
       </BottomSheet>
 
-      <ActionSheet
-        ref={actionSheetRef}
-        options={['Cancel', 'Hello', 'World'] as unknown as I18nText[]}
-        onSelect={logger}
-      />
+      <ActionSheet ref={actionSheetRef} options={['Cancel', 'Hello', 'World']} onSelect={logger} />
 
       <ImagePicker ref={imagePickerRef} images={images} onChangeImage={setImages} />
     </>
   );
 };
+
+const createStyles = ({ create }: StyleCallbackParams) =>
+  create({
+    scrollView: {
+      paddingVertical: 16,
+    },
+  });
 
 export default BottomSheets;

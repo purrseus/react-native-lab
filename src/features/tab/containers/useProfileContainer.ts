@@ -1,7 +1,7 @@
 import { useAppDispatch } from '@hooks';
 import { authActions } from '@store/slices/auth';
 
-const useProfile = () => {
+const useProfileContainer = () => {
   const dispatch = useAppDispatch();
 
   const logout = () => dispatch(authActions.logOut());
@@ -9,4 +9,4 @@ const useProfile = () => {
   return { logout };
 };
 
-export default useProfile;
+export default useProfileContainer;
