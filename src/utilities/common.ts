@@ -68,12 +68,12 @@ export const resizeImage = (
 
 export const deepAccessObject = <T extends Record<string, any>, V>(
   target: T,
-  arrKey: string[],
+  keyArray: string[],
 ): T | V => {
-  if (!arrKey.length) return target;
-  return arrKey.reduce((previous, current) => {
-    if (!!previous && typeof previous === 'object' && current in previous) return previous[current];
-    return previous;
+  if (!keyArray.length) return target;
+  return keyArray.reduce((object, key) => {
+    if (!!object && typeof object === 'object' && key in object) return object[key];
+    return object;
   }, target);
 };
 

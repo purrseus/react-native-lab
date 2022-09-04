@@ -18,11 +18,10 @@ const setupCodePush = () => {
 
   writeFileSync('android/app/src/main/assets/appcenter-config.json', json);
   writeFileSync('ios/AppCenter-Config.plist', plist);
-  console.log('Setup AppCenter... done! ✨✨✨');
+  console.log('Setup AppCenter... Done! ✨✨✨');
 };
 
 (() => {
   setupCodePush();
-  execSyncInherit('yarn prepare');
-  execSyncInherit('yarn postinstall');
+  execSyncInherit('yarn prepare && yarn postinstall');
 })();
