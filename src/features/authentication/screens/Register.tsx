@@ -1,4 +1,4 @@
-import { Touchable } from '@components/core';
+import { PressArea } from '@components/core';
 import { UnprotectedScreenName } from '@core/enums';
 import { UnprotectedScreen } from '@core/types';
 import { globalStyles } from '@themes';
@@ -11,9 +11,9 @@ const Register: UnprotectedScreen<UnprotectedScreenName.Register> = props => {
 
   return (
     <View style={globalStyles.flexFillCenter}>
-      <Touchable onPress={goBack}>
+      <PressArea onPress={goBack}>
         <Text>Register</Text>
-      </Touchable>
+      </PressArea>
     </View>
   );
 };

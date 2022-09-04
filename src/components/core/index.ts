@@ -2,7 +2,7 @@ export { default as ActionSheet } from './BottomSheet/ActionSheet';
 export { default as BottomSheet } from './BottomSheet/BottomSheet';
 export { default as ImagePicker } from './BottomSheet/ImagePicker';
 export { default as Button } from './Button/Button';
-export { default as Touchable } from './Button/Touchable';
+export { default as PressArea } from './Button/PressArea';
 export { default as Divider } from './Divider';
 export { default as Field } from './Form/Field';
 export { default as TextField } from './Form/TextField';

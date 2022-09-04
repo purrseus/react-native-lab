@@ -12,7 +12,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import Touchable from '../Button/Touchable';
+import PressArea from '../Button/PressArea';
 import Divider from '../Divider';
 import ListView from '../List/ListView';
 import Modal from '../Modal/Modal';
@@ -145,7 +145,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
 
     const renderOptionItem: ListRenderItem<string> = useCallback(
       ({ item, index }) => (
-        <Touchable onPress={handleSelectOption(index)} style={styles.option}>
+        <PressArea onPress={handleSelectOption(index)} style={styles.option}>
           <Text
             adjustsFontSizeToFit
             numberOfLines={1}
@@ -160,7 +160,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
           >
             {item}
           </Text>
-        </Touchable>
+        </PressArea>
       ),
       [
         options,
@@ -193,7 +193,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
           />
           <Spacer h={DEFAULT_MARGIN} />
           <View style={styles.optionContainer}>
-            <Touchable onPress={handleSelectOption(cancelButtonIndex, true)} style={styles.option}>
+            <PressArea onPress={handleSelectOption(cancelButtonIndex, true)} style={styles.option}>
               <Text
                 style={[
                   styles.optionTitle,
@@ -203,7 +203,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
               >
                 {props.options[cancelButtonIndex]}
               </Text>
-            </Touchable>
+            </PressArea>
           </View>
         </View>
       </Modal>

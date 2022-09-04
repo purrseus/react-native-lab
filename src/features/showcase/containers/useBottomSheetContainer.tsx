@@ -12,7 +12,8 @@ const useBottomSheetContainer = () => {
   const [images, setImages] = useState<Image[]>([]);
 
   useEffect(() => {
-    if (images.length) Alert(referenceTypeFormatter(images));
+    if (images.length)
+      Alert(referenceTypeFormatter(typeof images[0] !== 'string' ? images[0].uri : images[0]));
   }, [images]);
 
   const Separator = useCallback(

@@ -3,7 +3,7 @@ import { execSyncInherit, getArguments } from './utils.mjs';
 (() => {
   let command = '';
   const folderNames = ['components', 'containers', 'screens', 'utilities'];
-  const [featureFolderName, _targetDir = ''] = getArguments();
+  const [featureFolderName, _targetDir = '.'] = getArguments();
   if (!featureFolderName) throw new SyntaxError('Missing folder name!');
   const targetDir = _targetDir.replace(/\/+$/g, '');
 

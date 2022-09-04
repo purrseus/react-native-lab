@@ -5,7 +5,7 @@ import { CommonSize, Language } from '@core/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ForwardRefExoticComponent, memo, PropsWithoutRef, RefAttributes } from 'react';
 import isEqual from 'react-fast-compare';
-import { DevSettings, Insets, ShadowStyleIOS, UIManager, ViewStyle } from 'react-native';
+import { DevSettings, ShadowStyleIOS, UIManager, ViewStyle } from 'react-native';
 import { getLocales } from 'react-native-localize';
 import { isAndroid } from './os';
 
@@ -26,13 +26,6 @@ export const wait = (timeout = ONE_SECOND) =>
   new Promise<void>(resolve => setTimeout(resolve, timeout));
 
 export const createArray = (length = 0) => Array.from({ length }, (_, i) => i);
-
-export const createHitSlop = (insetValue = 8): Insets => ({
-  top: insetValue,
-  left: insetValue,
-  right: insetValue,
-  bottom: insetValue,
-});
 
 export const createShadow = (
   shadowColor = 'transparent',

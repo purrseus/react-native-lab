@@ -1,12 +1,12 @@
 import { Measure } from '@core/interfaces';
 import { useEffect, useRef, useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 
 interface Options {
   flexiblePosition?: boolean;
 }
 
-const useMeasure = <T extends TouchableOpacity | View>({ flexiblePosition = true }: Options) => {
+const useMeasure = <T extends View>({ flexiblePosition = true }: Options) => {
   const ref = useRef<T | null>(null);
   const [measure, setMeasure] = useState<Measure>({
     x: 0,
