@@ -4,9 +4,10 @@ export interface AlertButton extends RNAlertButton {
   text?: string;
 }
 
-const Alert = (title: string, message?: string, buttons?: AlertButton[]) =>
+const Alert = (...[title, message, buttons, options]: Parameters<typeof RNAlert.alert>) =>
   RNAlert.alert(title, message, buttons, {
     cancelable: false,
+    ...options,
   });
 
 export default Alert;

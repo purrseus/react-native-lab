@@ -12,7 +12,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import ActivityIndicator from './Loader/ActivityIndicator';
-import Touchable from './Button/Touchable';
+import PressArea from './Button/PressArea';
 
 interface SwitchProps {
   value: boolean;
@@ -30,7 +30,7 @@ const TRACK_HEIGHT = 32;
 const THUMB_SIZE = TRACK_HEIGHT;
 const INPUT_RANGE: ReadonlyArray<number> = [0, 1];
 
-const AnimatedTouchable = Animated.createAnimatedComponent(Touchable);
+const AnimatedPressArea = Animated.createAnimatedComponent(PressArea);
 
 const Switch = compareMemo<SwitchProps>(
   ({
@@ -81,8 +81,7 @@ const Switch = compareMemo<SwitchProps>(
 
     return (
       <View style={[styles.container, style]}>
-        <AnimatedTouchable
-          activeOpacity={1}
+        <AnimatedPressArea
           onPress={handleChangeValue}
           disabled={disabled || loading}
           style={[styles.track, trackAnimatedStyle]}
@@ -99,7 +98,7 @@ const Switch = compareMemo<SwitchProps>(
               )}
             </Animated.View>
           </View>
-        </AnimatedTouchable>
+        </AnimatedPressArea>
       </View>
     );
   },
@@ -117,8 +116,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
       width: TRACK_WIDTH,
       height: TRACK_HEIGHT,
       borderRadius: TRACK_HEIGHT / 2,
-      flexDirection: 'row',
-      alignItems: 'center',
+      justifyContent: 'center',
     },
     trackColor: [colors.primary, colors.switchTrackInactive] as ViewStyle,
     thumbColor: [colors.white, colors.darkGray] as ViewStyle,

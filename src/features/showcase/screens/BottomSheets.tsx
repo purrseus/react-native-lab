@@ -24,22 +24,20 @@ const BottomSheets = () => {
           title="Show BottomSheet"
           onPress={() => bottomSheetRef.current?.snapToIndex(0)}
         />
-
         <Separator />
-
         <ShowcaseItem title="Show ActionSheet" onPress={() => actionSheetRef.current?.show()} />
-
         <Separator />
-
         <ShowcaseItem title="Show ImagePicker" onPress={() => imagePickerRef.current?.pick()} />
       </StackContainer>
 
       <BottomSheet ref={bottomSheetRef} index={-1} snapPoints={['30%', '60%', '100%']}>
         <Text>This is a BottomSheet</Text>
       </BottomSheet>
-
-      <ActionSheet ref={actionSheetRef} options={['Cancel', 'Hello', 'World']} onSelect={logger} />
-
+      <ActionSheet
+        ref={actionSheetRef}
+        options={['Cancel', 'Option 1', 'Option 2']}
+        onSelect={logger}
+      />
       <ImagePicker ref={imagePickerRef} images={images} onChangeImage={setImages} />
     </>
   );

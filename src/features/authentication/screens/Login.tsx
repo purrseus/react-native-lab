@@ -1,4 +1,4 @@
-import { Spacer, Text, Touchable } from '@components/core';
+import { Spacer, Text, PressArea } from '@components/core';
 import { UnprotectedScreenName } from '@core/enums';
 import { UnprotectedScreen } from '@core/types';
 import { globalStyles } from '@themes';
@@ -11,15 +11,15 @@ const Login: UnprotectedScreen<UnprotectedScreenName.Login> = props => {
 
   return (
     <View style={globalStyles.flexFillCenter}>
-      <Touchable onPress={handleLogin}>
+      <PressArea onPress={handleLogin}>
         <Text>Login</Text>
-      </Touchable>
+      </PressArea>
 
       <Spacer h={32} />
 
-      <Touchable onPress={navigateToRegister}>
+      <PressArea onPress={navigateToRegister}>
         <Text>Go to Register</Text>
-      </Touchable>
+      </PressArea>
     </View>
   );
 };

@@ -1,5 +1,5 @@
 import { icons } from '@assets';
-import { Icon, Row, Spacer, Text, Touchable } from '@components/core';
+import { Icon, Row, Spacer, Text, PressArea } from '@components/core';
 import {
   DEFAULT_HEADER_ICON_SIZE,
   DEFAULT_HORIZONTAL_EDGE_SPACING,
@@ -34,9 +34,9 @@ const NavigationHeader = compareMemo<NavigationHeaderProps>(
 
           return (
             <Fragment key={index}>
-              <Touchable hitSlop={actionSeparatorWidth / 2} onPress={onPress}>
+              <PressArea hitSlop={actionSeparatorWidth / 2} onPress={onPress}>
                 <Icon source={icon} size={size || DEFAULT_HEADER_ICON_SIZE} />
-              </Touchable>
+              </PressArea>
               {showSpacerSeparator && <Spacer w={actionSeparatorWidth} />}
             </Fragment>
           );
@@ -57,9 +57,9 @@ const NavigationHeader = compareMemo<NavigationHeaderProps>(
             ]}
           >
             {handleGoBack && (
-              <Touchable hitSlop={actionSeparatorWidth / 2} onPress={handleGoBack}>
+              <PressArea hitSlop={actionSeparatorWidth / 2} onPress={handleGoBack}>
                 <Icon source={icons.header.back} size={DEFAULT_HEADER_ICON_SIZE} />
-              </Touchable>
+              </PressArea>
             )}
           </Row>
 

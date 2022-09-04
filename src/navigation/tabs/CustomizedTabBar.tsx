@@ -1,5 +1,5 @@
 import { icons } from '@assets';
-import { BottomTabSpacer, Icon, Row, Spacer, Text, Touchable } from '@components/core';
+import { BottomTabSpacer, Icon, Row, Spacer, Text, PressArea } from '@components/core';
 import { HORIZONTAL_SAFETY_EDGES, TAB_BAR_HEIGHT } from '@core/constants';
 import { TabScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
@@ -99,7 +99,7 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
           };
 
           return (
-            <Touchable
+            <PressArea
               key={index}
               accessibilityRole="button"
               accessibilityState={isFocused ? { selected: true } : {}}
@@ -120,7 +120,7 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
               >
                 {label}
               </Text>
-            </Touchable>
+            </PressArea>
           );
         })}
       </Row>
