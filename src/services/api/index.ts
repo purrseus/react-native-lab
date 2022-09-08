@@ -18,6 +18,8 @@ const UNAUTHORIZED_STATUS = 401;
 const promiseQueue: RequestPromise[] = [];
 
 const handlePromiseQueue = async (accessToken?: string, error?: any) => {
+  if (!promiseQueue.length) return;
+
   for (const promise of promiseQueue) {
     if (accessToken && !error) {
       promise.resolve(accessToken);
@@ -91,18 +93,18 @@ http.interceptors.response.use(
     });
 
     const originalRequest: OriginalRequest = responseError?.config;
-
-    if (originalRequest?.retry) return Promise.reject(responseError);
-
     const isUnauthorized = responseError?.response?.status === UNAUTHORIZED_STATUS;
 
-    if (isUnauthorized && !!originalRequest?.headers) {
+    const shouldHandleToken =
+      isUnauthorized && !!originalRequest?.headers && !originalRequest?.retry;
+
+    if (shouldHandleToken) {
       // Use accessToken from global state if originalRequest.headers.Authorization is undefined
-      if (!originalRequest.headers.Authorization) {
+      if (!originalRequest.headers!.Authorization) {
         const { accessToken } = store.getState().auth;
         if (accessToken) {
           setDefaultAccessToken(accessToken);
-          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+          originalRequest.headers!.Authorization = `Bearer ${accessToken}`;
           return http(originalRequest);
         }
       }
@@ -114,7 +116,7 @@ http.interceptors.response.use(
             promiseQueue.push({ resolve, reject });
           });
 
-          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+          originalRequest.headers!.Authorization = `Bearer ${accessToken}`;
           return http(originalRequest);
         } catch (error) {
           return Promise.reject(error);
@@ -130,7 +132,7 @@ http.interceptors.response.use(
 
         if (accessToken) {
           setDefaultAccessToken(accessToken);
-          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+          originalRequest.headers!.Authorization = `Bearer ${accessToken}`;
 
           handlePromiseQueue(accessToken);
           return http(originalRequest);

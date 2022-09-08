@@ -2,13 +2,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DEFAULT_THROTTLE_SETTINGS, ONE_SECOND } from '@core/constants';
 import { throttle } from 'lodash';
-import { useCallback } from 'react';
+import { DependencyList, useCallback } from 'react';
 
-const useThrottle = (
-  callback: (...args: any) => any,
-  dependencies: any[] = [],
+const useThrottle = <T extends (...args: any) => any>(
+  callback: T,
+  deps: DependencyList = [],
   wait = ONE_SECOND,
   throttleSettings = DEFAULT_THROTTLE_SETTINGS,
-) => useCallback(throttle(callback, wait, throttleSettings), dependencies);
+) => useCallback(throttle<T>(callback, wait, throttleSettings), deps);
 
 export default useThrottle;

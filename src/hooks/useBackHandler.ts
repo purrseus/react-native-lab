@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useFocusEffect } from '@react-navigation/native';
-import { useCallback } from 'react';
+import { DependencyList, useCallback } from 'react';
 import { BackHandler, BackHandlerStatic } from 'react-native';
 
 const useBackHandler = (
   onBackPress: (BackHandler: BackHandlerStatic) => boolean | null | undefined,
+  deps: DependencyList = [],
 ) => {
   useFocusEffect(
     useCallback(() => {
@@ -12,7 +14,7 @@ const useBackHandler = (
       );
 
       return () => subscription.remove();
-    }, [onBackPress]),
+    }, deps),
   );
 };
 
