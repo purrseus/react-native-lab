@@ -53,7 +53,6 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
     const onShow = useThrottle(
       () => {
         if (isIos()) {
-          // TODO: Add dismissActionSheet method to ActionSheetIOS
           ActionSheetIOS.showActionSheetWithOptions(
             {
               ...props,

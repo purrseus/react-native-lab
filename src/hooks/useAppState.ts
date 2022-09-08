@@ -1,9 +1,14 @@
-import { EffectCallback, useEffect, useRef } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { DependencyList, EffectCallback, useEffect, useRef } from 'react';
 import { AppState } from 'react-native';
 
 const INACTIVE_REGEX = /inactive|background/;
 
-const useAppState = (onActive?: EffectCallback, onInactive?: EffectCallback) => {
+const useAppState = (
+  onActive?: EffectCallback,
+  onInactive?: EffectCallback,
+  deps: DependencyList = [],
+) => {
   const currentAppState = useRef(AppState.currentState);
 
   useEffect(() => {
@@ -14,7 +19,7 @@ const useAppState = (onActive?: EffectCallback, onInactive?: EffectCallback) => 
     });
 
     return () => subscription.remove();
-  }, [onActive, onInactive]);
+  }, deps);
 };
 
 export default useAppState;
