@@ -20,11 +20,7 @@ export interface PressAreaProps extends PressableProps {
 
 const PressArea = compareMemo<View, PressAreaProps>(
   forwardRef(({ throttle = ONE_SECOND / 2, onPress, stateStyle, style, ...props }, ref) => {
-    const handleOnPress = useThrottle(
-      onPress as NonNullable<PressAreaProps['onPress']>,
-      [onPress],
-      throttle,
-    );
+    const handleOnPress = useThrottle(onPress || (() => null), [onPress], throttle);
 
     return (
       <Pressable
@@ -33,7 +29,7 @@ const PressArea = compareMemo<View, PressAreaProps>(
         android_disableSound={true}
         android_ripple={null}
         pressRetentionOffset={(props.hitSlop || 0) * 2}
-        onPress={throttle && onPress ? handleOnPress : onPress}
+        onPress={throttle ? handleOnPress : onPress}
         style={stateStyle ? state => [style, stateStyle(state)] : style}
       />
     );

@@ -73,12 +73,19 @@ const Button = compareMemo<ButtonProps>(
       ? iconSize
       : new Array(2).fill(iconSize || DEFAULT_ICON_SIZE);
     const styles = useStyle(createStyles(color));
+    const colorStyle = styles[`${disabled ? 'disabled' : type}Color`];
 
     return (
       <PressArea
         {...props}
         disabled={loading || disabled}
-        style={[styles.container, styles[type], { height: buttonSize }, style]}
+        style={[
+          styles.container,
+          styles[type],
+          { height: buttonSize },
+          !!disabled && styles.disabled,
+          style,
+        ]}
       >
         {gradient && (
           <LinearGradient
@@ -89,16 +96,18 @@ const Button = compareMemo<ButtonProps>(
         )}
 
         {loading ? (
-          <ActivityIndicator color={styles[`${type}Color`].color} />
+          <ActivityIndicator color={colorStyle.color} />
         ) : (
           <>
             {hasLeftIcon ? (
               <Icon
                 source={iconLeft}
                 size={leftIconSize}
-                tintColor={styles[`${type}Color`].color as string}
                 {...iconProps}
-                style={[{ marginRight: iconSpacing }, iconProps?.style]}
+                style={[
+                  { marginRight: iconSpacing, tintColor: colorStyle.color },
+                  iconProps?.style,
+                ]}
               />
             ) : hasRightIcon && titleCenter ? (
               <Spacer w={rightIconSize + iconSpacing} />
@@ -106,7 +115,7 @@ const Button = compareMemo<ButtonProps>(
 
             <Text
               numberOfLines={1}
-              style={[styles.title, styles[`${type}Color`], { fontSize: titleSize }, titleStyle]}
+              style={[styles.title, colorStyle, { fontSize: titleSize }, titleStyle]}
             >
               {title}
             </Text>
@@ -115,9 +124,8 @@ const Button = compareMemo<ButtonProps>(
               <Icon
                 source={iconRight}
                 size={rightIconSize}
-                tintColor={styles[`${type}Color`].color as string}
                 {...iconProps}
-                style={[{ marginLeft: iconSpacing }, iconProps?.style]}
+                style={[{ marginLeft: iconSpacing, tintColor: colorStyle.color }, iconProps?.style]}
               />
             ) : hasLeftIcon && titleCenter ? (
               <Spacer w={leftIconSize + iconSpacing} />
@@ -153,6 +161,9 @@ const createStyles =
       tonal: {
         backgroundColor: customColor || alphaHexColor(colors.primary, 0.2),
       },
+      disabled: {
+        backgroundColor: colors.lightGray,
+      },
       filledColor: {
         color: colors.white,
       },
@@ -161,6 +172,9 @@ const createStyles =
       },
       tonalColor: {
         color: customColor || colors.primary,
+      },
+      disabledColor: {
+        color: colors.darkGray,
       },
       title: {
         fontFamily: fonts.quicksandBold,
