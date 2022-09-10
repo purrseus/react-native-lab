@@ -6,12 +6,23 @@ import { useStyle } from '@hooks';
 import { logger } from '@utilities';
 import React from 'react';
 import { ShowcaseItem } from '../components';
-import useBottomSheetContainer from '../containers/useBottomSheetContainer';
+import Separator from '../components/Separator';
+import { useBottomSheetContainer } from '../containers';
 
 const BottomSheets = () => {
   const styles = useStyle(createStyles);
-  const { bottomSheetRef, actionSheetRef, imagePickerRef, images, setImages, Separator } =
-    useBottomSheetContainer();
+  const {
+    bottomSheetSnapPoints,
+    actionSheetOptions,
+    bottomSheetRef,
+    actionSheetRef,
+    imagePickerRef,
+    images,
+    setImages,
+    showBottomSheet,
+    showActionSheet,
+    showImagePicker,
+  } = useBottomSheetContainer();
 
   return (
     <>
@@ -20,24 +31,17 @@ const BottomSheets = () => {
         headerTitle="BottomSheet"
         wrapperStyle={styles.scrollView}
       >
-        <ShowcaseItem
-          title="Show BottomSheet"
-          onPress={() => bottomSheetRef.current?.snapToIndex(0)}
-        />
+        <ShowcaseItem title="Show BottomSheet" onPress={showBottomSheet} />
         <Separator />
-        <ShowcaseItem title="Show ActionSheet" onPress={() => actionSheetRef.current?.show()} />
+        <ShowcaseItem title="Show ActionSheet" onPress={showActionSheet} />
         <Separator />
-        <ShowcaseItem title="Show ImagePicker" onPress={() => imagePickerRef.current?.pick()} />
+        <ShowcaseItem title="Show ImagePicker" onPress={showImagePicker} />
       </StackContainer>
 
-      <BottomSheet ref={bottomSheetRef} index={-1} snapPoints={['30%', '60%', '100%']}>
+      <BottomSheet ref={bottomSheetRef} index={-1} snapPoints={bottomSheetSnapPoints}>
         <Text>This is a BottomSheet</Text>
       </BottomSheet>
-      <ActionSheet
-        ref={actionSheetRef}
-        options={['Cancel', 'Option 1', 'Option 2']}
-        onSelect={logger}
-      />
+      <ActionSheet ref={actionSheetRef} options={actionSheetOptions} onSelect={logger} />
       <ImagePicker ref={imagePickerRef} images={images} onChangeImage={setImages} />
     </>
   );

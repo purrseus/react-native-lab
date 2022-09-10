@@ -1,7 +1,7 @@
 import { ProtectedScreenName, UnprotectedScreenName } from '@core/enums';
 import { RootStackParamList } from '@core/types';
 import { Login, Register } from '@features/authentication/screens';
-import { BottomSheets, ShowcaseList } from '@features/showcase/screens';
+import { BottomSheets, Buttons, ShowcaseList } from '@features/showcase/screens';
 import { useAppSelector, useStyle } from '@hooks';
 import { stackScreenOptions } from '@navigation/options';
 import createStyles from '@navigation/styles';
@@ -24,6 +24,7 @@ const ProtectedScreens = (
     {/* Showcase */}
     <NativeStack.Screen name={ProtectedScreenName.ShowcaseList} component={ShowcaseList} />
     <NativeStack.Screen name={ProtectedScreenName.BottomSheets} component={BottomSheets} />
+    <NativeStack.Screen name={ProtectedScreenName.Buttons} component={Buttons} />
   </NativeStack.Group>
 );
 

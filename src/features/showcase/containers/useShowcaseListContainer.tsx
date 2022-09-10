@@ -8,7 +8,7 @@ import { ShowcaseItem } from '../components';
 const useShowcaseListContainer = ({
   navigation: { navigate },
 }: Parameters<ProtectedScreen<ProtectedScreenName.ShowcaseList>>[0]) => {
-  const data = [ProtectedScreenName.BottomSheets];
+  const data = [ProtectedScreenName.BottomSheets, ProtectedScreenName.Buttons];
 
   const renderItem: ListRenderItem<ProtectedScreenName> = ({ item }) => (
     <ShowcaseItem title={item} onPress={() => navigate(item)} />

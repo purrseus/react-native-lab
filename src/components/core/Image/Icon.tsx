@@ -5,7 +5,7 @@ import { compareMemo } from '@utilities';
 import React from 'react';
 import Image, { ImageProps } from './Image';
 
-export interface IconProps extends ImageProps<true> {
+export interface IconProps extends ImageProps<false> {
   size?: number;
 }
 

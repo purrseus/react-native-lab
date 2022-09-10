@@ -18,6 +18,7 @@ export type ProtectedParamList = {
   // Showcase
   [ProtectedScreenName.ShowcaseList]: undefined;
   [ProtectedScreenName.BottomSheets]: undefined;
+  [ProtectedScreenName.Buttons]: undefined;
 };
 
 export type RootStackParamList = UnprotectedParamList & ProtectedParamList;
