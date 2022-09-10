@@ -5,7 +5,7 @@ import { BackHandler, BackHandlerStatic } from 'react-native';
 
 const useBackHandler = (
   onBackPress: (BackHandler: BackHandlerStatic) => boolean | null | undefined,
-  deps: DependencyList = [],
+  deps: DependencyList,
 ) => {
   useFocusEffect(
     useCallback(() => {

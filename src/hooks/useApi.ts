@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { HttpSignal } from '@core/types';
 import { Draft } from 'immer';
 import { DependencyList, useCallback, useEffect, useRef } from 'react';
 import { useImmer } from 'use-immer';
@@ -11,9 +12,9 @@ interface ApiStatus<T> {
 }
 
 const useApi = <T>(
-  request: (controller: AbortController) => Promise<T>,
-  deps: DependencyList = [],
-) => {
+  request: HttpSignal<T>,
+  deps: DependencyList,
+): [ApiStatus<T>, () => Promise<void>] => {
   const controller = useRef<AbortController | null>(new AbortController());
   const [apiStatus, updateApiStatus] = useImmer<ApiStatus<T>>({
     fetching: false,
@@ -23,13 +24,21 @@ const useApi = <T>(
     if (!controller.current) return;
 
     try {
-      updateApiStatus(draft => (draft.fetching = true));
-      const response = await request(controller.current);
-      updateApiStatus(draft => (draft.data = response as Draft<Awaited<T>>));
+      updateApiStatus(draft => {
+        draft.fetching = true;
+      });
+      const response = await request(controller.current.signal);
+      updateApiStatus(draft => {
+        draft.data = response as Draft<Awaited<T>>;
+      });
     } catch (error) {
-      updateApiStatus(draft => (draft.error = error));
+      updateApiStatus(draft => {
+        draft.error = error;
+      });
     } finally {
-      updateApiStatus(draft => (draft.fetching = false));
+      updateApiStatus(draft => {
+        draft.fetching = false;
+      });
     }
   }, deps);
 
