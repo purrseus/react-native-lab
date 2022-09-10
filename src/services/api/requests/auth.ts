@@ -1,3 +1,5 @@
-const authAPI = {};
+interface AuthAPI {}
+
+const authAPI: AuthAPI = {};
 
 export default authAPI;

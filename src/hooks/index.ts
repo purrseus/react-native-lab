@@ -1,3 +1,4 @@
+export { default as useApi } from './useApi';
 export { default as useAppDispatch } from './useAppDispatch';
 export { default as useAppNavigation } from './useAppNavigation';
 export { default as useAppRoute } from './useAppRoute';

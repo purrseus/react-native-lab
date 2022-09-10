@@ -69,7 +69,9 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
       if (!Array.isArray(responseData)) return [];
 
       if (responseData.length < pageSize)
-        updateInfiniteScroll(draft => (draft.canLoadMore = false));
+        updateInfiniteScroll(draft => {
+          draft.canLoadMore = false;
+        });
 
       if (infiniteScrollRef.isFirstCall)
         updateInfiniteScroll(draft => {
@@ -81,7 +83,9 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
     } catch (error) {
       logger(error);
     } finally {
-      updateInfiniteScroll(draft => (draft.fetching = false));
+      updateInfiniteScroll(draft => {
+        draft.fetching = false;
+      });
       if (infiniteScrollRef.isFirstCall) infiniteScrollRef.isFirstCall = false;
     }
   }, [accessProperties, controller.signal, pageSize, requestCallback, updateInfiniteScroll]);
