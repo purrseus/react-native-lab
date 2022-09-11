@@ -37,27 +37,39 @@
 		00E356EE1AD99517003FC87E /* ReactNativeLabTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactNativeLabTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* ReactNativeLabTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReactNativeLabTests.m; sourceTree = "<group>"; };
+		0AA0B6998B7CDA94F04D2803 /* Pods-ReactNativeLab-ReactNativeLabTests.debug (dev).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab-ReactNativeLabTests.debug (dev).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab-ReactNativeLabTests/Pods-ReactNativeLab-ReactNativeLabTests.debug (dev).xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* ReactNativeLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactNativeLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ReactNativeLab/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = ReactNativeLab/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ReactNativeLab/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ReactNativeLab/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ReactNativeLab/main.m; sourceTree = "<group>"; };
+		186B0376844FAB4379A0BC2E /* Pods-ReactNativeLab.debug (dev).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab.debug (dev).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab/Pods-ReactNativeLab.debug (dev).xcconfig"; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-ReactNativeLab-ReactNativeLabTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeLab-ReactNativeLabTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E4483C08E6F8CC3D88441A4 /* Pods-ReactNativeLab.debug (prod).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab.debug (prod).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab/Pods-ReactNativeLab.debug (prod).xcconfig"; sourceTree = "<group>"; };
+		36AC615D5DB1628F0BCE3459 /* Pods-ReactNativeLab.debug (stag).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab.debug (stag).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab/Pods-ReactNativeLab.debug (stag).xcconfig"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-ReactNativeLab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeLab/Pods-ReactNativeLab.debug.xcconfig"; sourceTree = "<group>"; };
+		40913FFDF4ED7B41E1119541 /* Pods-ReactNativeLab-ReactNativeLabTests.debug (prod).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab-ReactNativeLabTests.debug (prod).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab-ReactNativeLabTests/Pods-ReactNativeLab-ReactNativeLabTests.debug (prod).xcconfig"; sourceTree = "<group>"; };
 		4801301B66A94C74AD19C7BF /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-SemiBold.ttf"; path = "../src/assets/fonts/Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
+		4A3D1FF7A78CE55DD6F2E333 /* Pods-ReactNativeLab-ReactNativeLabTests.release (stag).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab-ReactNativeLabTests.release (stag).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab-ReactNativeLabTests/Pods-ReactNativeLab-ReactNativeLabTests.release (stag).xcconfig"; sourceTree = "<group>"; };
+		4CDFD3BD8BFC2F86564B65ED /* Pods-ReactNativeLab-ReactNativeLabTests.release (dev).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab-ReactNativeLabTests.release (dev).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab-ReactNativeLabTests/Pods-ReactNativeLab-ReactNativeLabTests.release (dev).xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-ReactNativeLab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeLab/Pods-ReactNativeLab.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-ReactNativeLab-ReactNativeLabTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab-ReactNativeLabTests.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeLab-ReactNativeLabTests/Pods-ReactNativeLab-ReactNativeLabTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-ReactNativeLab.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeLab.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		752F8E9C5D1A4CE996F41CB5 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Medium.ttf"; path = "../src/assets/fonts/Quicksand-Medium.ttf"; sourceTree = "<group>"; };
+		79611E405E755A8AA2478D1A /* Pods-ReactNativeLab-ReactNativeLabTests.release (prod).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab-ReactNativeLabTests.release (prod).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab-ReactNativeLabTests/Pods-ReactNativeLab-ReactNativeLabTests.release (prod).xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ReactNativeLab/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		838D73B3AE6A6DF385F97E2F /* Pods-ReactNativeLab.release (prod).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab.release (prod).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab/Pods-ReactNativeLab.release (prod).xcconfig"; sourceTree = "<group>"; };
 		84125AB7283A355D00F40DFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		84125ABA283A378A00F40DFA /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		84667C0F284BA73100410EAB /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		848A5C93287A5B76002D0B4B /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-ReactNativeLab-ReactNativeLabTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab-ReactNativeLabTests.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeLab-ReactNativeLabTests/Pods-ReactNativeLab-ReactNativeLabTests.release.xcconfig"; sourceTree = "<group>"; };
+		8C4EC27D06FD47BEC1519DB4 /* Pods-ReactNativeLab-ReactNativeLabTests.debug (stag).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab-ReactNativeLabTests.debug (stag).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab-ReactNativeLabTests/Pods-ReactNativeLab-ReactNativeLabTests.debug (stag).xcconfig"; sourceTree = "<group>"; };
+		ABF6DA09FBDE4897231AF8A9 /* Pods-ReactNativeLab.release (stag).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab.release (stag).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab/Pods-ReactNativeLab.release (stag).xcconfig"; sourceTree = "<group>"; };
 		CA430C92F68848D2A5F33DA1 /* Quicksand-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Light.ttf"; path = "../src/assets/fonts/Quicksand-Light.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		EFDA969BD6F3B52BB447C5D5 /* Pods-ReactNativeLab.release (dev).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab.release (dev).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab/Pods-ReactNativeLab.release (dev).xcconfig"; sourceTree = "<group>"; };
 		EFE3E045F60947BB9B4D6986 /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Bold.ttf"; path = "../src/assets/fonts/Quicksand-Bold.ttf"; sourceTree = "<group>"; };
 		F31FF30334BC452791DF8E4F /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Regular.ttf"; path = "../src/assets/fonts/Quicksand-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -176,6 +188,18 @@
 				5709B34CF0A7D63546082F79 /* Pods-ReactNativeLab.release.xcconfig */,
 				5B7EB9410499542E8C5724F5 /* Pods-ReactNativeLab-ReactNativeLabTests.debug.xcconfig */,
 				89C6BE57DB24E9ADA2F236DE /* Pods-ReactNativeLab-ReactNativeLabTests.release.xcconfig */,
+				186B0376844FAB4379A0BC2E /* Pods-ReactNativeLab.debug (dev).xcconfig */,
+				36AC615D5DB1628F0BCE3459 /* Pods-ReactNativeLab.debug (stag).xcconfig */,
+				1E4483C08E6F8CC3D88441A4 /* Pods-ReactNativeLab.debug (prod).xcconfig */,
+				EFDA969BD6F3B52BB447C5D5 /* Pods-ReactNativeLab.release (dev).xcconfig */,
+				ABF6DA09FBDE4897231AF8A9 /* Pods-ReactNativeLab.release (stag).xcconfig */,
+				838D73B3AE6A6DF385F97E2F /* Pods-ReactNativeLab.release (prod).xcconfig */,
+				0AA0B6998B7CDA94F04D2803 /* Pods-ReactNativeLab-ReactNativeLabTests.debug (dev).xcconfig */,
+				8C4EC27D06FD47BEC1519DB4 /* Pods-ReactNativeLab-ReactNativeLabTests.debug (stag).xcconfig */,
+				40913FFDF4ED7B41E1119541 /* Pods-ReactNativeLab-ReactNativeLabTests.debug (prod).xcconfig */,
+				4CDFD3BD8BFC2F86564B65ED /* Pods-ReactNativeLab-ReactNativeLabTests.release (dev).xcconfig */,
+				4A3D1FF7A78CE55DD6F2E333 /* Pods-ReactNativeLab-ReactNativeLabTests.release (stag).xcconfig */,
+				79611E405E755A8AA2478D1A /* Pods-ReactNativeLab-ReactNativeLabTests.release (prod).xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -805,7 +829,7 @@
 		};
 		84115E8128CA493400A62616 /* Debug (dev) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-ReactNativeLab.debug.xcconfig */;
+			baseConfigurationReference = 186B0376844FAB4379A0BC2E /* Pods-ReactNativeLab.debug (dev).xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -836,7 +860,7 @@
 		};
 		84115E8228CA493400A62616 /* Debug (dev) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-ReactNativeLab-ReactNativeLabTests.debug.xcconfig */;
+			baseConfigurationReference = 0AA0B6998B7CDA94F04D2803 /* Pods-ReactNativeLab-ReactNativeLabTests.debug (dev).xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -936,7 +960,7 @@
 		};
 		84115E8428CA496200A62616 /* Debug (stag) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-ReactNativeLab.debug.xcconfig */;
+			baseConfigurationReference = 36AC615D5DB1628F0BCE3459 /* Pods-ReactNativeLab.debug (stag).xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -967,7 +991,7 @@
 		};
 		84115E8528CA496200A62616 /* Debug (stag) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-ReactNativeLab-ReactNativeLabTests.debug.xcconfig */;
+			baseConfigurationReference = 8C4EC27D06FD47BEC1519DB4 /* Pods-ReactNativeLab-ReactNativeLabTests.debug (stag).xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1067,7 +1091,7 @@
 		};
 		84115E8728CA497300A62616 /* Debug (prod) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-ReactNativeLab.debug.xcconfig */;
+			baseConfigurationReference = 1E4483C08E6F8CC3D88441A4 /* Pods-ReactNativeLab.debug (prod).xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1098,7 +1122,7 @@
 		};
 		84115E8828CA497300A62616 /* Debug (prod) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-ReactNativeLab-ReactNativeLabTests.debug.xcconfig */;
+			baseConfigurationReference = 40913FFDF4ED7B41E1119541 /* Pods-ReactNativeLab-ReactNativeLabTests.debug (prod).xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1191,7 +1215,7 @@
 		};
 		84115E8A28CA498500A62616 /* Release (dev) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-ReactNativeLab.release.xcconfig */;
+			baseConfigurationReference = EFDA969BD6F3B52BB447C5D5 /* Pods-ReactNativeLab.release (dev).xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1220,7 +1244,7 @@
 		};
 		84115E8B28CA498500A62616 /* Release (dev) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-ReactNativeLab-ReactNativeLabTests.release.xcconfig */;
+			baseConfigurationReference = 4CDFD3BD8BFC2F86564B65ED /* Pods-ReactNativeLab-ReactNativeLabTests.release (dev).xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -1310,7 +1334,7 @@
 		};
 		84115E8D28CA499200A62616 /* Release (stag) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-ReactNativeLab.release.xcconfig */;
+			baseConfigurationReference = ABF6DA09FBDE4897231AF8A9 /* Pods-ReactNativeLab.release (stag).xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1339,7 +1363,7 @@
 		};
 		84115E8E28CA499200A62616 /* Release (stag) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-ReactNativeLab-ReactNativeLabTests.release.xcconfig */;
+			baseConfigurationReference = 4A3D1FF7A78CE55DD6F2E333 /* Pods-ReactNativeLab-ReactNativeLabTests.release (stag).xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -1429,7 +1453,7 @@
 		};
 		84115E9028CA499B00A62616 /* Release (prod) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-ReactNativeLab.release.xcconfig */;
+			baseConfigurationReference = 838D73B3AE6A6DF385F97E2F /* Pods-ReactNativeLab.release (prod).xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1458,7 +1482,7 @@
 		};
 		84115E9128CA499B00A62616 /* Release (prod) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-ReactNativeLab-ReactNativeLabTests.release.xcconfig */;
+			baseConfigurationReference = 79611E405E755A8AA2478D1A /* Pods-ReactNativeLab-ReactNativeLabTests.release (prod).xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;

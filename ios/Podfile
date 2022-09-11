@@ -4,6 +4,16 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 platform :ios, '12.4'
 install! 'cocoapods', :deterministic_uuids => false
 
+project 'ReactNativeLab',
+  'Debug' => :debug,
+  'Debug (dev)' => :debug,
+  'Debug (stag)' => :debug,
+  'Debug (prod)' => :debug,
+  'Release' => :release,
+  'Release (dev)' => :release,
+  'Release (stag)' => :release,
+  'Release (prod)' => :release
+
 target 'ReactNativeLab' do
   config = use_native_modules!
 

@@ -228,7 +228,7 @@ android {
         }
     }
     signingConfigs {
-        app {
+        release {
             storeFile file(project.env.get("ANDROID_STORE_FILE"))
             storePassword project.env.get("ANDROID_STORE_PASSWORD")
             keyAlias project.env.get("ANDROID_KEY_ALIAS")
@@ -238,10 +238,10 @@ android {
     buildTypes {
         debug {
             debuggable true
-            signingConfig signingConfigs.app
+            signingConfig signingConfigs.release
         }
         release {
-            signingConfig signingConfigs.app
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }

@@ -41,7 +41,7 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Release (prod)"
+      buildConfiguration = "Debug (prod)"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
@@ -97,7 +97,7 @@
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Release (prod)">
+      buildConfiguration = "Debug (prod)">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release (prod)"
