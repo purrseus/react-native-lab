@@ -1,11 +1,11 @@
 import { icons } from '@assets';
-import { Button } from '@components/core';
+import { Button, Row, Spacer } from '@components/core';
 import { StackContainer } from '@components/custom';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { colors } from '@themes';
+import { colors, globalStyles } from '@themes';
 import React from 'react';
-import Separator from '../components/Separator';
+import { Separator } from '../components';
 
 const Buttons = () => {
   const styles = useStyle(createStyles);
@@ -18,6 +18,13 @@ const Buttons = () => {
       <Button title="Medium size" size="medium" />
       <Separator />
       <Button title="Small size" size="small" />
+      <Separator />
+
+      <Row>
+        <Button title="Small left" size="small" style={globalStyles.flexFill} />
+        <Spacer w={16} />
+        <Button title="Small right" size="small" style={globalStyles.flexFill} />
+      </Row>
       <Separator />
 
       {/* Type */}
@@ -36,7 +43,7 @@ const Buttons = () => {
       <Button
         title="Another gradient color"
         gradient
-        gradientColors={[colors.blue, colors.purple, colors.red]}
+        gradientColors={[colors.purple, colors.blue, colors.red, colors.orange]}
       />
       <Separator />
 

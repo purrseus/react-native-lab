@@ -20,7 +20,15 @@ export type TextFieldProps<T extends boolean = false> = {
 } & CombinedTextInputProps<T>;
 
 const _TextField = (
-  { label, errorText, multiline, containerStyle, wrapperStyle, ...props }: TextFieldProps,
+  {
+    label,
+    errorText,
+    placeholder,
+    multiline,
+    containerStyle,
+    wrapperStyle,
+    ...props
+  }: TextFieldProps,
   ref: ForwardedRef<RNTextInput>,
 ) => {
   const styles = useStyle(createStyles);
@@ -29,7 +37,12 @@ const _TextField = (
   return (
     <View style={containerStyle}>
       {!!label && <Text style={styles.label}>{label}</Text>}
-      <TextInputComponent {...props} ref={ref} containerStyle={wrapperStyle} />
+      <TextInputComponent
+        {...props}
+        ref={ref}
+        placeholder={placeholder || label}
+        containerStyle={wrapperStyle}
+      />
       {!!errorText && <Text style={styles.errorText}>{errorText}</Text>}
     </View>
   );
