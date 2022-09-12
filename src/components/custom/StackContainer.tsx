@@ -47,9 +47,9 @@ const createStyles = ({ create, edgeInsets }: StyleCallbackParams) =>
   create({
     wrapper: {
       flex: 1,
-      paddingHorizontal: 16,
     },
     contentContainer: {
+      paddingHorizontal: 16,
       paddingBottom: edgeInsets.bottom,
     },
   });

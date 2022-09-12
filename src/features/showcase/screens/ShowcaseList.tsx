@@ -26,7 +26,7 @@ const ShowcaseList: ProtectedScreen<ProtectedScreenName.ShowcaseList> = props =>
 const createStyles = ({ create }: StyleCallbackParams) =>
   create({
     scrollView: {
-      paddingVertical: 16,
+      padding: 16,
     },
   });
 

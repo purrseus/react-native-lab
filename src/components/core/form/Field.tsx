@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { compareMemo } from '@utilities';
 import React, {
@@ -46,7 +47,7 @@ const _Field = ({ type, name, ...props }: Props, ref: ForwardedRef<FieldRef[type
       value,
       name,
     }),
-    [onChange, type, value, name, errors],
+    [onChange, type, value, name, errors[name]],
   );
 
   const refCallback = useCallback<RefCallback<FieldRef[typeof type]>>(

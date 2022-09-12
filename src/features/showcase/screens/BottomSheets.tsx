@@ -5,8 +5,7 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { logger } from '@utilities';
 import React from 'react';
-import { ShowcaseItem } from '../components';
-import Separator from '../components/Separator';
+import { Separator, ShowcaseItem } from '../components';
 import { useBottomSheetContainer } from '../containers';
 
 const BottomSheets = () => {
