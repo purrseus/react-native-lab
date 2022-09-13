@@ -10,6 +10,7 @@ export enum ProtectedScreenName {
   BottomSheets = 'BottomSheets',
   Buttons = 'Buttons',
   Form = 'Form',
+  Images = 'Images',
 }
 
 export enum TabScreenName {

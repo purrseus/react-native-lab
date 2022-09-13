@@ -1,16 +1,24 @@
 import { StyleCallbackParams } from '@core/interfaces';
+import { CommonSize } from '@core/types';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
-import React from 'react';
+import { omit } from 'lodash';
+import React, { useCallback, useState } from 'react';
 import {
   AccessibilityProps,
   Image as RNImage,
+  ImageLoadEventData,
   ImageProps as RNImageProps,
   ImageStyle,
+  NativeSyntheticEvent,
   StyleProp,
   ViewProps,
 } from 'react-native';
-import FastImage, { FastImageProps, ImageStyle as FastImageStyle } from 'react-native-fast-image';
+import FastImage, {
+  FastImageProps,
+  ImageStyle as FastImageStyle,
+  OnLoadEvent,
+} from 'react-native-fast-image';
 
 type CombinedImagePropKeys =
   | 'source'
@@ -45,27 +53,44 @@ interface CommonImageProps<C extends boolean>
 
 export type ImageProps<C extends boolean = false> = CommonImageProps<C> & AdditionalImageProps<C>;
 
-const _Image = ({ style, cached, ...props }: ImageProps) => {
+const _Image = ({ style, cached, onLoad, ...props }: ImageProps) => {
   const styles = useStyle(createStyles);
+  const [size, setSize] = useState<CommonSize>({ width: 0, height: 0 });
+  const imageStyle = styles[!!size.width && !!size.height ? 'image' : 'progressImage'];
+
+  const _onLoad = useCallback(
+    ({ nativeEvent }: NativeSyntheticEvent<ImageLoadEventData> | OnLoadEvent) => {
+      onLoad?.({ nativeEvent } as Parameters<NonNullable<ImageProps['onLoad']>>[0]);
+
+      if (!!size.width && !!size.height) return;
+      setSize('source' in nativeEvent ? omit(nativeEvent.source, ['uri']) : nativeEvent);
+    },
+    [size.width, size.height, onLoad],
+  );
 
   return cached ? (
     <FastImage
       {...(props as FastImageProps)}
-      style={[styles.image, style as StyleProp<FastImageStyle>]}
+      onLoad={_onLoad}
+      style={[imageStyle, style as StyleProp<FastImageStyle>]}
     />
   ) : (
     <RNImage
       {...(props as RNImageProps)}
+      onLoad={_onLoad}
       progressiveRenderingEnabled
-      style={[styles.image, style as StyleProp<ImageStyle>]}
+      style={[imageStyle, style as StyleProp<ImageStyle>]}
     />
   );
 };
 
 const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
-    image: {
+    progressImage: {
       backgroundColor: colors.backgroundImage,
+    },
+    image: {
+      backgroundColor: colors.transparent,
     },
   });
 

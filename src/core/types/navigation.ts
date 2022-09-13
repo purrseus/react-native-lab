@@ -20,6 +20,7 @@ export type ProtectedParamList = {
   [ProtectedScreenName.BottomSheets]: undefined;
   [ProtectedScreenName.Buttons]: undefined;
   [ProtectedScreenName.Form]: undefined;
+  [ProtectedScreenName.Images]: undefined;
 };
 
 export type RootStackParamList = UnprotectedParamList & ProtectedParamList;
