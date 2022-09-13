@@ -30,9 +30,9 @@ const StackContainer = compareMemo<StackContainerProps>(
       <View {...props} style={[globalStyles.flexFill, style]}>
         {!!headerTitle && <NavigationHeader title={headerTitle} {...navigationHeaderProps} />}
         <Wrapper
-          style={[styles.wrapper, wrapperStyle]}
+          style={styles.wrapper}
           {...(wrapperType === 'scrollView' && {
-            contentContainerStyle: styles.contentContainer,
+            contentContainerStyle: [styles.contentContainer, wrapperStyle],
             automaticallyAdjustsScrollIndicatorInsets: false,
           })}
         >

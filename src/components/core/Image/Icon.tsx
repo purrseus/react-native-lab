@@ -5,14 +5,14 @@ import { compareMemo } from '@utilities';
 import React from 'react';
 import Image, { ImageProps } from './Image';
 
-export interface IconProps extends ImageProps<false> {
+export interface IconProps extends ImageProps<true> {
   size?: number;
 }
 
 const Icon = compareMemo<IconProps>(({ size = DEFAULT_ICON_SIZE, style, ...props }) => {
   const styles = useStyle(createStyles);
 
-  return <Image {...props} style={[styles.icon, { width: size, height: size }, style]} />;
+  return <Image {...props} cached style={[styles.icon, { width: size, height: size }, style]} />;
 });
 
 const createStyles = ({ create, colors }: StyleCallbackParams) =>
