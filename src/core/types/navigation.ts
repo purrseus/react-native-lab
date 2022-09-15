@@ -21,6 +21,7 @@ export type ProtectedParamList = {
   [ProtectedScreenName.Buttons]: undefined;
   [ProtectedScreenName.Form]: undefined;
   [ProtectedScreenName.Images]: undefined;
+  [ProtectedScreenName.List]: undefined;
 };
 
 export type RootStackParamList = UnprotectedParamList & ProtectedParamList;
