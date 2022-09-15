@@ -13,4 +13,4 @@ export type DateTimeFormatTemplate =
 
 export type NumberFormatTemplate = '0.0a' | '0 a' | '0a' | '0o' | '$0,0';
 
-export type ValidationObj<T> = Record<keyof T, BaseSchema>;
+export type ValidationObject<T> = Record<keyof T, BaseSchema>;

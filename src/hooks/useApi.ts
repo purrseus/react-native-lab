@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpSignal } from '@core/types';
-import { Draft } from 'immer';
 import { DependencyList, useCallback, useEffect, useRef } from 'react';
 import { useImmer } from 'use-immer';
 
@@ -20,25 +19,25 @@ const useApi = <T>(
     fetching: false,
   });
 
+  const update = useCallback(
+    <K extends keyof ApiStatus<T>>(key: K, value: ApiStatus<T>[K]) =>
+      updateApiStatus(draft => {
+        draft[key] = value;
+      }),
+    [updateApiStatus],
+  );
+
   const fetch = useCallback(async () => {
     if (!controller.current) return;
 
     try {
-      updateApiStatus(draft => {
-        draft.fetching = true;
-      });
+      update('fetching', true);
       const response = await request(controller.current.signal);
-      updateApiStatus(draft => {
-        draft.data = response as Draft<Awaited<T>>;
-      });
+      update('data', response);
     } catch (error) {
-      updateApiStatus(draft => {
-        draft.error = error;
-      });
+      update('error', error);
     } finally {
-      updateApiStatus(draft => {
-        draft.fetching = false;
-      });
+      update('fetching', false);
     }
   }, deps);
 
@@ -49,7 +48,7 @@ const useApi = <T>(
       controller.current?.abort();
       controller.current = null;
     };
-  }, [controller, fetch]);
+  }, deps);
 
   return [apiStatus, fetch];
 };

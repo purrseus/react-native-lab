@@ -4,7 +4,7 @@ import { useInfiniteScroll, useStyle, useThrottle } from '@hooks';
 import { globalStyles } from '@themes';
 import { compareMemo } from '@utilities';
 import { AxiosRequestConfig } from 'axios';
-import React, { ForwardedRef, forwardRef, RefAttributes } from 'react';
+import React, { ForwardedRef, forwardRef, RefAttributes, useMemo } from 'react';
 import { FlatList, RefreshControlProps, View } from 'react-native';
 import ActivityIndicator from '../Loader/ActivityIndicator';
 import ListView, { ListViewProps } from './ListView';
@@ -17,37 +17,51 @@ interface InfiniteListProps<T = any>
 }
 
 const _InfiniteList = (
-  { requestCallback, config, ...props }: InfiniteListProps,
+  { requestCallback, config, ListEmptyComponent, ...props }: InfiniteListProps,
   ref: ForwardedRef<FlatList>,
 ) => {
   const styles = useStyle(createStyles);
+
   const { canLoadMore, fetching, onLoadMore, ...listProps } = useInfiniteScroll(
     requestCallback,
     config,
   );
 
-  const handleOnEndReached = useThrottle(onLoadMore, [onLoadMore]);
+  const shouldShowFooter = canLoadMore && !listProps.refreshing && !fetching;
+  const contentContainerStyle = fetching ? globalStyles.flexFill : props.contentContainerStyle;
 
-  if (fetching)
-    return (
-      <View style={globalStyles.flexFillCenter}>
-        <ActivityIndicator size="large" />
+  const EmptyComponent = useMemo(
+    () =>
+      fetching ? (
+        <View style={globalStyles.flexFillCenter}>
+          <ActivityIndicator size="large" />
+        </View>
+      ) : (
+        ListEmptyComponent
+      ),
+    [fetching, ListEmptyComponent],
+  );
+
+  const ListFooterComponent = useMemo(
+    () => (
+      <View style={styles.footer}>
+        <ActivityIndicator />
       </View>
-    );
+    ),
+    [styles.footer],
+  );
+
+  const handleOnEndReached = useThrottle(onLoadMore, [onLoadMore]);
 
   return (
     <ListView
-      ref={ref}
       {...props}
       {...listProps}
+      ref={ref}
+      contentContainerStyle={contentContainerStyle}
       onEndReached={handleOnEndReached}
-      {...(canLoadMore && {
-        ListFooterComponent: (
-          <View style={styles.footer}>
-            <ActivityIndicator />
-          </View>
-        ),
-      })}
+      ListEmptyComponent={EmptyComponent}
+      {...(shouldShowFooter && { ListFooterComponent })}
     />
   );
 };

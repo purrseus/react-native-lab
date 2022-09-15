@@ -7,6 +7,7 @@ import {
 } from '@core/interfaces';
 import { deepAccessObject, logger } from '@utilities';
 import { AxiosRequestConfig } from 'axios';
+import { Draft } from 'immer';
 import { useCallback, useEffect, useRef } from 'react';
 import isEqual from 'react-fast-compare';
 import { useImmer } from 'use-immer';
@@ -26,8 +27,8 @@ interface InfiniteScroll<Data> {
 }
 
 const DEFAULT_PAGE_SIZE = 10;
-const PAGE_INDEX_KEY = 'page'; // pageIndex, page,...
-const PAGE_SIZE_KEY = 'limit'; // pageSize, perPage, limit,...
+const PAGE_INDEX_KEY = '_page'; // or pageIndex, page,...
+const PAGE_SIZE_KEY = '_limit'; // or pageSize, perPage, limit,...
 
 const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
   requestCallback: (requestConfig: AxiosRequestConfig) => Promise<T>,
@@ -75,8 +76,7 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
 
       if (infiniteScrollRef.isFirstCall)
         updateInfiniteScroll(draft => {
-          draft.data.length = 0;
-          draft.data.concat(responseData);
+          draft.data = responseData as Draft<D>;
         });
 
       return responseData;
@@ -88,7 +88,7 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
       });
       if (infiniteScrollRef.isFirstCall) infiniteScrollRef.isFirstCall = false;
     }
-  }, [accessProperties, controller.signal, pageSize, requestCallback, updateInfiniteScroll]);
+  }, [accessProperties, controller.signal, pageSize, updateInfiniteScroll]);
 
   const onRefresh = useCallback(async () => {
     if (infiniteScrollRef.loadingMore) return;
@@ -105,11 +105,14 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
 
       if (Array.isArray(responseData))
         updateInfiniteScroll(draft => {
-          draft.data.length = 0;
-          draft.data.concat(responseData);
+          draft.data = responseData as Draft<D>;
         });
     } catch (error) {
       logger(error);
+    } finally {
+      updateInfiniteScroll(draft => {
+        draft.refreshing = false;
+      });
     }
   }, [handleRequest, updateInfiniteScroll]);
 
@@ -123,7 +126,7 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
 
       if (Array.isArray(responseData))
         updateInfiniteScroll(draft => {
-          draft.data.concat(responseData);
+          draft.data.push(...responseData);
         });
     } catch (error) {
       logger(error);

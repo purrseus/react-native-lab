@@ -1,4 +1,4 @@
-import { ValidationObj } from '@core/types';
+import { ValidationObject } from '@core/types';
 import { useAppForm } from '@hooks';
 import { logger } from '@utilities';
 import { useMemo } from 'react';
@@ -13,7 +13,7 @@ export interface FormObject {
 }
 
 const useFormContainer = () => {
-  const validateObj = useMemo<ValidationObj<FormObject>>(
+  const validateObj = useMemo<ValidationObject<FormObject>>(
     () => ({
       firstName: string().required(),
       lastName: string().required(),

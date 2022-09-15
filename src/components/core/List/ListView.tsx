@@ -31,11 +31,17 @@ const _ListView = (
 
     // Find the key matching "id" in the first run
     if (keyRef.current === null) {
+      let id = '';
+
       for (const key in item) {
-        if (key.match(/id/gi)?.length) {
-          keyRef.current = key;
-          return `${item[key]}`;
+        if (key.match(/id/gi)?.length && ((!!id.length && key.length < id.length) || !id.length)) {
+          id = key;
         }
+      }
+
+      if (id.length) {
+        keyRef.current = id;
+        return `${item[id]}`;
       }
 
       // If any key is not matched, always return the index

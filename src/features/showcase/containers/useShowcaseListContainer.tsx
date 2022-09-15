@@ -13,6 +13,7 @@ const useShowcaseListContainer = ({
     ProtectedScreenName.Buttons,
     ProtectedScreenName.Form,
     ProtectedScreenName.Images,
+    ProtectedScreenName.List,
   ];
 
   const renderItem: ListRenderItem<ProtectedScreenName> = ({ item }) => (
