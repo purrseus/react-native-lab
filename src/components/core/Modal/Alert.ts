@@ -1,8 +1,4 @@
-import { Alert as RNAlert, AlertButton as RNAlertButton } from 'react-native';
-
-export interface AlertButton extends RNAlertButton {
-  text?: string;
-}
+import { Alert as RNAlert } from 'react-native';
 
 const Alert = (...[title, message, buttons, options]: Parameters<typeof RNAlert.alert>) =>
   RNAlert.alert(title, message, buttons, {

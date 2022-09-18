@@ -12,6 +12,7 @@ export enum ProtectedScreenName {
   Form = 'Form',
   Images = 'Images',
   List = 'List',
+  Loader = 'Loader',
 }
 
 export enum TabScreenName {
