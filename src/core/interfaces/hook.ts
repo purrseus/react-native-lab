@@ -19,8 +19,8 @@ export interface InfiniteScrollConfig {
   /**
    * @example
    * ```
-   * //                this is array
-   * //                     v
+   *                  this is array
+   *                        v
    * ['data', 'property', 'key'] // -> data.property.key
    * ```
    */

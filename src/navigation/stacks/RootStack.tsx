@@ -8,6 +8,7 @@ import {
   Images,
   List,
   Loader,
+  Modals,
   ShowcaseList,
 } from '@features/showcase/screens';
 import { useAppSelector, useStyle } from '@hooks';
@@ -37,6 +38,7 @@ const ProtectedScreens = (
     <NativeStack.Screen name={ProtectedScreenName.Images} component={Images} />
     <NativeStack.Screen name={ProtectedScreenName.List} component={List} />
     <NativeStack.Screen name={ProtectedScreenName.Loader} component={Loader} />
+    <NativeStack.Screen name={ProtectedScreenName.Modals} component={Modals} />
   </NativeStack.Group>
 );
 
