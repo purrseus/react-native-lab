@@ -15,6 +15,7 @@ const useShowcaseListContainer = ({
     ProtectedScreenName.Images,
     ProtectedScreenName.List,
     ProtectedScreenName.Loader,
+    ProtectedScreenName.Modals,
   ];
 
   const renderItem: ListRenderItem<ProtectedScreenName> = ({ item }) => (
