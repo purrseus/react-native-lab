@@ -2,8 +2,8 @@
 import { compareMemo } from '@utilities';
 import React, { ForwardedRef, forwardRef, RefAttributes, useCallback, useRef } from 'react';
 import { FlatList, FlatListProps, RefreshControlProps } from 'react-native';
-import BottomTabSpacer from '../Spacer/BottomTabSpacer';
 import RefreshControl from '../Loader/RefreshControl';
+import BottomSpacer from '../Spacer/BottomSpacer';
 
 export interface ListViewProps<T = any>
   extends Omit<FlatListProps<T>, keyof RefreshControlProps>,
@@ -67,7 +67,7 @@ const _ListView = (
       ListFooterComponent={
         <>
           {ListFooterComponent}
-          {isTabScreen && <BottomTabSpacer />}
+          {isTabScreen && <BottomSpacer type="bottomTab" />}
         </>
       }
     />

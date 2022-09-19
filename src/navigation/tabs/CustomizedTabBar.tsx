@@ -1,5 +1,5 @@
 import { icons } from '@assets';
-import { BottomTabSpacer, Icon, Row, Spacer, Text, PressArea } from '@components/core';
+import { BottomSpacer, Icon, Row, Spacer, Text, PressArea } from '@components/core';
 import { HORIZONTAL_SAFETY_EDGES, TAB_BAR_HEIGHT } from '@core/constants';
 import { TabScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
@@ -125,7 +125,7 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
         })}
       </Row>
 
-      <BottomTabSpacer heightOffset={0} />
+      <BottomSpacer type="halfSafeArea" />
     </AnimatedSafeAreaView>
   );
 };

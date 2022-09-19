@@ -16,7 +16,7 @@ export { default as RefreshControl } from './Loader/RefreshControl';
 export { default as Alert } from './Modal/Alert';
 export { default as Modal } from './Modal/Modal';
 export { default as Row } from './Row';
-export { default as BottomTabSpacer } from './Spacer/BottomTabSpacer';
+export { default as BottomSpacer } from './Spacer/BottomSpacer';
 export { default as Spacer } from './Spacer/Spacer';
 export { default as StatusBar } from './StatusBar';
 export { default as Switch } from './Switch';
