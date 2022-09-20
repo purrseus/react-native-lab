@@ -6,3 +6,4 @@ export { default as List } from './List';
 export { default as Loader } from './Loader';
 export { default as Modals } from './Modals';
 export { default as ShowcaseList } from './ShowcaseList';
+export { default as Spacers } from './Spacers';

@@ -6,7 +6,7 @@ import { globalStyles } from '@themes';
 import React from 'react';
 import { View } from 'react-native';
 import { ShowcaseItem } from '../components';
-import useModalsContainer from '../containers/useModalsContainer';
+import { useModalContainer } from '../containers';
 
 const Modals = () => {
   const styles = useStyle(createStyles);
@@ -20,7 +20,7 @@ const Modals = () => {
     isModalVisible,
     ModalTexts,
     bottomModalSafeArea,
-  } = useModalsContainer();
+  } = useModalContainer();
 
   return (
     <>

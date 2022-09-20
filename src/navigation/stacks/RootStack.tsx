@@ -10,6 +10,7 @@ import {
   Loader,
   Modals,
   ShowcaseList,
+  Spacers,
 } from '@features/showcase/screens';
 import { useAppSelector, useStyle } from '@hooks';
 import { stackScreenOptions } from '@navigation/options';
@@ -39,6 +40,7 @@ const ProtectedScreens = (
     <NativeStack.Screen name={ProtectedScreenName.List} component={List} />
     <NativeStack.Screen name={ProtectedScreenName.Loader} component={Loader} />
     <NativeStack.Screen name={ProtectedScreenName.Modals} component={Modals} />
+    <NativeStack.Screen name={ProtectedScreenName.Spacers} component={Spacers} />
   </NativeStack.Group>
 );
 
