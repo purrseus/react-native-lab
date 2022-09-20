@@ -3,7 +3,7 @@ import { createArray } from '@utilities';
 import React, { useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const useModalsContainer = () => {
+const useModalContainer = () => {
   const { bottom } = useSafeAreaInsets();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isBottomModalVisible, setIsBottomModalVisible] = useState(false);
@@ -35,4 +35,4 @@ const useModalsContainer = () => {
   };
 };
 
-export default useModalsContainer;
+export default useModalContainer;
