@@ -1,5 +1,6 @@
 import Row from '@components/core/Row';
 import Spacer from '@components/core/Spacer/Spacer';
+import { PADDING_VERTICAL_INPUT } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
@@ -42,7 +43,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
     container: {
       alignItems: 'center',
       paddingHorizontal: 8,
-      paddingVertical: 12,
+      paddingVertical: PADDING_VERTICAL_INPUT,
       backgroundColor: colors.lightGray,
       borderRadius: 12,
     },

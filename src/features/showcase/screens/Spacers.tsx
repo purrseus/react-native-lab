@@ -1,6 +1,8 @@
 import { BottomSpacer, Row, Spacer } from '@components/core';
 import { StackContainer } from '@components/custom';
+import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
+import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
 import React from 'react';
@@ -8,7 +10,7 @@ import { View } from 'react-native';
 import { Separator, ShowcaseItem } from '../components';
 import useSpacerContainer from '../containers/useSpacerContainer';
 
-const Spacers = () => {
+const Spacers: ProtectedScreen<ProtectedScreenName.Spacers> = () => {
   const styles = useStyle(createStyles);
   const {
     WIDTH,

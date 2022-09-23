@@ -1,13 +1,15 @@
 import { icons } from '@assets';
 import { Button, Row, Spacer } from '@components/core';
 import { StackContainer } from '@components/custom';
+import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
+import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
 import { colors, globalStyles } from '@themes';
 import React from 'react';
 import { Separator } from '../components';
 
-const Buttons = () => {
+const Buttons: ProtectedScreen<ProtectedScreenName.Buttons> = () => {
   const styles = useStyle(createStyles);
 
   return (
