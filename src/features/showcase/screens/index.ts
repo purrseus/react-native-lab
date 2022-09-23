@@ -7,3 +7,4 @@ export { default as Loader } from './Loader';
 export { default as Modals } from './Modals';
 export { default as ShowcaseList } from './ShowcaseList';
 export { default as Spacers } from './Spacers';
+export { default as Texts } from './Texts';

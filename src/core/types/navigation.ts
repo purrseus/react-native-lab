@@ -25,6 +25,7 @@ export type ProtectedParamList = {
   [ProtectedScreenName.Loader]: undefined;
   [ProtectedScreenName.Modals]: undefined;
   [ProtectedScreenName.Spacers]: undefined;
+  [ProtectedScreenName.Texts]: undefined;
 };
 
 export type RootStackParamList = UnprotectedParamList & ProtectedParamList;

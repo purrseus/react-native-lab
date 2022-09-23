@@ -58,6 +58,8 @@ const _ListView = (
       keyboardShouldPersistTaps="handled"
       onEndReachedThreshold={0.5}
       scrollEventThrottle={16}
+      automaticallyAdjustContentInsets={false}
+      automaticallyAdjustsScrollIndicatorInsets={false}
       {...props}
       {...(!!onRefresh && {
         refreshControl: <RefreshControl {...{ refreshing, onRefresh }} />,

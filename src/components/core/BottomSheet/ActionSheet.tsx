@@ -56,8 +56,8 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
           ActionSheetIOS.showActionSheetWithOptions(
             {
               ...props,
-              title: title ? title : undefined,
-              message: message ? message : undefined,
+              title,
+              message,
               options: props.options,
               userInterfaceStyle: theme === 'auto' ? colorScheme || 'light' : theme,
               tintColor: tintColor || colors.primaryText,

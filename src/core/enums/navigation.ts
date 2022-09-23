@@ -15,6 +15,7 @@ export enum ProtectedScreenName {
   Loader = 'Loader',
   Modals = 'Modals',
   Spacers = 'Spacers',
+  Texts = 'Texts',
 }
 
 export enum TabScreenName {

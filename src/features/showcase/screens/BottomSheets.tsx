@@ -1,14 +1,16 @@
 import { BottomSheet, ImagePicker, Text } from '@components/core';
 import ActionSheet from '@components/core/BottomSheet/ActionSheet';
 import { StackContainer } from '@components/custom';
+import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
+import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
 import { logger } from '@utilities';
 import React from 'react';
 import { Separator, ShowcaseItem } from '../components';
 import { useBottomSheetContainer } from '../containers';
 
-const BottomSheets = () => {
+const BottomSheets: ProtectedScreen<ProtectedScreenName.BottomSheets> = () => {
   const styles = useStyle(createStyles);
   const {
     bottomSheetSnapPoints,

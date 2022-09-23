@@ -20,7 +20,7 @@ import FastImage, {
   OnLoadEvent,
 } from 'react-native-fast-image';
 
-type CombinedImagePropKeys =
+type MixinImagePropKeys =
   | 'source'
   | 'resizeMode'
   | 'onLoadStart'
@@ -31,7 +31,7 @@ type CombinedImagePropKeys =
 
 type CachedImagePropKeys = 'fallback' | 'tintColor';
 
-type CombinedImageProps<C, Key extends keyof FastImageProps & keyof RNImageProps> = {
+type ImageTypeProps<C, Key extends keyof FastImageProps & keyof RNImageProps> = {
   [K in Key]: C extends true ? FastImageProps[K] : RNImageProps[K];
 };
 
@@ -39,10 +39,10 @@ type CachedImageProps<C, Key extends keyof FastImageProps> = {
   [K in Key]: C extends true ? FastImageProps[K] : undefined;
 };
 
-type AdditionalImageProps<C> = Partial<
-  CombinedImageProps<C, CombinedImagePropKeys> & CachedImageProps<C, CachedImagePropKeys>
+type MixinImageProps<C> = Partial<
+  ImageTypeProps<C, MixinImagePropKeys> & CachedImageProps<C, CachedImagePropKeys>
 > &
-  CombinedImageProps<C, 'source'>;
+  ImageTypeProps<C, 'source'>;
 
 interface CommonImageProps<C extends boolean>
   extends Omit<RNImageProps, keyof FastImageProps>,
@@ -51,7 +51,7 @@ interface CommonImageProps<C extends boolean>
   cached?: C;
 }
 
-export type ImageProps<C extends boolean = false> = CommonImageProps<C> & AdditionalImageProps<C>;
+export type ImageProps<C extends boolean = false> = CommonImageProps<C> & MixinImageProps<C>;
 
 const _Image = ({ style, cached, onLoad, ...props }: ImageProps) => {
   const styles = useStyle(createStyles);

@@ -1,13 +1,15 @@
 import { Icon, Image, Spacer, Text } from '@components/core';
 import { StackContainer } from '@components/custom';
+import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
+import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
 import React from 'react';
 import { View } from 'react-native';
 import { useImageContainer } from '../containers';
 
-const Images = () => {
+const Images: ProtectedScreen<ProtectedScreenName.Images> = () => {
   const styles = useStyle(createStyles);
   const { imageUrl } = useImageContainer();
 

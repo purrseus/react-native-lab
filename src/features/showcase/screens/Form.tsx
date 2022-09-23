@@ -1,6 +1,8 @@
 import { Button, Field, Spacer } from '@components/core';
 import { StackContainer } from '@components/custom';
+import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
+import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
 import React from 'react';
 import { FormProvider } from 'react-hook-form';
@@ -8,7 +10,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useFormContainer } from '../containers';
 import { FormObject } from '../containers/useFormContainer';
 
-const Form = () => {
+const Form: ProtectedScreen<ProtectedScreenName.Form> = () => {
   const styles = useStyle(createStyles);
   const { formMethods, onSubmit } = useFormContainer();
 
