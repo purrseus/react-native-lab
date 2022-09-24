@@ -10,7 +10,7 @@ const useShowcaseListContainer = ({
 }: Parameters<ProtectedScreen<ProtectedScreenName.ShowcaseList>>[0]) => {
   const data = [
     ProtectedScreenName.BottomSheets,
-    ProtectedScreenName.Buttons,
+    ProtectedScreenName.Pressable,
     ProtectedScreenName.Form,
     ProtectedScreenName.Images,
     ProtectedScreenName.List,

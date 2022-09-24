@@ -24,7 +24,7 @@ const Spacers: ProtectedScreen<ProtectedScreenName.Spacers> = () => {
   } = useSpacerContainer();
 
   return (
-    <StackContainer headerTitle="Spacers">
+    <StackContainer headerTitle={ProtectedScreenName.Spacers}>
       <View style={[globalStyles.flexFillCenter, styles.container]}>
         <ShowcaseItem title={`Show width spacer: ${WIDTH}`} onPress={showWidthSpacer} />
         <Separator />

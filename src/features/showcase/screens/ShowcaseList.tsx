@@ -1,4 +1,4 @@
-import { ListView } from '@components/core';
+import { List } from '@components/core';
 import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
@@ -12,8 +12,8 @@ const ShowcaseList: ProtectedScreen<ProtectedScreenName.ShowcaseList> = props =>
   const { data, renderItem, ItemSeparatorComponent } = useShowcaseListContainer(props);
 
   return (
-    <StackContainer headerTitle="ShowcaseList">
-      <ListView
+    <StackContainer headerTitle={ProtectedScreenName.ShowcaseList}>
+      <List
         data={data}
         renderItem={renderItem}
         contentContainerStyle={styles.scrollView}

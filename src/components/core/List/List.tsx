@@ -5,20 +5,14 @@ import { FlatList, FlatListProps, RefreshControlProps } from 'react-native';
 import RefreshControl from '../Loader/RefreshControl';
 import BottomSpacer from '../Spacer/BottomSpacer';
 
-export interface ListViewProps<T = any>
+export interface ListProps<T = any>
   extends Omit<FlatListProps<T>, keyof RefreshControlProps>,
     Partial<RefreshControlProps> {
   isTabScreen?: boolean;
 }
 
-const _ListView = (
-  {
-    refreshing = false,
-    onRefresh,
-    ListFooterComponent,
-    isTabScreen = false,
-    ...props
-  }: ListViewProps,
+const _List = (
+  { refreshing = false, onRefresh, ListFooterComponent, isTabScreen = false, ...props }: ListProps,
   ref: ForwardedRef<FlatList>,
 ) => {
   const keyRef = useRef<string | null>(null);
@@ -76,8 +70,8 @@ const _ListView = (
   );
 };
 
-const ListView = compareMemo<FlatList, ListViewProps>(forwardRef(_ListView)) as <T = any>(
-  props: ListViewProps<T> & RefAttributes<FlatList<T>>,
+const List = compareMemo<FlatList, ListProps>(forwardRef(_List)) as <T = any>(
+  props: ListProps<T> & RefAttributes<FlatList<T>>,
 ) => JSX.Element;
 
-export default ListView;
+export default List;

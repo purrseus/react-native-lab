@@ -4,7 +4,7 @@ import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
 import React from 'react';
 import { Text as RNText, TextProps as RNTextProps } from 'react-native';
-import PressArea, { PressAreaProps } from '../Button/PressArea';
+import PressArea, { PressAreaProps } from '../Pressable/PressArea';
 
 export interface TextProps extends RNTextProps, Pick<PressAreaProps, 'hitSlop' | 'throttle'> {}
 

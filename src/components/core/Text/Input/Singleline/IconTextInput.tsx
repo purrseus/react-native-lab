@@ -1,4 +1,4 @@
-import Row from '@components/core/Row';
+import Row from '@components/core/Layout/Row';
 import Spacer from '@components/core/Spacer/Spacer';
 import { PADDING_VERTICAL_INPUT } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';

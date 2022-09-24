@@ -8,7 +8,7 @@ export enum ProtectedScreenName {
   // Showcase
   ShowcaseList = 'ShowcaseList',
   BottomSheets = 'BottomSheets',
-  Buttons = 'Buttons',
+  Pressable = 'Pressable',
   Form = 'Form',
   Images = 'Images',
   List = 'List',

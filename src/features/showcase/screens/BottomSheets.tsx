@@ -29,7 +29,7 @@ const BottomSheets: ProtectedScreen<ProtectedScreenName.BottomSheets> = () => {
     <>
       <StackContainer
         wrapperType="scrollView"
-        headerTitle="BottomSheet"
+        headerTitle={ProtectedScreenName.BottomSheets}
         wrapperStyle={styles.scrollView}
       >
         <ShowcaseItem title="Show BottomSheet" onPress={showBottomSheet} />

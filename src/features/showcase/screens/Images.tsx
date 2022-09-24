@@ -15,7 +15,7 @@ const Images: ProtectedScreen<ProtectedScreenName.Images> = () => {
 
   return (
     <StackContainer
-      headerTitle="Images"
+      headerTitle={ProtectedScreenName.Images}
       wrapperType="scrollView"
       wrapperStyle={[globalStyles.flexCenter, styles.scrollView]}
     >

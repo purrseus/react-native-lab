@@ -12,9 +12,9 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import PressArea from '../Button/PressArea';
-import Divider from '../Divider';
-import ListView from '../List/ListView';
+import PressArea from '../Pressable/PressArea';
+import Divider from '../Layout/Divider';
+import List from '../List/List';
 import Modal from '../Modal/Modal';
 import Spacer from '../Spacer/Spacer';
 import Text from '../Text/Text';
@@ -183,7 +183,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
         onBackdropPress={() => onHide()}
       >
         <View style={styles.container}>
-          <ListView
+          <List
             data={options}
             scrollEnabled={false}
             renderItem={renderOptionItem}

@@ -16,7 +16,7 @@ const Divider = compareMemo<DividerProps>(
     return (
       <View
         style={{
-          borderBottomWidth: height <= 1 ? StyleSheet.hairlineWidth : height,
+          borderBottomWidth: height,
           borderBottomColor: color,
           alignSelf: 'stretch',
           ...props,

@@ -18,7 +18,7 @@ const Texts: ProtectedScreen<ProtectedScreenName.Texts> = () => {
   const { t } = useTranslation();
 
   return (
-    <StackContainer headerTitle="Texts">
+    <StackContainer headerTitle={ProtectedScreenName.Texts}>
       <KeyboardAwareScrollView>
         <Text>Normal text</Text>
         <Text>Locale text: {t('common.cancel')}</Text>

@@ -10,7 +10,10 @@ const Loader: ProtectedScreen<ProtectedScreenName.Loader> = () => {
   const { handleOverlayLoading } = useLoaderContainer();
 
   return (
-    <StackContainer headerTitle="Loader" wrapperStyle={globalStyles.flexFillCenter}>
+    <StackContainer
+      headerTitle={ProtectedScreenName.Loader}
+      wrapperStyle={globalStyles.flexFillCenter}
+    >
       <ShowcaseItem title="Show OverlayLoading in 3 seconds" onPress={handleOverlayLoading} />
     </StackContainer>
   );
