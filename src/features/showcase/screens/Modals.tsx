@@ -28,6 +28,7 @@ const Modals: ProtectedScreen<ProtectedScreenName.Modals> = () => {
     <>
       <StackContainer
         headerTitle={ProtectedScreenName.Modals}
+        wrapperType="scrollView"
         wrapperStyle={globalStyles.flexFillCenter}
       >
         <ShowcaseItem title="Show modal" onPress={openModal} />

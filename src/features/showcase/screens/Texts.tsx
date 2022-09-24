@@ -19,7 +19,7 @@ const Texts: ProtectedScreen<ProtectedScreenName.Texts> = () => {
 
   return (
     <StackContainer headerTitle={ProtectedScreenName.Texts}>
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView style={{ paddingHorizontal: 16 }}>
         <Text>Normal text</Text>
         <Text>Locale text: {t('common.cancel')}</Text>
 
