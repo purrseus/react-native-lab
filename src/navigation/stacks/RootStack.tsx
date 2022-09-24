@@ -3,12 +3,13 @@ import { RootStackParamList } from '@core/types';
 import { Login, Register } from '@features/authentication/screens';
 import {
   BottomSheets,
-  Pressable,
   Form,
   Images,
+  Layouts,
   List,
   Loader,
   Modals,
+  Pressable,
   ShowcaseList,
   Spacers,
   Texts,
@@ -38,6 +39,7 @@ const ProtectedScreens = (
     <NativeStack.Screen name={ProtectedScreenName.Pressable} component={Pressable} />
     <NativeStack.Screen name={ProtectedScreenName.Form} component={Form} />
     <NativeStack.Screen name={ProtectedScreenName.Images} component={Images} />
+    <NativeStack.Screen name={ProtectedScreenName.Layouts} component={Layouts} />
     <NativeStack.Screen name={ProtectedScreenName.List} component={List} />
     <NativeStack.Screen name={ProtectedScreenName.Loader} component={Loader} />
     <NativeStack.Screen name={ProtectedScreenName.Modals} component={Modals} />

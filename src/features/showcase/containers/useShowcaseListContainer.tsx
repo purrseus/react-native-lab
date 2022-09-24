@@ -13,6 +13,7 @@ const useShowcaseListContainer = ({
     ProtectedScreenName.Pressable,
     ProtectedScreenName.Form,
     ProtectedScreenName.Images,
+    ProtectedScreenName.Layouts,
     ProtectedScreenName.List,
     ProtectedScreenName.Loader,
     ProtectedScreenName.Modals,
