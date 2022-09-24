@@ -9,11 +9,15 @@ import { colors, globalStyles } from '@themes';
 import React from 'react';
 import { Separator } from '../components';
 
-const Buttons: ProtectedScreen<ProtectedScreenName.Buttons> = () => {
+const Pressable: ProtectedScreen<ProtectedScreenName.Pressable> = () => {
   const styles = useStyle(createStyles);
 
   return (
-    <StackContainer wrapperType="scrollView" headerTitle="Buttons" wrapperStyle={styles.scrollView}>
+    <StackContainer
+      wrapperType="scrollView"
+      headerTitle={ProtectedScreenName.Pressable}
+      wrapperStyle={styles.scrollView}
+    >
       {/* Size */}
       <Button title="Large size (default)" size="large" />
       <Separator />
@@ -84,4 +88,4 @@ const createStyles = ({ create }: StyleCallbackParams) =>
     },
   });
 
-export default Buttons;
+export default Pressable;

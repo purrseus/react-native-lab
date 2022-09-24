@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { fonts } from '@assets';
-import { ListViewProps } from '@components/core/List/ListView';
+import { ListProps } from '@components/core/List/List';
 import { darkTheme, lightTheme } from '@themes';
 import { ScaledSize, StyleSheet } from 'react-native';
 import { EdgeInsets } from 'react-native-safe-area-context';
@@ -28,7 +28,7 @@ export interface InfiniteScrollConfig {
 }
 
 export interface UseInfiniteScrollReturn
-  extends Pick<ListViewProps, 'data' | 'refreshing' | 'onRefresh'> {
+  extends Pick<ListProps, 'data' | 'refreshing' | 'onRefresh'> {
   fetching: boolean;
   canLoadMore: boolean;
   onLoadMore: () => Promise<void>;

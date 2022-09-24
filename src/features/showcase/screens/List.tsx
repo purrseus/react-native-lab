@@ -9,7 +9,7 @@ const List: ProtectedScreen<ProtectedScreenName.List> = () => {
   const { config, renderItem, getPhotos } = useListContainer();
 
   return (
-    <StackContainer headerTitle="List">
+    <StackContainer headerTitle={ProtectedScreenName.List}>
       <InfiniteList renderItem={renderItem} requestCallback={getPhotos} config={config} />
     </StackContainer>
   );

@@ -3,7 +3,7 @@ import { RootStackParamList } from '@core/types';
 import { Login, Register } from '@features/authentication/screens';
 import {
   BottomSheets,
-  Buttons,
+  Pressable,
   Form,
   Images,
   List,
@@ -35,7 +35,7 @@ const ProtectedScreens = (
     {/* Showcase */}
     <NativeStack.Screen name={ProtectedScreenName.ShowcaseList} component={ShowcaseList} />
     <NativeStack.Screen name={ProtectedScreenName.BottomSheets} component={BottomSheets} />
-    <NativeStack.Screen name={ProtectedScreenName.Buttons} component={Buttons} />
+    <NativeStack.Screen name={ProtectedScreenName.Pressable} component={Pressable} />
     <NativeStack.Screen name={ProtectedScreenName.Form} component={Form} />
     <NativeStack.Screen name={ProtectedScreenName.Images} component={Images} />
     <NativeStack.Screen name={ProtectedScreenName.List} component={List} />

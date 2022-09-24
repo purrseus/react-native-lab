@@ -15,7 +15,7 @@ const Form: ProtectedScreen<ProtectedScreenName.Form> = () => {
   const { formMethods, onSubmit } = useFormContainer();
 
   return (
-    <StackContainer headerTitle="Form">
+    <StackContainer headerTitle={ProtectedScreenName.Form}>
       <KeyboardAwareScrollView contentContainerStyle={styles.scrollView}>
         <FormProvider {...formMethods}>
           <Field<FormObject>

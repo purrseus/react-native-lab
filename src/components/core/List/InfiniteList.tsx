@@ -7,10 +7,10 @@ import { AxiosRequestConfig } from 'axios';
 import React, { ForwardedRef, forwardRef, RefAttributes, useMemo } from 'react';
 import { FlatList, RefreshControlProps, View } from 'react-native';
 import ActivityIndicator from '../Loader/ActivityIndicator';
-import ListView, { ListViewProps } from './ListView';
+import List, { ListProps } from './List';
 
 interface InfiniteListProps<T = any>
-  extends Omit<ListViewProps<T>, keyof RefreshControlProps | 'data'>,
+  extends Omit<ListProps<T>, keyof RefreshControlProps | 'data'>,
     Partial<RefreshControlProps> {
   requestCallback: (requestConfig: AxiosRequestConfig) => Promise<any>;
   config?: InfiniteScrollConfig;
@@ -54,7 +54,7 @@ const _InfiniteList = (
   const handleOnEndReached = useThrottle(onLoadMore, [onLoadMore]);
 
   return (
-    <ListView
+    <List
       {...props}
       {...listProps}
       ref={ref}

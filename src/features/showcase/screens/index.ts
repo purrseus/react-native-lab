@@ -1,5 +1,5 @@
 export { default as BottomSheets } from './BottomSheets';
-export { default as Buttons } from './Buttons';
+export { default as Pressable } from './Pressable';
 export { default as Form } from './Form';
 export { default as Images } from './Images';
 export { default as List } from './List';

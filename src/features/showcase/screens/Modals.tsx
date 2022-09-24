@@ -26,7 +26,10 @@ const Modals: ProtectedScreen<ProtectedScreenName.Modals> = () => {
 
   return (
     <>
-      <StackContainer headerTitle="Modals" wrapperStyle={globalStyles.flexFillCenter}>
+      <StackContainer
+        headerTitle={ProtectedScreenName.Modals}
+        wrapperStyle={globalStyles.flexFillCenter}
+      >
         <ShowcaseItem title="Show modal" onPress={openModal} />
         <Spacer h={16} />
         <ShowcaseItem title="Show bottom modal" onPress={openBottomModal} />
