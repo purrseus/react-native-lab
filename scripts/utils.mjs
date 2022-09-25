@@ -52,7 +52,7 @@ export const commands = {
     `cd android && ./gradlew clean && ./gradlew ${buildVariant} && cd ..`,
 
   runIos: (env, buildType, envShort) =>
-    `ENVFILE=environments/.env.${env} yarn react-native run-ios --configuration ${buildType} --scheme '${PLACEHOLDER_NAME} (${envShort})'`,
+    `ENVFILE=environments/.env.${env} yarn react-native run-ios --configuration '${buildType} (${envShort})' --scheme '${PLACEHOLDER_NAME} (${envShort})'`,
 
   openXcode: () => `echo '\nOpening Xcode... 🔨\n' && open ios/${PLACEHOLDER_NAME}.xcworkspace`,
 

@@ -14,10 +14,17 @@ interface InfiniteListProps<T = any>
     Partial<RefreshControlProps> {
   requestCallback: (requestConfig: AxiosRequestConfig) => Promise<any>;
   config?: InfiniteScrollConfig;
+  ListFetchingComponent: ListProps<T>['ListEmptyComponent'];
 }
 
 const _InfiniteList = (
-  { requestCallback, config, ListEmptyComponent, ...props }: InfiniteListProps,
+  {
+    requestCallback,
+    config,
+    ListFetchingComponent,
+    ListEmptyComponent,
+    ...props
+  }: InfiniteListProps,
   ref: ForwardedRef<FlatList>,
 ) => {
   const styles = useStyle(createStyles);
@@ -30,16 +37,14 @@ const _InfiniteList = (
   const shouldShowFooter = canLoadMore && !listProps.refreshing && !fetching;
   const contentContainerStyle = fetching ? globalStyles.flexFill : props.contentContainerStyle;
 
-  const EmptyComponent = useMemo(
+  const FetchingComponent = useMemo(
     () =>
-      fetching ? (
+      ListFetchingComponent || (
         <View style={globalStyles.flexFillCenter}>
           <ActivityIndicator size="large" />
         </View>
-      ) : (
-        ListEmptyComponent
       ),
-    [fetching, ListEmptyComponent],
+    [ListFetchingComponent],
   );
 
   const ListFooterComponent = useMemo(
@@ -60,7 +65,7 @@ const _InfiniteList = (
       ref={ref}
       contentContainerStyle={contentContainerStyle}
       onEndReached={handleOnEndReached}
-      ListEmptyComponent={EmptyComponent}
+      ListEmptyComponent={fetching ? FetchingComponent : ListEmptyComponent}
       {...(shouldShowFooter && { ListFooterComponent })}
     />
   );

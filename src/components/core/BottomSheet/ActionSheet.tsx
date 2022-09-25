@@ -12,10 +12,10 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import PressArea from '../Pressable/PressArea';
 import Divider from '../Layout/Divider';
 import List from '../List/List';
 import Modal from '../Modal/Modal';
+import PressArea from '../Pressable/PressArea';
 import Spacer from '../Spacer/Spacer';
 import Text from '../Text/Text';
 
