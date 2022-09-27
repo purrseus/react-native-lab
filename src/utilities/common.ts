@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ONE_SECOND } from '@core/constants';
 import { CommonSize, Language } from '@core/types';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { MMKVStorage } from '@store/integration';
 import { ForwardRefExoticComponent, memo, PropsWithoutRef, RefAttributes } from 'react';
 import isEqual from 'react-fast-compare';
 import { DevSettings, ShadowStyleIOS, UIManager, ViewStyle } from 'react-native';
@@ -84,9 +84,9 @@ export const onAppBootstrap = () => {
   if (__DEV__) {
     const devSettingItems: { title: string; handler: () => void }[] = [
       {
-        title: 'Clear AsyncStorage and reload',
+        title: 'Clear all storage and reload',
         handler: async () => {
-          await AsyncStorage.clear();
+          MMKVStorage.clearAll();
           DevSettings.reload();
         },
       },
