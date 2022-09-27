@@ -1,6 +1,7 @@
-import Alert, { AlertButton } from '@components/core/Modal/Alert';
+import Alert from '@components/core/Modal/Alert';
 import { I18nText } from '@core/types';
 import i18n from '@i18n';
+import { AlertButton } from 'react-native';
 import {
   check,
   checkMultiple,
