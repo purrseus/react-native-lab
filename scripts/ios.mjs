@@ -1,22 +1,23 @@
 import inquirer from 'inquirer';
 import {
   createBuildQuestionCollections,
-  execSyncInherit,
+  execScriptSync,
   platformBuildTypes,
   commands,
   uncapitalized,
   getArguments,
+  ensureGitBranch,
 } from './utils.mjs';
 
 (async () => {
-  const environment = {
+  const envShorts = {
     Development: 'dev',
     Staging: 'stag',
     Production: 'prod',
   };
 
   const [arg] = getArguments();
-  const openXCode = () => execSyncInherit(commands.openXcode());
+  const openXCode = () => execScriptSync(commands.openXcode());
 
   if (arg === 'xcode') {
     openXCode();
@@ -24,9 +25,12 @@ import {
   }
 
   const { env, buildType } = await inquirer.prompt(createBuildQuestionCollections('ios'));
+
+  ensureGitBranch(env);
+
   if (platformBuildTypes.ios.includes(buildType)) {
     openXCode();
   } else {
-    execSyncInherit(commands.runIos(uncapitalized(env), buildType, environment[env]));
+    execScriptSync(commands.runIos(uncapitalized(env), buildType, envShorts[env]));
   }
 })();
