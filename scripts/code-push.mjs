@@ -1,5 +1,12 @@
 import inquirer from 'inquirer';
-import { commands, envs, execSyncInherit, loadEnvFile, uncapitalized } from './utils.mjs';
+import {
+  commands,
+  ensureGitBranch,
+  envs,
+  execScriptSync,
+  loadEnvFile,
+  uncapitalized,
+} from './utils.mjs';
 
 (async () => {
   const { os, env } = await inquirer.prompt([
@@ -17,20 +24,17 @@ import { commands, envs, execSyncInherit, loadEnvFile, uncapitalized } from './u
     },
   ]);
 
+  ensureGitBranch(env);
+
   const { ANDROID_VERSION_NAME, IOS_VERSION } = loadEnvFile(uncapitalized(env));
 
+  const androidCommand = commands.codePush('🤖 Android', env, ANDROID_VERSION_NAME);
+  const iosCommand = commands.codePush('🍎 iOS', env, IOS_VERSION);
+
   if (os === 'Both') {
-    execSyncInherit(
-      `${commands.codePush('🤖 Android', env, ANDROID_VERSION_NAME)} && ${commands.codePush(
-        '🍎 iOS',
-        env,
-        IOS_VERSION,
-      )}`,
-    );
+    execScriptSync(`${androidCommand} && ${iosCommand}`);
     return;
   }
 
-  execSyncInherit(
-    commands.codePush(os, env, os === '🤖 Android' ? ANDROID_VERSION_NAME : IOS_VERSION),
-  );
+  execScriptSync(os === '🤖 Android' ? androidCommand : iosCommand);
 })();

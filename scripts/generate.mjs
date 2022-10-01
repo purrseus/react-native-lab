@@ -1,4 +1,4 @@
-import { execSyncInherit, getArguments } from './utils.mjs';
+import { execScriptSync, getArguments } from './utils.mjs';
 
 (() => {
   const folderNames = ['components', 'containers', 'screens', 'utilities'];
@@ -6,7 +6,7 @@ import { execSyncInherit, getArguments } from './utils.mjs';
   if (!featureFolderName) throw new SyntaxError('Missing folder name!');
   const targetDir = _targetDir.replace(/\/+$/g, '');
 
-  execSyncInherit(
+  execScriptSync(
     folderNames.reduce((command, folderName, index) => {
       const dirPath = `${targetDir}/${featureFolderName}/${folderName}`;
       const filePath = `${dirPath}/index.ts`;

@@ -1,16 +1,17 @@
 import inquirer from 'inquirer';
 import {
-  createBuildQuestionCollections,
-  execSyncInherit,
-  uncapitalized,
-  platformBuildTypes,
   commands,
+  createBuildQuestionCollections,
+  ensureGitBranch,
+  execScriptSync,
+  platformBuildTypes,
+  uncapitalized,
 } from './utils.mjs';
 
 (async () => {
   const buildVariantPrefix = {
     APK: 'assemble',
-    ABB: 'bundle',
+    AAB: 'bundle',
   };
 
   const suffixAppId = {
@@ -20,9 +21,12 @@ import {
   };
 
   const { env, buildType } = await inquirer.prompt(createBuildQuestionCollections('android'));
+
+  ensureGitBranch(env);
+
   if (platformBuildTypes.android.includes(buildType)) {
-    execSyncInherit(commands.generateAndroidFile(`${buildVariantPrefix[buildType]}${env}Release`));
+    execScriptSync(commands.generateAndroidFile(`${buildVariantPrefix[buildType]}${env}Release`));
   } else {
-    execSyncInherit(commands.runAndroid(uncapitalized(`${env}${buildType}`), suffixAppId[env]));
+    execScriptSync(commands.runAndroid(uncapitalized(`${env}${buildType}`), suffixAppId[env]));
   }
 })();

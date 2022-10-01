@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs';
-import { execSyncInherit, loadEnvFile } from './utils.mjs';
+import { execScriptSync, loadEnvFile } from './utils.mjs';
 
 const setupCodePush = () => {
   const { ANDROID_APP_SECRET_KEY, IOS_APP_SECRET_KEY } = loadEnvFile('development');
@@ -23,5 +23,5 @@ const setupCodePush = () => {
 
 (() => {
   setupCodePush();
-  execSyncInherit('yarn prepare && yarn postinstall');
+  execScriptSync('yarn prepare && yarn postinstall');
 })();

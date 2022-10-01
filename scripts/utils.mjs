@@ -15,14 +15,30 @@ const platformName = {
   ios: '🍎 iOS',
 };
 
+const gitBranches = {
+  Development: 'develop',
+  Staging: 'staging',
+  Production: 'main',
+};
+
 export const platformBuildTypes = {
-  android: ['APK', 'ABB'],
+  android: ['APK', 'AAB'],
   ios: ['Archive'],
 };
 
 export const envs = ['Development', 'Staging', 'Production'];
 
-export const execSyncInherit = command => execSync(command, { stdio: 'inherit' });
+export const execScriptSync = command => execSync(command);
+
+export const ensureGitBranch = env => {
+  const currentBranchName = execSync('git branch --show-current', {
+    encoding: 'utf-8',
+  }).replace('\n', '');
+
+  if (gitBranches[env] !== currentBranchName)
+    // TODO: change this message
+    throw new Error(`Current branch: ${currentBranchName}\nEnvironment selected: ${env}`);
+};
 
 export const uncapitalized = text =>
   typeof text !== 'string' || !text.length ? '' : `${text[0].toLowerCase()}${text.slice(1)}`;
