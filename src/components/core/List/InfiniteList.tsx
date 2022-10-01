@@ -4,7 +4,7 @@ import { useInfiniteScroll, useStyle, useThrottle } from '@hooks';
 import { globalStyles } from '@themes';
 import { compareMemo } from '@utilities';
 import { AxiosRequestConfig } from 'axios';
-import React, { ForwardedRef, forwardRef, RefAttributes, useMemo } from 'react';
+import { ForwardedRef, forwardRef, RefAttributes, useMemo } from 'react';
 import { FlatList, RefreshControlProps, View } from 'react-native';
 import ActivityIndicator from '../Loader/ActivityIndicator';
 import List, { ListProps } from './List';
@@ -14,7 +14,7 @@ interface InfiniteListProps<T = any>
     Partial<RefreshControlProps> {
   requestCallback: (requestConfig: AxiosRequestConfig) => Promise<any>;
   config?: InfiniteScrollConfig;
-  ListFetchingComponent: ListProps<T>['ListEmptyComponent'];
+  ListFetchingComponent?: ListProps<T>['ListEmptyComponent'];
 }
 
 const _InfiniteList = (

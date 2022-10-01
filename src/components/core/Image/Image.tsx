@@ -3,7 +3,7 @@ import { CommonSize } from '@core/types';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
 import { omit } from 'lodash';
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   AccessibilityProps,
   Image as RNImage,

@@ -1,14 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { compareMemo } from '@utilities';
-import React, {
-  ForwardedRef,
-  forwardRef,
-  RefAttributes,
-  RefCallback,
-  useCallback,
-  useMemo,
-} from 'react';
+import { ForwardedRef, forwardRef, RefAttributes, RefCallback, useCallback, useMemo } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { TextInput as RNTextInput } from 'react-native';
 import TextField, { TextFieldProps } from './TextField';

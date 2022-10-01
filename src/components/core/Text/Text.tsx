@@ -2,7 +2,6 @@ import { DEFAULT_FONT_SIZE } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
-import React from 'react';
 import { Text as RNText, TextProps as RNTextProps } from 'react-native';
 import PressArea, { PressAreaProps } from '../Pressable/PressArea';
 

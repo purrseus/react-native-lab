@@ -2,7 +2,6 @@ import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
 import { ProtectedScreen } from '@core/types';
 import { globalStyles } from '@themes';
-import React from 'react';
 import { ShowcaseItem } from '../components';
 import { useLoaderContainer } from '../containers';
 

@@ -7,7 +7,7 @@ import { useAppTranslation, useKeyboard, useStyle } from '@hooks';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { colors as Colors, globalStyles } from '@themes';
 import { createShadow } from '@utilities';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { ColorValue, ImageRequireSource, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';

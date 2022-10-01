@@ -1,6 +1,5 @@
 import { colors } from '@themes';
 import { compareMemo } from '@utilities';
-import React from 'react';
 import { StatusBar as RNStatusBar, StatusBarProps, useColorScheme } from 'react-native';
 
 const StatusBar = compareMemo<StatusBarProps>(({ ...props }) => (

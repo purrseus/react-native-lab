@@ -5,7 +5,7 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
 import { compareMemo } from '@utilities';
-import React, { forwardRef, ReactNode } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import {
   StyleProp,
   TextInput as RNTextInput,

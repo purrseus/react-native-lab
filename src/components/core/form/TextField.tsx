@@ -1,7 +1,7 @@
 import { CommonFieldProps, StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
-import React, { ForwardedRef, forwardRef, RefAttributes } from 'react';
+import { ForwardedRef, forwardRef, RefAttributes } from 'react';
 import { StyleProp, TextInput as RNTextInput, View, ViewStyle } from 'react-native';
 import MultilineTextInput, {
   MultilineTextInputProps,

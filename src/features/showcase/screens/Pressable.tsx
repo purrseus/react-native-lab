@@ -6,7 +6,6 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
 import { colors, globalStyles } from '@themes';
-import React from 'react';
 import { Separator } from '../components';
 
 const Pressable: ProtectedScreen<ProtectedScreenName.Pressable> = () => {

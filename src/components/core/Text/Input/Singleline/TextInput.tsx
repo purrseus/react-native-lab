@@ -2,7 +2,7 @@ import { DEFAULT_FONT_SIZE, DEFAULT_HIT_SLOP, MIN_HEIGHT_INPUT } from '@core/con
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { TextInput as RNTextInput, TextInputProps as RNTextInputProps } from 'react-native';
 
 const TextInput = compareMemo<RNTextInput, RNTextInputProps>(

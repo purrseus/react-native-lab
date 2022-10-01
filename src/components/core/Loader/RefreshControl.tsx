@@ -1,6 +1,5 @@
 import { useColor } from '@hooks';
 import { compareMemo } from '@utilities';
-import React from 'react';
 import { RefreshControl as RNRefreshControl, RefreshControlProps } from 'react-native';
 
 const RefreshControl = compareMemo<RefreshControlProps>(({ ...props }) => {

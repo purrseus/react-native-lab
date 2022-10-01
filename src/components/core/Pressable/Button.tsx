@@ -2,7 +2,6 @@ import { DEFAULT_ICON_SIZE, HORIZONTAL_GRADIENT_COORDINATES } from '@core/consta
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { alphaHexColor, compareMemo } from '@utilities';
-import React from 'react';
 import {
   ColorValue,
   ImageRequireSource,

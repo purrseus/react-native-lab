@@ -5,7 +5,6 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
-import React from 'react';
 import { View } from 'react-native';
 import { ShowcaseItem } from '../components';
 import { useModalContainer } from '../containers';

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { compareMemo } from '@utilities';
-import React, { ForwardedRef, forwardRef, RefAttributes, useCallback, useRef } from 'react';
+import { ForwardedRef, forwardRef, RefAttributes, useCallback, useRef } from 'react';
 import { FlatList, FlatListProps, RefreshControlProps } from 'react-native';
 import RefreshControl from '../Loader/RefreshControl';
 import BottomSpacer from '../Spacer/BottomSpacer';

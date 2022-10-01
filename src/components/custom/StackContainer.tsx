@@ -2,7 +2,6 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
 import { compareMemo } from '@utilities';
-import React from 'react';
 import { ScrollView, StyleProp, View, ViewProps, ViewStyle } from 'react-native';
 import NavigationHeader, { NavigationHeaderProps } from './NavigationHeader';
 

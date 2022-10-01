@@ -1,6 +1,6 @@
 import { Alert, Text } from '@components/core';
 import { createArray } from '@utilities';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const useModalContainer = () => {

@@ -6,7 +6,7 @@ import {
   compareMemo,
   logger,
 } from '@utilities';
-import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
+import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import {
   CameraOptions,
   ImageLibraryOptions,

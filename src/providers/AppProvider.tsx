@@ -1,5 +1,5 @@
 import { onAppBootstrap } from '@utilities';
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import CodePush from 'react-native-code-push';
 import LayoutProvider from './LayoutProvider';
 import NavigationProvider from './NavigationProvider';
