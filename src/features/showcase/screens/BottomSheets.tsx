@@ -6,7 +6,6 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
 import { logger } from '@utilities';
-import React from 'react';
 import { Separator, ShowcaseItem } from '../components';
 import { useBottomSheetContainer } from '../containers';
 

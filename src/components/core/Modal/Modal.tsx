@@ -3,7 +3,7 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { CommonSize } from '@core/types';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 import RNModal, { ModalProps as RNModalProps } from 'react-native-modal';
 

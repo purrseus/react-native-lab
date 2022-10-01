@@ -2,7 +2,7 @@ import { ONE_SECOND } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle, useThrottle } from '@hooks';
 import { compareMemo } from '@utilities';
-import React, { forwardRef, useCallback } from 'react';
+import { forwardRef, useCallback } from 'react';
 import {
   Pressable,
   PressableProps,

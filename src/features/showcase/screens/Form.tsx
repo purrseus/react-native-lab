@@ -4,7 +4,6 @@ import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
-import React from 'react';
 import { FormProvider } from 'react-hook-form';
 import { useFormContainer } from '../containers';
 import { FormObject } from '../containers/useFormContainer';

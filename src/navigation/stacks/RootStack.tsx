@@ -19,7 +19,6 @@ import { stackScreenOptions } from '@navigation/options';
 import createStyles from '@navigation/styles';
 import BottomTabBar from '@navigation/tabs/BottomTabBar';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
 
 const NativeStack = createNativeStackNavigator<RootStackParamList>();
 

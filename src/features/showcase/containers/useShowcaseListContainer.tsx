@@ -1,7 +1,6 @@
 import { Spacer } from '@components/core';
 import { ProtectedScreenName } from '@core/enums';
 import { ProtectedScreen } from '@core/types';
-import React from 'react';
 import { ListRenderItem } from 'react-native';
 import { ShowcaseItem } from '../components';
 

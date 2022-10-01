@@ -2,7 +2,6 @@ import { Divider, Row, Spacer, StatusBar, Text } from '@components/core';
 import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
 import { ProtectedScreen } from '@core/types';
-import React from 'react';
 
 const Layouts: ProtectedScreen<ProtectedScreenName.Layouts> = () => {
   return (

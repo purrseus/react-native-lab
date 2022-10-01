@@ -1,5 +1,4 @@
 import { PADDING_VERTICAL_INPUT } from '@core/constants';
-import React from 'react';
 import {
   KeyboardAwareScrollView as RNKeyboardAwareScrollView,
   KeyboardAwareScrollViewProps,

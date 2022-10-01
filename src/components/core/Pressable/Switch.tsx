@@ -2,7 +2,7 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
 import { compareMemo, createShadow, isAndroid as isAndroidOS, platformSelect } from '@utilities';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { ActivityIndicatorProps, ColorValue, StyleProp, View, ViewStyle } from 'react-native';
 import Animated, {
   interpolate,

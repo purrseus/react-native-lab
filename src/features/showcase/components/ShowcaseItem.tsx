@@ -2,7 +2,6 @@ import { PressArea } from '@components/core';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
-import React from 'react';
 import { Text } from 'react-native';
 
 interface ShowcaseItemProps {

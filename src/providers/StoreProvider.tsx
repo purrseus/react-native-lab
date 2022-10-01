@@ -1,6 +1,6 @@
 import { ActivityIndicator } from '@components/core';
 import store, { persistor } from '@store';
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 

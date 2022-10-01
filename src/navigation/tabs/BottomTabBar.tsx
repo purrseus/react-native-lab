@@ -5,7 +5,6 @@ import { useStyle } from '@hooks';
 import { tabScreenOptions } from '@navigation/options';
 import createStyles from '@navigation/styles';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React from 'react';
 import CustomizedTabBar from './CustomizedTabBar';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();

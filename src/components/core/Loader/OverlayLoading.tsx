@@ -1,7 +1,6 @@
 import { StyleCallbackParams } from '@core/interfaces';
 import { useLoading, useStyle } from '@hooks';
 import { alphaHexColor, compareMemo } from '@utilities';
-import React from 'react';
 import { View } from 'react-native';
 import Modal from '../Modal/Modal';
 import ActivityIndicator from './ActivityIndicator';

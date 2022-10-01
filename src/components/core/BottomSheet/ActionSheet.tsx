@@ -3,7 +3,7 @@ import { ONE_SECOND } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useAppSelector, useColor, useStyle, useThrottle } from '@hooks';
 import { alphaHexColor, compareMemo, isIos, wait } from '@utilities';
-import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
+import { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
 import {
   ActionSheetIOS,
   ActionSheetIOSOptions,

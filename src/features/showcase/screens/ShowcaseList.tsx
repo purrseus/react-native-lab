@@ -4,7 +4,6 @@ import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
-import React from 'react';
 import useShowcaseListContainer from '../containers/useShowcaseListContainer';
 
 const ShowcaseList: ProtectedScreen<ProtectedScreenName.ShowcaseList> = props => {

@@ -10,7 +10,7 @@ import { useLayout, useStyle } from '@hooks';
 import { useNavigation } from '@react-navigation/native';
 import { globalStyles } from '@themes';
 import { compareMemo, createShadow } from '@utilities';
-import React, { Fragment, useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
 import { StatusBar, View, ViewProps } from 'react-native';
 
 export interface NavigationHeaderProps extends ViewProps {

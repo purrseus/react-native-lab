@@ -2,7 +2,6 @@ import { Spacer, Text, PressArea } from '@components/core';
 import { UnprotectedScreenName } from '@core/enums';
 import { UnprotectedScreen } from '@core/types';
 import { globalStyles } from '@themes';
-import React from 'react';
 import { View } from 'react-native';
 import { useLoginContainer } from '../containers';
 

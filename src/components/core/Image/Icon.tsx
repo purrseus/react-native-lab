@@ -2,7 +2,6 @@ import { DEFAULT_ICON_SIZE } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
-import React from 'react';
 import Image, { ImageProps } from './Image';
 
 export interface IconProps extends ImageProps<false> {

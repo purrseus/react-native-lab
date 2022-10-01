@@ -1,6 +1,5 @@
 import { TAB_BAR_HEIGHT } from '@core/constants';
 import { compareMemo } from '@utilities';
-import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Spacer from './Spacer';
 
