@@ -3,8 +3,6 @@
 import { ONE_SECOND } from '@core/constants';
 import { CommonSize, Language } from '@core/types';
 import { MMKVStorage } from '@store/integration';
-import { ForwardRefExoticComponent, memo, PropsWithoutRef, RefAttributes } from 'react';
-import isEqual from 'react-fast-compare';
 import { DevSettings, ShadowStyleIOS, UIManager, ViewStyle } from 'react-native';
 import { getLocales } from 'react-native-localize';
 import { isAndroid } from './os';
@@ -15,12 +13,6 @@ export const randomColor = () => `#${Math.random().toString(16).slice(-6)}`;
 
 export const alphaHexColor = (hexColor: string, opacity: number) =>
   `${hexColor}${`${(Math.min(Math.max(opacity, 0), 1) * 255).toString(16)}0`.slice(0, 2)}`;
-
-export const compareMemo = <T, P = undefined>(
-  Component: P extends undefined
-    ? (props: T) => JSX.Element
-    : ForwardRefExoticComponent<PropsWithoutRef<P> & RefAttributes<T>>,
-) => memo(Component, isEqual);
 
 export const wait = (timeout = ONE_SECOND) =>
   new Promise<void>(resolve => setTimeout(resolve, timeout));
