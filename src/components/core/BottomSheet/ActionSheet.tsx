@@ -1,6 +1,6 @@
 /* eslint-disable react-native/split-platform-components */
 import { ONE_SECOND } from '@core/constants';
-import { StyleCallbackParams } from '@core/interfaces';
+import { ActionSheetMethods, StyleCallbackParams } from '@core/interfaces';
 import { useAppSelector, useColor, useStyle, useThrottle } from '@hooks';
 import { alphaHexColor, compareMemo, isIos, wait } from '@utilities';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
@@ -18,12 +18,6 @@ import Modal from '../Modal/Modal';
 import PressArea from '../Pressable/PressArea';
 import Spacer from '../Spacer/Spacer';
 import Text from '../Text/Text';
-
-export interface ActionSheetMethods {
-  show: () => void;
-  /** @platform android */
-  hide: () => void;
-}
 
 export interface ActionSheetProps extends ActionSheetIOSOptions {
   options: string[];

@@ -1,4 +1,5 @@
-import { File } from '@core/interfaces';
+import { ActionSheetMethods, File, ImagePickerMethods } from '@core/interfaces';
+import { PickedImageType } from '@core/types';
 import { useAppTranslation } from '@hooks';
 import {
   checkCameraPermission,
@@ -13,20 +14,13 @@ import {
   launchCamera,
   launchImageLibrary,
 } from 'react-native-image-picker';
-import ActionSheet, { ActionSheetMethods, ActionSheetProps } from './ActionSheet';
+import ActionSheet, { ActionSheetProps } from './ActionSheet';
 
-export type Image = string | File;
 type PickType = 'pick' | 'replace';
 
-export interface ImagePickerMethods {
-  pick: () => void;
-  replace: (replaceIndex: number) => void;
-  delete: (deleteIndex?: number) => void;
-}
-
 interface ImagePickerProps extends Omit<ActionSheetProps, 'onSelect' | 'options'> {
-  images: Image[];
-  onChangeImage: (images: Image[]) => void;
+  images: PickedImageType[];
+  onChangeImage: (images: PickedImageType[]) => void;
   maximumImages?: number;
   cameraOptions?: CameraOptions;
   imageLibraryOptions?: ImageLibraryOptions;
