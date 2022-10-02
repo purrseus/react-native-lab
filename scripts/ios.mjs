@@ -1,12 +1,11 @@
-import inquirer from 'inquirer';
 import {
-  createBuildQuestionCollections,
-  execScriptSync,
-  platformBuildTypes,
   commands,
-  uncapitalized,
+  createBuildQuestionCollections,
+  createQuestions,
+  execScriptSync,
   getArguments,
-  ensureGitBranch,
+  platformBuildTypes,
+  uncapitalized,
 } from './utils.mjs';
 
 (async () => {
@@ -24,9 +23,7 @@ import {
     return;
   }
 
-  const { env, buildType } = await inquirer.prompt(createBuildQuestionCollections('ios'));
-
-  ensureGitBranch(env);
+  const { env, buildType } = await createQuestions(createBuildQuestionCollections('ios'));
 
   if (platformBuildTypes.ios.includes(buildType)) {
     openXCode();

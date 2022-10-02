@@ -1,5 +1,6 @@
 import { execSync } from 'child_process';
 import { readFileSync } from 'fs';
+import inquirer from 'inquirer';
 import path from 'path';
 
 const PLACEHOLDER_NAME = 'ReactNativeLab';
@@ -26,18 +27,27 @@ export const platformBuildTypes = {
   ios: ['Archive'],
 };
 
-export const envs = ['Development', 'Staging', 'Production'];
-
-export const execScriptSync = command => execSync(command);
-
-export const ensureGitBranch = env => {
+const ensureGitBranch = env => {
   const currentBranchName = execSync('git branch --show-current', {
     encoding: 'utf-8',
   }).replace('\n', '');
 
   if (gitBranches[env] !== currentBranchName)
-    // TODO: change this message
-    throw new Error(`Current branch: ${currentBranchName}\nEnvironment selected: ${env}`);
+    throw new Error(
+      `Incorrect branch!\nCurrent branch: ${currentBranchName} (this branch matches the ${
+        Object.entries(gitBranches).find(el => el.includes(currentBranchName))[0]
+      } environment)\nEnvironment selected: ${env}\n`,
+    );
+};
+
+export const envs = ['Development', 'Staging', 'Production'];
+
+export const execScriptSync = command => execSync(command);
+
+export const createQuestions = async questions => {
+  const answers = await inquirer.prompt(questions);
+  if (answers.env) ensureGitBranch(answers.env);
+  return answers;
 };
 
 export const uncapitalized = text =>

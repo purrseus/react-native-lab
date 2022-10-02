@@ -1,7 +1,6 @@
-import inquirer from 'inquirer';
 import {
   commands,
-  ensureGitBranch,
+  createQuestions,
   envs,
   execScriptSync,
   loadEnvFile,
@@ -9,7 +8,7 @@ import {
 } from './utils.mjs';
 
 (async () => {
-  const { os, env } = await inquirer.prompt([
+  const { os, env } = await createQuestions([
     {
       type: 'list',
       name: 'os',
@@ -23,8 +22,6 @@ import {
       choices: envs,
     },
   ]);
-
-  ensureGitBranch(env);
 
   const { ANDROID_VERSION_NAME, IOS_VERSION } = loadEnvFile(uncapitalized(env));
 
