@@ -1,4 +1,5 @@
 export * from './common';
+export * from './component';
 export * from './format';
 export * from './logger';
 export * from './os';

@@ -1,3 +1,4 @@
+import { File } from '@core/interfaces';
 import { ScaledSize } from 'react-native';
 import { BaseSchema } from 'yup';
 
@@ -14,3 +15,5 @@ export type DateTimeFormatTemplate =
 export type NumberFormatTemplate = '0.0a' | '0 a' | '0a' | '0o' | '$0,0';
 
 export type ValidationObject<T> = Record<keyof T, BaseSchema>;
+
+export type PickedImageType = string | File;

@@ -1,10 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  InfiniteScrollConfig,
-  PaginationResponse,
-  UseInfiniteScrollReturn,
-} from '@core/interfaces';
+import { InfiniteScrollConfig, PaginationResponse } from '@core/interfaces';
 import { deepAccessObject, logger } from '@utilities';
 import { AxiosRequestConfig } from 'axios';
 import { Draft } from 'immer';
@@ -26,6 +22,11 @@ interface InfiniteScroll<Data> {
   data: Data;
 }
 
+interface UseInfiniteScrollReturn<D> extends InfiniteScroll<D> {
+  onRefresh: () => Promise<void>;
+  onLoadMore: () => Promise<void>;
+}
+
 const DEFAULT_PAGE_SIZE = 10;
 const PAGE_INDEX_KEY = '_page'; // or pageIndex, page,...
 const PAGE_SIZE_KEY = '_limit'; // or pageSize, perPage, limit,...
@@ -37,7 +38,7 @@ const useInfiniteScroll = <T extends PaginationResponse<D>, D extends any[]>(
     params = {},
     accessProperties = ['data'],
   }: InfiniteScrollConfig = {},
-): UseInfiniteScrollReturn => {
+): UseInfiniteScrollReturn<D> => {
   const controller = useRef(new AbortController()).current;
 
   const infiniteScrollRef = useRef<InfiniteScrollRef<InfiniteScrollConfig['params']>>({
