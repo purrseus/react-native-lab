@@ -4,7 +4,10 @@ import isEqual from 'react-fast-compare';
 
 export const overlayLoadingRef = createRef<OverlayLoadingMethods>();
 
-export const showOverlayLoading = (isShow: boolean) => overlayLoadingRef.current?.show(isShow);
+export const overlayLoading = {
+  show: () => overlayLoadingRef.current?.show(true),
+  hide: () => overlayLoadingRef.current?.show(false),
+};
 
 export const compareMemo = <T, P = undefined>(
   Component: P extends undefined
