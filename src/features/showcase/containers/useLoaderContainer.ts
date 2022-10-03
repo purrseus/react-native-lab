@@ -1,11 +1,11 @@
 import { ONE_SECOND } from '@core/constants';
-import { showOverlayLoading, wait } from '@utilities';
+import { overlayLoading, wait } from '@utilities';
 
 const useLoaderContainer = () => {
   const handleOverlayLoading = async () => {
-    showOverlayLoading(true);
+    overlayLoading.show();
     await wait(ONE_SECOND * 3);
-    showOverlayLoading(false);
+    overlayLoading.hide();
   };
 
   return { handleOverlayLoading };
