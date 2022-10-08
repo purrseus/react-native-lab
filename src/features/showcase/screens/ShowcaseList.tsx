@@ -8,13 +8,13 @@ import useShowcaseListContainer from '../containers/useShowcaseListContainer';
 
 const ShowcaseList: ProtectedScreen<ProtectedScreenName.ShowcaseList> = props => {
   const styles = useStyle(createStyles);
-  const { data, renderItem, ItemSeparatorComponent } = useShowcaseListContainer(props);
+  const { ItemSeparatorComponent, ...container } = useShowcaseListContainer(props);
 
   return (
     <StackContainer headerTitle={ProtectedScreenName.ShowcaseList}>
       <List
-        data={data}
-        renderItem={renderItem}
+        data={container.data}
+        renderItem={container.renderItem}
         contentContainerStyle={styles.scrollView}
         ItemSeparatorComponent={ItemSeparatorComponent}
       />

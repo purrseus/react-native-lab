@@ -10,7 +10,7 @@ import { useImageContainer } from '../containers';
 
 const Images: ProtectedScreen<ProtectedScreenName.Images> = () => {
   const styles = useStyle(createStyles);
-  const { imageUrl } = useImageContainer();
+  const container = useImageContainer();
 
   return (
     <StackContainer
@@ -19,17 +19,17 @@ const Images: ProtectedScreen<ProtectedScreenName.Images> = () => {
       wrapperStyle={[globalStyles.flexCenter, styles.scrollView]}
     >
       <Text>Image</Text>
-      <Image source={imageUrl} style={styles.image} />
+      <Image source={container.imageUrl} style={styles.image} />
 
       <Spacer h={60} />
 
       <Text>Cached Image</Text>
-      <Image cached source={imageUrl} style={styles.image} />
+      <Image cached source={container.imageUrl} style={styles.image} />
 
       <Spacer h={60} />
 
       <Text>Icon</Text>
-      <Icon source={imageUrl} size={24} />
+      <Icon source={container.imageUrl} size={24} />
       <View />
     </StackContainer>
   );

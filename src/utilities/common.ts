@@ -7,8 +7,6 @@ import { DevSettings, ShadowStyleIOS, UIManager, ViewStyle } from 'react-native'
 import { getLocales } from 'react-native-localize';
 import { isAndroid } from './os';
 
-export const currentTimestamp = () => +new Date();
-
 export const randomColor = () => `#${Math.random().toString(16).slice(-6)}`;
 
 export const alphaHexColor = (hexColor: string, opacity: number) =>
