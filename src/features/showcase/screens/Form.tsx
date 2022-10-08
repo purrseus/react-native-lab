@@ -10,12 +10,12 @@ import { FormObject } from '../containers/useFormContainer';
 
 const Form: ProtectedScreen<ProtectedScreenName.Form> = () => {
   const styles = useStyle(createStyles);
-  const { formMethods, onSubmit } = useFormContainer();
+  const container = useFormContainer();
 
   return (
     <StackContainer headerTitle={ProtectedScreenName.Form}>
       <KeyboardAwareScrollView style={styles.scrollView}>
-        <FormProvider {...formMethods}>
+        <FormProvider {...container.formMethods}>
           <Field<FormObject>
             type="text"
             name="firstName"
@@ -48,7 +48,7 @@ const Form: ProtectedScreen<ProtectedScreenName.Form> = () => {
         </FormProvider>
 
         <Spacer h={32} />
-        <Button title="Submit" onPress={onSubmit} />
+        <Button title="Submit" onPress={container.onSubmit} />
       </KeyboardAwareScrollView>
     </StackContainer>
   );
