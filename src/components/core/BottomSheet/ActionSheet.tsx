@@ -20,9 +20,6 @@ import Spacer from '../Spacer/Spacer';
 import Text from '../Text/Text';
 
 export interface ActionSheetProps extends ActionSheetIOSOptions {
-  options: string[];
-  title?: string;
-  message?: string;
   onSelect: (buttonIndex: number) => void;
 }
 

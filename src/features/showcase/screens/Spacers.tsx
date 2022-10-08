@@ -11,49 +11,43 @@ import useSpacerContainer from '../containers/useSpacerContainer';
 
 const Spacers: ProtectedScreen<ProtectedScreenName.Spacers> = () => {
   const styles = useStyle(createStyles);
-  const {
-    WIDTH,
-    HEIGHT,
-    status,
-    showWidthSpacer,
-    showHeightSpacer,
-    showBottomTabSpacer,
-    showSafeAreaSpacer,
-    showHalfSafeAreaSpacer,
-  } = useSpacerContainer();
+  const { WIDTH, HEIGHT, ...container } = useSpacerContainer();
 
   return (
     <StackContainer headerTitle={ProtectedScreenName.Spacers}>
       <View style={[globalStyles.flexFillCenter, styles.container]}>
-        <ShowcaseItem title={`Show width spacer: ${WIDTH}`} onPress={showWidthSpacer} />
+        <ShowcaseItem title={`Show width spacer: ${WIDTH}`} onPress={container.showWidthSpacer} />
         <Separator />
-        <ShowcaseItem title={`Show height spacer: ${HEIGHT}`} onPress={showHeightSpacer} />
+        <ShowcaseItem
+          title={`Show height spacer: ${HEIGHT}`}
+          onPress={container.showHeightSpacer}
+        />
         <Separator />
-        <ShowcaseItem title="Show bottomTab spacer" onPress={showBottomTabSpacer} />
+        <ShowcaseItem title="Show bottomTab spacer" onPress={container.showBottomTabSpacer} />
         <Separator />
-        <ShowcaseItem title="Show safeArea spacer" onPress={showSafeAreaSpacer} />
+        <ShowcaseItem title="Show safeArea spacer" onPress={container.showSafeAreaSpacer} />
         <Separator />
-        <ShowcaseItem title="Show halfSafeArea spacer" onPress={showHalfSafeAreaSpacer} />
+        <ShowcaseItem title="Show halfSafeArea spacer" onPress={container.showHalfSafeAreaSpacer} />
 
         <Spacer h={100} />
 
-        {status === 'spacerWidth' && (
+        {container.status === 'spacerWidth' && (
           <Row style={[styles.spacerExampleContainer, styles.row]}>
             <View style={styles.sideView} />
             <Spacer w={WIDTH} />
             <View style={styles.sideView} />
           </Row>
         )}
-        {status === 'spacerHeight' && (
+        {container.status === 'spacerHeight' && (
           <View style={styles.spacerExampleContainer}>
             <Spacer h={HEIGHT} />
           </View>
         )}
       </View>
 
-      {status === 'bottomTab' && <BottomSpacer type="bottomTab" />}
-      {status === 'safeArea' && <BottomSpacer type="safeArea" />}
-      {status === 'halfSafeArea' && <BottomSpacer type="halfSafeArea" />}
+      {container.status === 'bottomTab' && <BottomSpacer type="bottomTab" />}
+      {container.status === 'safeArea' && <BottomSpacer type="safeArea" />}
+      {container.status === 'halfSafeArea' && <BottomSpacer type="halfSafeArea" />}
     </StackContainer>
   );
 };

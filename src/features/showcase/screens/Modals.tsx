@@ -11,17 +11,7 @@ import { useModalContainer } from '../containers';
 
 const Modals: ProtectedScreen<ProtectedScreenName.Modals> = () => {
   const styles = useStyle(createStyles);
-  const {
-    showAlert,
-    dismissModal,
-    openModal,
-    openBottomModal,
-    dismissBottomModal,
-    isBottomModalVisible,
-    isModalVisible,
-    ModalTexts,
-    bottomModalSafeArea,
-  } = useModalContainer();
+  const { ModalTexts, ...container } = useModalContainer();
 
   return (
     <>
@@ -30,35 +20,35 @@ const Modals: ProtectedScreen<ProtectedScreenName.Modals> = () => {
         wrapperType="scrollView"
         wrapperStyle={globalStyles.flexFillCenter}
       >
-        <ShowcaseItem title="Show modal" onPress={openModal} />
+        <ShowcaseItem title="Show modal" onPress={container.openModal} />
         <Spacer h={16} />
-        <ShowcaseItem title="Show bottom modal" onPress={openBottomModal} />
+        <ShowcaseItem title="Show bottom modal" onPress={container.openBottomModal} />
         <Spacer h={16} />
-        <ShowcaseItem title="Show alert" onPress={showAlert} />
+        <ShowcaseItem title="Show alert" onPress={container.showAlert} />
       </StackContainer>
 
-      <Modal isVisible={isModalVisible} onBackdropPress={dismissModal}>
+      <Modal isVisible={container.isModalVisible} onBackdropPress={container.dismissModal}>
         <View style={[styles.modal, styles.modalContainer]}>
           {ModalTexts}
 
           <Spacer h={16} />
 
-          <Button title="Dismiss modal" onPress={dismissModal} />
+          <Button title="Dismiss modal" onPress={container.dismissModal} />
         </View>
       </Modal>
 
       <Modal
-        isVisible={isBottomModalVisible}
+        isVisible={container.isBottomModalVisible}
         type="bottomSheet"
-        onBackdropPress={dismissBottomModal}
+        onBackdropPress={container.dismissBottomModal}
       >
         <View style={[styles.modal, styles.bottomModalContainer]}>
           {ModalTexts}
 
           <Spacer h={16} />
 
-          <Button title="Dismiss modal" onPress={dismissModal} />
-          <Spacer h={bottomModalSafeArea} />
+          <Button title="Dismiss modal" onPress={container.dismissModal} />
+          <Spacer h={container.bottomModalSafeArea} />
         </View>
       </Modal>
     </>
