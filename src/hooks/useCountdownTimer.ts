@@ -1,5 +1,4 @@
 import { ONE_SECOND } from '@core/constants';
-import { currentTimestamp } from '@utilities';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface Options {
@@ -9,7 +8,7 @@ interface Options {
 }
 
 const useCountdownTimer = ({ duration, autoStart = true, onTimeout }: Options) => {
-  const getTimeEnd = useCallback(() => currentTimestamp() + duration, [duration]);
+  const getTimeEnd = useCallback(() => Date.now() + duration, [duration]);
 
   const timer = useRef<NodeJS.Timer | null>(null);
   const endTime = useRef(getTimeEnd());
@@ -31,7 +30,7 @@ const useCountdownTimer = ({ duration, autoStart = true, onTimeout }: Options) =
     if (timer.current) return;
     if (!autoStart) endTime.current = getTimeEnd();
     timer.current = setInterval(() => {
-      const current = currentTimestamp() - ONE_SECOND;
+      const current = Date.now() - ONE_SECOND;
       if (current >= endTime.current) {
         onTimeout?.();
         stop();

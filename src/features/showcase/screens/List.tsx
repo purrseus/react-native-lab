@@ -5,11 +5,15 @@ import { ProtectedScreen } from '@core/types';
 import { useListContainer } from '../containers';
 
 const List: ProtectedScreen<ProtectedScreenName.List> = () => {
-  const { config, renderItem, getPhotos } = useListContainer();
+  const container = useListContainer();
 
   return (
     <StackContainer headerTitle={ProtectedScreenName.List}>
-      <InfiniteList renderItem={renderItem} requestCallback={getPhotos} config={config} />
+      <InfiniteList
+        renderItem={container.renderItem}
+        requestCallback={container.getPhotos}
+        config={container.config}
+      />
     </StackContainer>
   );
 };

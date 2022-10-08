@@ -11,18 +11,7 @@ import { useBottomSheetContainer } from '../containers';
 
 const BottomSheets: ProtectedScreen<ProtectedScreenName.BottomSheets> = () => {
   const styles = useStyle(createStyles);
-  const {
-    bottomSheetSnapPoints,
-    actionSheetOptions,
-    bottomSheetRef,
-    actionSheetRef,
-    imagePickerRef,
-    images,
-    setImages,
-    showBottomSheet,
-    showActionSheet,
-    showImagePicker,
-  } = useBottomSheetContainer();
+  const container = useBottomSheetContainer();
 
   return (
     <>
@@ -31,18 +20,30 @@ const BottomSheets: ProtectedScreen<ProtectedScreenName.BottomSheets> = () => {
         headerTitle={ProtectedScreenName.BottomSheets}
         wrapperStyle={styles.scrollView}
       >
-        <ShowcaseItem title="Show BottomSheet" onPress={showBottomSheet} />
+        <ShowcaseItem title="Show BottomSheet" onPress={container.showBottomSheet} />
         <Separator />
-        <ShowcaseItem title="Show ActionSheet" onPress={showActionSheet} />
+        <ShowcaseItem title="Show ActionSheet" onPress={container.showActionSheet} />
         <Separator />
-        <ShowcaseItem title="Show ImagePicker" onPress={showImagePicker} />
+        <ShowcaseItem title="Show ImagePicker" onPress={container.showImagePicker} />
       </StackContainer>
 
-      <BottomSheet ref={bottomSheetRef} index={-1} snapPoints={bottomSheetSnapPoints}>
+      <BottomSheet
+        ref={container.bottomSheetRef}
+        index={-1}
+        snapPoints={container.bottomSheetSnapPoints}
+      >
         <Text>This is a BottomSheet</Text>
       </BottomSheet>
-      <ActionSheet ref={actionSheetRef} options={actionSheetOptions} onSelect={logger} />
-      <ImagePicker ref={imagePickerRef} images={images} onChangeImage={setImages} />
+      <ActionSheet
+        ref={container.actionSheetRef}
+        options={container.actionSheetOptions}
+        onSelect={logger}
+      />
+      <ImagePicker
+        ref={container.imagePickerRef}
+        images={container.images}
+        onChangeImage={container.setImages}
+      />
     </>
   );
 };

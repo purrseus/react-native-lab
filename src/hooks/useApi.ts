@@ -6,6 +6,7 @@ import { useImmer } from 'use-immer';
 
 interface ApiStatus<T> {
   fetching: boolean;
+  refetching: boolean;
   data?: Awaited<T>;
   error?: any;
 }
@@ -17,9 +18,10 @@ const useApi = <T>(
   const controller = useRef<AbortController | null>(new AbortController());
   const [apiStatus, updateApiStatus] = useImmer<ApiStatus<T>>({
     fetching: false,
+    refetching: false,
   });
 
-  const update = useCallback(
+  const updateState = useCallback(
     <K extends keyof ApiStatus<T>>(key: K, value: ApiStatus<T>[K]) =>
       updateApiStatus(draft => {
         draft[key] = value;
@@ -27,22 +29,23 @@ const useApi = <T>(
     [updateApiStatus],
   );
 
-  const fetch = useCallback(async () => {
+  const fetch = useCallback(async (isRefetch = true) => {
     if (!controller.current) return;
+    const stateKey: keyof ApiStatus<T> = isRefetch ? 'refetching' : 'fetching';
 
     try {
-      update('fetching', true);
+      updateState(stateKey, true);
       const response = await request(controller.current.signal);
-      update('data', response);
+      updateState('data', response);
     } catch (error) {
-      update('error', error);
+      updateState('error', error);
     } finally {
-      update('fetching', false);
+      updateState(stateKey, false);
     }
   }, deps);
 
   useEffect(() => {
-    fetch();
+    fetch(false);
 
     return () => {
       controller.current?.abort();
