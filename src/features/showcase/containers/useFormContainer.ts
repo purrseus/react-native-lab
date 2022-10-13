@@ -1,8 +1,9 @@
+import { CheckboxItem } from '@core/interfaces';
 import { ValidationObject } from '@core/types';
 import { useAppForm } from '@hooks';
 import { logger } from '@utilities';
 import { useMemo } from 'react';
-import { string } from 'yup';
+import { array, string } from 'yup';
 
 export interface FormObject {
   firstName: string;
@@ -10,9 +11,20 @@ export interface FormObject {
   age: number;
   address: string;
   gender: 'male' | 'female';
+  usingPhone: string[];
+}
+
+enum OS {
+  Android,
+  Ios,
 }
 
 const useFormContainer = () => {
+  const checkboxData: CheckboxItem<OS>[] = [
+    { label: 'Android', value: OS.Android },
+    { label: 'iOS', value: OS.Ios },
+  ];
+
   const validateObj = useMemo<ValidationObject<FormObject>>(
     () => ({
       firstName: string().required(),
@@ -20,6 +32,7 @@ const useFormContainer = () => {
       age: string().matches(/\d+/).required(),
       address: string().required(),
       gender: string().oneOf(['Male', 'Female']).required(),
+      usingPhone: array().of(string()),
     }),
     [],
   );
@@ -28,7 +41,7 @@ const useFormContainer = () => {
 
   const onSubmit = formMethods.handleSubmit(values => logger(values));
 
-  return { formMethods, onSubmit };
+  return { checkboxData, formMethods, onSubmit };
 };
 
 export default useFormContainer;
