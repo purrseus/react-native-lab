@@ -4,6 +4,7 @@ import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
+import { globalStyles } from '@themes';
 import { FormProvider } from 'react-hook-form';
 import { useFormContainer } from '../containers';
 import { FormObject } from '../containers/useFormContainer';
@@ -44,6 +45,14 @@ const Form: ProtectedScreen<ProtectedScreenName.Form> = () => {
             name="gender"
             label="gender"
             containerStyle={styles.field}
+          />
+
+          <Field<FormObject, 'checkboxList'>
+            type="checkboxList"
+            name="usingPhone"
+            data={container.checkboxData}
+            containerStyle={styles.field}
+            itemStyle={globalStyles.flexFill}
           />
         </FormProvider>
 

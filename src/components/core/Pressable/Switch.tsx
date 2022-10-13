@@ -3,7 +3,7 @@ import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
 import { compareMemo, createShadow, isAndroid as isAndroidOS, platformSelect } from '@utilities';
 import { ReactNode } from 'react';
-import { ActivityIndicatorProps, ColorValue, StyleProp, View, ViewStyle } from 'react-native';
+import { ActivityIndicatorProps, ColorValue, View, ViewProps, ViewStyle } from 'react-native';
 import Animated, {
   interpolate,
   interpolateColor,
@@ -14,7 +14,7 @@ import Animated, {
 import ActivityIndicator from '../Loader/ActivityIndicator';
 import PressArea from './PressArea';
 
-interface SwitchProps {
+interface SwitchProps extends ViewProps {
   value: boolean;
   onChange: (value: boolean) => void;
   disabled?: boolean;
@@ -22,7 +22,6 @@ interface SwitchProps {
   /** @platform android */
   thumbScaleAnimated?: boolean;
   loading?: boolean;
-  style?: StyleProp<ViewStyle>;
 }
 
 const TRACK_WIDTH = 52;
@@ -41,6 +40,7 @@ const Switch = compareMemo<SwitchProps>(
     thumbScaleAnimated = true,
     loading = false,
     style,
+    ...props
   }) => {
     const styles = useStyle(createStyles);
     const isAndroid = isAndroidOS();
@@ -80,7 +80,7 @@ const Switch = compareMemo<SwitchProps>(
     };
 
     return (
-      <View style={[styles.container, style]}>
+      <View {...props} style={[styles.container, style]}>
         <AnimatedPressArea
           onPress={handleChangeValue}
           disabled={disabled || loading}
