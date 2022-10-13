@@ -31,6 +31,10 @@ export const icons = {
     back: require('@assets/icons/header/back.png'),
     moreAction: require('@assets/icons/header/more-action.png'),
   },
+
+  checkbox: {
+    tick: require('@assets/icons/checkbox/tick.png'),
+  },
 };
 
 export const images = {};

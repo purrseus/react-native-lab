@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Dispatch, SetStateAction } from 'react';
 import { ImageRequireSource } from 'react-native';
 
@@ -10,6 +11,12 @@ export interface HeaderAction {
   icon: ImageRequireSource;
   size?: number;
   onPress: () => void;
+}
+
+export interface CheckboxItem<T = any> {
+  label: string;
+  value: T;
+  disabled?: boolean;
 }
 
 export interface ActionSheetMethods {

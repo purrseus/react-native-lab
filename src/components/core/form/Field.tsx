@@ -4,16 +4,19 @@ import { compareMemo } from '@utilities';
 import { ForwardedRef, forwardRef, RefAttributes, RefCallback, useCallback, useMemo } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { TextInput as RNTextInput } from 'react-native';
+import CheckboxList, { CheckboxListProps } from './CheckboxList';
 import TextField, { TextFieldProps } from './TextField';
 
-type FieldType = 'text';
+type FieldType = 'text' | 'checkboxList';
 
 type FieldProps = {
   text: TextFieldProps;
+  checkboxList: CheckboxListProps;
 };
 
 type FieldRef = {
   text: RNTextInput;
+  checkboxList: null;
 };
 
 type Props<F extends Record<string, any> = {}, T extends FieldType = 'text'> = {
@@ -23,6 +26,7 @@ type Props<F extends Record<string, any> = {}, T extends FieldType = 'text'> = {
 
 const Components: Record<FieldType, any> = {
   text: TextField,
+  checkboxList: CheckboxList,
 };
 
 const _Field = ({ type, name, ...props }: Props, ref: ForwardedRef<FieldRef[typeof type]>) => {
@@ -45,7 +49,7 @@ const _Field = ({ type, name, ...props }: Props, ref: ForwardedRef<FieldRef[type
 
   const refCallback = useCallback<RefCallback<FieldRef[typeof type]>>(
     instance => {
-      if (ref) 'current' in ref ? (ref.current = instance) : ref(instance);
+      'current' in ref! ? (ref.current = instance) : ref!(instance);
       controllerRef(instance);
     },
     [controllerRef, ref],
@@ -55,7 +59,7 @@ const _Field = ({ type, name, ...props }: Props, ref: ForwardedRef<FieldRef[type
     (p: Omit<Props, 'type'> & RefAttributes<FieldRef[typeof type]>) => JSX.Element
   >(() => Components[type], [type]);
 
-  return <FieldComponent {...props} {...fieldProps} ref={refCallback} />;
+  return <FieldComponent {...props} {...fieldProps} {...(!!ref && { ref: refCallback })} />;
 };
 
 const Field = compareMemo<any, Props>(forwardRef(_Field)) as <

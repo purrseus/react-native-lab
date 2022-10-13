@@ -1,6 +1,7 @@
 export { default as ActionSheet } from './BottomSheet/ActionSheet';
 export { default as BottomSheet } from './BottomSheet/BottomSheet';
 export { default as ImagePicker } from './BottomSheet/ImagePicker';
+export { default as CheckboxList } from './Form/CheckboxList';
 export { default as Field } from './Form/Field';
 export { default as TextField } from './Form/TextField';
 export { default as Icon } from './Image/Icon';
@@ -17,6 +18,7 @@ export { default as RefreshControl } from './Loader/RefreshControl';
 export { default as Alert } from './Modal/Alert';
 export { default as Modal } from './Modal/Modal';
 export { default as Button } from './Pressable/Button';
+export { default as Checkbox } from './Pressable/Checkbox';
 export { default as PressArea } from './Pressable/PressArea';
 export { default as Switch } from './Pressable/Switch';
 export { default as BottomSpacer } from './Spacer/BottomSpacer';
