@@ -39,7 +39,6 @@ const createStyles = ({ create, fonts, colors }: StyleCallbackParams) =>
     },
     text: {
       fontFamily: fonts.quicksandBold,
-      fontWeight: 'bold',
     },
   });
 
