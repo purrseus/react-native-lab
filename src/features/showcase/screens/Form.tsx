@@ -50,6 +50,7 @@ const Form: ProtectedScreen<ProtectedScreenName.Form> = () => {
           <Field<FormObject, 'checkboxList'>
             type="checkboxList"
             name="usingPhone"
+            label="usingPhone"
             data={container.checkboxData}
             containerStyle={styles.field}
             itemStyle={globalStyles.flexFill}
