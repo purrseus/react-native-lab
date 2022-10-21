@@ -1,9 +1,9 @@
 import { UnprotectedScreenName } from '@core/enums';
-import { UnprotectedScreen } from '@core/types';
+import { UnprotectedScreenProps } from '@core/types';
 
 const useRegisterContainer = ({
   navigation: { goBack },
-}: Parameters<UnprotectedScreen<UnprotectedScreenName.Register>>[0]) => {
+}: UnprotectedScreenProps<UnprotectedScreenName.Register>) => {
   return { goBack };
 };
 

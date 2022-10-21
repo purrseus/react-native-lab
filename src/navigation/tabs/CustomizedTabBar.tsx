@@ -1,4 +1,4 @@
-import { icons } from '@assets';
+import { fonts, icons } from '@assets';
 import { BottomSpacer, Icon, Row, Spacer, Text, PressArea } from '@components/core';
 import { HORIZONTAL_SAFETY_EDGES, TAB_BAR_HEIGHT } from '@core/constants';
 import { TabScreenName } from '@core/enums';
@@ -130,7 +130,7 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
   );
 };
 
-const createStyles = ({ colors, create, fonts }: StyleCallbackParams) =>
+const createStyles = ({ colors, create }: StyleCallbackParams) =>
   create({
     rootContainer: {
       ...StyleSheet.absoluteFillObject,

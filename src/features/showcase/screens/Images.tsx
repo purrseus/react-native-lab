@@ -2,15 +2,14 @@ import { Icon, Image, Spacer, Text } from '@components/core';
 import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
-import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
+import { withHook } from '@utilities';
 import { View } from 'react-native';
 import { useImageContainer } from '../containers';
 
-const Images: ProtectedScreen<ProtectedScreenName.Images> = () => {
+const Images = withHook(useImageContainer, ({ imageUrl }) => {
   const styles = useStyle(createStyles);
-  const container = useImageContainer();
 
   return (
     <StackContainer
@@ -19,21 +18,21 @@ const Images: ProtectedScreen<ProtectedScreenName.Images> = () => {
       wrapperStyle={[globalStyles.flexCenter, styles.scrollView]}
     >
       <Text>Image</Text>
-      <Image source={container.imageUrl} style={styles.image} />
+      <Image source={imageUrl} style={styles.image} />
 
       <Spacer h={60} />
 
       <Text>Cached Image</Text>
-      <Image cached source={container.imageUrl} style={styles.image} />
+      <Image cached source={imageUrl} style={styles.image} />
 
       <Spacer h={60} />
 
       <Text>Icon</Text>
-      <Icon source={container.imageUrl} size={24} />
+      <Icon source={imageUrl} size={24} />
       <View />
     </StackContainer>
   );
-};
+});
 
 const createStyles = ({ create }: StyleCallbackParams) =>
   create({

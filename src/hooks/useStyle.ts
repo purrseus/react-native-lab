@@ -1,4 +1,4 @@
-import { fonts } from '@assets';
+/* eslint-disable react-hooks/exhaustive-deps */
 import { StyleCallbackParams } from '@core/interfaces';
 import { useMemo } from 'react';
 import { StyleSheet, useWindowDimensions } from 'react-native';
@@ -19,11 +19,10 @@ const useStyle = <T extends StyleCallback>(createStyles: T): ReturnType<T> => {
       createStyles({
         dimensions,
         colors,
-        fonts,
         edgeInsets,
         create: StyleSheet.create,
       }) as ReturnType<T>,
-    [dimensions, edgeInsets, colors, createStyles],
+    [dimensions, edgeInsets, colors],
   );
 };
 

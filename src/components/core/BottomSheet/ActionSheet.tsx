@@ -1,4 +1,5 @@
 /* eslint-disable react-native/split-platform-components */
+import { fonts } from '@assets';
 import { ONE_SECOND } from '@core/constants';
 import { ActionSheetMethods, StyleCallbackParams } from '@core/interfaces';
 import { useAppSelector, useColor, useStyle, useThrottle } from '@hooks';
@@ -142,7 +143,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
             ellipsizeMode="middle"
             style={[
               styles.optionTitle,
-              !!tintColor && { color: tintColor as ColorValue },
+              !!tintColor && styles.optionTitleColor(tintColor as ColorValue),
               typeof props.destructiveButtonIndex === 'number' &&
                 props.destructiveButtonIndex === props.options.indexOf(options[index]) &&
                 styles.destructiveTitle,
@@ -152,16 +153,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
           </Text>
         </PressArea>
       ),
-      [
-        options,
-        handleSelectOption,
-        props.destructiveButtonIndex,
-        props.options,
-        tintColor,
-        styles.destructiveTitle,
-        styles.option,
-        styles.optionTitle,
-      ],
+      [handleSelectOption, options, props.destructiveButtonIndex, props.options, styles, tintColor],
     );
 
     if (isIos()) return null;
@@ -188,7 +180,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
                 style={[
                   styles.optionTitle,
                   styles.cancelTitle,
-                  !!tintColor && { color: tintColor as ColorValue },
+                  !!tintColor && styles.optionTitleColor(tintColor as ColorValue),
                 ]}
               >
                 {props.options[cancelButtonIndex]}
@@ -201,7 +193,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
   }),
 );
 
-const createStyles = ({ create, colors, edgeInsets, dimensions, fonts }: StyleCallbackParams) =>
+const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackParams) =>
   create({
     container: {
       alignSelf: 'center',
@@ -231,6 +223,9 @@ const createStyles = ({ create, colors, edgeInsets, dimensions, fonts }: StyleCa
     optionTitle: {
       fontSize: 18,
     },
+    optionTitleColor: (color: ColorValue) => ({
+      color,
+    }),
     destructiveTitle: {
       color: colors.red,
     },

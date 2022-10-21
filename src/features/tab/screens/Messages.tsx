@@ -1,10 +1,8 @@
 import { Text } from '@components/core';
-import { TabScreenName } from '@core/enums';
-import { TabScreen } from '@core/types';
 import { globalStyles } from '@themes';
 import { View } from 'react-native';
 
-const Messages: TabScreen<TabScreenName.Messages> = () => {
+const Messages = () => {
   return (
     <View style={globalStyles.flexFillCenter}>
       <Text>Messages</Text>

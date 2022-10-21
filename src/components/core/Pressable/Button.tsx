@@ -1,3 +1,4 @@
+import { fonts } from '@assets';
 import { DEFAULT_ICON_SIZE, HORIZONTAL_GRADIENT_COORDINATES } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
@@ -78,13 +79,7 @@ const Button = compareMemo<ButtonProps>(
       <PressArea
         {...props}
         disabled={loading || disabled}
-        style={[
-          styles.container,
-          styles[type],
-          { height: buttonSize },
-          !!disabled && styles.disabled,
-          style,
-        ]}
+        style={[styles.container(buttonSize), styles[type], !!disabled && styles.disabled, style]}
       >
         {gradient && (
           <LinearGradient
@@ -103,19 +98,13 @@ const Button = compareMemo<ButtonProps>(
                 source={iconLeft}
                 size={leftIconSize}
                 {...iconProps}
-                style={[
-                  { marginRight: iconSpacing, tintColor: colorStyle.color },
-                  iconProps?.style,
-                ]}
+                style={[styles.icon('left', iconSpacing, colorStyle.color), iconProps?.style]}
               />
             ) : hasRightIcon && titleCenter ? (
               <Spacer w={rightIconSize + iconSpacing} />
             ) : null}
 
-            <Text
-              numberOfLines={1}
-              style={[styles.title, colorStyle, { fontSize: titleSize }, titleStyle]}
-            >
+            <Text numberOfLines={1} style={[styles.title(titleSize), colorStyle, titleStyle]}>
               {title}
             </Text>
 
@@ -124,7 +113,7 @@ const Button = compareMemo<ButtonProps>(
                 source={iconRight}
                 size={rightIconSize}
                 {...iconProps}
-                style={[{ marginLeft: iconSpacing, tintColor: colorStyle.color }, iconProps?.style]}
+                style={[styles.icon('right', iconSpacing, colorStyle.color), iconProps?.style]}
               />
             ) : hasLeftIcon && titleCenter ? (
               <Spacer w={leftIconSize + iconSpacing} />
@@ -138,16 +127,17 @@ const Button = compareMemo<ButtonProps>(
 
 const createStyles =
   (customColor?: ColorValue) =>
-  ({ create, colors, fonts }: StyleCallbackParams) =>
+  ({ create, colors }: StyleCallbackParams) =>
     create({
-      container: {
+      container: (buttonSize: number) => ({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
         overflow: 'hidden',
         paddingHorizontal: 16,
-      },
+        height: buttonSize,
+      }),
       gradient: [colors.primary, colors.blue] as ViewStyle,
       filled: {
         backgroundColor: customColor || colors.primary,
@@ -175,10 +165,15 @@ const createStyles =
       disabledColor: {
         color: colors.darkGray,
       },
-      title: {
+      title: (titleSize: number) => ({
+        fontSize: titleSize,
         fontFamily: fonts.quicksandBold,
         maxWidth: '80%',
-      },
+      }),
+      icon: (direction: 'left' | 'right', iconSpacing: number, tintColor: ColorValue) => ({
+        [direction === 'left' ? 'marginLeft' : 'marginRight']: iconSpacing,
+        tintColor,
+      }),
     });
 
 export default Button;

@@ -9,13 +9,13 @@ import { execScriptSync, getArguments } from './utils.mjs';
   execScriptSync(
     folderNames.reduce((command, folderName, index) => {
       const dirPath = `${targetDir}/${featureFolderName}/${folderName}`;
-      const filePath = `${dirPath}/index.ts`;
+      const filePath = `${dirPath}/.gitkeep`;
 
       return (
         command +
         `${
           !index ? `mkdir -p ${targetDir}/${featureFolderName} && ` : ' && '
-        }mkdir ${dirPath} && touch ${filePath} && echo "export {};" > ${filePath}`
+        }mkdir ${dirPath} && touch ${filePath}`
       );
     }, ''),
   );

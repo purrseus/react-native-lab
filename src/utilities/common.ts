@@ -74,7 +74,7 @@ export const onAppBootstrap = () => {
   if (__DEV__) {
     const devSettingItems: { title: string; handler: () => void }[] = [
       {
-        title: 'Clear all storage and reload',
+        title: 'Clear All Storage And Reload',
         handler: async () => {
           MMKVStorage.clearAll();
           DevSettings.reload();

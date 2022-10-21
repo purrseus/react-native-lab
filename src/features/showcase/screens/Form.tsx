@@ -2,21 +2,20 @@ import { Button, Field, KeyboardAwareScrollView, Spacer } from '@components/core
 import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
-import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
+import { withHook } from '@utilities';
 import { FormProvider } from 'react-hook-form';
 import { useFormContainer } from '../containers';
 import { FormObject } from '../containers/useFormContainer';
 
-const Form: ProtectedScreen<ProtectedScreenName.Form> = () => {
+const Form = withHook(useFormContainer, ({ formMethods, checkboxData, onSubmit }) => {
   const styles = useStyle(createStyles);
-  const container = useFormContainer();
 
   return (
     <StackContainer headerTitle={ProtectedScreenName.Form}>
       <KeyboardAwareScrollView style={styles.scrollView}>
-        <FormProvider {...container.formMethods}>
+        <FormProvider {...formMethods}>
           <Field<FormObject>
             type="text"
             name="firstName"
@@ -51,18 +50,18 @@ const Form: ProtectedScreen<ProtectedScreenName.Form> = () => {
             type="checkboxList"
             name="usingPhone"
             label="usingPhone"
-            data={container.checkboxData}
+            data={checkboxData}
             containerStyle={styles.field}
             itemStyle={globalStyles.flexFill}
           />
         </FormProvider>
 
         <Spacer h={32} />
-        <Button title="Submit" onPress={container.onSubmit} />
+        <Button title="Submit" onPress={onSubmit} />
       </KeyboardAwareScrollView>
     </StackContainer>
   );
-};
+});
 
 const createStyles = ({ create }: StyleCallbackParams) =>
   create({

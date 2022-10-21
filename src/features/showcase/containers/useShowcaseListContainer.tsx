@@ -1,12 +1,12 @@
 import { Spacer } from '@components/core';
 import { ProtectedScreenName } from '@core/enums';
-import { ProtectedScreen } from '@core/types';
+import { ProtectedScreenProps } from '@core/types';
 import { ListRenderItem } from 'react-native';
 import { ShowcaseItem } from '../components';
 
 const useShowcaseListContainer = ({
   navigation: { navigate },
-}: Parameters<ProtectedScreen<ProtectedScreenName.ShowcaseList>>[0]) => {
+}: ProtectedScreenProps<ProtectedScreenName.ShowcaseList>) => {
   const data = [
     ProtectedScreenName.BottomSheets,
     ProtectedScreenName.Pressable,
@@ -21,7 +21,8 @@ const useShowcaseListContainer = ({
   ];
 
   const renderItem: ListRenderItem<ProtectedScreenName> = ({ item }) => (
-    <ShowcaseItem title={item} onPress={() => navigate(item)} />
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    <ShowcaseItem title={item} onPress={() => navigate(item as any)} />
   );
 
   const ItemSeparatorComponent = () => <Spacer h={16} />;
