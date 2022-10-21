@@ -1,13 +1,10 @@
-import { Spacer, Text, PressArea } from '@components/core';
-import { UnprotectedScreenName } from '@core/enums';
-import { UnprotectedScreen } from '@core/types';
+import { PressArea, Spacer, Text } from '@components/core';
 import { globalStyles } from '@themes';
+import { withHook } from '@utilities/screen';
 import { View } from 'react-native';
 import { useLoginContainer } from '../containers';
 
-const Login: UnprotectedScreen<UnprotectedScreenName.Login> = props => {
-  const { handleLogin, navigateToRegister } = useLoginContainer(props);
-
+const Login = withHook(useLoginContainer, ({ handleLogin, navigateToRegister }) => {
   return (
     <View style={globalStyles.flexFillCenter}>
       <PressArea onPress={handleLogin}>
@@ -21,6 +18,6 @@ const Login: UnprotectedScreen<UnprotectedScreenName.Login> = props => {
       </PressArea>
     </View>
   );
-};
+});
 
 export default Login;

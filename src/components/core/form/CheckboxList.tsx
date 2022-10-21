@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { fonts } from '@assets';
 import { CheckboxItem, CommonFieldProps, StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
@@ -58,7 +59,7 @@ const _CheckboxList = ({
   );
 };
 
-const createStyles = ({ create, colors, fonts }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     label: {
       fontSize: 14,

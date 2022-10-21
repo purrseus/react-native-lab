@@ -3,12 +3,11 @@ import { Button, Row, Spacer } from '@components/core';
 import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
-import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
 import { colors, globalStyles } from '@themes';
 import { Separator } from '../components';
 
-const Pressable: ProtectedScreen<ProtectedScreenName.Pressable> = () => {
+const Pressable = () => {
   const styles = useStyle(createStyles);
 
   return (

@@ -1,3 +1,4 @@
+import { fonts } from '@assets';
 import { Image, Row, Spacer, Text } from '@components/core';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
@@ -22,7 +23,7 @@ const Item = ({ thumbnailUrl, ...props }: Data) => {
   );
 };
 
-const createStyles = ({ create, fonts, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     container: {
       padding: 16,

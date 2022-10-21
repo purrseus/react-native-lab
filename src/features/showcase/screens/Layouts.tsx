@@ -1,9 +1,8 @@
 import { Divider, Row, Spacer, StatusBar, Text } from '@components/core';
 import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
-import { ProtectedScreen } from '@core/types';
 
-const Layouts: ProtectedScreen<ProtectedScreenName.Layouts> = () => {
+const Layouts = () => {
   return (
     <StackContainer
       headerTitle={ProtectedScreenName.Layouts}

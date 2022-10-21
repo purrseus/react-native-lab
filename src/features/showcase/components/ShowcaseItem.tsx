@@ -1,3 +1,4 @@
+import { fonts } from '@assets';
 import { PressArea } from '@components/core';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
@@ -19,7 +20,7 @@ const ShowcaseItem = compareMemo<ShowcaseItemProps>(({ title, onPress }) => {
   );
 });
 
-const createStyles = ({ create, fonts, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     item: {
       padding: 16,

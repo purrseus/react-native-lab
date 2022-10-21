@@ -1,3 +1,4 @@
+import { fonts } from '@assets';
 import { DEFAULT_FONT_SIZE, DEFAULT_HIT_SLOP, MIN_HEIGHT_INPUT } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
@@ -23,7 +24,7 @@ const TextInput = compareMemo<RNTextInput, RNTextInputProps>(
   }),
 );
 
-const createStyles = ({ create, colors, fonts }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     input: {
       padding: 0,

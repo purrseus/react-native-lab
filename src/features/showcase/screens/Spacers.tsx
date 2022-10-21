@@ -2,55 +2,63 @@ import { BottomSpacer, Row, Spacer } from '@components/core';
 import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
-import { ProtectedScreen } from '@core/types';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
+import { withHook } from '@utilities';
 import { View } from 'react-native';
 import { Separator, ShowcaseItem } from '../components';
 import useSpacerContainer from '../containers/useSpacerContainer';
 
-const Spacers: ProtectedScreen<ProtectedScreenName.Spacers> = () => {
-  const styles = useStyle(createStyles);
-  const { WIDTH, HEIGHT, ...container } = useSpacerContainer();
+const Spacers = withHook(
+  useSpacerContainer,
+  ({
+    WIDTH,
+    HEIGHT,
+    showWidthSpacer,
+    showHeightSpacer,
+    showBottomTabSpacer,
+    showSafeAreaSpacer,
+    showHalfSafeAreaSpacer,
+    status,
+  }) => {
+    const styles = useStyle(createStyles);
 
-  return (
-    <StackContainer headerTitle={ProtectedScreenName.Spacers}>
-      <View style={[globalStyles.flexFillCenter, styles.container]}>
-        <ShowcaseItem title={`Show width spacer: ${WIDTH}`} onPress={container.showWidthSpacer} />
-        <Separator />
-        <ShowcaseItem
-          title={`Show height spacer: ${HEIGHT}`}
-          onPress={container.showHeightSpacer}
-        />
-        <Separator />
-        <ShowcaseItem title="Show bottomTab spacer" onPress={container.showBottomTabSpacer} />
-        <Separator />
-        <ShowcaseItem title="Show safeArea spacer" onPress={container.showSafeAreaSpacer} />
-        <Separator />
-        <ShowcaseItem title="Show halfSafeArea spacer" onPress={container.showHalfSafeAreaSpacer} />
+    return (
+      <StackContainer headerTitle={ProtectedScreenName.Spacers}>
+        <View style={[globalStyles.flexFillCenter, styles.container]}>
+          <ShowcaseItem title={`Show width spacer: ${WIDTH}`} onPress={showWidthSpacer} />
+          <Separator />
+          <ShowcaseItem title={`Show height spacer: ${HEIGHT}`} onPress={showHeightSpacer} />
+          <Separator />
+          <ShowcaseItem title="Show bottomTab spacer" onPress={showBottomTabSpacer} />
+          <Separator />
+          <ShowcaseItem title="Show safeArea spacer" onPress={showSafeAreaSpacer} />
+          <Separator />
+          <ShowcaseItem title="Show halfSafeArea spacer" onPress={showHalfSafeAreaSpacer} />
 
-        <Spacer h={100} />
+          <Spacer h={100} />
 
-        {container.status === 'spacerWidth' && (
-          <Row style={[styles.spacerExampleContainer, styles.row]}>
-            <View style={styles.sideView} />
-            <Spacer w={WIDTH} />
-            <View style={styles.sideView} />
-          </Row>
-        )}
-        {container.status === 'spacerHeight' && (
-          <View style={styles.spacerExampleContainer}>
-            <Spacer h={HEIGHT} />
-          </View>
-        )}
-      </View>
+          {status === 'spacerWidth' && (
+            <Row style={[styles.spacerExampleContainer, styles.row]}>
+              <View style={styles.sideView} />
+              <Spacer w={WIDTH} />
+              <View style={styles.sideView} />
+            </Row>
+          )}
+          {status === 'spacerHeight' && (
+            <View style={styles.spacerExampleContainer}>
+              <Spacer h={HEIGHT} />
+            </View>
+          )}
+        </View>
 
-      {container.status === 'bottomTab' && <BottomSpacer type="bottomTab" />}
-      {container.status === 'safeArea' && <BottomSpacer type="safeArea" />}
-      {container.status === 'halfSafeArea' && <BottomSpacer type="halfSafeArea" />}
-    </StackContainer>
-  );
-};
+        {status === 'bottomTab' && <BottomSpacer type="bottomTab" />}
+        {status === 'safeArea' && <BottomSpacer type="safeArea" />}
+        {status === 'halfSafeArea' && <BottomSpacer type="halfSafeArea" />}
+      </StackContainer>
+    );
+  },
+);
 
 const createStyles = ({ create, colors, dimensions }: StyleCallbackParams) =>
   create({

@@ -9,11 +9,10 @@ import {
 } from '@components/core';
 import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
-import { ProtectedScreen } from '@core/types';
 import { useTranslation } from 'react-i18next';
 import { Separator } from '../components';
 
-const Texts: ProtectedScreen<ProtectedScreenName.Texts> = () => {
+const Texts = () => {
   const { t } = useTranslation();
 
   return (

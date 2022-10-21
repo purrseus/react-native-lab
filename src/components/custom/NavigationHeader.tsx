@@ -1,4 +1,4 @@
-import { icons } from '@assets';
+import { fonts, icons } from '@assets';
 import { Icon, Row, Spacer, Text, PressArea } from '@components/core';
 import {
   DEFAULT_HEADER_ICON_SIZE,
@@ -49,13 +49,7 @@ const NavigationHeader = compareMemo<NavigationHeaderProps>(
     return (
       <View {...props} style={styles.rootContainer}>
         <Row style={styles.safeAreaContainer}>
-          <Row
-            style={[
-              styles.sideWrapper,
-              styles.leftWrapper,
-              sideLayout.width ? { width: sideLayout.width } : undefined,
-            ]}
-          >
+          <Row style={[styles.sideWrapper, styles.leftWrapper(sideLayout.width)]}>
             {handleGoBack && (
               <PressArea hitSlop={actionSeparatorWidth / 2} onPress={handleGoBack}>
                 <Icon source={icons.header.back} size={DEFAULT_HEADER_ICON_SIZE} />
@@ -81,7 +75,7 @@ const NavigationHeader = compareMemo<NavigationHeaderProps>(
   },
 );
 
-const createStyles = ({ create, edgeInsets, colors, fonts }: StyleCallbackParams) =>
+const createStyles = ({ create, edgeInsets, colors }: StyleCallbackParams) =>
   create({
     rootContainer: {
       backgroundColor: colors.headerBackground,
@@ -98,9 +92,10 @@ const createStyles = ({ create, edgeInsets, colors, fonts }: StyleCallbackParams
       alignItems: 'center',
       paddingHorizontal: DEFAULT_HORIZONTAL_EDGE_SPACING,
     },
-    leftWrapper: {
+    leftWrapper: (width: number) => ({
       justifyContent: 'flex-start',
-    },
+      width: width || undefined,
+    }),
     rightWrapper: {
       justifyContent: 'flex-end',
     },
