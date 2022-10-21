@@ -1,11 +1,9 @@
 import { UnprotectedScreenName } from '@core/enums';
-import { UnprotectedScreen } from '@core/types';
+import { UnprotectedScreenProps } from '@core/types';
 import { useAppDispatch } from '@hooks';
 import { authActions } from '@store/slices/auth';
 
-const useLoginContainer = ({
-  navigation,
-}: Parameters<UnprotectedScreen<UnprotectedScreenName.Login>>[0]) => {
+const useLoginContainer = ({ navigation }: UnprotectedScreenProps<UnprotectedScreenName.Login>) => {
   const dispatch = useAppDispatch();
 
   const handleLogin = () => {

@@ -1,13 +1,10 @@
 import { PressArea } from '@components/core';
-import { UnprotectedScreenName } from '@core/enums';
-import { UnprotectedScreen } from '@core/types';
 import { globalStyles } from '@themes';
+import { withHook } from '@utilities';
 import { Text, View } from 'react-native';
 import { useRegisterContainer } from '../containers';
 
-const Register: UnprotectedScreen<UnprotectedScreenName.Register> = props => {
-  const { goBack } = useRegisterContainer(props);
-
+const Register = withHook(useRegisterContainer, ({ goBack }) => {
   return (
     <View style={globalStyles.flexFillCenter}>
       <PressArea onPress={goBack}>
@@ -15,6 +12,6 @@ const Register: UnprotectedScreen<UnprotectedScreenName.Register> = props => {
       </PressArea>
     </View>
   );
-};
+});
 
 export default Register;

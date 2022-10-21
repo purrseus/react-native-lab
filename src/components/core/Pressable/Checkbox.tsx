@@ -35,11 +35,7 @@ const _Checkbox = ({
         style={[styles.checkbox, styles[`checkbox${behaviorStyle}${stateStyle}`]]}
         {...{ disabled, onPress }}
       >
-        <Icon
-          source={icons.checkbox.tick}
-          size={20}
-          style={[{ opacity: +!!isActive }, styles.tick]}
-        />
+        <Icon source={icons.checkbox.tick} size={20} style={styles.tick(isActive)} />
       </PressArea>
       <Spacer w={6} />
       <Text style={styles[`label${behaviorStyle}`]}>{label}</Text>
@@ -70,9 +66,10 @@ const createStyles = ({ colors, create }: StyleCallbackParams) =>
       backgroundColor: colors.lightGray,
       borderColor: colors.transparent,
     },
-    tick: {
+    tick: (isActive?: boolean) => ({
       transform: [{ scale: 1.4 }],
-    },
+      opacity: +!!isActive,
+    }),
     labelEnabled: {
       color: colors.primaryText,
     },

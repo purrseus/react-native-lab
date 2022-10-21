@@ -1,3 +1,4 @@
+import { fonts } from '@assets';
 import { DEFAULT_FONT_SIZE } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
@@ -23,7 +24,7 @@ const Text = compareMemo<TextProps>(({ style, onPress, hitSlop = 8, throttle, ..
   );
 });
 
-const createStyles = ({ create, colors, fonts }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     text: {
       fontSize: DEFAULT_FONT_SIZE,
