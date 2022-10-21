@@ -14,9 +14,11 @@ interface Navigation<T extends RootStackParamList>
   ready(callback: () => void): void;
 
   navigate<RouteName extends keyof T>(
-    ...args: undefined extends T[RouteName]
-      ? [screen: RouteName] | [screen: RouteName, params: T[RouteName]]
-      : [screen: RouteName, params: T[RouteName]]
+    ...args: RouteName extends unknown
+      ? undefined extends T[RouteName]
+        ? [screen: RouteName] | [screen: RouteName, params: T[RouteName]]
+        : [screen: RouteName, params: T[RouteName]]
+      : never
   ): void;
 
   replace: ActionType<'replace'>;

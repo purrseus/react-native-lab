@@ -11,6 +11,23 @@ declare global {
   }
 }
 
+//    export function create<T extends NamedStyles<T> | NamedStyles<any>>(styles: T | NamedStyles<T>): T;
+
+declare module 'react-native' {
+  export namespace StyleSheet {
+    type MixinStyles<T> = {
+      [P in keyof T]:
+        | ViewStyle
+        | TextStyle
+        | ImageStyle
+        | ((...args: any[]) => ViewStyle | TextStyle | ImageStyle);
+    };
+    export function create<T extends MixinStyles<T> | MixinStyles<any>>(
+      styles: T | MixinStyles<T>,
+    ): T;
+  }
+}
+
 declare module '*.svg' {
   const content: (props: PropsWithChildren<SvgProps>) => JSX.Element;
   export default content;

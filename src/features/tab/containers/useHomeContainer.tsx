@@ -1,7 +1,7 @@
 import { ProtectedScreenName, TabScreenName } from '@core/enums';
-import { TabScreen } from '@core/types';
+import { TabScreenProps } from '@core/types';
 
-const useHomeContainer = ({ navigation }: Parameters<TabScreen<TabScreenName.Home>>[0]) => {
+const useHomeContainer = ({ navigation }: TabScreenProps<TabScreenName.Home>) => {
   const goToShowcase = () => navigation.navigate(ProtectedScreenName.ShowcaseList);
 
   return { goToShowcase };

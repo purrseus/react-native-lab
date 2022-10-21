@@ -1,18 +1,15 @@
 import { Text } from '@components/core';
-import { TabScreenName } from '@core/enums';
-import { TabScreen } from '@core/types';
 import { globalStyles } from '@themes';
+import { withHook } from '@utilities';
 import { View } from 'react-native';
 import { useProfileContainer } from '../containers';
 
-const Profile: TabScreen<TabScreenName.Profile> = () => {
-  const profileContainer = useProfileContainer();
-
+const Profile = withHook(useProfileContainer, ({ logout }) => {
   return (
     <View style={globalStyles.flexFillCenter}>
-      <Text onPress={profileContainer.logout}>Profile</Text>
+      <Text onPress={logout}>Profile</Text>
     </View>
   );
-};
+});
 
 export default Profile;
