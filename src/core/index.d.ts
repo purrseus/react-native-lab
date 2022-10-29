@@ -11,8 +11,6 @@ declare global {
   }
 }
 
-//    export function create<T extends NamedStyles<T> | NamedStyles<any>>(styles: T | NamedStyles<T>): T;
-
 declare module 'react-native' {
   export namespace StyleSheet {
     type MixinStyles<T> = {

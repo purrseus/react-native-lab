@@ -7,4 +7,5 @@ export * from './permission';
 export * from './screen';
 export * from './service';
 export * from './store';
+export * from './style';
 export * from './validate';

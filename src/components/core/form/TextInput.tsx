@@ -1,8 +1,8 @@
 import { fonts } from '@assets';
 import { CommonFieldProps, StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { compareMemo } from '@utilities';
-import { ForwardedRef, forwardRef, RefAttributes } from 'react';
+import { createField } from '@utilities';
+import { ForwardRefRenderFunction, RefAttributes } from 'react';
 import { StyleProp, TextInput as RNTextInput, View, ViewStyle } from 'react-native';
 import MultilineTextInput, {
   MultilineTextInputProps,
@@ -13,24 +13,16 @@ import Text from '../Text/Text';
 type CombinedTextInputProps<T extends boolean = false> = (T extends true
   ? MultilineTextInputProps
   : IconTextInputProps) &
-  CommonFieldProps;
+  Omit<CommonFieldProps<string>, 'onChange'>;
 
-export type TextFieldProps<T extends boolean = false> = {
+type TextInputProps<T extends boolean = false> = {
   multiline?: T;
   wrapperStyle?: StyleProp<ViewStyle>;
 } & CombinedTextInputProps<T>;
 
-const _TextField = (
-  {
-    label,
-    errorText,
-    placeholder,
-    multiline,
-    containerStyle,
-    wrapperStyle,
-    ...props
-  }: TextFieldProps,
-  ref: ForwardedRef<RNTextInput>,
+const _TextInput: ForwardRefRenderFunction<RNTextInput, TextInputProps> = (
+  { label, errorText, placeholder, multiline, containerStyle, wrapperStyle, ...props },
+  ref,
 ) => {
   const styles = useStyle(createStyles);
   const TextInputComponent = multiline ? MultilineTextInput : IconTextInput;
@@ -62,10 +54,8 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
     },
   });
 
-const TextField = compareMemo<RNTextInput, TextFieldProps>(forwardRef(_TextField)) as <
-  T extends boolean,
->(
-  props: TextFieldProps<T> & RefAttributes<RNTextInput>,
+const TextInput = createField(_TextInput, true) as <T extends boolean = false>(
+  props: TextInputProps<T> & RefAttributes<RNTextInput>,
 ) => JSX.Element;
 
-export default TextField;
+export default TextInput;
