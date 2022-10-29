@@ -2,31 +2,31 @@
 import { fonts } from '@assets';
 import { CheckboxItem, CommonFieldProps, StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { compareMemo } from '@utilities';
-import { useCallback } from 'react';
+import { createField } from '@utilities';
+import { ForwardRefRenderFunction, useCallback } from 'react';
 import { StyleProp, Text, View, ViewProps, ViewStyle } from 'react-native';
 import Checkbox from '../Pressable/Checkbox';
 
-export interface CheckboxListProps<T = any> extends Omit<ViewProps, 'style'>, CommonFieldProps {
+export interface CheckboxesProps<T = any>
+  extends Omit<ViewProps, 'style'>,
+    Omit<CommonFieldProps<T[]>, 'onChangeText'> {
   data: CheckboxItem<T>[];
-  value?: T[];
-  onChange?: (value: T[]) => void;
   containerStyle?: StyleProp<ViewStyle>;
-  listStyle?: StyleProp<ViewStyle>;
+  checkboxesStyle?: StyleProp<ViewStyle>;
   itemStyle?: StyleProp<ViewStyle>;
 }
 
-const _CheckboxList = ({
+const _Checkboxes: ForwardRefRenderFunction<unknown, CheckboxesProps> = ({
   label,
   data,
   value = [],
   onChange,
   containerStyle,
-  listStyle,
+  checkboxesStyle,
   itemStyle,
   errorText,
   ...props
-}: CheckboxListProps) => {
+}) => {
   const styles = useStyle(createStyles);
 
   const onPress = useCallback(
@@ -42,7 +42,7 @@ const _CheckboxList = ({
     <View {...props} style={containerStyle}>
       {!!label && <Text style={styles.label}>{label}</Text>}
 
-      <View style={[styles.list, listStyle]}>
+      <View style={[styles.checkboxes, checkboxesStyle]}>
         {data.map(item => (
           <Checkbox
             key={item.label}
@@ -66,7 +66,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
       fontFamily: fonts.quicksandBold,
       marginBottom: 4,
     },
-    list: {
+    checkboxes: {
       flexDirection: 'row',
     },
     errorText: {
@@ -75,8 +75,6 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
     },
   });
 
-const CheckboxList = compareMemo<CheckboxListProps>(_CheckboxList) as <T = any>(
-  props: CheckboxListProps<T>,
-) => JSX.Element;
+const Checkboxes = createField(_Checkboxes) as <T = any>(props: CheckboxesProps<T>) => JSX.Element;
 
-export default CheckboxList;
+export default Checkboxes;

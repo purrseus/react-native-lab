@@ -78,7 +78,7 @@ const createStyles = ({ colors, create }: StyleCallbackParams) =>
     },
   });
 
-const Checkbox = compareMemo<CheckboxProps>(_Checkbox) as <T extends any>(
+const Checkbox = compareMemo<CheckboxProps>(_Checkbox) as <T = any>(
   props: CheckboxProps<T>,
 ) => JSX.Element;
 

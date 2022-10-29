@@ -94,7 +94,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
     },
   });
 
-const Image = compareMemo<ImageProps>(_Image) as <T extends boolean>(
+const Image = compareMemo<ImageProps>(_Image) as <T extends boolean = false>(
   props: ImageProps<T>,
 ) => JSX.Element;
 

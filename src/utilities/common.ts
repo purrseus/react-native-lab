@@ -1,35 +1,15 @@
-/* eslint-disable react-native/split-platform-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ONE_SECOND } from '@core/constants';
-import { CommonSize, Language } from '@core/types';
+import { Language } from '@core/types';
 import { MMKVStorage } from '@store/integration';
-import { DevSettings, ShadowStyleIOS, UIManager, ViewStyle } from 'react-native';
+import { DevSettings, UIManager } from 'react-native';
 import { getLocales } from 'react-native-localize';
 import { isAndroid } from './os';
-
-export const randomColor = () => `#${Math.random().toString(16).slice(-6)}`;
-
-export const alphaHexColor = (hexColor: string, opacity: number) =>
-  `${hexColor}${`${(Math.min(Math.max(opacity, 0), 1) * 255).toString(16)}0`.slice(0, 2)}`;
 
 export const wait = (timeout = ONE_SECOND) =>
   new Promise<void>(resolve => setTimeout(resolve, timeout));
 
 export const createArray = (length = 0) => Array.from({ length }, (_, i) => i);
-
-export const createShadow = (
-  shadowColor = 'transparent',
-  shadowOffset = [0, 0],
-  shadowOpacity = 0,
-  shadowRadius = 0,
-  elevation = 0,
-): Required<ShadowStyleIOS & Pick<ViewStyle, 'elevation'>> => ({
-  shadowColor,
-  shadowOffset: { width: shadowOffset[0], height: shadowOffset[1] },
-  shadowOpacity,
-  shadowRadius,
-  elevation,
-});
 
 export const getCurrentLanguage = (): Language => {
   const [{ languageCode }] = getLocales();
@@ -42,18 +22,6 @@ export const getCurrentLanguage = (): Language => {
     default:
       return 'en-US';
   }
-};
-
-export const resizeImage = (
-  sizeType: 'width' | 'height',
-  expectSize: number,
-  currentWidth: number,
-  currentHeight: number,
-): CommonSize => {
-  if (!expectSize) return { width: 0, height: 0 };
-  const dimensionTarget = (sizeType === 'width' ? currentWidth : currentHeight) || 1;
-  const scale = expectSize / dimensionTarget;
-  return { width: currentWidth * scale, height: currentHeight * scale };
 };
 
 export const deepAccessObject = <T extends Record<string, any>, V>(

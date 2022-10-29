@@ -13,6 +13,10 @@ declare global {
      * Return true if string is empty
      */
     isEmpty(): boolean;
+    /**
+     * Return a string without spaces
+     */
+    removeSpace(): this;
   }
 }
 
