@@ -2,9 +2,13 @@
 import { Dispatch, SetStateAction } from 'react';
 import { ImageRequireSource } from 'react-native';
 
-export interface CommonFieldProps {
+export interface CommonFieldProps<T = any> {
+  name: string;
   label?: string;
   errorText?: string;
+  value?: T;
+  onChange?: (value: T) => void;
+  onChangeText?: (text: T) => void;
 }
 
 export interface HeaderAction {

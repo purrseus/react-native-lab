@@ -11,13 +11,10 @@ export const createPersistReducer = <
   slice: S,
   config?: Partial<PersistConfig<State>>,
 ) => {
-  const version = Date.now();
-  const key = `${Config.APP_NAME.replace(/\s+/g, '')}/${slice.name}`;
-
   const persistConfig: PersistConfig<State> = {
-    version,
-    key,
     storage,
+    version: Date.now(),
+    key: `${Config.APP_NAME?.removeSpace()}/${slice.name}`,
     stateReconciler: autoMergeLevel2,
     ...config,
   };
