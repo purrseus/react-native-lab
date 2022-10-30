@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {
   interface Array<T> {
     /**
@@ -16,7 +17,11 @@ declare global {
     /**
      * Return a string without spaces
      */
-    removeSpace(): this;
+    removeWhiteSpaces(): this;
+  }
+
+  interface ObjectConstructor {
+    trimValues<T extends Record<string, any>>(o: T): T;
   }
 }
 
