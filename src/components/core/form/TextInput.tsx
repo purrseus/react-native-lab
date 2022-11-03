@@ -10,7 +10,7 @@ import MultilineTextInput, {
 import IconTextInput, { IconTextInputProps } from '../Text/Input/Singleline/IconTextInput';
 import Text from '../Text/Text';
 
-type CombinedTextInputProps<T extends boolean = false> = (T extends true
+type MixinTextInputProps<T extends boolean = false> = (T extends true
   ? MultilineTextInputProps
   : IconTextInputProps) &
   Omit<CommonFieldProps<string>, 'onChange'>;
@@ -18,7 +18,7 @@ type CombinedTextInputProps<T extends boolean = false> = (T extends true
 type TextInputProps<T extends boolean = false> = {
   multiline?: T;
   wrapperStyle?: StyleProp<ViewStyle>;
-} & CombinedTextInputProps<T>;
+} & MixinTextInputProps<T>;
 
 const _TextInput: ForwardRefRenderFunction<RNTextInput, TextInputProps> = (
   { label, errorText, placeholder, multiline, containerStyle, wrapperStyle, ...props },
