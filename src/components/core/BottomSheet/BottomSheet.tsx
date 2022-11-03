@@ -14,7 +14,7 @@ interface BottomSheetProps
   extends RNBottomSheetProps,
     Pick<BottomSheetDefaultBackdropProps, 'enableTouchThrough'> {
   backdropOpacity?: number;
-  pressBackdropBehavior?: BottomSheetDefaultBackdropProps['pressBehavior'];
+  backdropPressBehavior?: BottomSheetDefaultBackdropProps['pressBehavior'];
   hasHandle?: boolean;
 }
 
@@ -24,7 +24,7 @@ const BottomSheet = compareMemo<BottomSheetMethods, BottomSheetProps>(
       {
         backdropOpacity = DEFAULT_BACKDROP_OPACITY,
         enableTouchThrough,
-        pressBackdropBehavior,
+        backdropPressBehavior,
         hasHandle = true,
         handleStyle,
         handleIndicatorStyle,
@@ -40,13 +40,13 @@ const BottomSheet = compareMemo<BottomSheetMethods, BottomSheetProps>(
           <BottomSheetBackdrop
             {...backdropProps}
             enableTouchThrough={enableTouchThrough}
-            pressBehavior={pressBackdropBehavior}
+            pressBehavior={backdropPressBehavior}
             opacity={backdropOpacity}
             disappearsOnIndex={-1}
             appearsOnIndex={0}
           />
         ),
-        [backdropOpacity, enableTouchThrough, pressBackdropBehavior],
+        [backdropOpacity, enableTouchThrough, backdropPressBehavior],
       );
 
       return (

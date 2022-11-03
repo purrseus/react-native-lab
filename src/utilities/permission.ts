@@ -1,7 +1,7 @@
 import Alert from '@components/core/Modal/Alert';
 import { I18nText } from '@core/types';
 import i18n from '@i18n';
-import { AlertButton } from 'react-native';
+import { AlertButton, Platform } from 'react-native';
 import {
   check,
   checkMultiple,
@@ -14,7 +14,6 @@ import {
   RESULTS,
 } from 'react-native-permissions';
 import { logger } from './logger';
-import { platformSelect } from './os';
 
 const BLOCKED_BUTTONS: AlertButton[] = [
   {
@@ -30,13 +29,19 @@ const BLOCKED_BUTTONS: AlertButton[] = [
 
 const ALLOWED_STATUSES: PermissionStatus[] = [RESULTS.GRANTED, RESULTS.LIMITED];
 
-const photoGalleryPermissions = platformSelect<Permission[]>(
-  [PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE, PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE],
-  [PERMISSIONS.IOS.PHOTO_LIBRARY, PERMISSIONS.IOS.PHOTO_LIBRARY_ADD_ONLY],
-);
+//#region permission names
+const photoGalleryPermissions = Platform.select<Permission[]>({
+  android: [PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE, PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE],
+  ios: [PERMISSIONS.IOS.PHOTO_LIBRARY, PERMISSIONS.IOS.PHOTO_LIBRARY_ADD_ONLY],
+});
 
-const cameraPermission = platformSelect(PERMISSIONS.ANDROID.CAMERA, PERMISSIONS.IOS.CAMERA);
+const cameraPermission = Platform.select({
+  android: PERMISSIONS.ANDROID.CAMERA,
+  ios: PERMISSIONS.IOS.CAMERA,
+});
+//#endregion
 
+//#region alerts
 const showUnavailablePermissionAlert = (): false => {
   Alert(i18n.t('permission.unavailableTitle'));
 
@@ -53,6 +58,7 @@ const showBlockedPermissionAlert = (permissionName?: I18nText): false => {
 
   return false;
 };
+//#endregion
 
 const checkMultiplePermissions =
   (permissions?: Permission[], permissionName?: I18nText) => async (): Promise<boolean> => {
@@ -122,9 +128,11 @@ const checkPermission =
     }
   };
 
+//#region check permissions
 export const checkPhotoGalleryPermissions = checkMultiplePermissions(
   photoGalleryPermissions,
   'permission.photoGallery',
 );
 
 export const checkCameraPermission = checkPermission(cameraPermission, 'permission.camera');
+//#endregion

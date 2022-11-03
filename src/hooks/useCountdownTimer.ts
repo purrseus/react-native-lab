@@ -15,13 +15,13 @@ const useCountdownTimer = ({ duration, autoStart = true, onTimeout }: Options) =
   const [currentTime, setCurrentTime] = useState(duration);
 
   const stop = useCallback(
-    (callback?: () => void) => {
-      const isReplay = !!callback;
+    (replayCallback?: () => void) => {
+      const isReplay = !!replayCallback;
       if (timer.current) clearInterval(timer.current);
       timer.current = null;
       if (isReplay) endTime.current = getTimeEnd();
       setCurrentTime(isReplay ? duration : 0);
-      callback?.();
+      replayCallback?.();
     },
     [duration, getTimeEnd],
   );

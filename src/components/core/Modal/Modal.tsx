@@ -30,6 +30,7 @@ const Modal = compareMemo<ModalProps>(({ type = 'modal', style, ...props }) => {
   const [dimensions, setDimensions] = useState<CommonSize>({ width, height });
 
   useEffect(() => {
+    // Screen Dimensions, not Window Dimensions
     const subscription = Dimensions.addEventListener('change', ({ screen }) => {
       setDimensions({ width: screen.width, height: screen.height });
     });

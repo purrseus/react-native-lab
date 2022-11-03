@@ -31,9 +31,9 @@ const _Checkboxes: ForwardRefRenderFunction<unknown, CheckboxesProps> = ({
 
   const onPress = useCallback(
     (itemValue: CheckboxItem['value']) => () => {
-      onChange?.(
-        value.includes(itemValue) ? value.filter(v => v !== itemValue) : [...value, itemValue],
-      );
+      const isChecked = value.includes(itemValue);
+      const currentValue = isChecked ? value.filter(v => v !== itemValue) : [...value, itemValue];
+      onChange?.(currentValue);
     },
     [onChange, value],
   );

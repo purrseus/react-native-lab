@@ -11,7 +11,7 @@ export const DEFAULT_THROTTLE_SETTINGS: Readonly<ThrottleSettings> = {
   trailing: false,
 };
 
-//#region size
+//#region sizes
 export const TAB_BAR_HEIGHT = 70;
 export const HEADER_HEIGHT = 50;
 export const DEFAULT_FONT_SIZE = 14;
@@ -24,12 +24,12 @@ export const DEFAULT_HORIZONTAL_EDGE_SPACING = 16;
 export const DEFAULT_HIT_SLOP: Insets = { top: 8, bottom: 8, left: 8, right: 8 };
 //#endregion
 
-//#region format
+//#region formats
 export const DEFAULT_DATE_TIME_FORMAT_TEMPLATE = 'DD/MMM/YYYY HH:mm';
 export const DEFAULT_NUMBER_FORMAT_TEMPLATE = '0,0';
 //#endregion
 
-//#region style
+//#region styles
 export const DEFAULT_BACKDROP_OPACITY = 0.2;
 export const HORIZONTAL_GRADIENT_COORDINATES: Readonly<
   Required<Pick<LinearGradientProps, 'start' | 'end'>>
