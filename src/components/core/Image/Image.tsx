@@ -60,7 +60,7 @@ const _Image = ({ style, cached, onLoad, ...props }: ImageProps) => {
 
   const _onLoad = useCallback(
     ({ nativeEvent }: NativeSyntheticEvent<ImageLoadEventData> | OnLoadEvent) => {
-      onLoad?.({ nativeEvent } as Parameters<NonNullable<ImageProps['onLoad']>>[0]);
+      onLoad?.({ nativeEvent } as Parameters<NonNullable<ImageProps['onLoad']>>['first']);
 
       if (!!size.width && !!size.height) return;
       setSize('source' in nativeEvent ? omit(nativeEvent.source, ['uri']) : nativeEvent);

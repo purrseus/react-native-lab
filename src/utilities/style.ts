@@ -46,13 +46,13 @@ export const alphaHexColor = (hexColor: string, opacity: number) => {
 
 export const createShadow = (
   shadowColor = 'transparent',
-  shadowOffset = [0, 0],
+  [shadowOffsetWidth, shadowOffsetHeight] = [0, 0],
   shadowOpacity = 0,
   shadowRadius = 0,
   elevation = 0,
 ): Required<ShadowStyleIOS & Pick<ViewStyle, 'elevation'>> => ({
   shadowColor,
-  shadowOffset: { width: shadowOffset[0], height: shadowOffset[1] },
+  shadowOffset: { width: shadowOffsetWidth, height: shadowOffsetHeight },
   shadowOpacity,
   shadowRadius,
   elevation,
