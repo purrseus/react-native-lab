@@ -73,11 +73,12 @@ const ImagePicker = compareMemo<ImagePickerMethods, ImagePickerProps>(
 
       const onSelect = useCallback(
         async (buttonIndex: 0 | PickerOptions) => {
-          if (
+          const notReplace =
             !buttonIndex ||
             (pickType.current === 'replace' && replaceIndex.current < 0) ||
-            !pickType.current
-          ) {
+            !pickType.current;
+
+          if (notReplace) {
             resetValue();
             return;
           }
@@ -120,11 +121,13 @@ const ImagePicker = compareMemo<ImagePickerMethods, ImagePickerProps>(
 
       const pickImage = useCallback(
         (type: PickType) => async (index?: number) => {
+          //#region check permissions
           const hasCameraPermission = await checkCameraPermission();
           if (!hasCameraPermission) return;
 
           const hasGalleryPermission = await checkPhotoGalleryPermissions();
           if (!hasGalleryPermission) return;
+          //#endregion
 
           const canNotPick = type === 'pick' && images.length >= maximumImages;
           const canNotReplace =
@@ -132,9 +135,10 @@ const ImagePicker = compareMemo<ImagePickerMethods, ImagePickerProps>(
           if (canNotReplace || canNotPick) return;
 
           pickType.current = type;
-          if (type === 'replace' && index !== undefined && index >= 0 && index < images.length)
-            replaceIndex.current = index;
+          const canReplace =
+            type === 'replace' && index !== undefined && index >= 0 && index < images.length;
 
+          if (canReplace) replaceIndex.current = index;
           actionSheetRef.current?.show();
         },
         [images, maximumImages],

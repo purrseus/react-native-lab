@@ -1,9 +1,16 @@
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
-import { compareMemo, createShadow, isAndroid as isAndroidOS, platformSelect } from '@utilities';
+import { compareMemo, createShadow, isAndroid as isAndroidOS } from '@utilities';
 import { ReactNode } from 'react';
-import { ActivityIndicatorProps, ColorValue, View, ViewProps, ViewStyle } from 'react-native';
+import {
+  ActivityIndicatorProps,
+  ColorValue,
+  Platform,
+  View,
+  ViewProps,
+  ViewStyle,
+} from 'react-native';
 import Animated, {
   interpolate,
   interpolateColor,
@@ -91,7 +98,10 @@ const Switch = compareMemo<SwitchProps>(
               {loading ? (
                 <ActivityIndicator
                   color={(value ? thumbInactiveColor : thumbActiveColor) as ColorValue}
-                  size={platformSelect<ActivityIndicatorProps['size']>(THUMB_SIZE - 16, 'small')}
+                  size={Platform.select<ActivityIndicatorProps['size']>({
+                    android: THUMB_SIZE - 16,
+                    ios: 'small',
+                  })}
                 />
               ) : (
                 ActiveIcon

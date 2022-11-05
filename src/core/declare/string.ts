@@ -4,7 +4,7 @@ String.prototype.isEmpty = function () {
   return !this.trim().length;
 };
 
-String.prototype.removeSpace = function () {
+String.prototype.removeWhiteSpaces = function () {
   return this.replace(/\s+/g, '');
 };
 

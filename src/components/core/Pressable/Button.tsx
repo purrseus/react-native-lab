@@ -75,6 +75,36 @@ const Button = compareMemo<ButtonProps>(
     const styles = useStyle(createStyles(color));
     const colorStyle = styles[`${disabled ? 'disabled' : type}Color`];
 
+    const ButtonContent = (
+      <>
+        {hasLeftIcon ? (
+          <Icon
+            source={iconLeft}
+            size={leftIconSize}
+            {...iconProps}
+            style={[styles.icon('left', iconSpacing, colorStyle.color), iconProps?.style]}
+          />
+        ) : hasRightIcon && titleCenter ? (
+          <Spacer w={rightIconSize + iconSpacing} />
+        ) : null}
+
+        <Text numberOfLines={1} style={[styles.title(titleSize), colorStyle, titleStyle]}>
+          {title}
+        </Text>
+
+        {hasRightIcon ? (
+          <Icon
+            source={iconRight}
+            size={rightIconSize}
+            {...iconProps}
+            style={[styles.icon('right', iconSpacing, colorStyle.color), iconProps?.style]}
+          />
+        ) : hasLeftIcon && titleCenter ? (
+          <Spacer w={leftIconSize + iconSpacing} />
+        ) : null}
+      </>
+    );
+
     return (
       <PressArea
         {...props}
@@ -89,37 +119,7 @@ const Button = compareMemo<ButtonProps>(
           />
         )}
 
-        {loading ? (
-          <ActivityIndicator color={colorStyle.color} />
-        ) : (
-          <>
-            {hasLeftIcon ? (
-              <Icon
-                source={iconLeft}
-                size={leftIconSize}
-                {...iconProps}
-                style={[styles.icon('left', iconSpacing, colorStyle.color), iconProps?.style]}
-              />
-            ) : hasRightIcon && titleCenter ? (
-              <Spacer w={rightIconSize + iconSpacing} />
-            ) : null}
-
-            <Text numberOfLines={1} style={[styles.title(titleSize), colorStyle, titleStyle]}>
-              {title}
-            </Text>
-
-            {hasRightIcon ? (
-              <Icon
-                source={iconRight}
-                size={rightIconSize}
-                {...iconProps}
-                style={[styles.icon('right', iconSpacing, colorStyle.color), iconProps?.style]}
-              />
-            ) : hasLeftIcon && titleCenter ? (
-              <Spacer w={leftIconSize + iconSpacing} />
-            ) : null}
-          </>
-        )}
+        {loading ? <ActivityIndicator color={colorStyle.color} /> : ButtonContent}
       </PressArea>
     );
   },
