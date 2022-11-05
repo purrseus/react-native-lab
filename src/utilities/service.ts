@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { File } from '@core/interfaces';
-import { platformSelect } from './os';
+import { Platform } from 'react-native';
 
 type FormDataObject = Record<
   string,
@@ -20,7 +20,7 @@ export const createFormData = (data: FormDataObject): FormData => {
 
   const platformFile = (file: File): File => ({
     ...file,
-    uri: platformSelect(file.uri, file.uri.replace(FILE_PREFIX, '')) || '',
+    uri: Platform.select({ android: file.uri, ios: file.uri.replace(FILE_PREFIX, '') }) || '',
   });
 
   const append = (key: string, value: any) =>

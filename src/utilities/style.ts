@@ -22,7 +22,7 @@ export const shadowGenerator = (depth: Depth<typeof MAX_DEPTH>, shadowColor = co
   shadowColor,
   shadowOffset: {
     width: 0,
-    height: Math.floor((depth || 2) / 2),
+    height: depth ? Math.floor(depth / 2) : 0,
   },
   shadowOpacity:
     Math.ceil((depth ? MIN_SHADOW_OPACITY : 0) * 100 + SHADOW_OPACITY_PER_DEPTH * depth) / 100,
@@ -33,8 +33,16 @@ export const shadowGenerator = (depth: Depth<typeof MAX_DEPTH>, shadowColor = co
 
 export const randomColor = () => `#${Math.random().toString(16).slice(-6)}`;
 
-export const alphaHexColor = (hexColor: string, opacity: number) =>
-  `${hexColor}${`${(Math.min(Math.max(opacity, 0), 1) * 255).toString(16)}0`.slice(0, 2)}`;
+export const alphaHexColor = (hexColor: string, opacity: number) => {
+  const MIN_OPACITY = 0.066;
+  // Limit the opacity from 0 to 1
+  const opacityRange = Math.min(Math.max(opacity, 0), 1);
+  const safeOpacityValue =
+    opacityRange > 0 && opacityRange < MIN_OPACITY ? MIN_OPACITY : opacityRange;
+  const alpha = `${(safeOpacityValue * 255).toString(16)}0`.slice(0, 2);
+
+  return `${hexColor}${alpha}`;
+};
 
 export const createShadow = (
   shadowColor = 'transparent',

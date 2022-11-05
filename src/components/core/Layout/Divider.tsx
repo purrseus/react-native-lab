@@ -11,18 +11,16 @@ interface DividerProps extends Pick<ViewStyle, DividerPropKeys> {
 }
 
 const Divider = compareMemo<DividerProps>(
-  ({ color = colors.darkGray, height = StyleSheet.hairlineWidth, ...props }) => {
-    return (
-      <View
-        style={{
-          borderBottomWidth: height,
-          borderBottomColor: color,
-          alignSelf: 'stretch',
-          ...props,
-        }}
-      />
-    );
-  },
+  ({ color = colors.darkGray, height = StyleSheet.hairlineWidth, ...props }) => (
+    <View
+      style={{
+        borderBottomWidth: height,
+        borderBottomColor: color,
+        alignSelf: 'stretch',
+        ...props,
+      }}
+    />
+  ),
 );
 
 export default Divider;

@@ -78,7 +78,10 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
 
     const onHide = useThrottle(
       async (buttonIndex = cancelButtonIndex) => {
-        if (!isIos()) {
+        /**
+         * @see Modal onBackdropPress below
+         */
+        if (!isIos() && typeof buttonIndex === 'number') {
           setIsVisible(false);
           await wait(ACTION_SHEET_ANIMATION_IN_TIMING);
           onSelect(buttonIndex);
@@ -89,6 +92,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
     );
 
     const handleSelectOption = useCallback(
+      // isCancel to distinguish between buttonIndex 0 of the selection item and buttonIndex 0 of the action sheet
       (buttonIndex: number, isCancel?: boolean) => async () => {
         await onHide(
           buttonIndex === cancelButtonIndex && isCancel
@@ -113,26 +117,34 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
       [styles.divider.color],
     );
 
-    const ListHeaderComponent = useMemo(
-      () =>
-        !!title || !!message ? (
-          <View>
-            <View style={styles.header}>
-              {!!title && (
-                <Text style={[styles.headerText, !!message && styles.boldedTitle]}>{title}</Text>
-              )}
-              {!!title && !!message && <Spacer h={4} />}
-              {!!message && (
-                <Text style={[styles.headerText, !title && styles.boldedTitle]}>{message}</Text>
-              )}
-              {!!title && !!message && <Spacer h={4} />}
-            </View>
+    const ListHeaderComponent = useMemo(() => {
+      const hasTitleOrMessage = !!title || !!message;
+      const SpaceSeparator = !!title && !!message ? <Spacer h={4} /> : null;
 
-            <Divider height={0.5} color={styles.divider.color} />
+      return hasTitleOrMessage ? (
+        <View>
+          <View style={styles.header}>
+            {!!title && (
+              <Text style={[styles.headerText, !!message && styles.boldedTitle]}>{title}</Text>
+            )}
+            {SpaceSeparator}
+            {!!message && (
+              <Text style={[styles.headerText, !title && styles.boldedTitle]}>{message}</Text>
+            )}
+            {SpaceSeparator}
           </View>
-        ) : null,
-      [message, styles.boldedTitle, styles.divider.color, styles.header, styles.headerText, title],
-    );
+
+          <Divider height={0.5} color={styles.divider.color} />
+        </View>
+      ) : null;
+    }, [
+      message,
+      styles.boldedTitle,
+      styles.divider.color,
+      styles.header,
+      styles.headerText,
+      title,
+    ]);
 
     const renderOptionItem: ListRenderItem<string> = useCallback(
       ({ item, index }) => (
@@ -163,7 +175,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
         isVisible={isVisible}
         animationInTiming={ACTION_SHEET_ANIMATION_IN_TIMING}
         animationOutTiming={ACTION_SHEET_ANIMATION_OUT_TIMING}
-        onBackdropPress={() => onHide()}
+        onBackdropPress={onHide}
       >
         <View style={styles.container}>
           <List
@@ -173,7 +185,9 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
             style={styles.optionContainer}
             {...{ ListHeaderComponent, ItemSeparatorComponent }}
           />
+
           <Spacer h={DEFAULT_MARGIN} />
+
           <View style={styles.optionContainer}>
             <PressArea onPress={handleSelectOption(cancelButtonIndex, true)} style={styles.option}>
               <Text

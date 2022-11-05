@@ -42,7 +42,7 @@ const ensureGitBranch = env => {
 
 export const envs = ['Development', 'Staging', 'Production'];
 
-export const execScriptSync = command => execSync(command);
+export const execScriptSync = command => execSync(command, { stdio: 'inherit' });
 
 export const createQuestions = async questions => {
   const answers = await inquirer.prompt(questions);

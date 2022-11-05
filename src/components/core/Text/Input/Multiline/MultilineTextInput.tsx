@@ -1,9 +1,10 @@
 import { MAX_HEIGHT_INPUT, MIN_HEIGHT_INPUT } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { compareMemo, platformSelect } from '@utilities';
+import { compareMemo } from '@utilities';
 import { forwardRef } from 'react';
 import {
+  Platform,
   StyleProp,
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
@@ -42,12 +43,12 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     container: {
       paddingHorizontal: 8,
-      paddingVertical: platformSelect(8.2, 12),
+      paddingVertical: Platform.select({ android: 8.2, ios: 12 }),
       backgroundColor: colors.lightGray,
       borderRadius: 12,
     },
     input: {
-      ...platformSelect({}, { paddingTop: 0 }),
+      paddingTop: Platform.select({ android: undefined, ios: 0 }),
     },
     expandedInput: {
       height: 120,
