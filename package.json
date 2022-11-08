@@ -2,7 +2,6 @@
   "name": "ReactNativeLab",
   "version": "0.0.1",
   "private": true,
-  "author": "thiendo261",
   "scripts": {
     "setup": "node scripts/setup.mjs",
     "android": "node scripts/android.mjs",

@@ -15,6 +15,7 @@ export const createFormData = (data: FormDataObject): FormData => {
   const arrayData = Object.entries(data);
   if (!arrayData.length) return formData;
 
+  //#region form data helper
   const isFile = (param: any): param is File =>
     typeof param === 'object' && FILE_KEYS.every(fileKey => fileKey in param);
 
@@ -25,6 +26,7 @@ export const createFormData = (data: FormDataObject): FormData => {
 
   const append = (key: string, value: any) =>
     formData.append(key, isFile(value) ? platformFile(value) : value);
+  //#endregion
 
   for (const [key, value] of arrayData) {
     if (Array.isArray(value)) {
