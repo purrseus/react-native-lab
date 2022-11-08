@@ -2,6 +2,14 @@
 declare global {
   interface Array<T> {
     /**
+     * Get the first element of the array.
+     */
+    first: T;
+    /**
+     * Get the last element of the array.
+     */
+    last: T;
+    /**
      * Swap position of two elements from an array. Return a swapped array.
      * @param indexA - The fist index of element to swap position
      * @param indexB - The second index of element to swap position

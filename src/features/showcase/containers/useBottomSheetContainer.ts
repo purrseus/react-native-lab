@@ -16,7 +16,9 @@ const useBottomSheetContainer = () => {
 
   useEffect(() => {
     if (images.length)
-      Alert(referenceTypeFormatter(typeof images[0] !== 'string' ? images[0].uri : images[0]));
+      Alert(
+        referenceTypeFormatter(typeof images.first !== 'string' ? images.first.uri : images.first),
+      );
   }, [images]);
 
   const showBottomSheet = () => bottomSheetRef.current?.snapToIndex(0);
