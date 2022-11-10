@@ -13,7 +13,7 @@ export const createPersistReducer = <
 ) => {
   const persistConfig: PersistConfig<State> = {
     storage,
-    version: Date.now(),
+    version: 1,
     key: `${Config.APP_NAME!.removeWhiteSpaces()}/${slice.name}`,
     stateReconciler: autoMergeLevel2,
     ...config,

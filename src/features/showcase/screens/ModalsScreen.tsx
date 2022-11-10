@@ -9,7 +9,7 @@ import { View } from 'react-native';
 import { ShowcaseItem } from '../components';
 import { useModalContainer } from '../containers';
 
-const Modals = withHook(
+const ModalsScreen = withHook(
   useModalContainer,
   ({
     openModal,
@@ -82,4 +82,4 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
     },
   });
 
-export default Modals;
+export default ModalsScreen;

@@ -12,7 +12,7 @@ import { ProtectedScreenName } from '@core/enums';
 import { useTranslation } from 'react-i18next';
 import { Separator } from '../components';
 
-const Texts = () => {
+const TextsScreen = () => {
   const { t } = useTranslation();
 
   return (
@@ -69,4 +69,4 @@ const Texts = () => {
   );
 };
 
-export default Texts;
+export default TextsScreen;

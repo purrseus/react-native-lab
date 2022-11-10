@@ -1,6 +1,11 @@
 import { TabScreenName } from '@core/enums';
 import { BottomTabParamList } from '@core/types';
-import { Home, Messages, Notification, Profile } from '@features/tab/screens';
+import {
+  HomeScreen,
+  MessagesScreen,
+  NotificationScreen,
+  ProfileScreen,
+} from '@features/tab/screens';
 import { useStyle } from '@hooks';
 import { tabScreenOptions } from '@navigation/options';
 import createStyles from '@navigation/styles';
@@ -19,10 +24,10 @@ const BottomTabBar = () => {
       sceneContainerStyle={styles.screenStyle}
       tabBar={props => <CustomizedTabBar {...props} />}
     >
-      <BottomTab.Screen name={TabScreenName.Home} component={Home} />
-      <BottomTab.Screen name={TabScreenName.Messages} component={Messages} />
-      <BottomTab.Screen name={TabScreenName.Notification} component={Notification} />
-      <BottomTab.Screen name={TabScreenName.Profile} component={Profile} />
+      <BottomTab.Screen name={TabScreenName.Home} component={HomeScreen} />
+      <BottomTab.Screen name={TabScreenName.Messages} component={MessagesScreen} />
+      <BottomTab.Screen name={TabScreenName.Notification} component={NotificationScreen} />
+      <BottomTab.Screen name={TabScreenName.Profile} component={ProfileScreen} />
     </BottomTab.Navigator>
   );
 };

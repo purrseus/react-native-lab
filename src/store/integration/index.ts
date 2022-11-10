@@ -1,7 +1,10 @@
 import { MMKV } from 'react-native-mmkv';
+import { initializeMMKVFlipper } from 'react-native-mmkv-flipper-plugin';
 import { Storage } from 'redux-persist';
 
 export const MMKVStorage = new MMKV();
+
+if (__DEV__) initializeMMKVFlipper({ default: MMKVStorage });
 
 export const storage: Storage = {
   setItem: (key, value) => {

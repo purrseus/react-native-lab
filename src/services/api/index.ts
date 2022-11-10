@@ -33,7 +33,7 @@ const handlePromiseQueue = async (accessToken?: string, error?: any) => {
 
 let isTokenRefreshing = false;
 
-const apiLogger = (key: string, message: Parameters<typeof logger>['first']) => {
+const apiLogger = (key: string, message: Parameters<typeof logger>[0]) => {
   if (LOGGER_ENABLED) {
     logger(`[API] ${key} ${referenceTypeFormatter(message)}`);
   }
