@@ -8,7 +8,7 @@ import { withHook } from '@utilities';
 import { View } from 'react-native';
 import { useImageContainer } from '../containers';
 
-const Images = withHook(useImageContainer, ({ imageUrl }) => {
+const ImagesScreen = withHook(useImageContainer, ({ imageUrl }) => {
   const styles = useStyle(createStyles);
 
   return (
@@ -45,4 +45,4 @@ const createStyles = ({ create }: StyleCallbackParams) =>
     },
   });
 
-export default Images;
+export default ImagesScreen;

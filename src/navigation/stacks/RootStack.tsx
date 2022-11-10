@@ -1,18 +1,18 @@
 import { ProtectedScreenName, UnprotectedScreenName } from '@core/enums';
 import { RootStackParamList } from '@core/types';
-import { Login, Register } from '@features/authentication/screens';
+import { LoginScreen, RegisterScreen } from '@features/authentication/screens';
 import {
-  BottomSheets,
-  Form,
-  Images,
-  Layouts,
-  List,
-  Loader,
-  Modals,
-  Pressable,
-  ShowcaseList,
-  Spacers,
-  Texts,
+  BottomSheetsScreen,
+  FormScreen,
+  ImagesScreen,
+  LayoutsScreen,
+  ListScreen,
+  LoaderScreen,
+  ModalsScreen,
+  PressableScreen,
+  ShowcaseListScreen,
+  SpacersScreen,
+  TextsScreen,
 } from '@features/showcase/screens';
 import { useAppSelector, useStyle } from '@hooks';
 import { stackScreenOptions } from '@navigation/options';
@@ -24,8 +24,8 @@ const NativeStack = createNativeStackNavigator<RootStackParamList>();
 
 const UnprotectedScreens = (
   <NativeStack.Group>
-    <NativeStack.Screen name={UnprotectedScreenName.Login} component={Login} />
-    <NativeStack.Screen name={UnprotectedScreenName.Register} component={Register} />
+    <NativeStack.Screen name={UnprotectedScreenName.Login} component={LoginScreen} />
+    <NativeStack.Screen name={UnprotectedScreenName.Register} component={RegisterScreen} />
   </NativeStack.Group>
 );
 
@@ -33,17 +33,17 @@ const ProtectedScreens = (
   <NativeStack.Group>
     <NativeStack.Screen name={ProtectedScreenName.BottomTab} component={BottomTabBar} />
     {/* Showcase */}
-    <NativeStack.Screen name={ProtectedScreenName.ShowcaseList} component={ShowcaseList} />
-    <NativeStack.Screen name={ProtectedScreenName.BottomSheets} component={BottomSheets} />
-    <NativeStack.Screen name={ProtectedScreenName.Pressable} component={Pressable} />
-    <NativeStack.Screen name={ProtectedScreenName.Form} component={Form} />
-    <NativeStack.Screen name={ProtectedScreenName.Images} component={Images} />
-    <NativeStack.Screen name={ProtectedScreenName.Layouts} component={Layouts} />
-    <NativeStack.Screen name={ProtectedScreenName.List} component={List} />
-    <NativeStack.Screen name={ProtectedScreenName.Loader} component={Loader} />
-    <NativeStack.Screen name={ProtectedScreenName.Modals} component={Modals} />
-    <NativeStack.Screen name={ProtectedScreenName.Spacers} component={Spacers} />
-    <NativeStack.Screen name={ProtectedScreenName.Texts} component={Texts} />
+    <NativeStack.Screen name={ProtectedScreenName.ShowcaseList} component={ShowcaseListScreen} />
+    <NativeStack.Screen name={ProtectedScreenName.BottomSheets} component={BottomSheetsScreen} />
+    <NativeStack.Screen name={ProtectedScreenName.Pressable} component={PressableScreen} />
+    <NativeStack.Screen name={ProtectedScreenName.Form} component={FormScreen} />
+    <NativeStack.Screen name={ProtectedScreenName.Images} component={ImagesScreen} />
+    <NativeStack.Screen name={ProtectedScreenName.Layouts} component={LayoutsScreen} />
+    <NativeStack.Screen name={ProtectedScreenName.List} component={ListScreen} />
+    <NativeStack.Screen name={ProtectedScreenName.Loader} component={LoaderScreen} />
+    <NativeStack.Screen name={ProtectedScreenName.Modals} component={ModalsScreen} />
+    <NativeStack.Screen name={ProtectedScreenName.Spacers} component={SpacersScreen} />
+    <NativeStack.Screen name={ProtectedScreenName.Texts} component={TextsScreen} />
   </NativeStack.Group>
 );
 

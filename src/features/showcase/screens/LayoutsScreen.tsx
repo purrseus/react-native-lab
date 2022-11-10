@@ -2,7 +2,7 @@ import { Divider, Row, Spacer, StatusBar, Text } from '@components/core';
 import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
 
-const Layouts = () => {
+const LayoutsScreen = () => {
   return (
     <StackContainer
       headerTitle={ProtectedScreenName.Layouts}
@@ -31,4 +31,4 @@ const Layouts = () => {
   );
 };
 
-export default Layouts;
+export default LayoutsScreen;
