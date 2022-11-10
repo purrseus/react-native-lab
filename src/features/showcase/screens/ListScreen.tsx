@@ -4,7 +4,7 @@ import { ProtectedScreenName } from '@core/enums';
 import { withHook } from '@utilities';
 import { useListContainer } from '../containers';
 
-const List = withHook(useListContainer, ({ renderItem, getPhotos, config }) => {
+const ListScreen = withHook(useListContainer, ({ renderItem, getPhotos, config }) => {
   return (
     <StackContainer headerTitle={ProtectedScreenName.List}>
       <InfiniteList renderItem={renderItem} requestCallback={getPhotos} config={config} />
@@ -12,4 +12,4 @@ const List = withHook(useListContainer, ({ renderItem, getPhotos, config }) => {
   );
 });
 
-export default List;
+export default ListScreen;

@@ -2,12 +2,12 @@ import { Text } from '@components/core';
 import { globalStyles } from '@themes';
 import { View } from 'react-native';
 
-const Notification = () => {
+const MessagesScreen = () => {
   return (
     <View style={globalStyles.flexFillCenter}>
-      <Text>Notification</Text>
+      <Text>MessagesScreen</Text>
     </View>
   );
 };
 
-export default Notification;
+export default MessagesScreen;

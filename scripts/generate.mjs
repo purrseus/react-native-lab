@@ -2,9 +2,10 @@ import { execScriptSync, getArguments } from './utils.mjs';
 
 (() => {
   const folderNames = ['components', 'containers', 'screens', 'utilities'];
-  const [featureFolderName, _targetDir = '.'] = getArguments();
+  const [featureFolderName, _targetDir = ''] = getArguments();
   if (!featureFolderName) throw new SyntaxError('Missing folder name!');
-  const targetDir = _targetDir.replace(/\/+$/g, '');
+  const featureDir = './src/features/';
+  const targetDir = featureDir + _targetDir.replace(/\/+$/g, '');
 
   execScriptSync(
     folderNames.reduce((command, folderName, index) => {

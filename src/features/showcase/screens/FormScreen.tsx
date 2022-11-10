@@ -8,7 +8,7 @@ import { withHook } from '@utilities';
 import { FormProvider } from 'react-hook-form';
 import { useFormContainer } from '../containers';
 
-const Form = withHook(useFormContainer, ({ formMethods, checkboxData, onSubmit }) => {
+const FormScreen = withHook(useFormContainer, ({ formMethods, checkboxData, onSubmit }) => {
   const styles = useStyle(createStyles);
 
   return (
@@ -51,4 +51,4 @@ const createStyles = ({ create }: StyleCallbackParams) =>
     },
   });
 
-export default Form;
+export default FormScreen;

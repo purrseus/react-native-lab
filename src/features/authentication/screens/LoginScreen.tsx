@@ -4,11 +4,11 @@ import { withHook } from '@utilities/screen';
 import { View } from 'react-native';
 import { useLoginContainer } from '../containers';
 
-const Login = withHook(useLoginContainer, ({ handleLogin, navigateToRegister }) => {
+const LoginScreen = withHook(useLoginContainer, ({ handleLogin, navigateToRegister }) => {
   return (
     <View style={globalStyles.flexFillCenter}>
       <PressArea onPress={handleLogin}>
-        <Text>Login</Text>
+        <Text>LoginScreen</Text>
       </PressArea>
 
       <Spacer h={32} />
@@ -20,4 +20,4 @@ const Login = withHook(useLoginContainer, ({ handleLogin, navigateToRegister }) 
   );
 });
 
-export default Login;
+export default LoginScreen;

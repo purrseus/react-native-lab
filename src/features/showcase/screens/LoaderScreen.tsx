@@ -5,7 +5,7 @@ import { withHook } from '@utilities';
 import { ShowcaseItem } from '../components';
 import { useLoaderContainer } from '../containers';
 
-const Loader = withHook(useLoaderContainer, ({ handleOverlayLoading }) => {
+const LoaderScreen = withHook(useLoaderContainer, ({ handleOverlayLoading }) => {
   return (
     <StackContainer
       headerTitle={ProtectedScreenName.Loader}
@@ -16,4 +16,4 @@ const Loader = withHook(useLoaderContainer, ({ handleOverlayLoading }) => {
   );
 });
 
-export default Loader;
+export default LoaderScreen;

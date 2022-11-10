@@ -9,7 +9,7 @@ import { View } from 'react-native';
 import { Separator, ShowcaseItem } from '../components';
 import useSpacerContainer from '../containers/useSpacerContainer';
 
-const Spacers = withHook(
+const SpacersScreen = withHook(
   useSpacerContainer,
   ({
     WIDTH,
@@ -78,4 +78,4 @@ const createStyles = ({ create, colors, dimensions }: StyleCallbackParams) =>
     },
   });
 
-export default Spacers;
+export default SpacersScreen;

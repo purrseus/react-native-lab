@@ -6,7 +6,7 @@ import { useStyle } from '@hooks';
 import { withHook } from '@utilities';
 import useShowcaseListContainer from '../containers/useShowcaseListContainer';
 
-const ShowcaseList = withHook(
+const ShowcaseListScreen = withHook(
   useShowcaseListContainer,
   ({ data, renderItem, ItemSeparatorComponent }) => {
     const styles = useStyle(createStyles);
@@ -31,4 +31,4 @@ const createStyles = ({ create }: StyleCallbackParams) =>
     },
   });
 
-export default ShowcaseList;
+export default ShowcaseListScreen;

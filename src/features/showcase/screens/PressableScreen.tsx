@@ -7,7 +7,7 @@ import { useStyle } from '@hooks';
 import { colors, globalStyles } from '@themes';
 import { Separator } from '../components';
 
-const Pressable = () => {
+const PressableScreen = () => {
   const styles = useStyle(createStyles);
 
   return (
@@ -86,4 +86,4 @@ const createStyles = ({ create }: StyleCallbackParams) =>
     },
   });
 
-export default Pressable;
+export default PressableScreen;

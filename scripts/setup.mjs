@@ -18,7 +18,7 @@ const setupCodePush = () => {
 
   writeFileSync('android/app/src/main/assets/appcenter-config.json', json);
   writeFileSync('ios/AppCenter-Config.plist', plist);
-  console.log('Setup AppCenter... Done! ✨✨✨');
+  console.log('Setup CodePush... Done! ✨✨✨');
 };
 
 (() => {
