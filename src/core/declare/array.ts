@@ -1,14 +1,15 @@
 /* eslint-disable no-extend-native */
 
-Object.defineProperty(Array.prototype, 'first', {
-  get() {
-    return this[0];
+Object.defineProperties(Array.prototype, {
+  first: {
+    get() {
+      return this[0];
+    },
   },
-});
-
-Object.defineProperty(Array.prototype, 'last', {
-  get() {
-    return this[this.length - 1];
+  last: {
+    get() {
+      return this[this.length - 1];
+    },
   },
 });
 

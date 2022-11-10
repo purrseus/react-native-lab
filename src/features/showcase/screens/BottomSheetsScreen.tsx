@@ -8,7 +8,7 @@ import { logger, withHook } from '@utilities';
 import { Separator, ShowcaseItem } from '../components';
 import { useBottomSheetContainer } from '../containers';
 
-const BottomSheets = withHook(
+const BottomSheetsScreen = withHook(
   useBottomSheetContainer,
   ({
     showBottomSheet,
@@ -55,4 +55,4 @@ const createStyles = ({ create }: StyleCallbackParams) =>
     },
   });
 
-export default BottomSheets;
+export default BottomSheetsScreen;

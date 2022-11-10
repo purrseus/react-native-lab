@@ -2,14 +2,14 @@ import { Text } from '@components/core';
 import { globalStyles } from '@themes';
 import { withHook } from '@utilities';
 import { View } from 'react-native';
-import { useHomeContainer } from '../containers';
+import { useProfileContainer } from '../containers';
 
-const Home = withHook(useHomeContainer, ({ goToShowcase }) => {
+const ProfileScreen = withHook(useProfileContainer, ({ logout }) => {
   return (
     <View style={globalStyles.flexFillCenter}>
-      <Text onPress={goToShowcase}>Home</Text>
+      <Text onPress={logout}>ProfileScreen</Text>
     </View>
   );
 });
 
-export default Home;
+export default ProfileScreen;
