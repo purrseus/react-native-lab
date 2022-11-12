@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Language, Resource, RootStackParamList } from '@core/types';
+import { Language, RootStackParamList } from '@core/types';
+import enUS from '@i18n/locales/en-US.json';
+import viVN from '@i18n/locales/vi-VN.json';
 import { PropsWithChildren } from 'react';
 import 'react-i18next';
 import { SvgProps } from 'react-native-svg';
@@ -33,6 +35,7 @@ declare module '*.svg' {
 
 declare module 'react-i18next' {
   type DefaultNS = typeof DEFAULT_NAMESPACE;
+  type Resource = typeof enUS & typeof viVN;
   interface CustomTypeOptions {
     defaultNS: DefaultNS;
     resources: Record<Language, Resource>;

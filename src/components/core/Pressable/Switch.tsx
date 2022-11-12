@@ -2,7 +2,7 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
 import { compareMemo, createShadow, isAndroid as isAndroidOS } from '@utilities';
-import { ReactNode } from 'react';
+import { ReactNode, useLayoutEffect } from 'react';
 import {
   ActivityIndicatorProps,
   ColorValue,
@@ -22,8 +22,8 @@ import ActivityIndicator from '../Loader/ActivityIndicator';
 import PressArea from './PressArea';
 
 interface SwitchProps extends ViewProps {
-  value: boolean;
-  onChange: (value: boolean) => void;
+  isEnabled: boolean;
+  onPress: (value: boolean) => void;
   disabled?: boolean;
   ActiveIcon?: ReactNode;
   /** @platform android */
@@ -40,8 +40,8 @@ const AnimatedPressArea = Animated.createAnimatedComponent(PressArea);
 
 const Switch = compareMemo<SwitchProps>(
   ({
-    value,
-    onChange,
+    isEnabled,
+    onPress,
     disabled = false,
     ActiveIcon,
     thumbScaleAnimated = true,
@@ -53,7 +53,7 @@ const Switch = compareMemo<SwitchProps>(
     const isAndroid = isAndroidOS();
     const [trackActiveColor, trackInactiveColor] = styles.trackColor as (string | number)[];
     const [thumbActiveColor, thumbInactiveColor] = styles.thumbColor as (string | number)[];
-    const statusAnimated = useSharedValue(+value);
+    const statusAnimated = useSharedValue(+isEnabled);
 
     const trackAnimatedStyle = useAnimatedStyle(() => {
       const backgroundColor = interpolateColor(statusAnimated.value, INPUT_RANGE, [
@@ -79,12 +79,13 @@ const Switch = compareMemo<SwitchProps>(
         transform: [{ translateX }, { scale: thumbScaleAnimated && isAndroid ? scale : 1 }],
         backgroundColor: backgroundColor as ColorValue,
       };
-    }, [disabled, value]);
+    }, [disabled, isEnabled]);
 
-    const handleChangeValue = () => {
-      statusAnimated.value = withTiming(+!value);
-      onChange(!value);
-    };
+    const handleChangeValue = () => onPress(!isEnabled);
+
+    useLayoutEffect(() => {
+      statusAnimated.value = withTiming(+isEnabled);
+    }, [isEnabled, statusAnimated]);
 
     return (
       <View {...props} style={[styles.container, style]}>
@@ -97,7 +98,7 @@ const Switch = compareMemo<SwitchProps>(
             <Animated.View style={[styles.thumb, thumbAnimatedStyle]}>
               {loading ? (
                 <ActivityIndicator
-                  color={(value ? thumbInactiveColor : thumbActiveColor) as ColorValue}
+                  color={(isEnabled ? thumbInactiveColor : thumbActiveColor) as ColorValue}
                   size={Platform.select<ActivityIndicatorProps['size']>({
                     android: THUMB_SIZE - 16,
                     ios: 'small',

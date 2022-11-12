@@ -1,7 +1,6 @@
 import Alert from '@components/core/Modal/Alert';
-import { I18nText } from '@core/types';
 import i18n from '@i18n';
-import { AlertButton, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import {
   check,
   checkMultiple,
@@ -15,29 +14,18 @@ import {
 } from 'react-native-permissions';
 import { logger } from './logger';
 
-const BLOCKED_BUTTONS: AlertButton[] = [
-  {
-    text: 'common.cancel',
-    style: 'cancel',
-  },
-  {
-    text: 'permission.openSettings',
-    onPress: () => openSettings().catch(() => logger('[permission] Cannot open settings!')),
-    style: 'default',
-  },
-];
-
 const ALLOWED_STATUSES: PermissionStatus[] = [RESULTS.GRANTED, RESULTS.LIMITED];
+const { ANDROID, IOS } = PERMISSIONS;
 
 //#region permission names
 const photoGalleryPermissions = Platform.select<Permission[]>({
-  android: [PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE, PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE],
-  ios: [PERMISSIONS.IOS.PHOTO_LIBRARY, PERMISSIONS.IOS.PHOTO_LIBRARY_ADD_ONLY],
+  android: [ANDROID.READ_EXTERNAL_STORAGE, ANDROID.WRITE_EXTERNAL_STORAGE],
+  ios: [IOS.PHOTO_LIBRARY, IOS.PHOTO_LIBRARY_ADD_ONLY],
 });
 
 const cameraPermission = Platform.select({
-  android: PERMISSIONS.ANDROID.CAMERA,
-  ios: PERMISSIONS.IOS.CAMERA,
+  android: ANDROID.CAMERA,
+  ios: IOS.CAMERA,
 });
 //#endregion
 
@@ -48,21 +36,31 @@ const showUnavailablePermissionAlert = (): false => {
   return false;
 };
 
-const showBlockedPermissionAlert = (permissionName?: I18nText): false => {
-  if (permissionName)
-    Alert(
-      i18n.t('permission.blockedTitle', { permissionName: `$t(${permissionName})` }),
-      i18n.t('permission.blockedMessage'),
-      BLOCKED_BUTTONS,
-    );
+const showBlockedPermissionAlert = (permissionName: string): false => {
+  Alert(
+    i18n.t('permission.blockedTitle', { permissionName }),
+    i18n.t('permission.blockedMessage'),
+    [
+      {
+        text: i18n.t('common.cancel'),
+        style: 'cancel',
+      },
+      {
+        text: i18n.t('permission.openSettings'),
+        onPress: () =>
+          openSettings().catch(() => logger('[permission] Cannot open permission settings!')),
+        style: 'default',
+      },
+    ],
+  );
 
   return false;
 };
 //#endregion
 
 const checkMultiplePermissions =
-  (permissions?: Permission[], permissionName?: I18nText) => async (): Promise<boolean> => {
-    if (!permissions) return false;
+  (getPermissionName: () => string, permissions: Permission[]) => async (): Promise<boolean> => {
+    const permissionName = getPermissionName();
 
     try {
       const permissionsStatuses = await checkMultiple(permissions);
@@ -96,8 +94,8 @@ const checkMultiplePermissions =
   };
 
 const checkPermission =
-  (permission?: Permission, permissionName?: I18nText) => async (): Promise<boolean> => {
-    if (!permission) return false;
+  (getPermissionName: () => string, permission: Permission) => async (): Promise<boolean> => {
+    const permissionName = getPermissionName();
 
     try {
       const permissionStatus = await check(permission);
@@ -130,9 +128,12 @@ const checkPermission =
 
 //#region check permissions
 export const checkPhotoGalleryPermissions = checkMultiplePermissions(
-  photoGalleryPermissions,
-  'permission.photoGallery',
+  () => i18n.t('permission.photoGallery'),
+  photoGalleryPermissions!,
 );
 
-export const checkCameraPermission = checkPermission(cameraPermission, 'permission.camera');
+export const checkCameraPermission = checkPermission(
+  () => i18n.t('permission.camera'),
+  cameraPermission!,
+);
 //#endregion

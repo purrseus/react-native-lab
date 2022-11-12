@@ -1,8 +1,6 @@
-import enUS from './locales/en-US.json';
-import viVN from './locales/vi-VN.json';
-
 type FontName = 'Quicksand';
 type FontStyle = 'Light' | 'Regular' | 'Medium' | 'SemiBold' | 'Bold';
+
 type Font<Name extends FontName, Style extends FontStyle> = Readonly<
   Record<Uncapitalize<`${Name}${Style}`>, `${Name}-${Style}`>
 >;
@@ -26,17 +24,13 @@ export const icons = {
     notificationFocused: require('@assets/icons/tabs/notification/notification-focused.png'),
     profileFocused: require('@assets/icons/tabs/profile/profile-focused.png'),
   },
-
   header: {
     back: require('@assets/icons/header/back.png'),
     moreAction: require('@assets/icons/header/more-action.png'),
   },
-
   checkbox: {
     tick: require('@assets/icons/checkbox/tick.png'),
   },
 };
 
 export const images = {};
-
-export const locales = { enUS, viVN };
