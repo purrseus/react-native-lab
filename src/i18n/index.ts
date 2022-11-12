@@ -1,4 +1,5 @@
-import { locales } from '@assets';
+import enUS from './locales/en-US.json';
+import viVN from './locales/vi-VN.json';
 import { DEFAULT_NAMESPACE, LANGUAGE_MAP } from '@core/constants';
 import { Language, LanguageMap } from '@core/types';
 import { getCurrentLanguage } from '@utilities/common';
@@ -11,7 +12,6 @@ import 'numeral/locales/en-gb';
 import 'numeral/locales/vi';
 import { initReactI18next } from 'react-i18next';
 
-const { enUS, viVN } = locales;
 const CURRENT_LANGUAGE = getCurrentLanguage();
 const FALLBACK_LANGUAGE: Language = 'en-US';
 

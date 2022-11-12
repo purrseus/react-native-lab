@@ -4,5 +4,6 @@ export { default as useImageContainer } from './useImageContainer';
 export { default as useListContainer } from './useListContainer';
 export { default as useLoaderContainer } from './useLoaderContainer';
 export { default as useModalContainer } from './useModalContainer';
+export { default as usePressableContainer } from './usePressableContainer';
 export { default as useShowcaseListContainer } from './useShowcaseListContainer';
 export { default as useSpacerContainer } from './useSpacerContainer';
