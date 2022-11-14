@@ -69,6 +69,7 @@ const createStyles = ({ colors, create }: StyleCallbackParams) =>
     tick: (isActive?: boolean) => ({
       transform: [{ scale: 1.4 }],
       opacity: +!!isActive,
+      tintColor: colors.white,
     }),
     labelEnabled: {
       color: colors.primaryText,

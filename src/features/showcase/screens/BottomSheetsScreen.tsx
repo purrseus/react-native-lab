@@ -1,4 +1,4 @@
-import { BottomSheet, ImagePicker, Text } from '@components/core';
+import { BottomSheet, Text } from '@components/core';
 import ActionSheet from '@components/core/BottomSheet/ActionSheet';
 import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
@@ -13,14 +13,10 @@ const BottomSheetsScreen = withHook(
   ({
     showBottomSheet,
     showActionSheet,
-    showImagePicker,
     bottomSheetRef,
     bottomSheetSnapPoints,
     actionSheetRef,
     actionSheetOptions,
-    imagePickerRef,
-    images,
-    setImages,
   }) => {
     const styles = useStyle(createStyles);
 
@@ -34,15 +30,12 @@ const BottomSheetsScreen = withHook(
           <ShowcaseItem title="Show BottomSheet" onPress={showBottomSheet} />
           <Separator />
           <ShowcaseItem title="Show ActionSheet" onPress={showActionSheet} />
-          <Separator />
-          <ShowcaseItem title="Show ImagePicker" onPress={showImagePicker} />
         </StackContainer>
 
         <BottomSheet ref={bottomSheetRef} index={-1} snapPoints={bottomSheetSnapPoints}>
           <Text>This is a BottomSheet</Text>
         </BottomSheet>
         <ActionSheet ref={actionSheetRef} options={actionSheetOptions} onSelect={logger} />
-        <ImagePicker ref={imagePickerRef} images={images} onChangeImage={setImages} />
       </>
     );
   },

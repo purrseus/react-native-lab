@@ -25,6 +25,7 @@ export type ProtectedParamList = {
   [ProtectedScreenName.List]: undefined;
   [ProtectedScreenName.Loader]: undefined;
   [ProtectedScreenName.Modals]: undefined;
+  [ProtectedScreenName.Pickers]: undefined;
   [ProtectedScreenName.Spacers]: undefined;
   [ProtectedScreenName.Texts]: undefined;
 };
