@@ -1,9 +1,8 @@
 import { fonts } from '@assets';
-import { PressArea } from '@components/core';
+import { PressArea, Text } from '@components/core';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
-import { Text } from 'react-native';
 
 interface ShowcaseItemProps {
   title: string;
@@ -24,7 +23,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     item: {
       padding: 16,
-      backgroundColor: colors.lightGray,
+      backgroundColor: colors.backgroundImage,
       borderRadius: 8,
       alignItems: 'center',
     },

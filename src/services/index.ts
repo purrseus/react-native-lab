@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { PromiseObj } from '@core/interfaces';
 import { unwrapResult } from '@reduxjs/toolkit';
 import store from '@store';
 import { fetchNewAccessToken } from '@store/slices/auth';
@@ -6,14 +7,10 @@ import axios, { AxiosRequestConfig } from 'axios';
 import Config from 'react-native-config';
 
 type OriginalRequest = (AxiosRequestConfig & { retry?: boolean }) | undefined;
-interface RequestPromise {
-  resolve: (value: string | PromiseLike<string>) => void;
-  reject: (reason?: any) => void;
-}
 
 const UNAUTHORIZED_STATUS = 401;
 
-const promiseQueue: RequestPromise[] = [];
+const promiseQueue: PromiseObj<string>[] = [];
 
 const handlePromiseQueue = async (accessToken?: string, error?: any) => {
   if (!promiseQueue.length) return;

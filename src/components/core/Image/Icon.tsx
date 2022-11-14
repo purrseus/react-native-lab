@@ -20,6 +20,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
       backgroundColor: colors.transparent,
       width: size,
       height: size,
+      tintColor: colors.tintIcon,
     }),
   });
 

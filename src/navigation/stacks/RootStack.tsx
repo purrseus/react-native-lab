@@ -9,6 +9,7 @@ import {
   ListScreen,
   LoaderScreen,
   ModalsScreen,
+  PickersScreen,
   PressableScreen,
   ShowcaseListScreen,
   SpacersScreen,
@@ -42,6 +43,7 @@ const ProtectedScreens = (
     <NativeStack.Screen name={ProtectedScreenName.List} component={ListScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Loader} component={LoaderScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Modals} component={ModalsScreen} />
+    <NativeStack.Screen name={ProtectedScreenName.Pickers} component={PickersScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Spacers} component={SpacersScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Texts} component={TextsScreen} />
   </NativeStack.Group>

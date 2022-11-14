@@ -38,3 +38,7 @@ export interface ImagePickerMethods {
 export interface OverlayLoadingMethods {
   show: Dispatch<SetStateAction<boolean>>;
 }
+
+export interface DateTimePickerMethods {
+  show: () => void;
+}

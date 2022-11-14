@@ -52,7 +52,6 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
               message,
               options: props.options,
               userInterfaceStyle: theme === 'auto' ? colorScheme || 'light' : theme,
-              tintColor: tintColor || colors.primaryText,
               cancelButtonIndex,
             },
             onSelect,
@@ -62,17 +61,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
 
         setIsVisible(true);
       },
-      [
-        cancelButtonIndex,
-        colorScheme,
-        colors.primaryText,
-        message,
-        onSelect,
-        props,
-        theme,
-        tintColor,
-        title,
-      ],
+      [cancelButtonIndex, colorScheme, colors.primaryText, message, onSelect, props, theme, title],
       ONE_SECOND / 2,
     );
 
