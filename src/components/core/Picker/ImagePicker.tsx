@@ -14,7 +14,7 @@ import {
   launchCamera,
   launchImageLibrary,
 } from 'react-native-image-picker';
-import ActionSheet, { ActionSheetProps } from './ActionSheet';
+import ActionSheet, { ActionSheetProps } from '../BottomSheet/ActionSheet';
 
 type PickType = 'pick' | 'replace';
 

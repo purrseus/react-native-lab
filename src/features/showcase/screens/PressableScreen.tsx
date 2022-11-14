@@ -1,13 +1,15 @@
 import { icons } from '@assets';
-import { Button, Row, Spacer } from '@components/core';
+import { Button, Row, Spacer, Switch } from '@components/core';
 import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { colors, globalStyles } from '@themes';
+import { withHook } from '@utilities';
 import { Separator } from '../components';
+import { usePressableContainer } from '../containers';
 
-const PressableScreen = () => {
+const PressableScreen = withHook(usePressableContainer, ({ isEnabled, onPress, isLoading }) => {
   const styles = useStyle(createStyles);
 
   return (
@@ -16,6 +18,9 @@ const PressableScreen = () => {
       headerTitle={ProtectedScreenName.Pressable}
       wrapperStyle={styles.scrollView}
     >
+      <Switch isEnabled={isEnabled} loading={isLoading} onPress={onPress} />
+      <Separator />
+
       {/* Size */}
       <Button title="Large size (default)" size="large" />
       <Separator />
@@ -77,7 +82,7 @@ const PressableScreen = () => {
       />
     </StackContainer>
   );
-};
+});
 
 const createStyles = ({ create }: StyleCallbackParams) =>
   create({

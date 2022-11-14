@@ -16,6 +16,7 @@ const useShowcaseListContainer = ({
     ProtectedScreenName.List,
     ProtectedScreenName.Loader,
     ProtectedScreenName.Modals,
+    ProtectedScreenName.Pickers,
     ProtectedScreenName.Spacers,
     ProtectedScreenName.Texts,
   ];

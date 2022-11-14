@@ -15,6 +15,7 @@ export enum ProtectedScreenName {
   List = 'List',
   Loader = 'Loader',
   Modals = 'Modals',
+  Pickers = 'Pickers',
   Spacers = 'Spacers',
   Texts = 'Texts',
 }

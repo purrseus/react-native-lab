@@ -1,6 +1,5 @@
 export { default as ActionSheet } from './BottomSheet/ActionSheet';
 export { default as BottomSheet } from './BottomSheet/BottomSheet';
-export { default as ImagePicker } from './BottomSheet/ImagePicker';
 export { default as Field } from './Form/Field';
 export { default as Icon } from './Image/Icon';
 export { default as Image } from './Image/Image';
@@ -15,6 +14,8 @@ export { default as OverlayLoading } from './Loader/OverlayLoading';
 export { default as RefreshControl } from './Loader/RefreshControl';
 export { default as Alert } from './Modal/Alert';
 export { default as Modal } from './Modal/Modal';
+export { default as ImagePicker } from './Picker/ImagePicker';
+export { default as DateTimePicker } from './Picker/DateTimePicker';
 export { default as Button } from './Pressable/Button';
 export { default as Checkbox } from './Pressable/Checkbox';
 export { default as PressArea } from './Pressable/PressArea';

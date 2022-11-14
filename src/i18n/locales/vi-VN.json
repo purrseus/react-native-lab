@@ -1,6 +1,7 @@
 {
   "common": {
-    "cancel": "Hủy"
+    "cancel": "Hủy",
+    "confirm": "Xác nhận"
   },
   "permission": {
     "camera": "Máy Ảnh",
