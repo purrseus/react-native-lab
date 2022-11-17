@@ -1,4 +1,3 @@
-import { fonts } from '@assets';
 import { CommonFieldProps, StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { createField } from '@utilities';
@@ -45,7 +44,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     label: {
       fontSize: 14,
-      fontFamily: fonts.quicksandBold,
+      fontWeight: 'bold',
       marginBottom: 4,
     },
     errorText: {

@@ -1,4 +1,4 @@
-import { fonts, icons } from '@assets';
+import { icons } from '@assets';
 import { Icon, Row, Spacer, Text, PressArea } from '@components/core';
 import {
   DEFAULT_HEADER_ICON_SIZE,
@@ -100,7 +100,7 @@ const createStyles = ({ create, edgeInsets, colors }: StyleCallbackParams) =>
       justifyContent: 'flex-end',
     },
     title: {
-      fontFamily: fonts.quicksandBold,
+      fontWeight: 'bold',
       fontSize: 20,
     },
   });

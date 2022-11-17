@@ -1,4 +1,3 @@
-import { fonts } from '@assets';
 import { Image, Row, Spacer, Text } from '@components/core';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
@@ -39,7 +38,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
       borderRadius: 16,
     },
     text: {
-      fontFamily: fonts.quicksandBold,
+      fontWeight: 'bold',
     },
   });
 

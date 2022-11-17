@@ -1,4 +1,4 @@
-import { fonts, icons } from '@assets';
+import { icons } from '@assets';
 import { BottomSpacer, Icon, Row, Spacer, Text, PressArea } from '@components/core';
 import { HORIZONTAL_SAFETY_EDGES, TAB_BAR_HEIGHT } from '@core/constants';
 import { TabScreenName } from '@core/enums';
@@ -153,7 +153,7 @@ const createStyles = ({ colors, create }: StyleCallbackParams) =>
       color: colors.tabBlur,
     },
     focusedLabel: {
-      fontFamily: fonts.quicksandBold,
+      fontWeight: 'bold',
     },
   });
 

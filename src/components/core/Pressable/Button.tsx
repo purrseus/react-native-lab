@@ -1,4 +1,3 @@
-import { fonts } from '@assets';
 import { DEFAULT_ICON_SIZE, HORIZONTAL_GRADIENT_COORDINATES } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
@@ -167,7 +166,7 @@ const createStyles =
       },
       title: (titleSize: number) => ({
         fontSize: titleSize,
-        fontFamily: fonts.quicksandBold,
+        fontWeight: 'bold',
         maxWidth: '80%',
       }),
       icon: (direction: 'left' | 'right', iconSpacing: number, tintColor: ColorValue) => ({
