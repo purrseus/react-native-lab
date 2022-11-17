@@ -1,9 +1,7 @@
 /* eslint-disable react-native/split-platform-components */
-import { fonts } from '@assets';
-import { ONE_SECOND } from '@core/constants';
 import { ActionSheetMethods, StyleCallbackParams } from '@core/interfaces';
 import { useAppSelector, useColor, useStyle, useThrottle } from '@hooks';
-import { alphaHexColor, compareMemo, isIos, wait } from '@utilities';
+import { alphaHexColor, compareMemo, duration, isIos, wait } from '@utilities';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
 import {
   ActionSheetIOS,
@@ -24,7 +22,8 @@ export interface ActionSheetProps extends ActionSheetIOSOptions {
   onSelect: (buttonIndex: number) => void;
 }
 
-const ACTION_SHEET_ANIMATION_IN_TIMING = ONE_SECOND / 3;
+const HALF_SECONDS = duration({ seconds: 0.5 });
+const ACTION_SHEET_ANIMATION_IN_TIMING = duration({ seconds: 0.33 });
 const ACTION_SHEET_ANIMATION_OUT_TIMING = ACTION_SHEET_ANIMATION_IN_TIMING * 2;
 const DEFAULT_MARGIN = 8;
 
@@ -62,7 +61,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
         setIsVisible(true);
       },
       [cancelButtonIndex, colorScheme, colors.primaryText, message, onSelect, props, theme, title],
-      ONE_SECOND / 2,
+      HALF_SECONDS,
     );
 
     const onHide = useThrottle(
@@ -77,7 +76,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
         }
       },
       [cancelButtonIndex, onSelect],
-      ONE_SECOND / 2,
+      HALF_SECONDS,
     );
 
     const handleSelectOption = useCallback(
@@ -217,7 +216,7 @@ const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackP
       color: alphaHexColor(colors.darkGray, 0.8),
     },
     boldedTitle: {
-      fontFamily: fonts.quicksandBold,
+      fontWeight: 'bold',
     },
     option: {
       alignItems: 'center',
@@ -233,7 +232,7 @@ const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackP
       color: colors.red,
     },
     cancelTitle: {
-      fontFamily: fonts.quicksandBold,
+      fontWeight: 'bold',
     },
     divider: {
       color: alphaHexColor(colors.darkGray, 0.5),

@@ -1,4 +1,3 @@
-import { fonts } from '@assets';
 import { DEFAULT_FONT_SIZE, DEFAULT_HIT_SLOP, MIN_HEIGHT_INPUT } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
@@ -32,7 +31,6 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
       color: colors.primaryText,
       fontSize: DEFAULT_FONT_SIZE,
       height: MIN_HEIGHT_INPUT,
-      fontFamily: fonts.quicksandMedium,
     },
     placeholder: {
       color: colors.darkGray,

@@ -1,4 +1,3 @@
-import { fonts } from '@assets';
 import { DEFAULT_FONT_SIZE } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
@@ -29,7 +28,6 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
     text: {
       fontSize: DEFAULT_FONT_SIZE,
       color: colors.primaryText,
-      fontFamily: fonts.quicksandMedium,
     },
     pressArea: {
       flexWrap: 'wrap',

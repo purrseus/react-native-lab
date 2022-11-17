@@ -1,18 +1,3 @@
-type FontName = 'Quicksand';
-type FontStyle = 'Light' | 'Regular' | 'Medium' | 'SemiBold' | 'Bold';
-
-type Font<Name extends FontName, Style extends FontStyle> = Readonly<
-  Record<Uncapitalize<`${Name}${Style}`>, `${Name}-${Style}`>
->;
-
-export const fonts: Font<FontName, FontStyle> = {
-  quicksandLight: 'Quicksand-Light',
-  quicksandRegular: 'Quicksand-Regular',
-  quicksandMedium: 'Quicksand-Medium',
-  quicksandSemiBold: 'Quicksand-SemiBold',
-  quicksandBold: 'Quicksand-Bold',
-};
-
 export const icons = {
   bottomTab: {
     home: require('@assets/icons/tabs/home/home.png'),
