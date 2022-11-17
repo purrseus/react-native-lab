@@ -1,5 +1,4 @@
 /* eslint-disable react-native/split-platform-components */
-import { fonts } from '@assets';
 import { ActionSheetMethods, StyleCallbackParams } from '@core/interfaces';
 import { useAppSelector, useColor, useStyle, useThrottle } from '@hooks';
 import { alphaHexColor, compareMemo, duration, isIos, wait } from '@utilities';
@@ -217,7 +216,7 @@ const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackP
       color: alphaHexColor(colors.darkGray, 0.8),
     },
     boldedTitle: {
-      fontFamily: fonts.quicksandBold,
+      fontWeight: 'bold',
     },
     option: {
       alignItems: 'center',
@@ -233,7 +232,7 @@ const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackP
       color: colors.red,
     },
     cancelTitle: {
-      fontFamily: fonts.quicksandBold,
+      fontWeight: 'bold',
     },
     divider: {
       color: alphaHexColor(colors.darkGray, 0.5),

@@ -1,4 +1,3 @@
-import { fonts } from '@assets';
 import { PressArea, Text } from '@components/core';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
@@ -29,7 +28,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
     },
     itemText: {
       fontSize: 16,
-      fontFamily: fonts.quicksandBold,
+      fontWeight: 'bold',
     },
   });
 

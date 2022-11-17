@@ -9,18 +9,13 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* ReactNativeLabTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ReactNativeLabTests.m */; };
 		0C80B921A6F3F58F76C31292 /* libPods-ReactNativeLab.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-ReactNativeLab.a */; };
-		0E16DDEADCFD4782A0633773 /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4801301B66A94C74AD19C7BF /* Quicksand-SemiBold.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		17505EC034694C5A82FAF144 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 752F8E9C5D1A4CE996F41CB5 /* Quicksand-Medium.ttf */; };
-		52F0B5D766BE44E4A7713B7A /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F31FF30334BC452791DF8E4F /* Quicksand-Regular.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-ReactNativeLab-ReactNativeLabTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-ReactNativeLab-ReactNativeLabTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		84125AB6283A355D00F40DFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84125AB8283A355D00F40DFA /* InfoPlist.strings */; };
 		848A5C94287A5B76002D0B4B /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848A5C93287A5B76002D0B4B /* AppCenter-Config.plist */; };
-		A463E960C37D43FB95DEE65F /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA430C92F68848D2A5F33DA1 /* Quicksand-Light.ttf */; };
-		B898DD83584845C7AE67CE2D /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFE3E045F60947BB9B4D6986 /* Quicksand-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,13 +45,11 @@
 		36AC615D5DB1628F0BCE3459 /* Pods-ReactNativeLab.debug (stag).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab.debug (stag).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab/Pods-ReactNativeLab.debug (stag).xcconfig"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-ReactNativeLab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeLab/Pods-ReactNativeLab.debug.xcconfig"; sourceTree = "<group>"; };
 		40913FFDF4ED7B41E1119541 /* Pods-ReactNativeLab-ReactNativeLabTests.debug (prod).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab-ReactNativeLabTests.debug (prod).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab-ReactNativeLabTests/Pods-ReactNativeLab-ReactNativeLabTests.debug (prod).xcconfig"; sourceTree = "<group>"; };
-		4801301B66A94C74AD19C7BF /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-SemiBold.ttf"; path = "../src/assets/fonts/Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
 		4A3D1FF7A78CE55DD6F2E333 /* Pods-ReactNativeLab-ReactNativeLabTests.release (stag).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab-ReactNativeLabTests.release (stag).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab-ReactNativeLabTests/Pods-ReactNativeLab-ReactNativeLabTests.release (stag).xcconfig"; sourceTree = "<group>"; };
 		4CDFD3BD8BFC2F86564B65ED /* Pods-ReactNativeLab-ReactNativeLabTests.release (dev).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab-ReactNativeLabTests.release (dev).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab-ReactNativeLabTests/Pods-ReactNativeLab-ReactNativeLabTests.release (dev).xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-ReactNativeLab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeLab/Pods-ReactNativeLab.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-ReactNativeLab-ReactNativeLabTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab-ReactNativeLabTests.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeLab-ReactNativeLabTests/Pods-ReactNativeLab-ReactNativeLabTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-ReactNativeLab.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeLab.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		752F8E9C5D1A4CE996F41CB5 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Medium.ttf"; path = "../src/assets/fonts/Quicksand-Medium.ttf"; sourceTree = "<group>"; };
 		79611E405E755A8AA2478D1A /* Pods-ReactNativeLab-ReactNativeLabTests.release (prod).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab-ReactNativeLabTests.release (prod).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab-ReactNativeLabTests/Pods-ReactNativeLab-ReactNativeLabTests.release (prod).xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ReactNativeLab/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		838D73B3AE6A6DF385F97E2F /* Pods-ReactNativeLab.release (prod).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab.release (prod).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab/Pods-ReactNativeLab.release (prod).xcconfig"; sourceTree = "<group>"; };
@@ -67,11 +60,8 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-ReactNativeLab-ReactNativeLabTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab-ReactNativeLabTests.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeLab-ReactNativeLabTests/Pods-ReactNativeLab-ReactNativeLabTests.release.xcconfig"; sourceTree = "<group>"; };
 		8C4EC27D06FD47BEC1519DB4 /* Pods-ReactNativeLab-ReactNativeLabTests.debug (stag).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab-ReactNativeLabTests.debug (stag).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab-ReactNativeLabTests/Pods-ReactNativeLab-ReactNativeLabTests.debug (stag).xcconfig"; sourceTree = "<group>"; };
 		ABF6DA09FBDE4897231AF8A9 /* Pods-ReactNativeLab.release (stag).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab.release (stag).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab/Pods-ReactNativeLab.release (stag).xcconfig"; sourceTree = "<group>"; };
-		CA430C92F68848D2A5F33DA1 /* Quicksand-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Light.ttf"; path = "../src/assets/fonts/Quicksand-Light.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EFDA969BD6F3B52BB447C5D5 /* Pods-ReactNativeLab.release (dev).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeLab.release (dev).xcconfig"; path = "Target Support Files/Pods-ReactNativeLab/Pods-ReactNativeLab.release (dev).xcconfig"; sourceTree = "<group>"; };
-		EFE3E045F60947BB9B4D6986 /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Bold.ttf"; path = "../src/assets/fonts/Quicksand-Bold.ttf"; sourceTree = "<group>"; };
-		F31FF30334BC452791DF8E4F /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Regular.ttf"; path = "../src/assets/fonts/Quicksand-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,11 +128,6 @@
 		311EFD61C85A455EBD00C5A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				EFE3E045F60947BB9B4D6986 /* Quicksand-Bold.ttf */,
-				CA430C92F68848D2A5F33DA1 /* Quicksand-Light.ttf */,
-				752F8E9C5D1A4CE996F41CB5 /* Quicksand-Medium.ttf */,
-				F31FF30334BC452791DF8E4F /* Quicksand-Regular.ttf */,
-				4801301B66A94C74AD19C7BF /* Quicksand-SemiBold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -303,11 +288,6 @@
 				84125AB6283A355D00F40DFA /* InfoPlist.strings in Resources */,
 				848A5C94287A5B76002D0B4B /* AppCenter-Config.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				B898DD83584845C7AE67CE2D /* Quicksand-Bold.ttf in Resources */,
-				A463E960C37D43FB95DEE65F /* Quicksand-Light.ttf in Resources */,
-				17505EC034694C5A82FAF144 /* Quicksand-Medium.ttf in Resources */,
-				52F0B5D766BE44E4A7713B7A /* Quicksand-Regular.ttf in Resources */,
-				0E16DDEADCFD4782A0633773 /* Quicksand-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
