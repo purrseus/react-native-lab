@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs';
-import { execScriptSync, loadEnvFile } from './utils.mjs';
+import { execScriptSync, loadEnvFile, getArguments } from './utils.mjs';
 
 const setupCodePush = () => {
   const { ANDROID_APP_SECRET_KEY, IOS_APP_SECRET_KEY } = loadEnvFile('development');
@@ -22,6 +22,7 @@ const setupCodePush = () => {
 };
 
 (() => {
-  setupCodePush();
-  execScriptSync('git init && yarn prepare && yarn postinstall');
+  const [arg] = getArguments();
+  if (arg === 'codepush') setupCodePush();
+  execScriptSync('yarn && git init');
 })();
