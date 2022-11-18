@@ -23,5 +23,5 @@ const setupCodePush = () => {
 
 (() => {
   setupCodePush();
-  execScriptSync('yarn prepare && yarn postinstall');
+  execScriptSync('git init && yarn prepare && yarn postinstall');
 })();
