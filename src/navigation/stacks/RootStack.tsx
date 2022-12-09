@@ -52,7 +52,8 @@ const ProtectedScreens = (
 const RootNavigator = () => {
   const styles = useStyle(createStyles);
   const { accessToken, refreshToken } = useAppSelector(state => state.auth);
-  const isAuthenticated = !!accessToken?.length && !!refreshToken?.length;
+  const isAuthenticated = accessToken?.isNotEmpty && refreshToken?.isNotEmpty;
+
   return (
     <NativeStack.Navigator
       screenOptions={{ ...stackScreenOptions, contentStyle: styles.screenStyle }}
