@@ -4,6 +4,7 @@ import { DevSettings, UIManager } from 'react-native';
 import CodePush from 'react-native-code-push';
 import LayoutProvider from './LayoutProvider';
 import NavigationProvider from './NavigationProvider';
+import QueryProvider from './QueryProvider';
 import StoreProvider from './StoreProvider';
 
 //#region bootstrap
@@ -27,9 +28,11 @@ if (__DEV__) {
 
 const AppProvider = ({ children }: PropsWithChildren) => (
   <StoreProvider>
-    <NavigationProvider>
-      <LayoutProvider>{children}</LayoutProvider>
-    </NavigationProvider>
+    <QueryProvider>
+      <NavigationProvider>
+        <LayoutProvider>{children}</LayoutProvider>
+      </NavigationProvider>
+    </QueryProvider>
   </StoreProvider>
 );
 

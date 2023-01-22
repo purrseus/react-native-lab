@@ -4,14 +4,14 @@ import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
 import { createShadow } from '@utilities';
 import { View } from 'react-native';
-import { Data } from '../containers/useListContainer';
+import { Photos } from '../services/adapters';
 
-const Item = ({ thumbnailUrl, ...props }: Data) => {
+const Item = ({ thumbnailUrl, ...props }: Photos[number]) => {
   const styles = useStyle(createStyles);
 
   return (
     <Row style={styles.container}>
-      <Image source={{ uri: thumbnailUrl }} style={styles.image} />
+      {!!thumbnailUrl && <Image source={{ uri: thumbnailUrl }} style={styles.image} />}
 
       <Spacer w={16} />
 

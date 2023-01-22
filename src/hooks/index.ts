@@ -1,4 +1,3 @@
-export { default as useApi } from './useApi';
 export { default as useAppDispatch } from './useAppDispatch';
 export { default as useAppFocus } from './useAppFocus';
 export { default as useAppForm } from './useAppForm';
@@ -12,7 +11,6 @@ export { default as useColor } from './useColor';
 export { default as useCountdownTimer } from './useCountdownTimer';
 export { default as useDebounce } from './useDebounce';
 export { default as useFormat } from './useFormat';
-export { default as useInfiniteScroll } from './useInfiniteScroll';
 export { default as useKeyboard } from './useKeyboard';
 export { default as useLayout } from './useLayout';
 export { default as useMeasure } from './useMeasure';

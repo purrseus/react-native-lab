@@ -58,12 +58,12 @@ const _List = compareMemo<FlatList, ListProps>(
           scrollEventThrottle={16}
           automaticallyAdjustContentInsets={false}
           automaticallyAdjustsScrollIndicatorInsets={false}
+          keyExtractor={handleKeyExtractor}
           {...props}
           {...(!!onRefresh && {
             refreshControl: <RefreshControl {...{ refreshing, onRefresh }} />,
           })}
           ref={ref}
-          keyExtractor={handleKeyExtractor}
           ListFooterComponent={
             <>
               {ListFooterComponent}
