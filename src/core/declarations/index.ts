@@ -11,13 +11,20 @@ global.isIos = () => Platform.OS === 'ios';
 
 global.referenceTypeFormatter = (value, space = 2) => JSON.stringify(value, null, space);
 
-global.logger = (message: any) => {
-  if (!__DEV__) return;
-  const platformName = Platform.select({ android: 'ANDROID', ios: 'IOS' });
-  const dateTime = dayjs(new Date()).locale(LANGUAGE_MAP['en-US']).format('DD/MM HH:mm:ss:SSS');
-  const formattedMessage = typeof message === 'object' ? referenceTypeFormatter(message) : message;
+global.logger = {
+  log: (...args) => {
+    if (!__DEV__) return;
+    const [message, ...optionalParams] = args;
+    const combinedMessage = optionalParams.isEmpty ? message : args;
+    const platformName = Platform.select({ android: 'ANDROID', ios: 'IOS' });
+    const dateTime = dayjs(new Date()).locale(LANGUAGE_MAP['en-US']).format('DD/MM HH:mm:ss:SSS');
+    const formattedMessage =
+      typeof combinedMessage === 'object'
+        ? referenceTypeFormatter(combinedMessage)
+        : combinedMessage;
 
-  console.log(`${platformName} [${dateTime}]`, formattedMessage);
+    console.log(`${platformName} [${dateTime}]`, formattedMessage);
+  },
 };
 
 global.duration = ({ days = 0, hours = 0, minutes = 0, seconds = 0, milliseconds = 0 }) => {

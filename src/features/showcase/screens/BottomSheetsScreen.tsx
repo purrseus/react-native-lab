@@ -35,7 +35,7 @@ const BottomSheetsScreen = withHook(
         <BottomSheet ref={bottomSheetRef} index={-1} snapPoints={bottomSheetSnapPoints}>
           <Text>This is a BottomSheet</Text>
         </BottomSheet>
-        <ActionSheet ref={actionSheetRef} options={actionSheetOptions} onSelect={logger} />
+        <ActionSheet ref={actionSheetRef} options={actionSheetOptions} onSelect={logger.log} />
       </>
     );
   },

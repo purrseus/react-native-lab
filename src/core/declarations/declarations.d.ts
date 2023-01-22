@@ -21,11 +21,7 @@ declare global {
     space?: Parameters<typeof JSON.stringify>[2],
   ): ReturnType<typeof JSON.stringify>;
 
-  /**
-   * Prints to `stdout` with newline.
-   * @param message Everything you want to prints.
-   */
-  function logger(message: any): void;
+  declare var logger: Pick<typeof console, 'log'>;
 
   /**
    * Generate duration in milliseconds.
