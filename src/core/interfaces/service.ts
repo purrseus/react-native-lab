@@ -3,7 +3,3 @@ export interface File {
   name: string;
   type: string;
 }
-
-export interface RefreshTokenResponse {
-  accessToken?: string;
-}

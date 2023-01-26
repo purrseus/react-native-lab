@@ -1,10 +1,11 @@
+import { useCommonStore } from '@stores';
 import { darkTheme, lightTheme } from '@themes';
+import isEqual from 'react-fast-compare';
 import { useColorScheme } from 'react-native';
-import useAppSelector from './useAppSelector';
 
 const useColor = () => {
   const colorScheme = useColorScheme();
-  const { theme } = useAppSelector(state => state.common);
+  const theme = useCommonStore(state => state.theme, isEqual);
   return (theme === 'auto' ? colorScheme : theme) === 'dark' ? darkTheme : lightTheme;
 };
 

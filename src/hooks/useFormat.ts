@@ -1,8 +1,9 @@
+import { useCommonStore } from '@stores';
 import { _formatDateTime, _formatNumber } from '@utilities';
-import useAppSelector from './useAppSelector';
+import isEqual from 'react-fast-compare';
 
 const useFormat = () => {
-  useAppSelector(state => state.common.language);
+  useCommonStore(state => state.language, isEqual);
 
   return { dateTimeFormatter: _formatDateTime, numberFormatter: _formatNumber };
 };

@@ -15,11 +15,13 @@ import {
   SpacersScreen,
   TextsScreen,
 } from '@features/showcase/screens';
-import { useAppSelector, useStyle } from '@hooks';
+import { useStyle } from '@hooks';
 import { stackScreenOptions } from '@navigators/options';
 import createStyles from '@navigators/styles';
 import BottomTabBar from '@navigators/tabs/BottomTabBar';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useAuthStore } from '@stores';
+import isEqual from 'react-fast-compare';
 
 const NativeStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -51,7 +53,10 @@ const ProtectedScreens = (
 
 const RootNavigator = () => {
   const styles = useStyle(createStyles);
-  const { accessToken, refreshToken } = useAppSelector(state => state.auth);
+  const [accessToken, refreshToken] = useAuthStore(
+    state => [state.accessToken, state.refreshToken],
+    isEqual,
+  );
   const isAuthenticated = accessToken?.isNotEmpty && refreshToken?.isNotEmpty;
 
   return (

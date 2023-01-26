@@ -1,8 +1,10 @@
 /* eslint-disable react-native/split-platform-components */
 import { ActionSheetMethods, StyleCallbackParams } from '@core/interfaces';
-import { useAppSelector, useColor, useStyle, useThrottle } from '@hooks';
+import { useColor, useStyle, useThrottle } from '@hooks';
+import { useCommonStore } from '@stores';
 import { alphaHexColor, compareMemo } from '@utilities';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
+import isEqual from 'react-fast-compare';
 import {
   ActionSheetIOS,
   ActionSheetIOSOptions,
@@ -32,7 +34,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
     const isIOS = isIos();
     const colors = useColor();
     const styles = useStyle(createStyles);
-    const { theme } = useAppSelector(state => state.common);
+    const theme = useCommonStore(state => state.theme, isEqual);
     const colorScheme = useColorScheme();
     const [isVisible, setIsVisible] = useState(false);
 
