@@ -1,4 +1,4 @@
-export enum UnprotectedScreenName {
+export enum PublicScreenName {
   Login = 'Login',
   Register = 'Register',
 }

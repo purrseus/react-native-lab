@@ -1,9 +1,9 @@
-import { ProtectedScreenName, TabScreenName, UnprotectedScreenName } from '@core/enums';
+import { ProtectedScreenName, TabScreenName, PublicScreenName } from '@core/enums';
 import { NavigatorScreenParams } from '@react-navigation/native';
 
-export type UnprotectedParamList = {
-  [UnprotectedScreenName.Login]: undefined;
-  [UnprotectedScreenName.Register]: undefined;
+export type PublicParamList = {
+  [PublicScreenName.Login]: undefined;
+  [PublicScreenName.Register]: undefined;
 };
 
 export type BottomTabParamList = {
@@ -30,4 +30,4 @@ export type ProtectedParamList = {
   [ProtectedScreenName.Texts]: undefined;
 };
 
-export type RootStackParamList = UnprotectedParamList & ProtectedParamList;
+export type RootStackParamList = PublicParamList & ProtectedParamList;

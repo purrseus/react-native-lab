@@ -1,9 +1,9 @@
-import { UnprotectedScreenName } from '@core/enums';
-import { UnprotectedScreenProps } from '@core/types';
+import { PublicScreenName } from '@core/enums';
+import { PublicScreenProps } from '@core/types';
 import { useAppDispatch } from '@hooks';
 import { authActions } from '@store/slices/auth';
 
-const useLoginContainer = ({ navigation }: UnprotectedScreenProps<UnprotectedScreenName.Login>) => {
+const useLoginContainer = ({ navigation }: PublicScreenProps<PublicScreenName.Login>) => {
   const dispatch = useAppDispatch();
 
   const handleLogin = () => {
@@ -15,7 +15,7 @@ const useLoginContainer = ({ navigation }: UnprotectedScreenProps<UnprotectedScr
     );
   };
 
-  const navigateToRegister = () => navigation.navigate(UnprotectedScreenName.Register);
+  const navigateToRegister = () => navigation.navigate(PublicScreenName.Register);
 
   return { handleLogin, navigateToRegister };
 };
