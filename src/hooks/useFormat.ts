@@ -5,7 +5,7 @@ import isEqual from 'react-fast-compare';
 const useFormat = () => {
   useCommonStore(state => state.language, isEqual);
 
-  return { dateTimeFormatter: _formatDateTime, numberFormatter: _formatNumber };
+  return { formatDateTime: _formatDateTime, formatNumber: _formatNumber };
 };
 
 export default useFormat;

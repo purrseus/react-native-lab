@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { CommonSize } from '@core/types';
-import { colors } from '@themes';
+import { color } from '@themes';
 import { ShadowStyleIOS, ViewStyle } from 'react-native';
 
 //#region shadowGenerator
@@ -18,7 +18,7 @@ const MAX_SHADOW_RADIUS = 16;
 const SHADOW_OPACITY_PER_DEPTH = (MAX_SHADOW_OPACITY * 100 - MIN_SHADOW_OPACITY * 100) / MAX_DEPTH;
 const SHADOW_RADIUS_PER_DEPTH = MAX_SHADOW_RADIUS / MAX_DEPTH;
 
-export const shadowGenerator = (depth: Depth<typeof MAX_DEPTH>, shadowColor = colors.black) => ({
+export const shadowGenerator = (depth: Depth<typeof MAX_DEPTH>, shadowColor = color.black) => ({
   shadowColor,
   shadowOffset: {
     width: 0,

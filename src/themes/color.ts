@@ -1,4 +1,4 @@
-export const colors = {
+export const color = {
   transparent: 'transparent',
   black: '#000000',
   white: '#ffffff',
@@ -13,7 +13,7 @@ export const colors = {
 } as const;
 
 export const lightTheme = {
-  ...colors,
+  ...color,
   tabBlur: '#888888',
   tabBarBackground: '#FFFFFF',
   bottomSheetBackground: '#FFFFFF',
@@ -29,7 +29,7 @@ export const lightTheme = {
 } as const;
 
 export const darkTheme = {
-  ...colors,
+  ...color,
   tabBlur: '#888888',
   tabBarBackground: '#111111',
   bottomSheetBackground: '#1A1A1A',

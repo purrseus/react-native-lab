@@ -4,7 +4,7 @@ import { EdgeInsets } from 'react-native-safe-area-context';
 
 export interface StyleCallbackParams {
   dimensions: ScaledSize;
-  colors: typeof darkTheme | typeof lightTheme;
+  color: typeof darkTheme | typeof lightTheme;
   edgeInsets: EdgeInsets;
   create: typeof StyleSheet.create;
 }

@@ -24,6 +24,7 @@ module.exports = {
         'react-native/no-inline-styles': 'warn',
         'react-native/no-color-literals': 'warn',
         'react-native/no-single-element-style-arrays': 'warn',
+        'max-lines': ['error', { skipBlankLines: true, skipComments: true, max: 500 }],
       },
     },
   ],

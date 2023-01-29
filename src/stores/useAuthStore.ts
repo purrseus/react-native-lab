@@ -1,7 +1,4 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { immer } from 'zustand/middleware/immer';
-import createPersistOptions from './persistStorage';
+import { createPersistenceStore } from '@utilities/store';
 
 interface Tokens {
   accessToken: string | null;
@@ -13,24 +10,19 @@ interface AuthState extends Tokens {
   clearTokens: () => void;
 }
 
-const useAuthStore = create<AuthState>()(
-  persist(
-    immer(set => ({
-      accessToken: null,
-      refreshToken: null,
-      setTokens: ({ accessToken, refreshToken }) =>
-        set(state => {
-          if (accessToken) state.accessToken = accessToken;
-          if (refreshToken) state.refreshToken = refreshToken;
-        }),
-      clearTokens: () =>
-        set(state => {
-          state.accessToken = null;
-          state.refreshToken = null;
-        }),
-    })),
-    createPersistOptions<AuthState>('auth'),
-  ),
-);
+const useAuthStore = createPersistenceStore<AuthState>('auth', set => ({
+  accessToken: null,
+  refreshToken: null,
+  setTokens: ({ accessToken, refreshToken }) =>
+    set(state => {
+      if (accessToken) state.accessToken = accessToken;
+      if (refreshToken) state.refreshToken = refreshToken;
+    }),
+  clearTokens: () =>
+    set(state => {
+      state.accessToken = null;
+      state.refreshToken = null;
+    }),
+}));
 
 export default useAuthStore;

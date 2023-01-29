@@ -38,13 +38,13 @@ const IconTextInput = compareMemo<RNTextInput, IconTextInputProps>(
   }),
 );
 
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, color }: StyleCallbackParams) =>
   create({
     container: {
       alignItems: 'center',
       paddingHorizontal: 8,
       paddingVertical: PADDING_VERTICAL_INPUT,
-      backgroundColor: colors.lightGray,
+      backgroundColor: color.lightGray,
       borderRadius: 12,
     },
   });

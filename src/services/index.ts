@@ -27,19 +27,12 @@ const handlePromiseQueue = async (accessToken?: string, error?: any) => {
 };
 
 const handleRefreshToken = async () => {
-  try {
-    const response = await axios.post<AxiosResponse<{ accessToken?: string }>>(
-      `/auth/refresh-token`,
-      {
-        refreshToken: useAuthStore.getState().refreshToken,
-      },
-    );
+  const response = await axios.post<AxiosResponse<{ accessToken?: string }>>(
+    `${Config.API_URL}/auth/refresh-token`,
+    { refreshToken: useAuthStore.getState().refreshToken },
+  );
 
-    if (!response.data.accessToken) throw new Error('');
-    return response.data.accessToken;
-  } catch (error) {
-    useAuthStore.getState().clearTokens();
-  }
+  return response.data.accessToken;
 };
 
 const axiosInstance = axios.create({
@@ -71,15 +64,11 @@ axiosInstance.interceptors.response.use(
 
     // Use accessToken from global state if originalRequest.headers.Authorization is undefined
     if (!originalRequest.headers.Authorization) {
-      try {
-        const accessToken = useAuthStore.getState().accessToken;
-        if (accessToken) {
-          setDefaultAccessToken(accessToken);
-          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-          return axiosInstance(originalRequest);
-        }
-      } catch (error) {
-        return Promise.reject(error);
+      const accessToken = useAuthStore.getState().accessToken;
+      if (accessToken) {
+        setDefaultAccessToken(accessToken);
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+        return axiosInstance(originalRequest);
       }
     }
 
@@ -110,6 +99,7 @@ axiosInstance.interceptors.response.use(
 
       return axiosInstance(originalRequest).finally(() => handlePromiseQueue(accessToken));
     } catch (error) {
+      useAuthStore.getState().clearTokens();
       setDefaultAccessToken(null);
       handlePromiseQueue(undefined, error);
 

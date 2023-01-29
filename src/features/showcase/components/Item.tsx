@@ -22,15 +22,15 @@ const Item = ({ thumbnailUrl, ...props }: Photos[number]) => {
   );
 };
 
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, color }: StyleCallbackParams) =>
   create({
     container: {
       padding: 16,
       marginVertical: 8,
       marginHorizontal: 16,
       borderRadius: 16,
-      backgroundColor: colors.white,
-      ...createShadow(colors.shadow, [0, 0], 0.1, 8, 16),
+      backgroundColor: color.white,
+      ...createShadow(color.shadow, [0, 0], 0.1, 8, 16),
     },
     image: {
       width: 100,

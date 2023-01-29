@@ -23,12 +23,12 @@ const OverlayLoading = compareMemo<OverlayLoadingMethods, unknown>(
   }),
 );
 
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, color }: StyleCallbackParams) =>
   create({
     activityIndicatorWrapper: {
       alignSelf: 'center',
       padding: 20,
-      backgroundColor: alphaHexColor(colors.black, 0.6),
+      backgroundColor: alphaHexColor(color.black, 0.6),
       borderRadius: 12,
     },
   });

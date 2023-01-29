@@ -1,4 +1,4 @@
-import { MMKVStorage } from '@stores/persistStorage';
+import { MMKVStorage } from '@utilities/store';
 import { PropsWithChildren } from 'react';
 import { DevSettings, UIManager } from 'react-native';
 import CodePush from 'react-native-code-push';

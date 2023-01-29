@@ -5,7 +5,7 @@ import { TabScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useAppTranslation, useKeyboard, useStyle } from '@hooks';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { colors as Colors, globalStyles } from '@themes';
+import { color as defaultColor, globalStyles } from '@themes';
 import { createShadow } from '@utilities';
 import { useMemo } from 'react';
 import { ColorValue, ImageRequireSource, StyleSheet } from 'react-native';
@@ -31,25 +31,25 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
       [TabScreenName.Home]: {
         icon: icons.bottomTab.home,
         focusedIcon: icons.bottomTab.homeFocused,
-        focusedColor: Colors.purple,
+        focusedColor: defaultColor.purple,
         label: t('home'),
       },
       [TabScreenName.Messages]: {
         icon: icons.bottomTab.message,
         focusedIcon: icons.bottomTab.messageFocused,
-        focusedColor: Colors.orange,
+        focusedColor: defaultColor.orange,
         label: t('messages'),
       },
       [TabScreenName.Notification]: {
         icon: icons.bottomTab.notification,
         focusedIcon: icons.bottomTab.notificationFocused,
-        focusedColor: Colors.red,
+        focusedColor: defaultColor.red,
         label: t('notification'),
       },
       [TabScreenName.Profile]: {
         icon: icons.bottomTab.profile,
         focusedIcon: icons.bottomTab.profileFocused,
-        focusedColor: Colors.blue,
+        focusedColor: defaultColor.blue,
         label: t('profile'),
       },
     }),
@@ -130,15 +130,15 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
   );
 };
 
-const createStyles = ({ colors, create }: StyleCallbackParams) =>
+const createStyles = ({ color, create }: StyleCallbackParams) =>
   create({
     rootContainer: {
       ...StyleSheet.absoluteFillObject,
       top: undefined,
-      ...createShadow(colors.shadow, [0, 0], 0.1, 10, 20),
+      ...createShadow(color.shadow, [0, 0], 0.1, 10, 20),
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
-      backgroundColor: colors.tabBarBackground,
+      backgroundColor: color.tabBarBackground,
     },
     container: {
       height: TAB_BAR_HEIGHT,
@@ -146,11 +146,11 @@ const createStyles = ({ colors, create }: StyleCallbackParams) =>
       borderTopRightRadius: 20,
     },
     icon: {
-      tintColor: colors.tabBlur,
+      tintColor: color.tabBlur,
     },
     label: {
       fontSize: 12,
-      color: colors.tabBlur,
+      color: color.tabBlur,
     },
     focusedLabel: {
       fontWeight: 'bold',

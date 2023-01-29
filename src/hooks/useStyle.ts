@@ -3,7 +3,7 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { useMemo } from 'react';
 import { StyleSheet, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import useColor from './useColor';
+import useTheme from './useTheme';
 
 export type StyleCallback = (
   params: StyleCallbackParams,
@@ -11,18 +11,18 @@ export type StyleCallback = (
 
 const useStyle = <T extends StyleCallback>(createStyles: T): ReturnType<T> => {
   const dimensions = useWindowDimensions();
-  const colors = useColor();
+  const { color } = useTheme();
   const edgeInsets = useSafeAreaInsets();
 
   return useMemo(
     () =>
       createStyles({
         dimensions,
-        colors,
+        color,
         edgeInsets,
         create: StyleSheet.create,
       }) as ReturnType<T>,
-    [dimensions, edgeInsets, colors],
+    [dimensions, edgeInsets, color],
   );
 };
 

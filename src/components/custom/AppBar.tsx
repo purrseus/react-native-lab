@@ -73,14 +73,14 @@ const AppBar = compareMemo<AppBarProps>(
   },
 );
 
-const createStyles = ({ create, edgeInsets, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, edgeInsets, color }: StyleCallbackParams) =>
   create({
     rootContainer: {
-      backgroundColor: colors.appBarBackground,
+      backgroundColor: color.appBarBackground,
       paddingTop: edgeInsets.top || StatusBar.currentHeight || 0,
       paddingLeft: edgeInsets.left,
       paddingRight: edgeInsets.right,
-      ...createShadow(colors.shadow, [0, 4], 0.1, 8, 16),
+      ...createShadow(color.shadow, [0, 4], 0.1, 8, 16),
     },
     safeAreaContainer: {
       height: APP_BAR_HEIGHT,

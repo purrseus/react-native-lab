@@ -11,15 +11,15 @@ const appCenterAppName = {
   '🍎 iOS': '<Your_iOS_app_name>',
 };
 
-const platformName = {
-  android: '🤖 Android',
-  ios: '🍎 iOS',
-};
-
 const gitBranches = {
   Development: 'develop',
   Staging: 'staging',
   Production: 'main',
+};
+
+const platformName = {
+  android: '🤖 Android',
+  ios: '🍎 iOS',
 };
 
 export const platformBuildTypes = {
@@ -85,7 +85,7 @@ export const commands = {
   openXcode: () => `xed -b ios`,
 
   codePush: (os, env, version) =>
-    `appcenter codepush release-react -a ${APP_CENTER_OWNER_NAME}/${appCenterAppName[os]} -d ${env} -t ${version}`,
+    `appcenter codepush release-react -a ${APP_CENTER_OWNER_NAME}/${appCenterAppName[os]} -d ${env} -t ${version} -m`,
 };
 
 export const loadEnvFile = envSuffix => {

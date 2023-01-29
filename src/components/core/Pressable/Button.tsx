@@ -126,7 +126,7 @@ const Button = compareMemo<ButtonProps>(
 
 const createStyles =
   (customColor?: ColorValue) =>
-  ({ create, colors }: StyleCallbackParams) =>
+  ({ create, color }: StyleCallbackParams) =>
     create({
       container: (buttonSize: number) => ({
         flexDirection: 'row',
@@ -137,32 +137,32 @@ const createStyles =
         paddingHorizontal: 16,
         height: buttonSize,
       }),
-      gradient: [colors.primary, colors.blue] as ViewStyle,
+      gradient: [color.primary, color.blue] as ViewStyle,
       filled: {
-        backgroundColor: customColor || colors.primary,
+        backgroundColor: customColor || color.primary,
       },
       outlined: {
-        backgroundColor: colors.white,
-        borderColor: customColor || colors.primary,
+        backgroundColor: color.white,
+        borderColor: customColor || color.primary,
         borderWidth: 1,
       },
       tonal: {
-        backgroundColor: customColor || alphaHexColor(colors.primary, 0.2),
+        backgroundColor: customColor || alphaHexColor(color.primary, 0.2),
       },
       disabled: {
-        backgroundColor: colors.lightGray,
+        backgroundColor: color.lightGray,
       },
       filledColor: {
-        color: colors.white,
+        color: color.white,
       },
       outlinedColor: {
-        color: customColor || colors.primary,
+        color: customColor || color.primary,
       },
       tonalColor: {
-        color: customColor || colors.primary,
+        color: customColor || color.primary,
       },
       disabledColor: {
-        color: colors.darkGray,
+        color: color.darkGray,
       },
       title: (titleSize: number) => ({
         fontSize: titleSize,

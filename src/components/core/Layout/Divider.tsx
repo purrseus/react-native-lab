@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { colors } from '@themes';
+import { color as defaultColor } from '@themes';
 import { compareMemo } from '@utilities';
 import { ColorValue, StyleSheet, View, ViewStyle } from 'react-native';
 
@@ -11,7 +11,7 @@ interface DividerProps extends Pick<ViewStyle, DividerPropKeys> {
 }
 
 const Divider = compareMemo<DividerProps>(
-  ({ color = colors.darkGray, height = StyleSheet.hairlineWidth, ...props }) => (
+  ({ color = defaultColor.darkGray, height = StyleSheet.hairlineWidth, ...props }) => (
     <View
       style={{
         borderBottomWidth: height,

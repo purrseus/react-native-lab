@@ -115,7 +115,7 @@ const Switch = compareMemo<SwitchProps>(
   },
 );
 
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, color }: StyleCallbackParams) =>
   create({
     container: {
       width: TRACK_WIDTH,
@@ -129,8 +129,8 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
       borderRadius: TRACK_HEIGHT / 2,
       justifyContent: 'center',
     },
-    trackColor: [colors.primary, colors.switchTrackInactive] as ViewStyle,
-    thumbColor: [colors.white, colors.darkGray] as ViewStyle,
+    trackColor: [color.primary, color.switchTrackInactive] as ViewStyle,
+    thumbColor: [color.white, color.darkGray] as ViewStyle,
     thumbWrapper: {
       padding: 4,
       width: THUMB_SIZE,
@@ -139,7 +139,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
     thumb: {
       ...globalStyles.flexFillCenter,
       borderRadius: 100,
-      ...createShadow(colors.shadow, [0, 4], 0.4, 4, 8),
+      ...createShadow(color.shadow, [0, 4], 0.4, 4, 8),
     },
   });
 

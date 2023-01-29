@@ -1,6 +1,6 @@
 /* eslint-disable react-native/split-platform-components */
 import { ActionSheetMethods, StyleCallbackParams } from '@core/interfaces';
-import { useColor, useStyle, useThrottle } from '@hooks';
+import { useTheme, useStyle, useThrottle } from '@hooks';
 import { useCommonStore } from '@stores';
 import { alphaHexColor, compareMemo } from '@utilities';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
@@ -32,7 +32,7 @@ const DEFAULT_MARGIN = 8;
 const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
   forwardRef(({ onSelect, cancelButtonIndex = 0, tintColor, title, message, ...props }, ref) => {
     const isIOS = isIos();
-    const colors = useColor();
+    const { color } = useTheme();
     const styles = useStyle(createStyles);
     const theme = useCommonStore(state => state.theme, isEqual);
     const colorScheme = useColorScheme();
@@ -63,7 +63,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
 
         setIsVisible(true);
       },
-      [cancelButtonIndex, colorScheme, colors.primaryText, message, onSelect, props, theme, title],
+      [cancelButtonIndex, colorScheme, color.primaryText, message, onSelect, props, theme, title],
       HALF_SECONDS,
     );
 
@@ -199,7 +199,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
   }),
 );
 
-const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackParams) =>
+const createStyles = ({ create, color, edgeInsets, dimensions }: StyleCallbackParams) =>
   create({
     container: {
       alignSelf: 'center',
@@ -209,7 +209,7 @@ const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackP
     },
     optionContainer: {
       borderRadius: 12,
-      backgroundColor: colors.white,
+      backgroundColor: color.white,
     },
     header: {
       paddingVertical: 16,
@@ -217,7 +217,7 @@ const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackP
     },
     headerText: {
       fontSize: 12,
-      color: alphaHexColor(colors.darkGray, 0.8),
+      color: alphaHexColor(color.darkGray, 0.8),
     },
     boldedTitle: {
       fontWeight: 'bold',
@@ -229,17 +229,17 @@ const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackP
     optionTitle: {
       fontSize: 18,
     },
-    optionTitleColor: (color: ColorValue) => ({
-      color,
+    optionTitleColor: (colorValue: ColorValue) => ({
+      color: colorValue,
     }),
     destructiveTitle: {
-      color: colors.red,
+      color: color.red,
     },
     cancelTitle: {
       fontWeight: 'bold',
     },
     divider: {
-      color: alphaHexColor(colors.darkGray, 0.5),
+      color: alphaHexColor(color.darkGray, 0.5),
     },
   });
 

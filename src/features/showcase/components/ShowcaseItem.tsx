@@ -18,11 +18,11 @@ const ShowcaseItem = compareMemo<ShowcaseItemProps>(({ title, onPress }) => {
   );
 });
 
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, color }: StyleCallbackParams) =>
   create({
     item: {
       padding: 16,
-      backgroundColor: colors.backgroundImage,
+      backgroundColor: color.backgroundImage,
       borderRadius: 8,
       alignItems: 'center',
     },

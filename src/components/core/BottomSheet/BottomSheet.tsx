@@ -64,7 +64,7 @@ const BottomSheet = compareMemo<BottomSheetMethods, BottomSheetProps>(
   ),
 );
 
-const createStyles = ({ create, edgeInsets, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, edgeInsets, color }: StyleCallbackParams) =>
   create({
     inset: {
       top: edgeInsets.top,
@@ -76,16 +76,16 @@ const createStyles = ({ create, edgeInsets, colors }: StyleCallbackParams) =>
       alignItems: 'center',
     },
     indicator: {
-      backgroundColor: colors.bottomSheetIndicator,
+      backgroundColor: color.bottomSheetIndicator,
     },
     background: {
-      backgroundColor: colors.bottomSheetBackground,
+      backgroundColor: color.bottomSheetBackground,
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
-      ...createShadow(colors.shadow, [0, 0], 0.1, 8, 16),
+      ...createShadow(color.shadow, [0, 0], 0.1, 8, 16),
     },
     backdrop: {
-      backgroundColor: colors.black,
+      backgroundColor: color.black,
     },
     hidedHandle: {
       display: 'none',

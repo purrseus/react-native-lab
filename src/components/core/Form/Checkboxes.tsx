@@ -67,7 +67,7 @@ const _Checkboxes = createField<unknown, CheckboxesProps>(
   ),
 );
 
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, color }: StyleCallbackParams) =>
   create({
     label: {
       fontSize: 14,
@@ -78,7 +78,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
       flexDirection: 'row',
     },
     errorText: {
-      color: colors.red,
+      color: color.red,
       marginTop: 4,
     },
   });

@@ -4,7 +4,7 @@ import { StackContainer } from '@components/custom';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { colors, globalStyles } from '@themes';
+import { color, globalStyles } from '@themes';
 import { withHook } from '@utilities';
 import { Separator } from '../components';
 import { usePressableContainer } from '../containers';
@@ -45,14 +45,14 @@ const PressableScreen = withHook(usePressableContainer, ({ isEnabled, onPress, i
       <Separator />
 
       {/* Color */}
-      <Button title="Another color" color={colors.red} />
+      <Button title="Another color" color={color.red} />
       <Separator />
       <Button title="Gradient color" gradient />
       <Separator />
       <Button
         title="Another gradient color"
         gradient
-        gradientColors={[colors.purple, colors.blue, colors.red, colors.orange]}
+        gradientColors={[color.purple, color.blue, color.red, color.orange]}
       />
       <Separator />
 

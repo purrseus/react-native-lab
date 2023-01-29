@@ -69,10 +69,10 @@ const DateTimePicker = compareMemo<DateTimePickerMethods, Partial<Props>>(
   }),
 );
 
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, color }: StyleCallbackParams) =>
   create({
     selected: {
-      color: colors.primary,
+      color: color.primary,
     },
   });
 

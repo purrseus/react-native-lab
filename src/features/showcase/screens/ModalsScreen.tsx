@@ -67,10 +67,10 @@ const ModalsScreen = withHook(
   },
 );
 
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, color }: StyleCallbackParams) =>
   create({
     modal: {
-      backgroundColor: colors.white,
+      backgroundColor: color.white,
       padding: 16,
     },
     modalContainer: {

@@ -23,11 +23,11 @@ const Text = compareMemo<TextProps>(({ style, onPress, hitSlop = 8, throttle, ..
   );
 });
 
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, color }: StyleCallbackParams) =>
   create({
     text: {
       fontSize: DEFAULT_FONT_SIZE,
-      color: colors.primaryText,
+      color: color.primaryText,
     },
     pressArea: {
       flexWrap: 'wrap',

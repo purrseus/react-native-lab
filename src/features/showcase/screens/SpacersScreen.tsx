@@ -60,18 +60,18 @@ const SpacersScreen = withHook(
   },
 );
 
-const createStyles = ({ create, colors, dimensions }: StyleCallbackParams) =>
+const createStyles = ({ create, color, dimensions }: StyleCallbackParams) =>
   create({
     container: {
-      backgroundColor: colors.darkGray,
+      backgroundColor: color.darkGray,
     },
     spacerExampleContainer: {
-      backgroundColor: colors.white,
+      backgroundColor: color.white,
       width: dimensions.width,
     },
     sideView: {
       flex: 1,
-      backgroundColor: colors.darkGray,
+      backgroundColor: color.darkGray,
     },
     row: {
       height: 32,

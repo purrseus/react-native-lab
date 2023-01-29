@@ -5,7 +5,7 @@ export { default as useAppRoute } from './useAppRoute';
 export { default as useAppState } from './useAppState';
 export { default as useAppTranslation } from './useAppTranslation';
 export { default as useBackHandler } from './useBackHandler';
-export { default as useColor } from './useColor';
+export { default as useTheme } from './useTheme';
 export { default as useCountdownTimer } from './useCountdownTimer';
 export { default as useDebounce } from './useDebounce';
 export { default as useFormat } from './useFormat';

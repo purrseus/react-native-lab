@@ -1,12 +1,13 @@
-import { colors } from '@themes';
+import { useTheme } from '@hooks';
+import { color } from '@themes';
 import { compareMemo } from '@utilities';
-import { StatusBar as RNStatusBar, StatusBarProps, useColorScheme } from 'react-native';
+import { StatusBar as RNStatusBar, StatusBarProps } from 'react-native';
 
 const StatusBar = compareMemo<StatusBarProps>(({ ...props }) => (
   <RNStatusBar
     translucent
-    barStyle={useColorScheme() === 'dark' ? 'light-content' : 'dark-content'}
-    backgroundColor={colors.transparent}
+    barStyle={useTheme().isDarkMode ? 'dark-content' : 'light-content'}
+    backgroundColor={color.transparent}
     {...props}
   />
 ));

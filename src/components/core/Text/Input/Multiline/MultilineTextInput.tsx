@@ -39,12 +39,12 @@ const MultilineTextInput = compareMemo<RNTextInput, MultilineTextInputProps>(
   }),
 );
 
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, color }: StyleCallbackParams) =>
   create({
     container: {
       paddingHorizontal: 8,
       paddingVertical: Platform.select({ android: 8.2, ios: 12 }),
-      backgroundColor: colors.lightGray,
+      backgroundColor: color.lightGray,
       borderRadius: 12,
     },
     input: {

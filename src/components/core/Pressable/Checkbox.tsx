@@ -38,7 +38,7 @@ const _Checkbox = compareMemo<CheckboxProps>(
   },
 );
 
-const createStyles = ({ colors, create }: StyleCallbackParams) =>
+const createStyles = ({ color, create }: StyleCallbackParams) =>
   create({
     container: {
       alignItems: 'center',
@@ -48,29 +48,29 @@ const createStyles = ({ colors, create }: StyleCallbackParams) =>
       borderWidth: 1,
     },
     checkboxEnabledInactive: {
-      borderColor: colors.primaryText,
+      borderColor: color.primaryText,
     },
     checkboxEnabledActive: {
-      backgroundColor: colors.primary,
-      borderColor: colors.transparent,
+      backgroundColor: color.primary,
+      borderColor: color.transparent,
     },
     checkboxDisabledInactive: {
-      borderColor: colors.lightGray,
+      borderColor: color.lightGray,
     },
     checkboxDisabledActive: {
-      backgroundColor: colors.lightGray,
-      borderColor: colors.transparent,
+      backgroundColor: color.lightGray,
+      borderColor: color.transparent,
     },
     tick: (isActive?: boolean) => ({
       transform: [{ scale: 1.4 }],
       opacity: +!!isActive,
-      tintColor: colors.white,
+      tintColor: color.white,
     }),
     labelEnabled: {
-      color: colors.primaryText,
+      color: color.primaryText,
     },
     labelDisabled: {
-      color: colors.lightGray,
+      color: color.lightGray,
     },
   });
 

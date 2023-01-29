@@ -84,13 +84,13 @@ const _Image = compareMemo<ImageProps>(({ style, cached, onLoad, ...props }) => 
   );
 });
 
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, color }: StyleCallbackParams) =>
   create({
     progressImage: {
-      backgroundColor: colors.backgroundImage,
+      backgroundColor: color.backgroundImage,
     },
     image: {
-      backgroundColor: colors.transparent,
+      backgroundColor: color.transparent,
     },
   });
 

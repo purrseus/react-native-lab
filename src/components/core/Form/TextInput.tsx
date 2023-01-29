@@ -42,7 +42,7 @@ const _TextInput = createField<RNTextInput, TextInputProps>(
   true,
 );
 
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
+const createStyles = ({ create, color }: StyleCallbackParams) =>
   create({
     label: {
       fontSize: 14,
@@ -50,7 +50,7 @@ const createStyles = ({ create, colors }: StyleCallbackParams) =>
       marginBottom: 4,
     },
     errorText: {
-      color: colors.red,
+      color: color.red,
       marginTop: 4,
     },
   });
