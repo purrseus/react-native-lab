@@ -1,6 +1,6 @@
 /* eslint-disable react-native/split-platform-components */
 import { ActionSheetMethods, StyleCallbackParams } from '@core/interfaces';
-import { useTheme, useStyle, useThrottle } from '@hooks';
+import { useStyle, useTheme, useThrottle } from '@hooks';
 import { useCommonStore } from '@stores';
 import { alphaHexColor, compareMemo } from '@utilities';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
@@ -16,9 +16,9 @@ import {
 import Divider from '../Layout/Divider';
 import List from '../List/List';
 import Modal from '../Modal/Modal';
-import PressArea from '../Pressable/PressArea';
 import Spacer from '../Spacer/Spacer';
 import Text from '../Text/Text';
+import Touchable from '../Touchable/Touchable';
 
 export interface ActionSheetProps extends ActionSheetIOSOptions {
   onSelect: (buttonIndex: number) => void;
@@ -32,7 +32,7 @@ const DEFAULT_MARGIN = 8;
 const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
   forwardRef(({ onSelect, cancelButtonIndex = 0, tintColor, title, message, ...props }, ref) => {
     const isIOS = isIos();
-    const { color } = useTheme();
+    const { colors } = useTheme();
     const styles = useStyle(createStyles);
     const theme = useCommonStore(state => state.theme, isEqual);
     const colorScheme = useColorScheme();
@@ -63,16 +63,13 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
 
         setIsVisible(true);
       },
-      [cancelButtonIndex, colorScheme, color.primaryText, message, onSelect, props, theme, title],
+      [cancelButtonIndex, colorScheme, colors.primaryText, message, onSelect, props, theme, title],
       HALF_SECONDS,
     );
 
     const onHide = useThrottle(
-      async (buttonIndex = cancelButtonIndex) => {
-        /**
-         * @see Modal onBackdropPress below
-         */
-        if (!isIOS && typeof buttonIndex === 'number') {
+      async (buttonIndex: number = cancelButtonIndex) => {
+        if (!isIOS) {
           setIsVisible(false);
           await wait(ACTION_SHEET_ANIMATION_IN_TIMING);
           onSelect(buttonIndex);
@@ -139,7 +136,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
 
     const renderOptionItem: ListRenderItem<string> = useCallback(
       ({ item, index }) => (
-        <PressArea onPress={handleSelectOption(index)} style={styles.option}>
+        <Touchable onPress={handleSelectOption(index)} style={styles.option}>
           <Text
             adjustsFontSizeToFit
             numberOfLines={1}
@@ -154,7 +151,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
           >
             {item}
           </Text>
-        </PressArea>
+        </Touchable>
       ),
       [handleSelectOption, options, props.destructiveButtonIndex, props.options, styles, tintColor],
     );
@@ -167,7 +164,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
         isVisible={isVisible}
         animationInTiming={ACTION_SHEET_ANIMATION_IN_TIMING}
         animationOutTiming={ACTION_SHEET_ANIMATION_OUT_TIMING}
-        onBackdropPress={onHide}
+        onBackdropPress={() => onHide()}
       >
         <View style={styles.container}>
           <List
@@ -181,7 +178,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
           <Spacer h={DEFAULT_MARGIN} />
 
           <View style={styles.optionContainer}>
-            <PressArea onPress={handleSelectOption(cancelButtonIndex, true)} style={styles.option}>
+            <Touchable onPress={handleSelectOption(cancelButtonIndex, true)} style={styles.option}>
               <Text
                 style={[
                   styles.optionTitle,
@@ -191,7 +188,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
               >
                 {props.options[cancelButtonIndex]}
               </Text>
-            </PressArea>
+            </Touchable>
           </View>
         </View>
       </Modal>
@@ -199,7 +196,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
   }),
 );
 
-const createStyles = ({ create, color, edgeInsets, dimensions }: StyleCallbackParams) =>
+const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackParams) =>
   create({
     container: {
       alignSelf: 'center',
@@ -209,7 +206,7 @@ const createStyles = ({ create, color, edgeInsets, dimensions }: StyleCallbackPa
     },
     optionContainer: {
       borderRadius: 12,
-      backgroundColor: color.white,
+      backgroundColor: colors.white,
     },
     header: {
       paddingVertical: 16,
@@ -217,7 +214,7 @@ const createStyles = ({ create, color, edgeInsets, dimensions }: StyleCallbackPa
     },
     headerText: {
       fontSize: 12,
-      color: alphaHexColor(color.darkGray, 0.8),
+      color: alphaHexColor(colors.darkGray, 0.8),
     },
     boldedTitle: {
       fontWeight: 'bold',
@@ -233,13 +230,13 @@ const createStyles = ({ create, color, edgeInsets, dimensions }: StyleCallbackPa
       color: colorValue,
     }),
     destructiveTitle: {
-      color: color.red,
+      color: colors.red,
     },
     cancelTitle: {
       fontWeight: 'bold',
     },
     divider: {
-      color: alphaHexColor(color.darkGray, 0.5),
+      color: alphaHexColor(colors.darkGray, 0.5),
     },
   });
 

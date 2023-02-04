@@ -1,9 +1,9 @@
 import { StyleCallbackParams } from '@core/interfaces';
 
-const createStyles = ({ create, color }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     screenStyle: {
-      backgroundColor: color.background,
+      backgroundColor: colors.background,
     },
   });
 

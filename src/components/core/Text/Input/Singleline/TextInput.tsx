@@ -23,20 +23,20 @@ const TextInput = compareMemo<RNTextInput, RNTextInputProps>(
   }),
 );
 
-const createStyles = ({ create, color }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     input: {
       padding: 0,
       margin: 0,
-      color: color.primaryText,
+      color: colors.primaryText,
       fontSize: DEFAULT_FONT_SIZE,
       height: MIN_HEIGHT_INPUT,
     },
     placeholder: {
-      color: color.darkGray,
+      color: colors.darkGray,
     },
     selection: {
-      color: color.primary,
+      color: colors.primary,
     },
   });
 

@@ -18,7 +18,7 @@ export type ProtectedParamList = {
   // Showcase
   [ProtectedScreenName.ShowcaseList]: undefined;
   [ProtectedScreenName.BottomSheets]: undefined;
-  [ProtectedScreenName.Pressable]: undefined;
+  [ProtectedScreenName.Touchable]: undefined;
   [ProtectedScreenName.Form]: undefined;
   [ProtectedScreenName.Images]: undefined;
   [ProtectedScreenName.Layouts]: undefined;

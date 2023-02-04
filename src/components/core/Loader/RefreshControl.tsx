@@ -3,14 +3,14 @@ import { compareMemo } from '@utilities';
 import { RefreshControl as RNRefreshControl, RefreshControlProps } from 'react-native';
 
 const RefreshControl = compareMemo<RefreshControlProps>(({ ...props }) => {
-  const { color } = useTheme();
+  const { colors } = useTheme();
 
   return (
     <RNRefreshControl
       {...props}
-      colors={[color.primary, color.secondary]}
-      progressBackgroundColor={color.refreshControlBackground}
-      tintColor={color.primary}
+      colors={[colors.primary, colors.secondary]}
+      progressBackgroundColor={colors.refreshControlBackground}
+      tintColor={colors.primary}
     />
   );
 });

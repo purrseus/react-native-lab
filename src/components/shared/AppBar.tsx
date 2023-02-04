@@ -1,5 +1,5 @@
 import { icons } from '@assets';
-import { Icon, Row, Spacer, Text, PressArea } from '@components/core';
+import { Icon, Row, Spacer, Text, Touchable } from '@components/core';
 import { DEFAULT_HORIZONTAL_EDGE_SPACING, APP_BAR_HEIGHT } from '@core/constants';
 import { AppBarAction, StyleCallbackParams } from '@core/interfaces';
 import { useLayout, useStyle } from '@hooks';
@@ -32,9 +32,9 @@ const AppBar = compareMemo<AppBarProps>(
 
           return (
             <Fragment key={index}>
-              <PressArea hitSlop={actionSeparatorWidth / 2} onPress={onPress}>
+              <Touchable hitSlop={actionSeparatorWidth / 2} onPress={onPress}>
                 <Icon source={icon} size={size || DEFAULT_ICON_SIZE} />
-              </PressArea>
+              </Touchable>
               {showSpacerSeparator && <Spacer w={actionSeparatorWidth} />}
             </Fragment>
           );
@@ -49,9 +49,9 @@ const AppBar = compareMemo<AppBarProps>(
         <Row style={styles.safeAreaContainer}>
           <Row style={[styles.sideWrapper, styles.leftWrapper(sideLayout.width)]}>
             {handleGoBack && (
-              <PressArea hitSlop={actionSeparatorWidth / 2} onPress={handleGoBack}>
+              <Touchable hitSlop={actionSeparatorWidth / 2} onPress={handleGoBack}>
                 <Icon source={icons.appBar.back} size={DEFAULT_ICON_SIZE} />
-              </PressArea>
+              </Touchable>
             )}
           </Row>
 
@@ -73,14 +73,14 @@ const AppBar = compareMemo<AppBarProps>(
   },
 );
 
-const createStyles = ({ create, edgeInsets, color }: StyleCallbackParams) =>
+const createStyles = ({ create, edgeInsets, colors }: StyleCallbackParams) =>
   create({
     rootContainer: {
-      backgroundColor: color.appBarBackground,
+      backgroundColor: colors.appBarBackground,
       paddingTop: edgeInsets.top || StatusBar.currentHeight || 0,
       paddingLeft: edgeInsets.left,
       paddingRight: edgeInsets.right,
-      ...createShadow(color.shadow, [0, 4], 0.1, 8, 16),
+      ...createShadow(colors.shadow, [0, 4], 0.1, 8, 16),
     },
     safeAreaContainer: {
       height: APP_BAR_HEIGHT,

@@ -1,5 +1,5 @@
 import { BottomSpacer, Row, Spacer } from '@components/core';
-import { StackContainer } from '@components/custom';
+import { StackContainer } from '@components/shared';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
@@ -60,18 +60,18 @@ const SpacersScreen = withHook(
   },
 );
 
-const createStyles = ({ create, color, dimensions }: StyleCallbackParams) =>
+const createStyles = ({ create, colors, dimensions }: StyleCallbackParams) =>
   create({
     container: {
-      backgroundColor: color.darkGray,
+      backgroundColor: colors.darkGray,
     },
     spacerExampleContainer: {
-      backgroundColor: color.white,
+      backgroundColor: colors.white,
       width: dimensions.width,
     },
     sideView: {
       flex: 1,
-      backgroundColor: color.darkGray,
+      backgroundColor: colors.darkGray,
     },
     row: {
       height: 32,

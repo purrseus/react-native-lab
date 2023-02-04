@@ -19,7 +19,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import ActivityIndicator from '../Loader/ActivityIndicator';
-import PressArea from './PressArea';
+import Touchable from './Touchable';
 
 interface SwitchProps extends ViewProps {
   isEnabled: boolean;
@@ -36,7 +36,7 @@ const TRACK_HEIGHT = 32;
 const THUMB_SIZE = TRACK_HEIGHT;
 const INPUT_RANGE: ReadonlyArray<number> = [0, 1];
 
-const AnimatedPressArea = Animated.createAnimatedComponent(PressArea);
+const AnimatedTouchable = Animated.createAnimatedComponent(Touchable);
 
 const Switch = compareMemo<SwitchProps>(
   ({
@@ -89,7 +89,7 @@ const Switch = compareMemo<SwitchProps>(
 
     return (
       <View {...props} style={[styles.container, style]}>
-        <AnimatedPressArea
+        <AnimatedTouchable
           onPress={handleChangeValue}
           disabled={disabled || loading}
           style={[styles.track, trackAnimatedStyle]}
@@ -109,13 +109,13 @@ const Switch = compareMemo<SwitchProps>(
               )}
             </Animated.View>
           </View>
-        </AnimatedPressArea>
+        </AnimatedTouchable>
       </View>
     );
   },
 );
 
-const createStyles = ({ create, color }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     container: {
       width: TRACK_WIDTH,
@@ -129,8 +129,8 @@ const createStyles = ({ create, color }: StyleCallbackParams) =>
       borderRadius: TRACK_HEIGHT / 2,
       justifyContent: 'center',
     },
-    trackColor: [color.primary, color.switchTrackInactive] as ViewStyle,
-    thumbColor: [color.white, color.darkGray] as ViewStyle,
+    trackColor: [colors.primary, colors.switchTrackInactive] as ViewStyle,
+    thumbColor: [colors.white, colors.darkGray] as ViewStyle,
     thumbWrapper: {
       padding: 4,
       width: THUMB_SIZE,
@@ -139,7 +139,7 @@ const createStyles = ({ create, color }: StyleCallbackParams) =>
     thumb: {
       ...globalStyles.flexFillCenter,
       borderRadius: 100,
-      ...createShadow(color.shadow, [0, 4], 0.4, 4, 8),
+      ...createShadow(colors.shadow, [0, 4], 0.4, 4, 8),
     },
   });
 

@@ -5,7 +5,6 @@ import CodePush from 'react-native-code-push';
 import LayoutProvider from './LayoutProvider';
 import NavigationProvider from './NavigationProvider';
 import QueryProvider from './QueryProvider';
-import StoreProvider from './StoreProvider';
 
 //#region bootstrap
 if (isAndroid() && UIManager.setLayoutAnimationEnabledExperimental)
@@ -27,13 +26,11 @@ if (__DEV__) {
 //#endregion
 
 const AppProvider = ({ children }: PropsWithChildren) => (
-  <StoreProvider>
-    <QueryProvider>
-      <NavigationProvider>
-        <LayoutProvider>{children}</LayoutProvider>
-      </NavigationProvider>
-    </QueryProvider>
-  </StoreProvider>
+  <QueryProvider>
+    <NavigationProvider>
+      <LayoutProvider>{children}</LayoutProvider>
+    </NavigationProvider>
+  </QueryProvider>
 );
 
 export default __DEV__ ? AppProvider : CodePush(AppProvider);

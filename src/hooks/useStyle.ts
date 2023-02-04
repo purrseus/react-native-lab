@@ -11,18 +11,18 @@ export type StyleCallback = (
 
 const useStyle = <T extends StyleCallback>(createStyles: T): ReturnType<T> => {
   const dimensions = useWindowDimensions();
-  const { color } = useTheme();
+  const { colors } = useTheme();
   const edgeInsets = useSafeAreaInsets();
 
   return useMemo(
     () =>
       createStyles({
         dimensions,
-        color,
+        colors,
         edgeInsets,
         create: StyleSheet.create,
       }) as ReturnType<T>,
-    [dimensions, edgeInsets, color],
+    [dimensions, edgeInsets, colors],
   );
 };
 

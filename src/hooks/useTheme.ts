@@ -7,7 +7,7 @@ const useTheme = () => {
   const colorScheme = useColorScheme();
   const theme = useCommonStore(state => state.theme, isEqual);
   const isDarkMode = (theme === 'auto' ? colorScheme : theme) === 'dark';
-  return { color: isDarkMode ? darkTheme : lightTheme, isDarkMode };
+  return { colors: isDarkMode ? darkTheme : lightTheme, isDarkMode };
 };
 
 export default useTheme;

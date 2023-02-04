@@ -1,11 +1,11 @@
 import { icons } from '@assets';
-import { BottomSpacer, Icon, Row, Spacer, Text, PressArea } from '@components/core';
+import { BottomSpacer, Icon, Row, Spacer, Text, Touchable } from '@components/core';
 import { HORIZONTAL_SAFETY_EDGES, TAB_BAR_HEIGHT } from '@core/constants';
 import { TabScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useAppTranslation, useKeyboard, useStyle } from '@hooks';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { color as defaultColor, globalStyles } from '@themes';
+import { colors as defaultColors, globalStyles } from '@themes';
 import { createShadow } from '@utilities';
 import { useMemo } from 'react';
 import { ColorValue, ImageRequireSource, StyleSheet } from 'react-native';
@@ -31,25 +31,25 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
       [TabScreenName.Home]: {
         icon: icons.bottomTab.home,
         focusedIcon: icons.bottomTab.homeFocused,
-        focusedColor: defaultColor.purple,
+        focusedColor: defaultColors.purple,
         label: t('home'),
       },
       [TabScreenName.Messages]: {
         icon: icons.bottomTab.message,
         focusedIcon: icons.bottomTab.messageFocused,
-        focusedColor: defaultColor.orange,
+        focusedColor: defaultColors.orange,
         label: t('messages'),
       },
       [TabScreenName.Notification]: {
         icon: icons.bottomTab.notification,
         focusedIcon: icons.bottomTab.notificationFocused,
-        focusedColor: defaultColor.red,
+        focusedColor: defaultColors.red,
         label: t('notification'),
       },
       [TabScreenName.Profile]: {
         icon: icons.bottomTab.profile,
         focusedIcon: icons.bottomTab.profileFocused,
-        focusedColor: defaultColor.blue,
+        focusedColor: defaultColors.blue,
         label: t('profile'),
       },
     }),
@@ -99,7 +99,7 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
           };
 
           return (
-            <PressArea
+            <Touchable
               key={index}
               accessibilityRole="button"
               accessibilityState={isFocused ? { selected: true } : {}}
@@ -120,7 +120,7 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
               >
                 {label}
               </Text>
-            </PressArea>
+            </Touchable>
           );
         })}
       </Row>
@@ -130,15 +130,15 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
   );
 };
 
-const createStyles = ({ color, create }: StyleCallbackParams) =>
+const createStyles = ({ colors, create }: StyleCallbackParams) =>
   create({
     rootContainer: {
       ...StyleSheet.absoluteFillObject,
       top: undefined,
-      ...createShadow(color.shadow, [0, 0], 0.1, 10, 20),
+      ...createShadow(colors.shadow, [0, 0], 0.1, 10, 20),
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
-      backgroundColor: color.tabBarBackground,
+      backgroundColor: colors.tabBarBackground,
     },
     container: {
       height: TAB_BAR_HEIGHT,
@@ -146,11 +146,11 @@ const createStyles = ({ color, create }: StyleCallbackParams) =>
       borderTopRightRadius: 20,
     },
     icon: {
-      tintColor: color.tabBlur,
+      tintColor: colors.tabBlur,
     },
     label: {
       fontSize: 12,
-      color: color.tabBlur,
+      color: colors.tabBlur,
     },
     focusedLabel: {
       fontWeight: 'bold',

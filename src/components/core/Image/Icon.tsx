@@ -14,13 +14,13 @@ const Icon = compareMemo<IconProps>(({ size = DEFAULT_ICON_SIZE, style, ...props
   return <Image {...props} style={[styles.icon(size), style]} />;
 });
 
-const createStyles = ({ create, color }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     icon: (size: number) => ({
-      backgroundColor: color.transparent,
+      backgroundColor: colors.transparent,
       width: size,
       height: size,
-      tintColor: color.tintIcon,
+      tintColor: colors.tintIcon,
     }),
   });
 

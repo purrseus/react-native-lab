@@ -1,5 +1,5 @@
 import { InfiniteList } from '@components/core';
-import { StackContainer } from '@components/custom';
+import { StackContainer } from '@components/shared';
 import { ProtectedScreenName } from '@core/enums';
 import { withHook } from '@utilities';
 import { Item } from '../components';

@@ -10,7 +10,7 @@ import {
   LoaderScreen,
   ModalsScreen,
   PickersScreen,
-  PressableScreen,
+  TouchableScreen,
   ShowcaseListScreen,
   SpacersScreen,
   TextsScreen,
@@ -34,11 +34,13 @@ const PublicScreens = (
 
 const ProtectedScreens = (
   <NativeStack.Group>
+    {/* BottomTab */}
     <NativeStack.Screen name={ProtectedScreenName.BottomTab} component={BottomTabBar} />
+
     {/* Showcase */}
     <NativeStack.Screen name={ProtectedScreenName.ShowcaseList} component={ShowcaseListScreen} />
     <NativeStack.Screen name={ProtectedScreenName.BottomSheets} component={BottomSheetsScreen} />
-    <NativeStack.Screen name={ProtectedScreenName.Pressable} component={PressableScreen} />
+    <NativeStack.Screen name={ProtectedScreenName.Touchable} component={TouchableScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Form} component={FormScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Images} component={ImagesScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Layouts} component={LayoutsScreen} />
@@ -53,11 +55,10 @@ const ProtectedScreens = (
 
 const RootNavigator = () => {
   const styles = useStyle(createStyles);
-  const [accessToken, refreshToken] = useAuthStore(
-    state => [state.accessToken, state.refreshToken],
+  const isAuthenticated = useAuthStore(
+    ({ accessToken, refreshToken }) => accessToken?.isNotEmpty && refreshToken?.isNotEmpty,
     isEqual,
   );
-  const isAuthenticated = accessToken?.isNotEmpty && refreshToken?.isNotEmpty;
 
   return (
     <NativeStack.Navigator

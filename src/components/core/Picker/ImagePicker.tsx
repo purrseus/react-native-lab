@@ -106,7 +106,7 @@ const ImagePicker = compareMemo<ImagePickerMethods, ImagePickerProps>(
               }
             }
           } catch (error) {
-            logger.log(error);
+            print(error);
           } finally {
             resetValue();
           }

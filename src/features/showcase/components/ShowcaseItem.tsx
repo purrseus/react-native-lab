@@ -1,4 +1,4 @@
-import { PressArea, Text } from '@components/core';
+import { Touchable, Text } from '@components/core';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
@@ -12,17 +12,17 @@ const ShowcaseItem = compareMemo<ShowcaseItemProps>(({ title, onPress }) => {
   const styles = useStyle(createStyles);
 
   return (
-    <PressArea onPress={onPress} style={styles.item}>
+    <Touchable onPress={onPress} style={styles.item}>
       <Text style={styles.itemText}>{title}</Text>
-    </PressArea>
+    </Touchable>
   );
 });
 
-const createStyles = ({ create, color }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     item: {
       padding: 16,
-      backgroundColor: color.backgroundImage,
+      backgroundColor: colors.backgroundImage,
       borderRadius: 8,
       alignItems: 'center',
     },

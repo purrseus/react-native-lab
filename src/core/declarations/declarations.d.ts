@@ -2,6 +2,11 @@
 
 declare global {
   /**
+   * Prints a string representation of the object to the console.
+   * @param args everything you want to display on the console.
+   */
+  declare function print(...args: any[]): void;
+  /**
    * Return true if and only if the current OS is Android.
    */
   function isAndroid(): boolean;
@@ -20,8 +25,6 @@ declare global {
     value: Parameters<typeof JSON.stringify>[0],
     space?: Parameters<typeof JSON.stringify>[2],
   ): ReturnType<typeof JSON.stringify>;
-
-  declare var logger: Pick<typeof console, 'log'>;
 
   /**
    * Generate duration in milliseconds.

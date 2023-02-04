@@ -15,14 +15,14 @@ import Icon, { IconProps } from '../Image/Icon';
 import ActivityIndicator from '../Loader/ActivityIndicator';
 import Spacer from '../Spacer/Spacer';
 import Text from '../Text/Text';
-import PressArea, { PressAreaProps } from './PressArea';
+import Touchable, { TouchableProps } from './Touchable';
 
 type SizeName = 'small' | 'medium' | 'large';
 type ButtonType = 'filled' | 'outlined' | 'tonal';
 type ButtonSize = number;
 type TitleSize = number;
 
-interface ButtonProps extends PressAreaProps {
+interface ButtonProps extends TouchableProps {
   title: string;
   size?: SizeName;
   type?: ButtonType;
@@ -105,7 +105,7 @@ const Button = compareMemo<ButtonProps>(
     );
 
     return (
-      <PressArea
+      <Touchable
         {...props}
         disabled={loading || disabled}
         style={[styles.container(buttonSize), styles[type], !!disabled && styles.disabled, style]}
@@ -119,14 +119,14 @@ const Button = compareMemo<ButtonProps>(
         )}
 
         {loading ? <ActivityIndicator color={colorStyle.color} /> : ButtonContent}
-      </PressArea>
+      </Touchable>
     );
   },
 );
 
 const createStyles =
   (customColor?: ColorValue) =>
-  ({ create, color }: StyleCallbackParams) =>
+  ({ create, colors }: StyleCallbackParams) =>
     create({
       container: (buttonSize: number) => ({
         flexDirection: 'row',
@@ -137,32 +137,32 @@ const createStyles =
         paddingHorizontal: 16,
         height: buttonSize,
       }),
-      gradient: [color.primary, color.blue] as ViewStyle,
+      gradient: [colors.primary, colors.blue] as ViewStyle,
       filled: {
-        backgroundColor: customColor || color.primary,
+        backgroundColor: customColor || colors.primary,
       },
       outlined: {
-        backgroundColor: color.white,
-        borderColor: customColor || color.primary,
+        backgroundColor: colors.white,
+        borderColor: customColor || colors.primary,
         borderWidth: 1,
       },
       tonal: {
-        backgroundColor: customColor || alphaHexColor(color.primary, 0.2),
+        backgroundColor: customColor || alphaHexColor(colors.primary, 0.2),
       },
       disabled: {
-        backgroundColor: color.lightGray,
+        backgroundColor: colors.lightGray,
       },
       filledColor: {
-        color: color.white,
+        color: colors.white,
       },
       outlinedColor: {
-        color: customColor || color.primary,
+        color: customColor || colors.primary,
       },
       tonalColor: {
-        color: customColor || color.primary,
+        color: customColor || colors.primary,
       },
       disabledColor: {
-        color: color.darkGray,
+        color: colors.darkGray,
       },
       title: (titleSize: number) => ({
         fontSize: titleSize,

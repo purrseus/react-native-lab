@@ -1,5 +1,5 @@
 import { Button, Modal, Spacer } from '@components/core';
-import { StackContainer } from '@components/custom';
+import { StackContainer } from '@components/shared';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
@@ -67,10 +67,10 @@ const ModalsScreen = withHook(
   },
 );
 
-const createStyles = ({ create, color }: StyleCallbackParams) =>
+const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
     modal: {
-      backgroundColor: color.white,
+      backgroundColor: colors.white,
       padding: 16,
     },
     modalContainer: {

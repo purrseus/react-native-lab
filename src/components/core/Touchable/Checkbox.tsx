@@ -8,7 +8,7 @@ import Icon from '../Image/Icon';
 import Row from '../Layout/Row';
 import Spacer from '../Spacer/Spacer';
 import Text from '../Text/Text';
-import PressArea from './PressArea';
+import Touchable from './Touchable';
 
 interface CheckboxProps<T = any> extends Omit<CheckboxItem<T>, 'value'>, Omit<ViewProps, 'style'> {
   isActive?: boolean;
@@ -24,13 +24,13 @@ const _Checkbox = compareMemo<CheckboxProps>(
 
     return (
       <Row {...props} style={[styles.container, containerStyle]}>
-        <PressArea
+        <Touchable
           hitSlop={8}
           style={[styles.checkbox, styles[`checkbox${behaviorStyle}${stateStyle}`]]}
           {...{ disabled, onPress }}
         >
           <Icon source={icons.checkbox.tick} size={20} style={styles.tick(isActive)} />
-        </PressArea>
+        </Touchable>
         <Spacer w={6} />
         <Text style={styles[`label${behaviorStyle}`]}>{label}</Text>
       </Row>
@@ -38,7 +38,7 @@ const _Checkbox = compareMemo<CheckboxProps>(
   },
 );
 
-const createStyles = ({ color, create }: StyleCallbackParams) =>
+const createStyles = ({ colors, create }: StyleCallbackParams) =>
   create({
     container: {
       alignItems: 'center',
@@ -48,29 +48,29 @@ const createStyles = ({ color, create }: StyleCallbackParams) =>
       borderWidth: 1,
     },
     checkboxEnabledInactive: {
-      borderColor: color.primaryText,
+      borderColor: colors.primaryText,
     },
     checkboxEnabledActive: {
-      backgroundColor: color.primary,
-      borderColor: color.transparent,
+      backgroundColor: colors.primary,
+      borderColor: colors.transparent,
     },
     checkboxDisabledInactive: {
-      borderColor: color.lightGray,
+      borderColor: colors.lightGray,
     },
     checkboxDisabledActive: {
-      backgroundColor: color.lightGray,
-      borderColor: color.transparent,
+      backgroundColor: colors.lightGray,
+      borderColor: colors.transparent,
     },
     tick: (isActive?: boolean) => ({
       transform: [{ scale: 1.4 }],
       opacity: +!!isActive,
-      tintColor: color.white,
+      tintColor: colors.white,
     }),
     labelEnabled: {
-      color: color.primaryText,
+      color: colors.primaryText,
     },
     labelDisabled: {
-      color: color.lightGray,
+      color: colors.lightGray,
     },
   });
 
