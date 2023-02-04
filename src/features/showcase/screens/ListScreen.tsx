@@ -13,6 +13,7 @@ const ListScreen = withHook(useListContainer, ({ photosQueryKey }) => {
         renderItem={({ item }) => <Item {...item} />}
         queryKey={photosQueryKey}
         queryFn={listAPI.getPhotos}
+        estimatedItemSize={200}
       />
     </StackContainer>
   );

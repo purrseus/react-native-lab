@@ -6,7 +6,7 @@ import { StatusBar as RNStatusBar, StatusBarProps } from 'react-native';
 const StatusBar = compareMemo<StatusBarProps>(({ ...props }) => (
   <RNStatusBar
     translucent
-    barStyle={useTheme().isDarkMode ? 'dark-content' : 'light-content'}
+    barStyle={useTheme().isDarkMode ? 'light-content' : 'dark-content'}
     backgroundColor={color.transparent}
     {...props}
   />

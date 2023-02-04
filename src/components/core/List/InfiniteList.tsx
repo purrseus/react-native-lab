@@ -1,30 +1,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle, useThrottle } from '@hooks';
+import { FlashList } from '@shopify/flash-list';
 import {
-  QueryKey,
-  QueryFunction,
   GetNextPageParamFunction,
+  QueryFunction,
+  QueryKey,
   useInfiniteQuery,
 } from '@tanstack/react-query';
 import { globalStyles } from '@themes';
 import { compareMemo } from '@utilities';
 import { forwardRef, RefAttributes, useMemo, useState } from 'react';
-import { FlatList, RefreshControlProps, View } from 'react-native';
+import { RefreshControlProps, View } from 'react-native';
 import ActivityIndicator from '../Loader/ActivityIndicator';
 import List, { ListProps } from './List';
 
 interface InfiniteListProps<T = any>
-  extends Omit<ListProps<T>, keyof RefreshControlProps | 'data'>,
+  extends Omit<ListProps<T, true>, keyof RefreshControlProps | 'data' | 'isFlashList'>,
     Partial<RefreshControlProps> {
   queryKey: QueryKey;
   queryFn: QueryFunction<T[]>;
   getNextPageParam?: GetNextPageParamFunction<T[]>;
-  ListFetchingComponent?: ListProps<T>['ListEmptyComponent'];
-  ListErrorComponent?: ListProps<T>['ListEmptyComponent'];
+  ListFetchingComponent?: ListProps<T, true>['ListEmptyComponent'];
+  ListErrorComponent?: ListProps<T, true>['ListEmptyComponent'];
 }
 
-const _InfiniteList = compareMemo<FlatList, InfiniteListProps>(
+const _InfiniteList = compareMemo<FlashList<any>, InfiniteListProps>(
   forwardRef(
     (
       {
@@ -48,10 +49,6 @@ const _InfiniteList = compareMemo<FlatList, InfiniteListProps>(
       });
 
       const isFetching = isLoading && !refreshing;
-
-      const contentContainerStyle = isFetching
-        ? globalStyles.flexFill
-        : props.contentContainerStyle;
 
       const FetchingComponent = useMemo(
         () =>
@@ -77,16 +74,18 @@ const _InfiniteList = compareMemo<FlatList, InfiniteListProps>(
         refetch().finally(() => setRefreshing(false));
       }, [setRefreshing, refetch]);
 
-      const handleOnEndReached = useThrottle(() => fetchNextPage(), [fetchNextPage]);
+      const handleOnEndReached = useThrottle(() => {
+        fetchNextPage();
+      }, [fetchNextPage]);
 
       return (
-        <List
+        <List<Awaited<ReturnType<typeof queryFn>>[number], true>
           {...props}
+          isFlashList
           data={data?.pages.flat()}
           refreshing={refreshing}
           onRefresh={handleOnRefresh}
           ref={ref}
-          contentContainerStyle={contentContainerStyle}
           onEndReached={handleOnEndReached}
           ListEmptyComponent={
             isError ? ListErrorComponent : isFetching ? FetchingComponent : ListEmptyComponent
@@ -106,7 +105,7 @@ const createStyles = ({ create }: StyleCallbackParams) =>
   });
 
 const InfiniteList = _InfiniteList as <T = any>(
-  props: InfiniteListProps<T> & RefAttributes<FlatList<T>>,
+  props: InfiniteListProps<T> & RefAttributes<FlashList<T>>,
 ) => JSX.Element;
 
 export default InfiniteList;
