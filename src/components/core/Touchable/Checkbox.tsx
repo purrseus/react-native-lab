@@ -29,7 +29,11 @@ const _Checkbox = compareMemo<CheckboxProps>(
           style={[styles.checkbox, styles[`checkbox${behaviorStyle}${stateStyle}`]]}
           {...{ disabled, onPress }}
         >
-          <Icon source={icons.checkbox.tick} size={20} style={styles.tick(isActive)} />
+          <Icon
+            source={icons.checkbox.tick}
+            size={20}
+            style={[styles.tick, { opacity: +!!isActive }]}
+          />
         </Touchable>
         <Spacer w={6} />
         <Text style={styles[`label${behaviorStyle}`]}>{label}</Text>
@@ -61,11 +65,10 @@ const createStyles = ({ colors, create }: StyleCallbackParams) =>
       backgroundColor: colors.lightGray,
       borderColor: colors.transparent,
     },
-    tick: (isActive?: boolean) => ({
+    tick: {
       transform: [{ scale: 1.4 }],
-      opacity: +!!isActive,
       tintColor: colors.white,
-    }),
+    },
     labelEnabled: {
       color: colors.primaryText,
     },

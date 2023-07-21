@@ -74,7 +74,7 @@ export const createBuildQuestionCollections = platform => [
 
 export const commands = {
   runAndroid: (buildVariant, suffixAppId) =>
-    `yarn react-native run-android --variant ${buildVariant} --appId com.${PLACEHOLDER_NAME.toLowerCase()}${suffixAppId}`,
+    `yarn react-native run-android --mode ${buildVariant} --appId com.${PLACEHOLDER_NAME.toLowerCase()}${suffixAppId}`,
 
   generateAndroidFile: buildVariant =>
     `cd android && ./gradlew clean && ./gradlew ${buildVariant} && cd ..`,

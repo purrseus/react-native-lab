@@ -11,8 +11,13 @@ import { tabScreenOptions } from '@navigators/options';
 import createStyles from '@navigators/styles';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CustomizedTabBar from './CustomizedTabBar';
+import { BottomTabNavigationConfig } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
+
+const TabBar: NonNullable<BottomTabNavigationConfig['tabBar']> = props => (
+  <CustomizedTabBar {...props} />
+);
 
 const BottomTabBar = () => {
   const styles = useStyle(createStyles);
@@ -22,7 +27,7 @@ const BottomTabBar = () => {
       initialRouteName={TabScreenName.Home}
       screenOptions={tabScreenOptions}
       sceneContainerStyle={styles.screenStyle}
-      tabBar={props => <CustomizedTabBar {...props} />}
+      tabBar={TabBar}
     >
       <BottomTab.Screen name={TabScreenName.Home} component={HomeScreen} />
       <BottomTab.Screen name={TabScreenName.Messages} component={MessagesScreen} />

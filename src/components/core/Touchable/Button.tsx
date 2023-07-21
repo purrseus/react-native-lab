@@ -5,6 +5,7 @@ import { alphaHexColor, compareMemo } from '@utilities';
 import {
   ColorValue,
   ImageRequireSource,
+  ImageStyle,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -74,6 +75,11 @@ const Button = compareMemo<ButtonProps>(
     const styles = useStyle(createStyles(color));
     const colorStyle = styles[`${disabled ? 'disabled' : type}Color`];
 
+    const iconStyle = (direction: 'left' | 'right', tintColor: ColorValue): ImageStyle => ({
+      [direction === 'left' ? 'marginLeft' : 'marginRight']: iconSpacing,
+      tintColor,
+    });
+
     const ButtonContent = (
       <>
         {hasLeftIcon ? (
@@ -81,13 +87,16 @@ const Button = compareMemo<ButtonProps>(
             source={iconLeft}
             size={leftIconSize}
             {...iconProps}
-            style={[styles.icon('left', iconSpacing, colorStyle.color), iconProps?.style]}
+            style={[iconStyle('left', colorStyle.color), iconProps?.style]}
           />
         ) : hasRightIcon && titleCenter ? (
           <Spacer w={rightIconSize + iconSpacing} />
         ) : null}
 
-        <Text numberOfLines={1} style={[styles.title(titleSize), colorStyle, titleStyle]}>
+        <Text
+          numberOfLines={1}
+          style={[styles.title, { fontSize: titleSize }, colorStyle, titleStyle]}
+        >
           {title}
         </Text>
 
@@ -96,7 +105,7 @@ const Button = compareMemo<ButtonProps>(
             source={iconRight}
             size={rightIconSize}
             {...iconProps}
-            style={[styles.icon('right', iconSpacing, colorStyle.color), iconProps?.style]}
+            style={[iconStyle('right', colorStyle.color), iconProps?.style]}
           />
         ) : hasLeftIcon && titleCenter ? (
           <Spacer w={leftIconSize + iconSpacing} />
@@ -108,7 +117,13 @@ const Button = compareMemo<ButtonProps>(
       <Touchable
         {...props}
         disabled={loading || disabled}
-        style={[styles.container(buttonSize), styles[type], !!disabled && styles.disabled, style]}
+        style={[
+          styles.container,
+          { height: buttonSize },
+          styles[type],
+          !!disabled && styles.disabled,
+          style,
+        ]}
       >
         {gradient && (
           <LinearGradient
@@ -128,15 +143,14 @@ const createStyles =
   (customColor?: ColorValue) =>
   ({ create, colors }: StyleCallbackParams) =>
     create({
-      container: (buttonSize: number) => ({
+      container: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
         overflow: 'hidden',
         paddingHorizontal: 16,
-        height: buttonSize,
-      }),
+      },
       gradient: [colors.primary, colors.blue] as ViewStyle,
       filled: {
         backgroundColor: customColor || colors.primary,
@@ -164,15 +178,10 @@ const createStyles =
       disabledColor: {
         color: colors.darkGray,
       },
-      title: (titleSize: number) => ({
-        fontSize: titleSize,
+      title: {
         fontWeight: 'bold',
         maxWidth: '80%',
-      }),
-      icon: (direction: 'left' | 'right', iconSpacing: number, tintColor: ColorValue) => ({
-        [direction === 'left' ? 'marginLeft' : 'marginRight']: iconSpacing,
-        tintColor,
-      }),
+      },
     });
 
 export default Button;

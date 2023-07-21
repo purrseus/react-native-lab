@@ -11,17 +11,15 @@ export interface IconProps extends ImageProps<false> {
 const Icon = compareMemo<IconProps>(({ size = DEFAULT_ICON_SIZE, style, ...props }) => {
   const styles = useStyle(createStyles);
 
-  return <Image {...props} style={[styles.icon(size), style]} />;
+  return <Image {...props} style={[styles.icon, { width: size, height: size }, style]} />;
 });
 
 const createStyles = ({ create, colors }: StyleCallbackParams) =>
   create({
-    icon: (size: number) => ({
+    icon: {
       backgroundColor: colors.transparent,
-      width: size,
-      height: size,
       tintColor: colors.tintIcon,
-    }),
+    },
   });
 
 export default Icon;

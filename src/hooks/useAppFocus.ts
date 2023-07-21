@@ -8,10 +8,13 @@ const useAppFocus = (focusCallback: FocusCallback, deps: DependencyList) => {
   const isFocused = useIsFocused();
   const isFirstRender = useRef(true);
 
-  useEffect(() => {
-    focusCallback({ isFocused, isFirstRender: isFirstRender.current });
-    if (isFirstRender.current) isFirstRender.current = false;
-  }, deps.concat([isFocused]));
+  useEffect(
+    () => {
+      focusCallback({ isFocused, isFirstRender: isFirstRender.current });
+      if (isFirstRender.current) isFirstRender.current = false;
+    },
+    deps.concat([isFocused]),
+  );
 };
 
 export default useAppFocus;

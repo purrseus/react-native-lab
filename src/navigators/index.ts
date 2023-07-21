@@ -7,7 +7,7 @@ import {
 import RootNavigator from './stacks/RootStack';
 
 type ActionName = keyof typeof StackActions;
-type ActionType<T extends ActionName> = (...args: Parameters<typeof StackActions[T]>) => void;
+type ActionType<T extends ActionName> = (...args: Parameters<(typeof StackActions)[T]>) => void;
 
 interface Navigation<T extends RootStackParamList>
   extends Pick<NavigationHelpers<T>, 'goBack' | 'reset' | 'dispatch'> {

@@ -13,7 +13,7 @@ if (isAndroid() && UIManager.setLayoutAnimationEnabledExperimental)
 if (__DEV__) {
   const devSettingItems: { title: string; handler: () => void }[] = [
     {
-      title: 'Clear All Storage And Reload',
+      title: 'Clear MMKV Storage And Reload',
       handler: async () => {
         MMKVStorage.clearAll();
         DevSettings.reload();

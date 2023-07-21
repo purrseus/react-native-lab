@@ -47,7 +47,13 @@ const AppBar = compareMemo<AppBarProps>(
     return (
       <View {...props} style={styles.rootContainer}>
         <Row style={styles.safeAreaContainer}>
-          <Row style={[styles.sideWrapper, styles.leftWrapper(sideLayout.width)]}>
+          <Row
+            style={[
+              styles.sideWrapper,
+              styles.leftWrapper,
+              { width: sideLayout.width || undefined },
+            ]}
+          >
             {handleGoBack && (
               <Touchable hitSlop={actionSeparatorWidth / 2} onPress={handleGoBack}>
                 <Icon source={icons.appBar.back} size={DEFAULT_ICON_SIZE} />
@@ -90,10 +96,9 @@ const createStyles = ({ create, edgeInsets, colors }: StyleCallbackParams) =>
       alignItems: 'center',
       paddingHorizontal: DEFAULT_HORIZONTAL_EDGE_SPACING,
     },
-    leftWrapper: (width: number) => ({
+    leftWrapper: {
       justifyContent: 'flex-start',
-      width: width || undefined,
-    }),
+    },
     rightWrapper: {
       justifyContent: 'flex-end',
     },

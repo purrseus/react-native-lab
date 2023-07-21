@@ -143,7 +143,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
             ellipsizeMode="middle"
             style={[
               styles.optionTitle,
-              !!tintColor && styles.optionTitleColor(tintColor as ColorValue),
+              !!tintColor && { color: tintColor as ColorValue },
               typeof props.destructiveButtonIndex === 'number' &&
                 props.destructiveButtonIndex === props.options.indexOf(options[index]) &&
                 styles.destructiveTitle,
@@ -183,7 +183,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
                 style={[
                   styles.optionTitle,
                   styles.cancelTitle,
-                  !!tintColor && styles.optionTitleColor(tintColor as ColorValue),
+                  !!tintColor && { color: tintColor as ColorValue },
                 ]}
               >
                 {props.options[cancelButtonIndex]}
@@ -226,9 +226,6 @@ const createStyles = ({ create, colors, edgeInsets, dimensions }: StyleCallbackP
     optionTitle: {
       fontSize: 18,
     },
-    optionTitleColor: (colorValue: ColorValue) => ({
-      color: colorValue,
-    }),
     destructiveTitle: {
       color: colors.red,
     },

@@ -1,6 +1,7 @@
+/* eslint-disable react-native/split-platform-components */
 import Alert from '@components/core/Modal/Alert';
 import i18n from '@i18n';
-import { Platform } from 'react-native';
+import { Platform, PlatformAndroidStatic } from 'react-native';
 import {
   check,
   checkMultiple,
@@ -16,9 +17,13 @@ import {
 const ALLOWED_STATUSES: PermissionStatus[] = [RESULTS.GRANTED, RESULTS.LIMITED];
 const { ANDROID, IOS } = PERMISSIONS;
 
+// https://developer.android.com/reference/android/os/Build.VERSION_CODES#TIRAMISU
+const isTiramisuVersionOrHigher =
+  isAndroid() && (Platform as PlatformAndroidStatic).constants.Version >= 33;
+
 //#region permission names
 const photoGalleryPermissions = Platform.select<Permission[]>({
-  android: [ANDROID.READ_EXTERNAL_STORAGE, ANDROID.WRITE_EXTERNAL_STORAGE],
+  android: [isTiramisuVersionOrHigher ? ANDROID.READ_MEDIA_IMAGES : ANDROID.READ_EXTERNAL_STORAGE],
   ios: [IOS.PHOTO_LIBRARY, IOS.PHOTO_LIBRARY_ADD_ONLY],
 });
 
