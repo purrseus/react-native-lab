@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { writeFileSync } from 'fs';
 import { execScriptSync, loadEnvFile, getArguments } from './utils.mjs';
 

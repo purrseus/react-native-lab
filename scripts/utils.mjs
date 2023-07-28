@@ -82,7 +82,7 @@ export const commands = {
   runIos: (env, buildType, envShort) =>
     `ENVFILE=environments/.env.${env} yarn react-native run-ios --configuration '${buildType} (${envShort})' --scheme '${PLACEHOLDER_NAME} (${envShort})'`,
 
-  openXcode: () => `xed -b ios`,
+  openXcode: () => 'xed -b ios',
 
   codePush: (os, env, version) =>
     `appcenter codepush release-react -a ${APP_CENTER_OWNER_NAME}/${appCenterAppName[os]} -d ${env} -t ${version} -m`,

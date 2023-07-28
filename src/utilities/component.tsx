@@ -49,7 +49,7 @@ export const createField = <R, P extends CommonFieldProps>(
             errorText: (errors[props.name] as any)?.message,
             value,
             name: props.name,
-          }) as PropsWithoutRef<P>,
+          } as PropsWithoutRef<P>),
         [onChange, value, props, errors[props.name]],
       );
 

@@ -3,17 +3,17 @@ module.exports = {
   extends: [
     '@react-native',
     'plugin:react/jsx-runtime',
-    'plugin:prettier/recommended',
     'plugin:@tanstack/eslint-plugin-query/recommended',
   ],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   overrides: [
     {
-      files: ['*.ts', '*.tsx'],
+      files: ['*.ts', '*.tsx', '*.js', '*.jsx', '*.mjs'],
       rules: {
         '@typescript-eslint/no-shadow': ['error'],
         '@typescript-eslint/no-explicit-any': 'error',
+        curly: 'off',
         'no-shadow': 'off',
         'no-undef': 'off',
         'no-alert': 'error',
