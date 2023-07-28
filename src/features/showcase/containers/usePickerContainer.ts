@@ -12,7 +12,7 @@ const usePickerContainer = () => {
   useEffect(() => {
     if (images.isNotEmpty)
       Alert(
-        referenceTypeFormatter(typeof images.first !== 'string' ? images.first.uri : images.first),
+        formatReferenceType(typeof images.first !== 'string' ? images.first.uri : images.first),
       );
   }, [images]);
 

@@ -3,7 +3,7 @@ import { overlayLoading } from '@utilities';
 const useLoaderContainer = () => {
   const handleOverlayLoading = async () => {
     overlayLoading.show();
-    await wait(duration({ seconds: 3 }));
+    await wait(duration({ s: 3 }));
     overlayLoading.hide();
   };
 

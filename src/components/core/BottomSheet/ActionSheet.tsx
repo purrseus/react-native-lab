@@ -24,8 +24,8 @@ export interface ActionSheetProps extends ActionSheetIOSOptions {
   onSelect: (buttonIndex: number) => void;
 }
 
-const HALF_SECONDS = duration({ seconds: 0.5 });
-const ACTION_SHEET_ANIMATION_IN_TIMING = duration({ seconds: 0.33 });
+const HALF_SECONDS = duration({ s: 0.5 });
+const ACTION_SHEET_ANIMATION_IN_TIMING = duration({ s: 0.33 });
 const ACTION_SHEET_ANIMATION_OUT_TIMING = ACTION_SHEET_ANIMATION_IN_TIMING * 2;
 const DEFAULT_MARGIN = 8;
 

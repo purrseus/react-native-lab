@@ -19,7 +19,7 @@ export interface TouchableProps extends PressableProps {
 
 const Touchable = compareMemo<View, TouchableProps>(
   forwardRef(
-    ({ throttle = duration({ seconds: 0.5 }), onPress, pressInStyle, style, ...props }, ref) => {
+    ({ throttle = duration({ s: 0.5 }), onPress, pressInStyle, style, ...props }, ref) => {
       const handleOnPress = useThrottle(onPress || (() => null), [onPress], throttle);
 
       const handleStateStyle = useCallback(

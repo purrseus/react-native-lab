@@ -17,7 +17,7 @@ const Item = (props: Photos[number]) => {
       <Spacer w={16} />
 
       <View style={globalStyles.flexFill}>
-        <Text style={styles.text}>{referenceTypeFormatter(props)}</Text>
+        <Text style={styles.text}>{formatReferenceType(props)}</Text>
       </View>
     </Touchable>
   );

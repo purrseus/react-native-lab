@@ -8,7 +8,7 @@ const useTouchableContainer = () => {
     setIsLoading(true);
     setIsEnabled(value);
     try {
-      await wait(duration({ seconds: 0.5 }));
+      await wait(duration({ s: 0.5 }));
       throw new Error('test');
     } catch (error) {
       setIsEnabled(!value);
