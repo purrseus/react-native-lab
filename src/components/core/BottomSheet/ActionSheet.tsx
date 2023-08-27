@@ -4,14 +4,13 @@ import { useStyle, useTheme, useThrottle } from '@hooks';
 import { useCommonStore } from '@stores';
 import { alphaHexColor, compareMemo } from '@utilities';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
-import isEqual from 'react-fast-compare';
 import {
   ActionSheetIOS,
   ActionSheetIOSOptions,
   ColorValue,
   ListRenderItem,
-  useColorScheme,
   View,
+  useColorScheme,
 } from 'react-native';
 import Divider from '../Layout/Divider';
 import List from '../List/List';
@@ -34,7 +33,7 @@ const ActionSheet = compareMemo<ActionSheetMethods, ActionSheetProps>(
     const isIOS = isIos();
     const { colors } = useTheme();
     const styles = useStyle(createStyles);
-    const theme = useCommonStore(state => state.theme, isEqual);
+    const theme = useCommonStore(state => state.theme);
     const colorScheme = useColorScheme();
     const [isVisible, setIsVisible] = useState(false);
 

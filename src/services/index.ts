@@ -1,16 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PromiseObj } from '@core/interfaces';
+import { PromiseObject } from '@core/interfaces';
 import { useAuthStore } from '@stores';
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, HttpStatusCode } from 'axios';
 import Config from 'react-native-config';
 
 type OriginalRequest = AxiosRequestConfig & { retry?: boolean };
 
 let isTokenRefreshing = false;
 
-const UNAUTHORIZED_STATUS = 401;
-
-const promiseQueue: PromiseObj<string>[] = [];
+const promiseQueue: PromiseObject<string>[] = [];
 
 const handlePromiseQueue = async (accessToken?: string, error?: any) => {
   if (promiseQueue.isEmpty) return;
@@ -55,7 +53,7 @@ axiosInstance.interceptors.response.use(
   response => response.data,
   async responseError => {
     const originalRequest: OriginalRequest = responseError.config;
-    const isUnauthorized = responseError?.response?.status === UNAUTHORIZED_STATUS;
+    const isUnauthorized = responseError?.response?.status === HttpStatusCode.Unauthorized;
 
     const shouldHandleToken =
       isUnauthorized && !!originalRequest.headers && !originalRequest?.retry;

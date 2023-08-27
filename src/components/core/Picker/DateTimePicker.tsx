@@ -3,7 +3,6 @@ import { useStyle } from '@hooks';
 import { useCommonStore } from '@stores';
 import { compareMemo } from '@utilities';
 import { forwardRef, useImperativeHandle, useState } from 'react';
-import isEqual from 'react-fast-compare';
 import { useTranslation } from 'react-i18next';
 import { Platform, useColorScheme } from 'react-native';
 import DateTimePickerModal, {
@@ -31,7 +30,7 @@ const DateTimePicker = compareMemo<DateTimePickerMethods, Partial<Props>>(
     const styles = useStyle(createStyles);
     const colorScheme = useColorScheme();
     const [isVisible, setIsVisible] = useState(false);
-    const language = useCommonStore(state => state.language, isEqual);
+    const language = useCommonStore(state => state.language);
 
     useImperativeHandle(
       ref,

@@ -21,7 +21,6 @@ import createStyles from '@navigators/styles';
 import BottomTabBar from '@navigators/tabs/BottomTabBar';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useAuthStore } from '@stores';
-import isEqual from 'react-fast-compare';
 
 const NativeStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -57,7 +56,6 @@ const RootNavigator = () => {
   const styles = useStyle(createStyles);
   const isAuthenticated = useAuthStore(
     ({ accessToken, refreshToken }) => accessToken?.isNotEmpty && refreshToken?.isNotEmpty,
-    isEqual,
   );
 
   return (

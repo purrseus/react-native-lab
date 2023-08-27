@@ -90,6 +90,12 @@ declare global {
      * Return true if and only if this number is even.
      */
     isEven: boolean;
+
+    /**
+     * Returns true if the number is a valid index in the array.
+     * @param array The array you want to check.
+     */
+    isValidIndex(array: any[]): boolean;
   }
 
   interface ObjectConstructor {

@@ -8,7 +8,7 @@ export interface Measure extends CommonSize {
   pageY: number;
 }
 
-export interface PromiseObj<T> {
+export interface PromiseObject<T> {
   resolve: (value: T | PromiseLike<T>) => void;
   reject: (reason?: any) => void;
 }
