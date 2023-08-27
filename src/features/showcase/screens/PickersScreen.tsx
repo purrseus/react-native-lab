@@ -1,4 +1,4 @@
-import { DateTimePicker, ImagePicker } from '@components/core';
+import { DateTimePicker } from '@components/core';
 import { StackContainer } from '@components/shared';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
@@ -9,16 +9,7 @@ import { usePickerContainer } from '../containers';
 
 const PickersScreen = withHook(
   usePickerContainer,
-  ({
-    images,
-    setImages,
-    dateTime,
-    setDateTime,
-    imagePickerRef,
-    dateTimePickerRef,
-    showImagePicker,
-    showDateTimePicker,
-  }) => {
+  ({ dateTime, setDateTime, dateTimePickerRef, showImagePicker, showDateTimePicker }) => {
     const styles = useStyle(createStyles);
 
     return (
@@ -30,8 +21,6 @@ const PickersScreen = withHook(
         <ShowcaseItem title="Show ImagePicker" onPress={showImagePicker} />
         <Separator />
         <ShowcaseItem title="Show DateTimePicker" onPress={showDateTimePicker} />
-
-        <ImagePicker ref={imagePickerRef} images={images} onChangeImage={setImages} />
 
         <DateTimePicker
           mode="time"

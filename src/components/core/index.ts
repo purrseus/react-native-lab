@@ -1,4 +1,3 @@
-export { default as ActionSheet } from './BottomSheet/ActionSheet';
 export { default as BottomSheet } from './BottomSheet/BottomSheet';
 export { default as Field } from './Form/Field';
 export { default as Icon } from './Image/Icon';
@@ -15,7 +14,6 @@ export { default as RefreshControl } from './Loader/RefreshControl';
 export { default as Alert } from './Modal/Alert';
 export { default as Modal } from './Modal/Modal';
 export { default as DateTimePicker } from './Picker/DateTimePicker';
-export { default as ImagePicker } from './Picker/ImagePicker';
 export { default as BottomSpacer } from './Spacer/BottomSpacer';
 export { default as Spacer } from './Spacer/Spacer';
 export { default as MultilineTextInput } from './Text/Input/Multiline/MultilineTextInput';

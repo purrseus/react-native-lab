@@ -1,13 +1,12 @@
 import { Alert } from '@components/core';
-import { DateTimePickerMethods, ImagePickerMethods } from '@core/interfaces';
-import { PickedImageType } from '@core/types';
+import { DateTimePickerMethods } from '@core/interfaces';
+import { useImagePicker } from '@hooks';
 import { useEffect, useRef, useState } from 'react';
 
 const usePickerContainer = () => {
-  const [images, setImages] = useState<PickedImageType[]>([]);
   const [dateTime, setDateTime] = useState<Date | null>(null);
-  const imagePickerRef = useRef<ImagePickerMethods | null>(null);
   const dateTimePickerRef = useRef<DateTimePickerMethods | null>(null);
+  const { images, pickImage } = useImagePicker();
 
   useEffect(() => {
     if (images.isNotEmpty)
@@ -20,16 +19,13 @@ const usePickerContainer = () => {
     if (dateTime) Alert(dateTime.toString());
   }, [dateTime]);
 
-  const showImagePicker = () => imagePickerRef.current?.pick();
+  const showImagePicker = pickImage;
 
   const showDateTimePicker = () => dateTimePickerRef.current?.show();
 
   return {
-    images,
-    setImages,
     dateTime,
     setDateTime,
-    imagePickerRef,
     dateTimePickerRef,
     showImagePicker,
     showDateTimePicker,

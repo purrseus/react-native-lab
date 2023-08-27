@@ -23,18 +23,6 @@ export interface CheckboxItem<T = any> {
   disabled?: boolean;
 }
 
-export interface ActionSheetMethods {
-  show: () => void;
-  /** @platform android */
-  hide: () => void;
-}
-
-export interface ImagePickerMethods {
-  pick: () => void;
-  replace: (replaceIndex: number) => void;
-  delete: (deleteIndex?: number) => void;
-}
-
 export interface OverlayLoadingMethods {
   show: Dispatch<SetStateAction<boolean>>;
 }
