@@ -21,5 +21,9 @@
     "takePhoto": "Chụp ảnh",
     "chooseFromLibrary": "Chọn ảnh từ Thư viện",
     "cancel": "Hủy"
+  },
+  "text": {
+    "readMore": "Đọc thêm",
+    "seeLess": "Ẩn bớt"
   }
 }

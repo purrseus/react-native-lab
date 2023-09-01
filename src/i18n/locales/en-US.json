@@ -21,5 +21,9 @@
     "takePhoto": "Take Photo...",
     "chooseFromLibrary": "Choose from Library...",
     "cancel": "Cancel"
+  },
+  "text": {
+    "readMore": "Read more",
+    "seeLess": "See less"
   }
 }

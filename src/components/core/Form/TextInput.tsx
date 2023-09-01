@@ -1,12 +1,10 @@
 import { CommonFieldProps, StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { createField } from '@utilities';
-import { forwardRef, RefAttributes } from 'react';
-import { StyleProp, TextInput as RNTextInput, View, ViewStyle } from 'react-native';
-import MultilineTextInput, {
-  MultilineTextInputProps,
-} from '../Text/Input/Multiline/MultilineTextInput';
-import IconTextInput, { IconTextInputProps } from '../Text/Input/Singleline/IconTextInput';
+import { RefAttributes, forwardRef } from 'react';
+import { TextInput as RNTextInput, StyleProp, View, ViewStyle } from 'react-native';
+import MultilineTextInput, { MultilineTextInputProps } from '../Input/Multiline/MultilineTextInput';
+import IconTextInput, { IconTextInputProps } from '../Input/Singleline/IconTextInput';
 import Text from '../Text/Text';
 
 type MixinTextInputProps<T extends boolean = false> = (T extends true
