@@ -1,7 +1,5 @@
 import { execSync } from 'child_process';
-import { readFileSync } from 'fs';
 import inquirer from 'inquirer';
-import path from 'path';
 
 const PLACEHOLDER_NAME = 'ReactNativeLab';
 const APP_CENTER_OWNER_NAME = '<Your_owner_name>';
@@ -88,21 +86,5 @@ export const commands = {
     `appcenter codepush release-react -a ${APP_CENTER_OWNER_NAME}/${appCenterAppName[os]} -d ${env} -t ${version} -m`,
 };
 
-export const loadEnvFile = envSuffix => {
-  const env = readFileSync(path.join(`environments/.env.${envSuffix}`), 'utf8');
-
-  return Object.fromEntries(
-    env
-      .split('\n')
-      .filter(line => !!line.length && !line.startsWith('#'))
-      .map(line => {
-        const firstEqualIndex = line.indexOf('=');
-        if (firstEqualIndex < 0) throw new SyntaxError(`.env.${envSuffix}`);
-
-        return [
-          line.slice(0, firstEqualIndex),
-          line.slice(firstEqualIndex + 1).replace(/(^"|"$)/g, ''),
-        ];
-      }),
-  );
-};
+export const withENV = (envSuffix, command) =>
+  `(source ./environments/.env.${envSuffix} && ${command})`;

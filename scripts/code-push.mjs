@@ -3,7 +3,7 @@ import {
   createQuestions,
   envs,
   execScriptSync,
-  loadEnvFile,
+  withENV,
   uncapitalize,
 } from './utils.mjs';
 
@@ -23,10 +23,12 @@ import {
     },
   ]);
 
-  const { ANDROID_VERSION_NAME, IOS_VERSION } = loadEnvFile(uncapitalize(env));
+  const androidCommand = withENV(
+    uncapitalize(env),
+    commands.codePush('🤖 Android', env, '$ANDROID_VERSION_NAME'),
+  );
 
-  const androidCommand = commands.codePush('🤖 Android', env, ANDROID_VERSION_NAME);
-  const iosCommand = commands.codePush('🍎 iOS', env, IOS_VERSION);
+  const iosCommand = withENV(uncapitalize(env), commands.codePush('🍎 iOS', env, '$IOS_VERSION'));
 
   if (os === 'Both') {
     execScriptSync(`${androidCommand} && ${iosCommand}`);
