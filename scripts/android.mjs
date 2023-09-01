@@ -3,7 +3,7 @@ import {
   createBuildQuestionCollections,
   createQuestions,
   execScriptSync,
-  platformBuildTypes,
+  platformInfo,
   uncapitalize,
 } from './utils.mjs';
 
@@ -21,7 +21,7 @@ import {
 
   const { env, buildType } = await createQuestions(createBuildQuestionCollections('android'));
 
-  if (platformBuildTypes.android.includes(buildType)) {
+  if (platformInfo.buildTypes.android.includes(buildType)) {
     execScriptSync(commands.generateAndroidFile(`${buildVariantPrefix[buildType]}${env}Release`));
   } else {
     execScriptSync(commands.runAndroid(uncapitalize(`${env}${buildType}`), suffixAppId[env]));

@@ -2,11 +2,13 @@ import { execSync } from 'child_process';
 import inquirer from 'inquirer';
 
 const PLACEHOLDER_NAME = 'ReactNativeLab';
-const APP_CENTER_OWNER_NAME = '<Your_owner_name>';
 
-const appCenterAppName = {
-  '🤖 Android': '<Your_Android_app_name>',
-  '🍎 iOS': '<Your_iOS_app_name>',
+const appCenter = {
+  ownerName: '<Your_owner_name>',
+  appName: {
+    '🤖 Android': '<Your_Android_app_name>',
+    '🍎 iOS': '<Your_iOS_app_name>',
+  },
 };
 
 const gitBranches = {
@@ -15,14 +17,15 @@ const gitBranches = {
   Production: 'main',
 };
 
-const platformName = {
-  android: '🤖 Android',
-  ios: '🍎 iOS',
-};
-
-export const platformBuildTypes = {
-  android: ['APK', 'AAB'],
-  ios: ['Archive'],
+export const platformInfo = {
+  name: {
+    android: '🤖 Android',
+    ios: '🍎 iOS',
+  },
+  buildTypes: {
+    android: ['APK', 'AAB'],
+    ios: ['Archive'],
+  },
 };
 
 const ensureGitBranch = env => {
@@ -59,14 +62,14 @@ export const createBuildQuestionCollections = platform => [
   {
     type: 'list',
     name: 'env',
-    message: `[${platformName[platform]}] Select the environment you want to use:`,
+    message: `[${platform[platform]}] Select the environment you want to use:`,
     choices: envs,
   },
   {
     type: 'list',
     name: 'buildType',
-    message: `[${platformName[platform]}] Select the build type you want to use:`,
-    choices: ['Debug', 'Release'].concat(platformBuildTypes[platform]),
+    message: `[${platformInfo.name[platform]}] Select the build type you want to use:`,
+    choices: ['Debug', 'Release'].concat(platformInfo.buildTypes[platform]),
   },
 ];
 
@@ -83,7 +86,7 @@ export const commands = {
   openXcode: () => 'xed -b ios',
 
   codePush: (os, env, version) =>
-    `appcenter codepush release-react -a ${APP_CENTER_OWNER_NAME}/${appCenterAppName[os]} -d ${env} -t ${version} -m`,
+    `appcenter codepush release-react -a ${appCenter.ownerName}/${appCenter.appName[os]} -d ${env} -t ${version} -m`,
 };
 
 export const withENV = (envSuffix, command) =>

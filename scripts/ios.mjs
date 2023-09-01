@@ -4,7 +4,7 @@ import {
   createQuestions,
   execScriptSync,
   getArguments,
-  platformBuildTypes,
+  platformInfo,
   uncapitalize,
 } from './utils.mjs';
 
@@ -25,7 +25,7 @@ import {
 
   const { env, buildType } = await createQuestions(createBuildQuestionCollections('ios'));
 
-  if (platformBuildTypes.ios.includes(buildType)) {
+  if (platformInfo.buildTypes.ios.includes(buildType)) {
     openXCode();
   } else {
     execScriptSync(commands.runIos(uncapitalize(env), buildType, envShorts[env]));
