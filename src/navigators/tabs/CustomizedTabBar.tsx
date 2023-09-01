@@ -21,7 +21,7 @@ interface TabUI {
 
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 
-const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
+export default function CustomizedTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
   const styles = useStyle(createStyles);
   const { t } = useAppTranslation('tab');
   const { keyboardShown } = useKeyboard();
@@ -128,7 +128,7 @@ const CustomizedTabBar = ({ state, descriptors, navigation }: BottomTabBarProps)
       <BottomSpacer type="halfSafeArea" />
     </AnimatedSafeAreaView>
   );
-};
+}
 
 const createStyles = ({ colors, create }: StyleCallbackParams) =>
   create({
@@ -156,5 +156,3 @@ const createStyles = ({ colors, create }: StyleCallbackParams) =>
       fontWeight: 'bold',
     },
   });
-
-export default CustomizedTabBar;

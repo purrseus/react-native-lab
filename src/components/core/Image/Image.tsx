@@ -58,7 +58,7 @@ const _Image = compareMemo<ImageProps>(({ style, cached, onLoad, ...props }) => 
   const [size, setSize] = useState<CommonSize>({ width: 0, height: 0 });
   const imageStyle = styles[!!size.width && !!size.height ? 'image' : 'progressImage'];
 
-  const _onLoad = useCallback(
+  const handleOnLoad = useCallback(
     ({ nativeEvent }: NativeSyntheticEvent<ImageLoadEventData> | OnLoadEvent) => {
       onLoad?.({ nativeEvent } as Parameters<NonNullable<ImageProps['onLoad']>>[0]);
 
@@ -71,13 +71,13 @@ const _Image = compareMemo<ImageProps>(({ style, cached, onLoad, ...props }) => 
   return cached ? (
     <FastImage
       {...(props as FastImageProps)}
-      onLoad={_onLoad}
+      onLoad={handleOnLoad}
       style={[imageStyle, style as StyleProp<FastImageStyle>]}
     />
   ) : (
     <RNImage
       {...(props as RNImageProps)}
-      onLoad={_onLoad}
+      onLoad={handleOnLoad}
       progressiveRenderingEnabled
       style={[imageStyle, style as StyleProp<ImageStyle>]}
     />

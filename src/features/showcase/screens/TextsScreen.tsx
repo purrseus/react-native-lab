@@ -15,7 +15,7 @@ import { useStyle } from '@hooks';
 import { useTranslation } from 'react-i18next';
 import { Separator } from '../components';
 
-const TextsScreen = () => {
+export default function TextsScreen() {
   const { t } = useTranslation();
   const styles = useStyle(createStyles);
 
@@ -88,7 +88,7 @@ const TextsScreen = () => {
       </KeyboardAwareScrollView>
     </StackContainer>
   );
-};
+}
 
 const createStyles = ({ create }: StyleCallbackParams) =>
   create({
@@ -106,5 +106,3 @@ const createStyles = ({ create }: StyleCallbackParams) =>
       width: '100%',
     },
   });
-
-export default TextsScreen;

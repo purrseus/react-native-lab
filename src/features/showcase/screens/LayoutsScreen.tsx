@@ -4,7 +4,7 @@ import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 
-const LayoutsScreen = () => {
+export default function LayoutsScreen() {
   const styles = useStyle(createStyles);
 
   return (
@@ -33,7 +33,7 @@ const LayoutsScreen = () => {
       </Row>
     </StackContainer>
   );
-};
+}
 
 const createStyles = ({ create }: StyleCallbackParams) =>
   create({
@@ -41,5 +41,3 @@ const createStyles = ({ create }: StyleCallbackParams) =>
       paddingVertical: 16,
     },
   });
-
-export default LayoutsScreen;

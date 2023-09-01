@@ -1,5 +1,5 @@
 import { Divider } from '@components/core';
 
-const Separator = () => <Divider marginVertical={16} />;
-
-export default Separator;
+export default function Separator() {
+  return <Divider marginVertical={16} />;
+}

@@ -6,7 +6,7 @@ import { PropsWithChildren } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-const LayoutProvider = ({ children }: PropsWithChildren) => {
+export default function LayoutProvider({ children }: PropsWithChildren) {
   return (
     <SafeAreaProvider>
       <ActionSheetProvider>
@@ -18,6 +18,4 @@ const LayoutProvider = ({ children }: PropsWithChildren) => {
       </ActionSheetProvider>
     </SafeAreaProvider>
   );
-};
-
-export default LayoutProvider;
+}

@@ -10,10 +10,10 @@ import {
   LoaderScreen,
   ModalsScreen,
   PickersScreen,
-  TouchableScreen,
   ShowcaseListScreen,
   SpacersScreen,
   TextsScreen,
+  TouchableScreen,
 } from '@features/showcase/screens';
 import { useStyle } from '@hooks';
 import { stackScreenOptions } from '@navigators/options';
@@ -52,7 +52,7 @@ const ProtectedScreens = (
   </NativeStack.Group>
 );
 
-const RootNavigator = () => {
+export default function RootNavigator() {
   const styles = useStyle(createStyles);
   const isAuthenticated = useAuthStore(
     ({ accessToken, refreshToken }) => accessToken?.isNotEmpty && refreshToken?.isNotEmpty,
@@ -66,6 +66,4 @@ const RootNavigator = () => {
       {isAuthenticated ? ProtectedScreens : PublicScreens}
     </NativeStack.Navigator>
   );
-};
-
-export default RootNavigator;
+}

@@ -14,51 +14,45 @@ type UseActionSheet = (
   ...args: Parameters<ActionSheetProps['showActionSheetWithOptions']>
 ) => () => void;
 
-const useAppActionSheet: UseActionSheet = (
-  { options, cancelButtonIndex, ...otherOptions },
-  callback,
-) => {
+const useAppActionSheet: UseActionSheet = (actionSheetOptions, callback) => {
   const { showActionSheetWithOptions } = useActionSheet();
   const theme = useCommonStore(state => state.theme);
   const colorScheme = useColorScheme();
   const styles = useStyle(createStyles);
 
   const showActionSheet = useCallback(() => {
-    const keepOriginalValue = !Number.isInteger(cancelButtonIndex) || isIos();
-    const _options = keepOriginalValue ? options : options.slice(1).concat(options.slice(0, 1));
-    const _cancelButtonIndex = keepOriginalValue ? cancelButtonIndex : options.lastIndex;
+    const keepOriginalValue = !Number.isInteger(actionSheetOptions.cancelButtonIndex) || isIos();
+
+    const options = keepOriginalValue
+      ? actionSheetOptions.options
+      : actionSheetOptions.options.slice(1).concat(actionSheetOptions.options.slice(0, 1));
+
+    const cancelButtonIndex = keepOriginalValue
+      ? actionSheetOptions.cancelButtonIndex
+      : options.lastIndex;
 
     const additionalOptions: ActionSheetOptions = {
-      options: _options,
-      cancelButtonIndex: _cancelButtonIndex,
+      options,
+      cancelButtonIndex,
       userInterfaceStyle: theme === 'auto' ? colorScheme || 'light' : theme,
       containerStyle: styles.container,
       titleTextStyle: StyleSheet.flatten([
         styles.title,
-        !!otherOptions.message && styles.boldedTitle,
+        !!actionSheetOptions.message && styles.boldedTitle,
       ]),
       messageTextStyle: StyleSheet.flatten([
         styles.title,
-        !otherOptions.title && styles.boldedMessage,
+        !actionSheetOptions.title && styles.boldedMessage,
       ]),
       textStyle: styles.text,
       showSeparators: false,
       destructiveColor: styles.destructive.color,
     };
 
-    return showActionSheetWithOptions({ ...otherOptions, ...additionalOptions }, index =>
+    return showActionSheetWithOptions({ ...actionSheetOptions, ...additionalOptions }, index =>
       callback(keepOriginalValue ? index : index === options.lastIndex ? 0 : (index ?? -1) + 1),
     );
-  }, [
-    cancelButtonIndex,
-    options,
-    theme,
-    colorScheme,
-    styles,
-    otherOptions,
-    showActionSheetWithOptions,
-    callback,
-  ]);
+  }, [actionSheetOptions, theme, colorScheme, styles, showActionSheetWithOptions, callback]);
 
   return showActionSheet;
 };

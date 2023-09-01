@@ -19,7 +19,7 @@ const TabBar: NonNullable<BottomTabNavigationConfig['tabBar']> = props => (
   <CustomizedTabBar {...props} />
 );
 
-const BottomTabBar = () => {
+export default function BottomTabBar() {
   const styles = useStyle(createStyles);
 
   return (
@@ -35,6 +35,4 @@ const BottomTabBar = () => {
       <BottomTab.Screen name={TabScreenName.Profile} component={ProfileScreen} />
     </BottomTab.Navigator>
   );
-};
-
-export default BottomTabBar;
+}

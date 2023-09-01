@@ -5,10 +5,8 @@ import { PropsWithChildren } from 'react';
 
 const useNavigationFlipper = __DEV__ ? useFlipper : null;
 
-const NavigationProvider = ({ children }: PropsWithChildren) => {
+export default function NavigationProvider({ children }: PropsWithChildren) {
   useNavigationFlipper?.(navigationRef);
 
   return <NavigationContainer ref={navigationRef}>{children}</NavigationContainer>;
-};
-
-export default NavigationProvider;
+}
