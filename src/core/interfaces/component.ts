@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Dispatch, SetStateAction } from 'react';
-import { ImageRequireSource } from 'react-native';
+import { Dispatch, FC, SetStateAction } from 'react';
+import { SvgProps } from 'react-native-svg';
 
 export interface CommonFieldProps<T = any, I = false> {
   name: string;
@@ -12,7 +12,7 @@ export interface CommonFieldProps<T = any, I = false> {
 }
 
 export interface AppBarAction {
-  icon: ImageRequireSource;
+  Icon: FC<SvgProps>;
   size?: number;
   onPress: () => void;
 }

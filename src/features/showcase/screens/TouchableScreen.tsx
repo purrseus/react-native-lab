@@ -1,4 +1,3 @@
-import { icons } from '@assets';
 import { Button, Row, Spacer, Switch } from '@components/core';
 import { StackContainer } from '@components/shared';
 import { ProtectedScreenName } from '@core/enums';
@@ -8,6 +7,7 @@ import { colors, globalStyles } from '@themes';
 import { withHook } from '@utilities';
 import { Separator } from '../components';
 import { useTouchableContainer } from '../containers';
+import { ArrowLeft, Home } from '@assets/icons';
 
 const TouchableScreen = withHook(useTouchableContainer, ({ isEnabled, onPress, isLoading }) => {
   const styles = useStyle(createStyles);
@@ -63,22 +63,20 @@ const TouchableScreen = withHook(useTouchableContainer, ({ isEnabled, onPress, i
       <Separator />
 
       {/* Icon */}
-      <Button title="Title with right icon" iconSpacing={8} iconRight={icons.bottomTab.home} />
+      <Button title="Title with right icon" RightIcon={props => <Home {...props} />} />
       <Separator />
-      <Button title="Title with left icon" iconSpacing={8} iconLeft={icons.appBar.back} />
+      <Button title="Title with left icon" LeftIcon={props => <ArrowLeft {...props} />} />
       <Separator />
       <Button
-        title="Title with both icon"
-        iconSpacing={8}
-        iconLeft={icons.appBar.back}
-        iconRight={icons.bottomTab.home}
+        title="Title with both icons"
+        LeftIcon={props => <ArrowLeft {...props} />}
+        RightIcon={props => <Home {...props} />}
       />
       <Separator />
       <Button
-        title="Title is not in center position"
-        titleCenter={false}
-        iconSpacing={8}
-        iconRight={icons.bottomTab.home}
+        title="Non-center title"
+        centerTitle={false}
+        RightIcon={props => <Home {...props} />}
       />
     </StackContainer>
   );

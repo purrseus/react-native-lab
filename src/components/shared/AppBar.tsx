@@ -1,5 +1,5 @@
-import { icons } from '@assets';
-import { Icon, Row, Spacer, Text, Touchable } from '@components/core';
+import { ArrowLeft } from '@assets/icons';
+import { Row, Spacer, Text, Touchable } from '@components/core';
 import { DEFAULT_HORIZONTAL_EDGE_SPACING, APP_BAR_HEIGHT } from '@core/constants';
 import { AppBarAction, StyleCallbackParams } from '@core/interfaces';
 import { useLayout, useStyle } from '@hooks';
@@ -15,8 +15,6 @@ export interface AppBarProps extends ViewProps {
   actionSeparatorWidth?: number;
 }
 
-const DEFAULT_ICON_SIZE = 24;
-
 const AppBar = compareMemo<AppBarProps>(
   ({ title, rightActions = [], actionSeparatorWidth = 8, ...props }) => {
     const styles = useStyle(createStyles);
@@ -27,19 +25,19 @@ const AppBar = compareMemo<AppBarProps>(
 
     const RightActions = useMemo(
       () =>
-        rightActions.map(({ onPress, icon, size }: AppBarAction, index, array) => {
+        rightActions.map(({ onPress, Icon, size = 24 }: AppBarAction, index, array) => {
           const showSpacerSeparator = index !== array.lastIndex;
 
           return (
             <Fragment key={index}>
               <Touchable hitSlop={actionSeparatorWidth / 2} onPress={onPress}>
-                <Icon source={icon} size={size || DEFAULT_ICON_SIZE} />
+                <Icon width={size} height={size} stroke={styles.icon.tintColor} />
               </Touchable>
               {showSpacerSeparator && <Spacer w={actionSeparatorWidth} />}
             </Fragment>
           );
         }),
-      [rightActions, actionSeparatorWidth],
+      [rightActions, actionSeparatorWidth, styles.icon.tintColor],
     );
 
     const handleGoBack = canGoBack() ? goBack : undefined;
@@ -56,7 +54,7 @@ const AppBar = compareMemo<AppBarProps>(
           >
             {handleGoBack && (
               <Touchable hitSlop={actionSeparatorWidth / 2} onPress={handleGoBack}>
-                <Icon source={icons.appBar.back} size={DEFAULT_ICON_SIZE} />
+                <ArrowLeft stroke={styles.icon.tintColor} />
               </Touchable>
             )}
           </Row>
@@ -101,6 +99,9 @@ const createStyles = ({ create, edgeInsets, colors }: StyleCallbackParams) =>
     },
     rightWrapper: {
       justifyContent: 'flex-end',
+    },
+    icon: {
+      tintColor: colors.primaryText,
     },
     title: {
       fontWeight: 'bold',

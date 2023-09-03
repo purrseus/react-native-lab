@@ -1,5 +1,5 @@
-import { icons } from '@assets';
-import { BottomSpacer, Icon, Row, Spacer, Text, Touchable } from '@components/core';
+import * as Icons from '@assets/icons';
+import { BottomSpacer, Row, Spacer, Text, Touchable } from '@components/core';
 import { HORIZONTAL_SAFETY_EDGES, TAB_BAR_HEIGHT } from '@core/constants';
 import { TabScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
@@ -7,14 +7,15 @@ import { useAppTranslation, useKeyboard, useStyle } from '@hooks';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { colors as defaultColors, globalStyles } from '@themes';
 import { createShadow } from '@utilities';
-import { useMemo } from 'react';
-import { ColorValue, ImageRequireSource, StyleSheet } from 'react-native';
+import { FC, useMemo } from 'react';
+import { ColorValue, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { SvgProps } from 'react-native-svg';
 
 interface TabUI {
-  icon: ImageRequireSource;
-  focusedIcon: ImageRequireSource;
+  icon: FC<SvgProps>;
+  focusedIcon: FC<SvgProps>;
   focusedColor: ColorValue;
   label: string;
 }
@@ -29,26 +30,26 @@ export default function CustomizedTabBar({ state, descriptors, navigation }: Bot
   const tabUI: Record<TabScreenName, TabUI> = useMemo(
     () => ({
       [TabScreenName.Home]: {
-        icon: icons.bottomTab.home,
-        focusedIcon: icons.bottomTab.homeFocused,
+        icon: Icons.Home,
+        focusedIcon: Icons.HomeFocused,
         focusedColor: defaultColors.purple,
         label: t('home'),
       },
       [TabScreenName.Messages]: {
-        icon: icons.bottomTab.message,
-        focusedIcon: icons.bottomTab.messageFocused,
+        icon: Icons.Messages,
+        focusedIcon: Icons.MessagesFocused,
         focusedColor: defaultColors.orange,
         label: t('messages'),
       },
       [TabScreenName.Notification]: {
-        icon: icons.bottomTab.notification,
-        focusedIcon: icons.bottomTab.notificationFocused,
+        icon: Icons.Notification,
+        focusedIcon: Icons.NotificationFocused,
         focusedColor: defaultColors.red,
         label: t('notification'),
       },
       [TabScreenName.Profile]: {
-        icon: icons.bottomTab.profile,
-        focusedIcon: icons.bottomTab.profileFocused,
+        icon: Icons.Profile,
+        focusedIcon: Icons.ProfileFocused,
         focusedColor: defaultColors.blue,
         label: t('profile'),
       },
@@ -72,7 +73,7 @@ export default function CustomizedTabBar({ state, descriptors, navigation }: Bot
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
           const screenName = route.name as TabScreenName;
-          const { icon, focusedIcon, focusedColor, label } = tabUI[screenName];
+          const { icon: Icon, focusedIcon: FocusedIcon, focusedColor, label } = tabUI[screenName];
           const isFocused = state.index === index;
 
           const onPress = () => {
@@ -109,11 +110,11 @@ export default function CustomizedTabBar({ state, descriptors, navigation }: Bot
               onLongPress={onLongPress}
               style={globalStyles.flexFillCenter}
             >
-              <Icon
-                size={24}
-                source={isFocused ? focusedIcon : icon}
-                style={[styles.icon, isFocused && { tintColor: focusedColor as string }]}
-              />
+              {isFocused ? (
+                <FocusedIcon fill={focusedColor} />
+              ) : (
+                <Icon stroke={styles.icon.tintColor} />
+              )}
               <Spacer h={4} />
               <Text
                 style={[styles.label, isFocused && [{ color: focusedColor }, styles.focusedLabel]]}

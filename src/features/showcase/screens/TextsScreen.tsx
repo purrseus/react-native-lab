@@ -1,6 +1,4 @@
-import { icons } from '@assets';
 import {
-  Icon,
   IconTextInput,
   KeyboardAwareScrollView,
   MultilineTextInput,
@@ -14,6 +12,7 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { useTranslation } from 'react-i18next';
 import { Separator } from '../components';
+import { Home } from '@assets/icons';
 
 export default function TextsScreen() {
   const { t } = useTranslation();
@@ -47,26 +46,20 @@ export default function TextsScreen() {
         <Separator />
 
         <Text>IconTextInput (left)</Text>
-        <IconTextInput
-          placeholder="IconTextInput (left)"
-          IconLeftComponent={<Icon source={icons.bottomTab.home} />}
-        />
+        <IconTextInput placeholder="IconTextInput (left)" IconLeftComponent={<Home />} />
 
         <Separator />
 
         <Text>IconTextInput (right)</Text>
-        <IconTextInput
-          placeholder="IconTextInput (right)"
-          IconRightComponent={<Icon source={icons.bottomTab.home} />}
-        />
+        <IconTextInput placeholder="IconTextInput (right)" IconRightComponent={<Home />} />
 
         <Separator />
 
         <Text>IconTextInput (both)</Text>
         <IconTextInput
           placeholder="IconTextInput (both)"
-          IconLeftComponent={<Icon source={icons.bottomTab.home} />}
-          IconRightComponent={<Icon source={icons.bottomTab.message} />}
+          IconLeftComponent={<Home />}
+          IconRightComponent={<Home />}
         />
 
         <Separator />

@@ -1,4 +1,5 @@
-import { Icon, Image, Spacer, Text } from '@components/core';
+import { More } from '@assets/icons';
+import { Image, Spacer, Text } from '@components/core';
 import { StackContainer } from '@components/shared';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
@@ -28,7 +29,7 @@ const ImagesScreen = withHook(useImageContainer, ({ imageUrl }) => {
       <Spacer h={60} />
 
       <Text>Icon</Text>
-      <Icon source={imageUrl} size={24} />
+      <More stroke={'red'} />
       <View />
     </StackContainer>
   );

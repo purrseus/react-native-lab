@@ -1,20 +1,12 @@
-import { DEFAULT_ICON_SIZE, HORIZONTAL_GRADIENT_COORDINATES } from '@core/constants';
+import { HORIZONTAL_GRADIENT_COORDINATES } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { alphaHexColor, compareMemo } from '@utilities';
-import {
-  ColorValue,
-  ImageRequireSource,
-  ImageStyle,
-  StyleProp,
-  StyleSheet,
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
+import { FC, useMemo } from 'react';
+import { ColorValue, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon, { IconProps } from '../Image/Icon';
+import { SvgProps } from 'react-native-svg';
 import ActivityIndicator from '../Loader/ActivityIndicator';
-import Spacer from '../Spacer/Spacer';
 import Text from '../Text/Text';
 import Touchable, { TouchableProps } from './Touchable';
 
@@ -30,14 +22,11 @@ interface ButtonProps extends TouchableProps {
   gradient?: boolean;
   gradientColors?: ColorValue[];
   color?: ColorValue;
-  titleCenter?: boolean;
+  centerTitle?: boolean;
   titleStyle?: StyleProp<TextStyle>;
   loading?: boolean;
-  iconLeft?: ImageRequireSource;
-  iconRight?: ImageRequireSource;
-  iconSpacing?: number;
-  iconSize?: number | [number, number];
-  iconProps?: Partial<IconProps>;
+  LeftIcon?: FC<SvgProps>;
+  RightIcon?: FC<SvgProps>;
 }
 
 const sizes: Record<SizeName, [ButtonSize, TitleSize]> = {
@@ -55,62 +44,42 @@ const Button = compareMemo<ButtonProps>(
     title,
     gradient = false,
     gradientColors,
-    titleCenter = true,
+    centerTitle = true,
     titleStyle,
-    loading = false,
-    iconLeft,
-    iconRight,
-    iconSpacing = 0,
-    iconSize,
-    iconProps,
+    loading,
+    LeftIcon,
+    RightIcon,
     disabled,
     ...props
   }) => {
     const [buttonSize, titleSize] = sizes[size];
-    const hasLeftIcon = typeof iconLeft === 'number';
-    const hasRightIcon = typeof iconRight === 'number';
-    const [leftIconSize, rightIconSize]: number[] = Array.isArray(iconSize)
-      ? iconSize
-      : new Array(2).fill(iconSize || DEFAULT_ICON_SIZE);
     const styles = useStyle(createStyles(color));
-    const colorStyle = styles[`${disabled ? 'disabled' : type}Color`];
+    const contentStyle = styles[`${disabled ? 'disabled' : type}Color`];
 
-    const iconStyle = (direction: 'left' | 'right', tintColor: ColorValue): ImageStyle => ({
-      [direction === 'left' ? 'marginLeft' : 'marginRight']: iconSpacing,
-      tintColor,
-    });
+    const LeftIconComponent = useMemo(
+      () => (LeftIcon ? <LeftIcon stroke={contentStyle.color} /> : null),
+      [LeftIcon, contentStyle.color],
+    );
 
-    const ButtonContent = (
-      <>
-        {hasLeftIcon ? (
-          <Icon
-            source={iconLeft}
-            size={leftIconSize}
-            {...iconProps}
-            style={[iconStyle('left', colorStyle.color), iconProps?.style]}
-          />
-        ) : hasRightIcon && titleCenter ? (
-          <Spacer w={rightIconSize + iconSpacing} />
-        ) : null}
+    const RightIconComponent = useMemo(
+      () => (RightIcon ? <RightIcon stroke={contentStyle.color} /> : null),
+      [RightIcon, contentStyle.color],
+    );
 
-        <Text
-          numberOfLines={1}
-          style={[styles.title, { fontSize: titleSize }, colorStyle, titleStyle]}
-        >
-          {title}
-        </Text>
+    const LeftCounterWeight = useMemo(
+      () =>
+        !!RightIcon && centerTitle ? (
+          <View style={styles.counterWeight}>{RightIconComponent}</View>
+        ) : null,
+      [RightIcon, RightIconComponent, centerTitle, styles.counterWeight],
+    );
 
-        {hasRightIcon ? (
-          <Icon
-            source={iconRight}
-            size={rightIconSize}
-            {...iconProps}
-            style={[iconStyle('right', colorStyle.color), iconProps?.style]}
-          />
-        ) : hasLeftIcon && titleCenter ? (
-          <Spacer w={leftIconSize + iconSpacing} />
-        ) : null}
-      </>
+    const RightCounterWeight = useMemo(
+      () =>
+        !!LeftIcon && centerTitle ? (
+          <View style={styles.counterWeight}>{LeftIconComponent}</View>
+        ) : null,
+      [LeftIcon, LeftIconComponent, centerTitle, styles.counterWeight],
     );
 
     return (
@@ -133,7 +102,20 @@ const Button = compareMemo<ButtonProps>(
           />
         )}
 
-        {loading ? <ActivityIndicator color={colorStyle.color} /> : ButtonContent}
+        {loading ? (
+          <ActivityIndicator color={contentStyle.color} />
+        ) : (
+          <>
+            {LeftIconComponent || LeftCounterWeight}
+            <Text
+              numberOfLines={1}
+              style={[styles.title, { fontSize: titleSize }, contentStyle, titleStyle]}
+            >
+              {title}
+            </Text>
+            {RightIconComponent || RightCounterWeight}
+          </>
+        )}
       </Touchable>
     );
   },
@@ -181,6 +163,10 @@ const createStyles =
       title: {
         fontWeight: 'bold',
         maxWidth: '80%',
+        marginHorizontal: 8,
+      },
+      counterWeight: {
+        opacity: 0,
       },
     });
 

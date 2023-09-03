@@ -1,6 +1,5 @@
 export { default as BottomSheet } from './BottomSheet/BottomSheet';
 export { default as Field } from './Form/Field';
-export { default as Icon } from './Image/Icon';
 export { default as Image } from './Image/Image';
 export { default as MultilineTextInput } from './Input/Multiline/MultilineTextInput';
 export { default as IconTextInput } from './Input/Singleline/IconTextInput';

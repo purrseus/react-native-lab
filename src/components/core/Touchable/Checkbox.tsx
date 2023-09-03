@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { icons } from '@assets';
+import { Tick } from '@assets/icons';
 import { CheckboxItem, StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { compareMemo } from '@utilities';
 import { StyleProp, ViewProps, ViewStyle } from 'react-native';
-import Icon from '../Image/Icon';
 import Row from '../Layout/Row';
 import Spacer from '../Spacer/Spacer';
 import Text from '../Text/Text';
@@ -29,11 +28,7 @@ const _Checkbox = compareMemo<CheckboxProps>(
           style={[styles.checkbox, styles[`checkbox${behaviorStyle}${stateStyle}`]]}
           {...{ disabled, onPress }}
         >
-          <Icon
-            source={icons.checkbox.tick}
-            size={20}
-            style={[styles.tick, { opacity: +!!isActive }]}
-          />
+          <Tick stroke={styles.tick.tintColor} width={10} height={10} opacity={+!!isActive} />
         </Touchable>
         <Spacer w={6} />
         <Text style={styles[`label${behaviorStyle}`]}>{label}</Text>
@@ -50,6 +45,10 @@ const createStyles = ({ colors, create }: StyleCallbackParams) =>
     checkbox: {
       borderRadius: 6,
       borderWidth: 1,
+      width: 20,
+      height: 20,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     checkboxEnabledInactive: {
       borderColor: colors.primaryText,
@@ -66,7 +65,6 @@ const createStyles = ({ colors, create }: StyleCallbackParams) =>
       borderColor: colors.transparent,
     },
     tick: {
-      transform: [{ scale: 1.4 }],
       tintColor: colors.white,
     },
     labelEnabled: {
