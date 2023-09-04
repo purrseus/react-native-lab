@@ -1,11 +1,4 @@
-import {
-  commands,
-  createQuestions,
-  envs,
-  execScriptSync,
-  withENV,
-  uncapitalize,
-} from './utils.mjs';
+import { commands, createQuestions, envs, execScriptSync, uncapitalize } from './utils.mjs';
 
 (async () => {
   const { os, env } = await createQuestions([
@@ -23,12 +16,20 @@ import {
     },
   ]);
 
-  const androidCommand = withENV(
-    uncapitalize(env),
-    commands.codePush('🤖 Android', env, '$ANDROID_VERSION_NAME'),
+  const uncapitalizedENV = uncapitalize(env);
+
+  const androidCommand = commands.withENV(
+    uncapitalizedENV,
+    commands.withFirebase(
+      uncapitalizedENV,
+      commands.runCodePush('🤖 Android', env, '$ANDROID_VERSION_NAME'),
+    ),
   );
 
-  const iosCommand = withENV(uncapitalize(env), commands.codePush('🍎 iOS', env, '$IOS_VERSION'));
+  const iosCommand = commands.withENV(
+    uncapitalizedENV,
+    commands.withFirebase(uncapitalizedENV, commands.runCodePush('🍎 iOS', env, '$IOS_VERSION')),
+  );
 
   if (os === 'Both') {
     execScriptSync(`${androidCommand} && ${iosCommand}`);

@@ -7,6 +7,7 @@
     "setup:code-push": "node scripts/setup.mjs code-push",
     "android": "node scripts/android.mjs",
     "ios": "node scripts/ios.mjs",
+    "firebase": "node scripts/firebase.mjs",
     "start": "react-native start --reset-cache",
     "xcode": "node scripts/ios.mjs xcode",
     "code-push": "node scripts/code-push.mjs",

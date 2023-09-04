@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { execScriptSync, getArguments, withENV } from './utils.mjs';
+import { execScriptSync, getArguments, commands } from './utils.mjs';
 
 const writeJSONFile = `cat <<EOF > ./android/app/src/main/assets/appcenter-config.json
 {
@@ -21,8 +21,8 @@ EOF
 `;
 
 const setupCodePush = () => {
-  execScriptSync(withENV('development', writeJSONFile));
-  execScriptSync(withENV('development', writePlistFile));
+  execScriptSync(commands.withENV('development', writeJSONFile));
+  execScriptSync(commands.withENV('development', writePlistFile));
   console.log('Setup CodePush... Done! ✨✨✨');
 };
 
