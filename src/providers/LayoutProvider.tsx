@@ -1,7 +1,7 @@
 import { OverlayLoading, StatusBar } from '@components/core';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { globalStyles } from '@themes';
-import { overlayLoadingRef } from '@utilities';
+import { overlayLoadingRef } from '@utils';
 import { PropsWithChildren } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';

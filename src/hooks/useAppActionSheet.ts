@@ -5,7 +5,7 @@ import {
   useActionSheet,
 } from '@expo/react-native-action-sheet';
 import { useCommonStore } from '@stores';
-import { alphaHexColor } from '@utilities';
+import { alphaHexColor } from '@utils';
 import { useCallback } from 'react';
 import { StyleSheet, useColorScheme } from 'react-native';
 import useStyle from './useStyle';

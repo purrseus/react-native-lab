@@ -1,6 +1,6 @@
 import { File, PromiseObject } from '@core/interfaces';
 import { PickedImageType } from '@core/types';
-import { checkCameraPermission, checkPhotoGalleryPermissions } from '@utilities';
+import { checkCameraPermission, checkPhotoGalleryPermissions } from '@utils';
 import { useCallback, useMemo, useRef } from 'react';
 import {
   CameraOptions,

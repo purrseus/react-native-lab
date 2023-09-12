@@ -1,7 +1,7 @@
 import { DateTimePickerMethods, StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { useCommonStore } from '@stores';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, useColorScheme } from 'react-native';

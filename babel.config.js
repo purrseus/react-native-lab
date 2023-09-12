@@ -19,7 +19,7 @@ module.exports = {
           '@services': './src/services',
           '@stores': './src/stores',
           '@themes': './src/themes',
-          '@utilities': './src/utilities',
+          '@utils': './src/utils',
         },
       },
     ],

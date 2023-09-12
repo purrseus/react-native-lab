@@ -1,6 +1,6 @@
 import { useTheme } from '@hooks';
 import { colors } from '@themes';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { StatusBar as RNStatusBar, StatusBarProps } from 'react-native';
 
 const StatusBar = compareMemo<StatusBarProps>(({ ...props }) => (

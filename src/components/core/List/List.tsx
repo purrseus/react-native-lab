@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FlashList, FlashListProps as RNFlashListProps } from '@shopify/flash-list';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { forwardRef, RefAttributes, useCallback, useRef } from 'react';
 import { FlatList, FlatListProps as RNFlatListProps, RefreshControlProps } from 'react-native';
 import RefreshControl from '../Loader/RefreshControl';

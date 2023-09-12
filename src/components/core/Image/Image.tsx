@@ -1,7 +1,7 @@
 import { StyleCallbackParams } from '@core/interfaces';
 import { CommonSize } from '@core/types';
 import { useStyle } from '@hooks';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { omit } from 'lodash';
 import { useCallback, useState } from 'react';
 import {

@@ -1,6 +1,6 @@
 import { OverlayLoadingMethods, StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { alphaHexColor, compareMemo } from '@utilities';
+import { alphaHexColor, compareMemo } from '@utils';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { View } from 'react-native';
 import Modal from '../Modal/Modal';

@@ -1,6 +1,6 @@
 import { StyleCallbackParams } from '@core/interfaces';
 import { useAppTranslation, useStyle } from '@hooks';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { useMemo, useRef, useState } from 'react';
 import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
 import Text, { TextProps } from './Text';

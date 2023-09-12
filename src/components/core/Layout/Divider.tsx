@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import { colors as defaultColors } from '@themes';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { ColorValue, StyleSheet, View, ViewStyle } from 'react-native';
 
 type DividerPropKeys = 'width' | 'borderRadius' | 'marginHorizontal' | 'marginVertical';

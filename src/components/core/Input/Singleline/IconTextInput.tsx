@@ -4,7 +4,7 @@ import { PADDING_VERTICAL_INPUT } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { forwardRef, ReactNode } from 'react';
 import {
   StyleProp,

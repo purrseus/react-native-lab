@@ -1,7 +1,7 @@
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { ScrollView, StyleProp, View, ViewProps, ViewStyle } from 'react-native';
 import AppBar, { AppBarProps } from './AppBar';
 

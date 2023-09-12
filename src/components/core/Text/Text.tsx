@@ -1,7 +1,7 @@
 import { DEFAULT_FONT_SIZE } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle, useThrottle } from '@hooks';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { Text as RNText, TextProps as RNTextProps } from 'react-native';
 
 export interface TextProps extends RNTextProps {}

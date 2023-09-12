@@ -1,7 +1,7 @@
 import { InfiniteList } from '@components/core';
 import { StackContainer } from '@components/shared';
 import { ProtectedScreenName } from '@core/enums';
-import { withHook } from '@utilities';
+import { withHook } from '@utils';
 import { Item } from '../components';
 import { useListContainer } from '../containers';
 import listAPI from '../services/apis/list';

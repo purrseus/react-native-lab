@@ -1,7 +1,7 @@
 import { StackContainer } from '@components/shared';
 import { ProtectedScreenName } from '@core/enums';
 import { globalStyles } from '@themes';
-import { withHook } from '@utilities';
+import { withHook } from '@utils';
 import { ShowcaseItem } from '../components';
 import { useLoaderContainer } from '../containers';
 

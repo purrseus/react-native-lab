@@ -1,5 +1,5 @@
 import { useTheme } from '@hooks';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { RefreshControl as RNRefreshControl, RefreshControlProps } from 'react-native';
 
 const RefreshControl = compareMemo<RefreshControlProps>(({ ...props }) => {

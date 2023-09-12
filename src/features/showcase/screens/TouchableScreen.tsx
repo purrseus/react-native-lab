@@ -4,7 +4,7 @@ import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { colors, globalStyles } from '@themes';
-import { withHook } from '@utilities';
+import { withHook } from '@utils';
 import { Separator } from '../components';
 import { useTouchableContainer } from '../containers';
 import { ArrowLeft, Home } from '@assets/icons';

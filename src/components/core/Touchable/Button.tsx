@@ -1,7 +1,7 @@
 import { HORIZONTAL_GRADIENT_COORDINATES } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { alphaHexColor, compareMemo } from '@utilities';
+import { alphaHexColor, compareMemo } from '@utils';
 import { FC, useMemo } from 'react';
 import { ColorValue, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';

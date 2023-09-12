@@ -1,7 +1,7 @@
 import { Touchable, Text } from '@components/core';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 
 interface ShowcaseItemProps {
   title: string;

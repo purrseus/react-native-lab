@@ -1,7 +1,7 @@
 import { MAX_HEIGHT_INPUT, MIN_HEIGHT_INPUT } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { forwardRef } from 'react';
 import {
   Platform,

@@ -5,7 +5,7 @@ import { AppBarAction, StyleCallbackParams } from '@core/interfaces';
 import { useLayout, useStyle } from '@hooks';
 import { useNavigation } from '@react-navigation/native';
 import { globalStyles } from '@themes';
-import { compareMemo, createShadow } from '@utilities';
+import { compareMemo, createShadow } from '@utils';
 import { Fragment, useMemo } from 'react';
 import { StatusBar, View, ViewProps } from 'react-native';
 

@@ -9,7 +9,7 @@ import {
   useInfiniteQuery,
 } from '@tanstack/react-query';
 import { globalStyles } from '@themes';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { forwardRef, RefAttributes, useMemo, useState } from 'react';
 import { RefreshControlProps, View } from 'react-native';
 import ActivityIndicator from '../Loader/ActivityIndicator';

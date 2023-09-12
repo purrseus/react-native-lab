@@ -3,7 +3,7 @@ import { StackContainer } from '@components/shared';
 import { ProtectedScreenName } from '@core/enums';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { withHook } from '@utilities';
+import { withHook } from '@utils';
 import { Separator, ShowcaseItem } from '../components';
 import { usePickerContainer } from '../containers';
 

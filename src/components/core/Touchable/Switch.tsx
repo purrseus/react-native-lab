@@ -1,7 +1,7 @@
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
-import { compareMemo, createShadow } from '@utilities';
+import { compareMemo, createShadow } from '@utils';
 import { ReactNode, useLayoutEffect } from 'react';
 import {
   ActivityIndicatorProps,

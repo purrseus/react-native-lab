@@ -2,7 +2,7 @@ import { Image, Touchable, Spacer, Text } from '@components/core';
 import { StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
 import { globalStyles } from '@themes';
-import { createShadow } from '@utilities';
+import { createShadow } from '@utils';
 import { View } from 'react-native';
 import { Photos } from '../services/adapters';
 

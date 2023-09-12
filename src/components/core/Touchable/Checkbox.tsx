@@ -2,7 +2,7 @@
 import { Tick } from '@assets/icons';
 import { CheckboxItem, StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { StyleProp, ViewProps, ViewStyle } from 'react-native';
 import Row from '../Layout/Row';
 import Spacer from '../Spacer/Spacer';

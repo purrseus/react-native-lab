@@ -1,7 +1,6 @@
 import { execSync } from 'child_process';
 import inquirer from 'inquirer';
-
-const placeholderName = 'ReactNativeLab';
+import { name as placeholderName } from '../app.json';
 
 const appCenter = {
   ownerName: '<Your_owner_name>',

@@ -6,7 +6,7 @@ import { StyleCallbackParams } from '@core/interfaces';
 import { useAppTranslation, useKeyboard, useStyle } from '@hooks';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { colors as defaultColors, globalStyles } from '@themes';
-import { createShadow } from '@utilities';
+import { createShadow } from '@utils';
 import { FC, useMemo } from 'react';
 import { ColorValue, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';

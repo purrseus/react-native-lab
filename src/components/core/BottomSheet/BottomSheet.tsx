@@ -7,7 +7,7 @@ import RNBottomSheet, {
 import { BottomSheetDefaultBackdropProps } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { useStyle } from '@hooks';
-import { compareMemo, createShadow } from '@utilities';
+import { compareMemo, createShadow } from '@utils';
 import { forwardRef, useCallback } from 'react';
 
 interface BottomSheetProps

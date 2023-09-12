@@ -2,7 +2,7 @@ import { DEFAULT_BACKDROP_OPACITY } from '@core/constants';
 import { StyleCallbackParams } from '@core/interfaces';
 import { CommonSize } from '@core/types';
 import { useStyle } from '@hooks';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 import RNModal, { ModalProps as RNModalProps } from 'react-native-modal';

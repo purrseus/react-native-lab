@@ -1,5 +1,5 @@
 import { PADDING_VERTICAL_INPUT } from '@core/constants';
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import {
   KeyboardAwareScrollView as RNKeyboardAwareScrollView,
   KeyboardAwareScrollViewProps,

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { View, ViewProps } from 'react-native';
 
 interface RowProps extends ViewProps {

@@ -1,5 +1,5 @@
 import { useCommonStore } from '@stores';
-import { _formatDateTime, _formatNumber } from '@utilities';
+import { _formatDateTime, _formatNumber } from '@utils';
 
 const useFormat = () => {
   useCommonStore(state => state.language);

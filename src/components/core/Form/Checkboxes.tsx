@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CheckboxItem, CommonFieldProps, StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { createField } from '@utilities';
+import { createField } from '@utils';
 import { forwardRef, useCallback } from 'react';
 import { StyleProp, Text, View, ViewProps, ViewStyle } from 'react-native';
 import Checkbox from '../Touchable/Checkbox';

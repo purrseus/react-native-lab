@@ -1,6 +1,6 @@
 import { CommonFieldProps, StyleCallbackParams } from '@core/interfaces';
 import { useStyle } from '@hooks';
-import { createField } from '@utilities';
+import { createField } from '@utils';
 import { RefAttributes, forwardRef } from 'react';
 import { TextInput as RNTextInput, StyleProp, View, ViewStyle } from 'react-native';
 import MultilineTextInput, { MultilineTextInputProps } from '../Input/Multiline/MultilineTextInput';

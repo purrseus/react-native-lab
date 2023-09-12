@@ -1,6 +1,6 @@
 import { Button, Spacer, Text } from '@components/core';
 import { globalStyles } from '@themes';
-import { withHook } from '@utilities/screen';
+import { withHook } from '@utils/screen';
 import { View } from 'react-native';
 import { useLoginContainer } from '../containers';
 

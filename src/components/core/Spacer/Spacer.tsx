@@ -1,4 +1,4 @@
-import { compareMemo } from '@utilities';
+import { compareMemo } from '@utils';
 import { View } from 'react-native';
 
 interface SpacerProps {

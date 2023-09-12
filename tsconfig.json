@@ -20,7 +20,7 @@
       "@services/*": ["services/*"],
       "@stores/*": ["stores/*"],
       "@themes/*": ["themes/*"],
-      "@utilities/*": ["utilities/*"]
+      "@utils/*": ["utils/*"]
     },                                                   /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
 
     /* Type Checking */
