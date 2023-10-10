@@ -1,14 +1,14 @@
 import { HORIZONTAL_GRADIENT_COORDINATES } from '@core/constants';
-import { StyleCallbackParams } from '@core/interfaces';
-import { useStyle } from '@hooks';
-import { alphaHexColor, compareMemo } from '@utils';
+import { compareMemo } from '@utils';
 import { FC, useMemo } from 'react';
-import { ColorValue, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
+import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { SvgProps } from 'react-native-svg';
+import { Style } from 'twrnc/dist/esm/types';
 import ActivityIndicator from '../Loader/ActivityIndicator';
 import Text from '../Text/Text';
 import Touchable, { TouchableProps } from './Touchable';
+import { useTailwind } from '@hooks';
 
 type SizeName = 'small' | 'medium' | 'large';
 type ButtonType = 'filled' | 'outlined' | 'tonal';
@@ -20,10 +20,11 @@ interface ButtonProps extends TouchableProps {
   size?: SizeName;
   type?: ButtonType;
   gradient?: boolean;
-  gradientColors?: ColorValue[];
-  color?: ColorValue;
+  gradientColors?: string[];
+  color?: string;
   centerTitle?: boolean;
-  titleStyle?: StyleProp<TextStyle>;
+  titleStyle?: Style;
+  style?: Style;
   loading?: boolean;
   LeftIcon?: FC<SvgProps>;
   RightIcon?: FC<SvgProps>;
@@ -52,64 +53,81 @@ const Button = compareMemo<ButtonProps>(
     disabled,
     ...props
   }) => {
+    const { tw } = useTailwind();
     const [buttonSize, titleSize] = sizes[size];
-    const styles = useStyle(createStyles(color));
-    const contentStyle = styles[`${disabled ? 'disabled' : type}Color`];
+
+    const [typeStyle, contentTypeColor] = useMemo(() => {
+      const typeStyles: Record<ButtonType | 'disabled', Style> = {
+        filled: tw.style(color ? `bg-[${color}]` : 'bg-emerald-500'),
+        outlined: tw.style('bg-transparent border border-emerald-500', !!color && `bg-[${color}]`),
+        tonal: tw.style(color ? `bg-[${color}]` : 'bg-emerald-500/20'),
+        disabled: tw`bg-zinc-300`,
+      };
+
+      const contentTypeColors: Record<ButtonType | 'disabled', string | undefined> = {
+        filled: tw.color('white'),
+        outlined: color || tw.color('emerald-500'),
+        tonal: color || tw.color('emerald-500'),
+        disabled: tw.color('zinc-400'),
+      };
+
+      return [
+        typeStyles[`${disabled ? 'disabled' : type}`],
+        contentTypeColors[`${disabled ? 'disabled' : type}`],
+      ];
+    }, [color, disabled, tw, type]);
 
     const LeftIconComponent = useMemo(
-      () => (LeftIcon ? <LeftIcon stroke={contentStyle.color} /> : null),
-      [LeftIcon, contentStyle.color],
+      () => (LeftIcon ? <LeftIcon stroke={contentTypeColor} /> : null),
+      [LeftIcon, contentTypeColor],
     );
 
     const RightIconComponent = useMemo(
-      () => (RightIcon ? <RightIcon stroke={contentStyle.color} /> : null),
-      [RightIcon, contentStyle.color],
+      () => (RightIcon ? <RightIcon stroke={contentTypeColor} /> : null),
+      [RightIcon, contentTypeColor],
     );
 
     const LeftCounterWeight = useMemo(
       () =>
-        !!RightIcon && centerTitle ? (
-          <View style={styles.counterWeight}>{RightIconComponent}</View>
-        ) : null,
-      [RightIcon, RightIconComponent, centerTitle, styles.counterWeight],
+        !!RightIcon && centerTitle ? <View style={tw`opacity-0`}>{RightIconComponent}</View> : null,
+      [RightIcon, RightIconComponent, centerTitle, tw],
     );
 
     const RightCounterWeight = useMemo(
       () =>
-        !!LeftIcon && centerTitle ? (
-          <View style={styles.counterWeight}>{LeftIconComponent}</View>
-        ) : null,
-      [LeftIcon, LeftIconComponent, centerTitle, styles.counterWeight],
+        !!LeftIcon && centerTitle ? <View style={tw`opacity-0`}>{LeftIconComponent}</View> : null,
+      [LeftIcon, LeftIconComponent, centerTitle, tw],
     );
 
     return (
       <Touchable
         {...props}
         disabled={loading || disabled}
-        style={[
-          styles.container,
-          { height: buttonSize },
-          styles[type],
-          !!disabled && styles.disabled,
+        style={tw.style(
+          `flex-row flex-center rounded-xl overflow-hidden px-4 h-[${buttonSize}px]`,
+          typeStyle,
           style,
-        ]}
+        )}
       >
         {gradient && (
           <LinearGradient
-            colors={gradientColors || Object.values(styles.gradient)}
+            colors={gradientColors || ([tw.color('emerald-500'), tw.color('blue-500')] as string[])}
             {...HORIZONTAL_GRADIENT_COORDINATES}
-            style={StyleSheet.absoluteFill}
+            style={tw`abs-fill`}
           />
         )}
 
         {loading ? (
-          <ActivityIndicator color={contentStyle.color} />
+          <ActivityIndicator color={contentTypeColor} />
         ) : (
           <>
             {LeftIconComponent || LeftCounterWeight}
             <Text
               numberOfLines={1}
-              style={[styles.title, { fontSize: titleSize }, contentStyle, titleStyle]}
+              style={tw.style(
+                `font-bold max-w-[80%] mx-2 text-[${titleSize}px] text-[${contentTypeColor}]`,
+                titleStyle,
+              )}
             >
               {title}
             </Text>
@@ -120,54 +138,5 @@ const Button = compareMemo<ButtonProps>(
     );
   },
 );
-
-const createStyles =
-  (customColor?: ColorValue) =>
-  ({ create, colors }: StyleCallbackParams) =>
-    create({
-      container: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 10,
-        overflow: 'hidden',
-        paddingHorizontal: 16,
-      },
-      gradient: [colors.primary, colors.blue] as ViewStyle,
-      filled: {
-        backgroundColor: customColor || colors.primary,
-      },
-      outlined: {
-        backgroundColor: colors.white,
-        borderColor: customColor || colors.primary,
-        borderWidth: 1,
-      },
-      tonal: {
-        backgroundColor: customColor || alphaHexColor(colors.primary, 0.2),
-      },
-      disabled: {
-        backgroundColor: colors.lightGray,
-      },
-      filledColor: {
-        color: colors.white,
-      },
-      outlinedColor: {
-        color: customColor || colors.primary,
-      },
-      tonalColor: {
-        color: customColor || colors.primary,
-      },
-      disabledColor: {
-        color: colors.darkGray,
-      },
-      title: {
-        fontWeight: 'bold',
-        maxWidth: '80%',
-        marginHorizontal: 8,
-      },
-      counterWeight: {
-        opacity: 0,
-      },
-    });
 
 export default Button;

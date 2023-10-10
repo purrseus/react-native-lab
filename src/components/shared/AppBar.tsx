@@ -1,13 +1,13 @@
 import { ArrowLeft } from '@assets/icons';
-import { Row, Spacer, Text, Touchable } from '@components/core';
-import { DEFAULT_HORIZONTAL_EDGE_SPACING, APP_BAR_HEIGHT } from '@core/constants';
-import { AppBarAction, StyleCallbackParams } from '@core/interfaces';
-import { useLayout, useStyle } from '@hooks';
+import { Text, Touchable } from '@components/core';
+import { APP_BAR_HEIGHT, DEFAULT_HORIZONTAL_EDGE_SPACING } from '@core/constants';
+import { AppBarAction } from '@core/interfaces';
+import { useLayout, useTailwind } from '@hooks';
 import { useNavigation } from '@react-navigation/native';
-import { globalStyles } from '@themes';
-import { compareMemo, createShadow } from '@utils';
-import { Fragment, useMemo } from 'react';
-import { StatusBar, View, ViewProps } from 'react-native';
+import { compareMemo } from '@utils';
+import { useMemo } from 'react';
+import { View, ViewProps } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export interface AppBarProps extends ViewProps {
   title: string;
@@ -17,96 +17,63 @@ export interface AppBarProps extends ViewProps {
 
 const AppBar = compareMemo<AppBarProps>(
   ({ title, rightActions = [], actionSeparatorWidth = 8, ...props }) => {
-    const styles = useStyle(createStyles);
+    const { tw } = useTailwind();
+    const edgeInsets = useSafeAreaInsets();
     const { canGoBack, goBack } = useNavigation();
     const { layout: sideLayout, handleLayout: handleSideLayout } = useLayout({
       flexibleLayout: false,
     });
+    const iconColor = tw.color(tw.prefixMatch('dark') ? 'white' : 'zinc-700');
 
     const RightActions = useMemo(
       () =>
-        rightActions.map(({ onPress, Icon, size = 24 }: AppBarAction, index, array) => {
-          const showSpacerSeparator = index !== array.lastIndex;
-
+        rightActions.map(({ onPress, Icon, size = 24 }: AppBarAction, index) => {
           return (
-            <Fragment key={index}>
-              <Touchable hitSlop={actionSeparatorWidth / 2} onPress={onPress}>
-                <Icon width={size} height={size} stroke={styles.icon.tintColor} />
-              </Touchable>
-              {showSpacerSeparator && <Spacer w={actionSeparatorWidth} />}
-            </Fragment>
+            <Touchable key={index} hitSlop={actionSeparatorWidth / 2} onPress={onPress}>
+              <Icon width={size} height={size} stroke={iconColor} />
+            </Touchable>
           );
         }),
-      [rightActions, actionSeparatorWidth, styles.icon.tintColor],
+      [rightActions, actionSeparatorWidth, iconColor],
     );
 
     const handleGoBack = canGoBack() ? goBack : undefined;
 
     return (
-      <View {...props} style={styles.rootContainer}>
-        <Row style={styles.safeAreaContainer}>
-          <Row
-            style={[
-              styles.sideWrapper,
-              styles.leftWrapper,
-              { width: sideLayout.width || undefined },
-            ]}
+      <View
+        {...props}
+        style={tw`bg-white dark:bg-zinc-900 pt-[${edgeInsets.top}px] pl-[${edgeInsets.left}px] pr-[${edgeInsets.right}px] shadow-black shadow-opacity-10 shadow-radius-2 elevation-16`}
+      >
+        <View style={tw`h-[${APP_BAR_HEIGHT}px] flex-row`}>
+          <View
+            style={tw.style(
+              `flex-row min-w-[20%] px-[${DEFAULT_HORIZONTAL_EDGE_SPACING}px] items-center justify-start`,
+              !!sideLayout.width && `w-[${sideLayout.width}px]`,
+            )}
           >
             {handleGoBack && (
               <Touchable hitSlop={actionSeparatorWidth / 2} onPress={handleGoBack}>
-                <ArrowLeft stroke={styles.icon.tintColor} />
+                <ArrowLeft stroke={iconColor} />
               </Touchable>
             )}
-          </Row>
+          </View>
 
-          <Row style={globalStyles.flexFillCenter}>
-            <Text numberOfLines={1} style={styles.title}>
+          <View style={tw`flex-fill-center flex-row`}>
+            <Text numberOfLines={1} style={tw`font-bold text-xl`}>
               {title}
             </Text>
-          </Row>
+          </View>
 
-          <Row
+          <View
             onLayout={rightActions.isNotEmpty ? handleSideLayout : undefined}
-            style={[styles.sideWrapper, styles.rightWrapper]}
+            style={tw`flex-row min-w-[20%] px-[${DEFAULT_HORIZONTAL_EDGE_SPACING}px] items-center justify-end gap-x-[${actionSeparatorWidth}px]`}
           >
             {RightActions}
-          </Row>
-        </Row>
+          </View>
+        </View>
       </View>
     );
   },
 );
-
-const createStyles = ({ create, edgeInsets, colors }: StyleCallbackParams) =>
-  create({
-    rootContainer: {
-      backgroundColor: colors.appBarBackground,
-      paddingTop: edgeInsets.top || StatusBar.currentHeight || 0,
-      paddingLeft: edgeInsets.left,
-      paddingRight: edgeInsets.right,
-      ...createShadow(colors.shadow, [0, 4], 0.1, 8, 16),
-    },
-    safeAreaContainer: {
-      height: APP_BAR_HEIGHT,
-    },
-    sideWrapper: {
-      minWidth: '20%',
-      alignItems: 'center',
-      paddingHorizontal: DEFAULT_HORIZONTAL_EDGE_SPACING,
-    },
-    leftWrapper: {
-      justifyContent: 'flex-start',
-    },
-    rightWrapper: {
-      justifyContent: 'flex-end',
-    },
-    icon: {
-      tintColor: colors.primaryText,
-    },
-    title: {
-      fontWeight: 'bold',
-      fontSize: 20,
-    },
-  });
 
 export default AppBar;

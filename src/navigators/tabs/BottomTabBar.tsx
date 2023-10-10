@@ -6,12 +6,11 @@ import {
   NotificationScreen,
   ProfileScreen,
 } from '@features/tab/screens';
-import { useStyle } from '@hooks';
+import { useTailwind } from '@hooks';
 import { tabScreenOptions } from '@navigators/options';
-import createStyles from '@navigators/styles';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import CustomizedTabBar from './CustomizedTabBar';
 import { BottomTabNavigationConfig } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
+import CustomizedTabBar from './CustomizedTabBar';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -20,13 +19,13 @@ const TabBar: NonNullable<BottomTabNavigationConfig['tabBar']> = props => (
 );
 
 export default function BottomTabBar() {
-  const styles = useStyle(createStyles);
+  const { tw } = useTailwind();
 
   return (
     <BottomTab.Navigator
       initialRouteName={TabScreenName.Home}
       screenOptions={tabScreenOptions}
-      sceneContainerStyle={styles.screenStyle}
+      sceneContainerStyle={tw`background-color`}
       tabBar={TabBar}
     >
       <BottomTab.Screen name={TabScreenName.Home} component={HomeScreen} />

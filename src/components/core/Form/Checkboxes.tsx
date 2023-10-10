@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CheckboxItem, CommonFieldProps, StyleCallbackParams } from '@core/interfaces';
-import { useStyle } from '@hooks';
+import { CheckboxItem, CommonFieldProps } from '@core/interfaces';
 import { createField } from '@utils';
 import { forwardRef, useCallback } from 'react';
-import { StyleProp, Text, View, ViewProps, ViewStyle } from 'react-native';
+import { Text, View, ViewProps } from 'react-native';
+import { Style } from 'twrnc/dist/esm/types';
 import Checkbox from '../Touchable/Checkbox';
+import { useTailwind } from '@hooks';
 
 export interface CheckboxesProps<T = any> extends Omit<ViewProps, 'style'>, CommonFieldProps<T[]> {
   data: CheckboxItem<T>[];
-  containerStyle?: StyleProp<ViewStyle>;
-  checkboxStyle?: StyleProp<ViewStyle>;
-  itemStyle?: StyleProp<ViewStyle>;
+  containerStyle?: Style;
+  checkboxStyle?: Style;
+  itemStyle?: Style;
 }
 
 const _Checkboxes = createField<unknown, CheckboxesProps>(
@@ -29,7 +30,7 @@ const _Checkboxes = createField<unknown, CheckboxesProps>(
       },
       _ref,
     ) => {
-      const styles = useStyle(createStyles);
+      const { tw } = useTailwind();
 
       const onPress = useCallback(
         (itemValue: CheckboxItem['value']) => () => {
@@ -44,9 +45,9 @@ const _Checkboxes = createField<unknown, CheckboxesProps>(
 
       return (
         <View {...(props as ViewProps)} style={containerStyle}>
-          {!!label && <Text style={styles.label}>{label}</Text>}
+          {!!label && <Text style={tw`text-sm font-bold mb-1`}>{label}</Text>}
 
-          <View style={[styles.checkboxes, checkboxStyle]}>
+          <View style={tw.style('flex-row', checkboxStyle)}>
             {data.map(item => (
               <Checkbox
                 key={item.label}
@@ -58,28 +59,12 @@ const _Checkboxes = createField<unknown, CheckboxesProps>(
             ))}
           </View>
 
-          {!!errorText && <Text style={styles.errorText}>{errorText}</Text>}
+          {!!errorText && <Text style={tw`text-red-600 mt-1`}>{errorText}</Text>}
         </View>
       );
     },
   ),
 );
-
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
-  create({
-    label: {
-      fontSize: 14,
-      fontWeight: 'bold',
-      marginBottom: 4,
-    },
-    checkboxes: {
-      flexDirection: 'row',
-    },
-    errorText: {
-      color: colors.red,
-      marginTop: 4,
-    },
-  });
 
 const Checkboxes = _Checkboxes as <T = any>(props: CheckboxesProps<T>) => JSX.Element;
 

@@ -1,5 +1,5 @@
 import '@core/declarations';
-import '@i18n';
+import '@libs/i18n';
 import { AppRegistry } from 'react-native';
 import 'react-native-gesture-handler';
 import { name as appName } from './app.json';

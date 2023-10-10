@@ -1,11 +1,12 @@
-import { CommonFieldProps, StyleCallbackParams } from '@core/interfaces';
-import { useStyle } from '@hooks';
+import { CommonFieldProps } from '@core/interfaces';
 import { createField } from '@utils';
 import { RefAttributes, forwardRef } from 'react';
-import { TextInput as RNTextInput, StyleProp, View, ViewStyle } from 'react-native';
+import { TextInput as RNTextInput, View } from 'react-native';
+import { Style } from 'twrnc/dist/esm/types';
 import MultilineTextInput, { MultilineTextInputProps } from '../Input/Multiline/MultilineTextInput';
 import IconTextInput, { IconTextInputProps } from '../Input/Singleline/IconTextInput';
 import Text from '../Text/Text';
+import { useTailwind } from '@hooks';
 
 type MixinTextInputProps<T extends boolean = false> = (T extends true
   ? MultilineTextInputProps
@@ -14,44 +15,31 @@ type MixinTextInputProps<T extends boolean = false> = (T extends true
 
 type TextInputProps<T extends boolean = false> = {
   multiline?: T;
-  wrapperStyle?: StyleProp<ViewStyle>;
+  wrapperStyle?: Style;
 } & MixinTextInputProps<T>;
 
 const _TextInput = createField<RNTextInput, TextInputProps>(
   forwardRef(
     ({ label, errorText, placeholder, multiline, containerStyle, wrapperStyle, ...props }, ref) => {
-      const styles = useStyle(createStyles);
+      const { tw } = useTailwind();
       const TextInputComponent = multiline ? MultilineTextInput : IconTextInput;
 
       return (
         <View style={containerStyle}>
-          {!!label && <Text style={styles.label}>{label}</Text>}
+          {!!label && <Text style={tw`text-sm font-bold mb-1`}>{label}</Text>}
           <TextInputComponent
             {...props}
             ref={ref}
             placeholder={placeholder || label}
             containerStyle={wrapperStyle}
           />
-          {!!errorText && <Text style={styles.errorText}>{errorText}</Text>}
+          {!!errorText && <Text style={tw`text-red-600 mt-1`}>{errorText}</Text>}
         </View>
       );
     },
   ),
   true,
 );
-
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
-  create({
-    label: {
-      fontSize: 14,
-      fontWeight: 'bold',
-      marginBottom: 4,
-    },
-    errorText: {
-      color: colors.red,
-      marginTop: 4,
-    },
-  });
 
 const TextInput = _TextInput as <T extends boolean = false>(
   props: TextInputProps<T> & RefAttributes<RNTextInput>,

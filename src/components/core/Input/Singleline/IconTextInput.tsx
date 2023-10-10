@@ -1,52 +1,35 @@
-import Row from '@components/core/Layout/Row';
-import Spacer from '@components/core/Spacer/Spacer';
 import { PADDING_VERTICAL_INPUT } from '@core/constants';
-import { StyleCallbackParams } from '@core/interfaces';
-import { useStyle } from '@hooks';
-import { globalStyles } from '@themes';
 import { compareMemo } from '@utils';
 import { forwardRef, ReactNode } from 'react';
-import {
-  StyleProp,
-  TextInput as RNTextInput,
-  TextInputProps as RNTextInputProps,
-  ViewStyle,
-} from 'react-native';
+import { TextInput as RNTextInput, TextInputProps as RNTextInputProps, View } from 'react-native';
+import { Style } from 'twrnc/dist/esm/types';
 import TextInput from './TextInput';
+import { useTailwind } from '@hooks';
 
 export interface IconTextInputProps extends RNTextInputProps {
   IconLeftComponent?: ReactNode;
   IconRightComponent?: ReactNode;
-  containerStyle?: StyleProp<ViewStyle>;
+  containerStyle?: Style;
+  style?: Style;
 }
 
 const IconTextInput = compareMemo<RNTextInput, IconTextInputProps>(
   forwardRef(({ IconLeftComponent, IconRightComponent, containerStyle, style, ...props }, ref) => {
-    const styles = useStyle(createStyles);
-
-    const IconSpacer = <Spacer w={8} />;
+    const { tw } = useTailwind();
 
     return (
-      <Row style={[styles.container, containerStyle]}>
+      <View
+        style={tw.style(
+          `flex-row items-center px-2 py-[${PADDING_VERTICAL_INPUT}px] bg-zinc-300 rounded-xl gap-x-2`,
+          containerStyle,
+        )}
+      >
         {IconLeftComponent}
-        {!!IconLeftComponent && IconSpacer}
-        <TextInput {...props} ref={ref} style={[globalStyles.flexFill, style]} />
-        {!!IconRightComponent && IconSpacer}
+        <TextInput {...props} ref={ref} style={tw.style('flex-1', style)} />
         {IconRightComponent}
-      </Row>
+      </View>
     );
   }),
 );
-
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
-  create({
-    container: {
-      alignItems: 'center',
-      paddingHorizontal: 8,
-      paddingVertical: PADDING_VERTICAL_INPUT,
-      backgroundColor: colors.lightGray,
-      borderRadius: 12,
-    },
-  });
 
 export default IconTextInput;

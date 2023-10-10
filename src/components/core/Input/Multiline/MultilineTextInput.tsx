@@ -1,64 +1,41 @@
 import { MAX_HEIGHT_INPUT, MIN_HEIGHT_INPUT } from '@core/constants';
-import { StyleCallbackParams } from '@core/interfaces';
-import { useStyle } from '@hooks';
 import { compareMemo } from '@utils';
 import { forwardRef } from 'react';
-import {
-  Platform,
-  StyleProp,
-  TextInput as RNTextInput,
-  TextInputProps as RNTextInputProps,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { TextInput as RNTextInput, TextInputProps as RNTextInputProps, View } from 'react-native';
+import { Style } from 'twrnc/dist/esm/types';
 import TextInput from '../Singleline/TextInput';
+import { useTailwind } from '@hooks';
 
 export interface MultilineTextInputProps extends RNTextInputProps {
   dynamicHeight?: boolean;
-  containerStyle?: StyleProp<ViewStyle>;
+  containerStyle?: Style;
+  style?: Style;
 }
 
 const MultilineTextInput = compareMemo<RNTextInput, MultilineTextInputProps>(
   forwardRef(({ dynamicHeight = false, style, containerStyle, ...props }, ref) => {
-    const styles = useStyle(createStyles);
+    const { tw } = useTailwind();
 
     return (
-      <View style={[styles.container, containerStyle]}>
+      <View
+        style={tw.style('px-2 android:py-[8.2px] ios:py-3 bg-zinc-300 rounded-xl', containerStyle)}
+      >
         <TextInput
           {...props}
           multiline
           ref={ref}
-          style={[
-            styles.input,
-            styles[dynamicHeight ? 'dynamicHeightInput' : 'expandedInput'],
+          style={tw.style(
+            'ios:pt-0',
+            dynamicHeight
+              ? `h-auto min-h-[${MIN_HEIGHT_INPUT}px] max-h-[${MAX_HEIGHT_INPUT}px]`
+              : 'h-[120px]',
+            !dynamicHeight && { textAlignVertical: 'top' },
             style,
-          ]}
+          )}
         />
       </View>
     );
   }),
 );
-
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
-  create({
-    container: {
-      paddingHorizontal: 8,
-      paddingVertical: Platform.select({ android: 8.2, ios: 12 }),
-      backgroundColor: colors.lightGray,
-      borderRadius: 12,
-    },
-    input: {
-      paddingTop: Platform.select({ android: undefined, ios: 0 }),
-    },
-    expandedInput: {
-      height: 120,
-      textAlignVertical: 'top',
-    },
-    dynamicHeightInput: {
-      height: 'auto',
-      minHeight: MIN_HEIGHT_INPUT,
-      maxHeight: MAX_HEIGHT_INPUT,
-    },
-  });
 
 export default MultilineTextInput;

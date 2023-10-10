@@ -1,16 +1,16 @@
-import { useTheme } from '@hooks';
+import { useTailwind } from '@hooks';
 import { compareMemo } from '@utils';
 import { RefreshControl as RNRefreshControl, RefreshControlProps } from 'react-native';
 
 const RefreshControl = compareMemo<RefreshControlProps>(({ ...props }) => {
-  const { colors } = useTheme();
+  const { tw } = useTailwind();
 
   return (
     <RNRefreshControl
       {...props}
-      colors={[colors.primary, colors.secondary]}
-      progressBackgroundColor={colors.refreshControlBackground}
-      tintColor={colors.primary}
+      colors={[tw.color('emerald-500'), tw.color('green-500')] as string[]}
+      progressBackgroundColor={tw.color('zinc-50')}
+      tintColor={tw.color('emerald-500')}
     />
   );
 });

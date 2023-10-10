@@ -1,3 +1,4 @@
+import { Home } from '@assets/icons';
 import {
   IconTextInput,
   KeyboardAwareScrollView,
@@ -8,19 +9,17 @@ import {
 } from '@components/core';
 import { StackContainer } from '@components/shared';
 import { ProtectedScreenName } from '@core/enums';
-import { StyleCallbackParams } from '@core/interfaces';
-import { useStyle } from '@hooks';
+import { useTailwind } from '@hooks';
 import { useTranslation } from 'react-i18next';
 import { Separator } from '../components';
-import { Home } from '@assets/icons';
 
 export default function TextsScreen() {
+  const { tw } = useTailwind();
   const { t } = useTranslation();
-  const styles = useStyle(createStyles);
 
   return (
     <StackContainer title={ProtectedScreenName.Texts}>
-      <KeyboardAwareScrollView style={styles.keyboardView}>
+      <KeyboardAwareScrollView style={tw`px-4`}>
         <Text>Normal text</Text>
 
         <Separator />
@@ -41,34 +40,37 @@ export default function TextsScreen() {
         <Separator />
 
         <Text>SinglelineTextInput</Text>
-        <TextInput style={styles.singlelineTextInput} />
+        <TextInput style={tw`border w-[100%]`} />
 
         <Separator />
 
         <Text>IconTextInput (left)</Text>
-        <IconTextInput placeholder="IconTextInput (left)" IconLeftComponent={<Home />} />
+        <IconTextInput
+          placeholder="IconTextInput (left)"
+          IconLeftComponent={<Home stroke={tw.color('zinc-400')} />}
+        />
 
         <Separator />
 
         <Text>IconTextInput (right)</Text>
-        <IconTextInput placeholder="IconTextInput (right)" IconRightComponent={<Home />} />
+        <IconTextInput
+          placeholder="IconTextInput (right)"
+          IconRightComponent={<Home stroke={tw.color('zinc-400')} />}
+        />
 
         <Separator />
 
         <Text>IconTextInput (both)</Text>
         <IconTextInput
           placeholder="IconTextInput (both)"
-          IconLeftComponent={<Home />}
-          IconRightComponent={<Home />}
+          IconLeftComponent={<Home stroke={tw.color('zinc-400')} />}
+          IconRightComponent={<Home stroke={tw.color('zinc-400')} />}
         />
 
         <Separator />
 
         <Text>MultilineTextInput</Text>
-        <MultilineTextInput
-          placeholder="MultilineTextInput"
-          containerStyle={styles.multilineTextInput}
-        />
+        <MultilineTextInput placeholder="MultilineTextInput" containerStyle={tw`w-[100%]`} />
 
         <Separator />
 
@@ -76,26 +78,9 @@ export default function TextsScreen() {
         <MultilineTextInput
           dynamicHeight
           placeholder="MultilineTextInput"
-          containerStyle={styles.dynamicHeightMultilineTextInput}
+          containerStyle={tw`w-[100%]`}
         />
       </KeyboardAwareScrollView>
     </StackContainer>
   );
 }
-
-const createStyles = ({ create }: StyleCallbackParams) =>
-  create({
-    keyboardView: {
-      paddingHorizontal: 16,
-    },
-    singlelineTextInput: {
-      borderWidth: 1,
-      width: '100%',
-    },
-    multilineTextInput: {
-      width: '100%',
-    },
-    dynamicHeightMultilineTextInput: {
-      width: '100%',
-    },
-  });

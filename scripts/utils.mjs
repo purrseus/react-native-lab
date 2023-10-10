@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 import inquirer from 'inquirer';
-import { name as placeholderName } from '../app.json';
+import appInfo from '../app.json' assert { type: 'json' };
 
 const appCenter = {
   ownerName: '<Your_owner_name>',
@@ -69,7 +69,8 @@ export const createBuildQuestionCollections = platform => [
 
 export const commands = {
   generateFirebaseConfigFile(env) {
-    return `cp firebase/${env}/google-services.json android/app/google-services.json && cp firebase/${env}/GoogleService-Info.plist ios/GoogleService-Info.plist`;
+    return 'echo "Running..."';
+    // return `cp firebase/${env}/google-services.json android/app/google-services.json && cp firebase/${env}/GoogleService-Info.plist ios/GoogleService-Info.plist`;
   },
   withENV(envSuffix, command) {
     return `(source ./environments/.env.${envSuffix} && ${command})`;
@@ -78,13 +79,13 @@ export const commands = {
     return `${this.generateFirebaseConfigFile(env)} && ${command}`;
   },
   runAndroid(buildVariant, suffixAppId) {
-    return `yarn react-native run-android --mode ${buildVariant} --appId com.${placeholderName.toLowerCase()}${suffixAppId}`;
+    return `yarn react-native run-android --mode ${buildVariant} --appId com.${appInfo.name.toLowerCase()}${suffixAppId}`;
   },
   generateAndroidFile(buildVariant) {
     return `cd android && ./gradlew clean && ./gradlew ${buildVariant} && cd ..`;
   },
   runIos(env, buildType, envShort) {
-    return `ENVFILE=environments/.env.${env} yarn react-native run-ios --configuration '${buildType} (${envShort})' --scheme '${placeholderName} (${envShort})'`;
+    return `ENVFILE=environments/.env.${env} yarn react-native run-ios --configuration '${buildType} (${envShort})' --scheme '${appInfo.name} (${envShort})'`;
   },
   openXCode() {
     return 'xed -b ios';

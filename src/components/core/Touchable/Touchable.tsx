@@ -1,20 +1,14 @@
 import { useThrottle } from '@hooks';
 import { compareMemo } from '@utils';
 import { forwardRef, useCallback } from 'react';
-import {
-  Pressable,
-  PressableProps,
-  PressableStateCallbackType,
-  StyleProp,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { Pressable, PressableProps, PressableStateCallbackType, View } from 'react-native';
+import { Style } from 'twrnc/dist/esm/types';
 
 export interface TouchableProps extends PressableProps {
   throttle?: number;
   hitSlop?: number;
-  pressInStyle?: StyleProp<ViewStyle>;
-  style?: StyleProp<ViewStyle>;
+  pressInStyle?: Style;
+  style?: Style;
 }
 
 const Touchable = compareMemo<View, TouchableProps>(

@@ -1,16 +1,6 @@
-import { StyleCallbackParams } from '@core/interfaces';
-import { useStyle } from '@hooks';
-import { globalStyles } from '@themes';
-import { compareMemo, createShadow } from '@utils';
+import { compareMemo } from '@utils';
 import { ReactNode, useLayoutEffect } from 'react';
-import {
-  ActivityIndicatorProps,
-  ColorValue,
-  Platform,
-  View,
-  ViewProps,
-  ViewStyle,
-} from 'react-native';
+import { ColorValue, View, ViewProps } from 'react-native';
 import Animated, {
   interpolate,
   interpolateColor,
@@ -20,6 +10,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import ActivityIndicator from '../Loader/ActivityIndicator';
 import Touchable from './Touchable';
+import { Style } from 'twrnc/dist/esm/types';
+import { useTailwind } from '@hooks';
 
 interface SwitchProps extends ViewProps {
   isEnabled: boolean;
@@ -29,6 +21,7 @@ interface SwitchProps extends ViewProps {
   /** @platform android */
   thumbScaleAnimated?: boolean;
   loading?: boolean;
+  style?: Style;
 }
 
 const TRACK_WIDTH = 52;
@@ -49,10 +42,19 @@ const Switch = compareMemo<SwitchProps>(
     style,
     ...props
   }) => {
-    const styles = useStyle(createStyles);
+    const { tw } = useTailwind();
     const isAndroidPlatform = isAndroid();
-    const [trackActiveColor, trackInactiveColor] = styles.trackColor as (string | number)[];
-    const [thumbActiveColor, thumbInactiveColor] = styles.thumbColor as (string | number)[];
+
+    const [trackActiveColor, trackInactiveColor] = [
+      tw.color('emerald-500'),
+      tw.color('zinc-300'),
+    ] as string[];
+
+    const [thumbActiveColor, thumbInactiveColor] = [
+      tw.color('white'),
+      tw.color('zinc-400'),
+    ] as string[];
+
     const statusAnimated = useSharedValue(+isEnabled);
 
     const trackAnimatedStyle = useAnimatedStyle(() => {
@@ -61,7 +63,7 @@ const Switch = compareMemo<SwitchProps>(
         disabled ? trackInactiveColor : trackActiveColor,
       ]);
 
-      return { backgroundColor: backgroundColor as ColorValue };
+      return { backgroundColor: backgroundColor };
     }, [disabled]);
 
     const thumbAnimatedStyle = useAnimatedStyle(() => {
@@ -69,10 +71,12 @@ const Switch = compareMemo<SwitchProps>(
         0,
         TRACK_WIDTH - THUMB_SIZE,
       ]);
+
       const backgroundColor = interpolateColor(statusAnimated.value, INPUT_RANGE, [
         thumbInactiveColor,
         disabled ? thumbInactiveColor : thumbActiveColor,
       ]);
+
       const scale = interpolate(statusAnimated.value, INPUT_RANGE, [2 / 3, 1]);
 
       return {
@@ -88,21 +92,35 @@ const Switch = compareMemo<SwitchProps>(
     }, [isEnabled, statusAnimated]);
 
     return (
-      <View {...props} style={[styles.container, style]}>
+      <View
+        {...props}
+        style={tw.style(`w-[${TRACK_WIDTH}px] h-[${TRACK_HEIGHT}px] flex-center`, style)}
+      >
         <AnimatedTouchable
           onPress={handleChangeValue}
           disabled={disabled || loading}
-          style={[styles.track, trackAnimatedStyle]}
+          style={[
+            tw.style(
+              `w-[${TRACK_WIDTH}px] h-[${TRACK_HEIGHT}px] rounded-[${
+                TRACK_HEIGHT / 2
+              }px] justify-center`,
+            ),
+            trackAnimatedStyle,
+          ]}
         >
-          <View style={styles.thumbWrapper}>
-            <Animated.View style={[styles.thumb, thumbAnimatedStyle]}>
+          <View style={tw`w-[${THUMB_SIZE}px] h-[${THUMB_SIZE}px] p-1`}>
+            <Animated.View
+              style={[
+                tw.style(
+                  'flex-fill-center rounded-full shadow-black dark:shadow-zinc-200 shadow-offset-[0px]/[4px] shadow-opacity-40 shadow-radius-4 elevation-8',
+                ),
+                thumbAnimatedStyle,
+              ]}
+            >
               {loading ? (
                 <ActivityIndicator
-                  color={(isEnabled ? thumbInactiveColor : thumbActiveColor) as ColorValue}
-                  size={Platform.select<ActivityIndicatorProps['size']>({
-                    android: THUMB_SIZE - 16,
-                    ios: 'small',
-                  })}
+                  color={isEnabled ? thumbInactiveColor : thumbActiveColor}
+                  size={isAndroidPlatform ? THUMB_SIZE - 16 : 'small'}
                 />
               ) : (
                 ActiveIcon
@@ -114,33 +132,5 @@ const Switch = compareMemo<SwitchProps>(
     );
   },
 );
-
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
-  create({
-    container: {
-      width: TRACK_WIDTH,
-      height: TRACK_HEIGHT,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    track: {
-      width: TRACK_WIDTH,
-      height: TRACK_HEIGHT,
-      borderRadius: TRACK_HEIGHT / 2,
-      justifyContent: 'center',
-    },
-    trackColor: [colors.primary, colors.switchTrackInactive] as ViewStyle,
-    thumbColor: [colors.white, colors.darkGray] as ViewStyle,
-    thumbWrapper: {
-      padding: 4,
-      width: THUMB_SIZE,
-      height: THUMB_SIZE,
-    },
-    thumb: {
-      ...globalStyles.flexFillCenter,
-      borderRadius: 100,
-      ...createShadow(colors.shadow, [0, 4], 0.4, 4, 8),
-    },
-  });
 
 export default Switch;

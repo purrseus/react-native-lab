@@ -1,14 +1,15 @@
 import { DEFAULT_BACKDROP_OPACITY } from '@core/constants';
-import { StyleCallbackParams } from '@core/interfaces';
 import RNBottomSheet, {
   BottomSheetBackdrop,
   BottomSheetProps as RNBottomSheetProps,
 } from '@gorhom/bottom-sheet';
 import { BottomSheetDefaultBackdropProps } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
-import { useStyle } from '@hooks';
-import { compareMemo, createShadow } from '@utils';
+import { useTailwind } from '@hooks';
+import { compareMemo } from '@utils';
 import { forwardRef, useCallback } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Style } from 'twrnc/dist/esm/types';
 
 interface BottomSheetProps
   extends RNBottomSheetProps,
@@ -16,6 +17,9 @@ interface BottomSheetProps
   backdropOpacity?: number;
   backdropPressBehavior?: BottomSheetDefaultBackdropProps['pressBehavior'];
   hasHandle?: boolean;
+  handleStyle?: Style;
+  handleIndicatorStyle?: Style;
+  backgroundStyle?: Style;
 }
 
 const BottomSheet = compareMemo<BottomSheetMethods, BottomSheetProps>(
@@ -33,7 +37,8 @@ const BottomSheet = compareMemo<BottomSheetMethods, BottomSheetProps>(
       },
       ref,
     ) => {
-      const styles = useStyle(createStyles);
+      const { tw } = useTailwind();
+      const { top } = useSafeAreaInsets();
 
       const backdropComponent = useCallback(
         (backdropProps: BottomSheetDefaultBackdropProps) => (
@@ -54,42 +59,17 @@ const BottomSheet = compareMemo<BottomSheetMethods, BottomSheetProps>(
           {...props}
           {...{ ref, backdropComponent }}
           keyboardBlurBehavior="restore"
-          topInset={styles.inset.top}
-          handleStyle={[styles.handle, !hasHandle && styles.hidedHandle, handleStyle]}
-          handleIndicatorStyle={[styles.indicator, handleIndicatorStyle]}
-          backgroundStyle={[styles.background, backgroundStyle]}
+          topInset={top}
+          handleStyle={tw.style('h-4 py-0 flex-center', !hasHandle && 'hidden', handleStyle)}
+          handleIndicatorStyle={tw.style('bg-zinc-500 dark:bg-zinc-100', handleIndicatorStyle)}
+          backgroundStyle={tw.style(
+            'bg-white dark:bg-zinc-800 rounded-t-3xl shadow-black dark:shadow-zinc-200 shadow-opacity-10 shadow-radius-2 elevation-16',
+            backgroundStyle,
+          )}
         />
       );
     },
   ),
 );
-
-const createStyles = ({ create, edgeInsets, colors }: StyleCallbackParams) =>
-  create({
-    inset: {
-      top: edgeInsets.top,
-    },
-    handle: {
-      height: 16,
-      paddingVertical: 0,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    indicator: {
-      backgroundColor: colors.bottomSheetIndicator,
-    },
-    background: {
-      backgroundColor: colors.bottomSheetBackground,
-      borderTopLeftRadius: 20,
-      borderTopRightRadius: 20,
-      ...createShadow(colors.shadow, [0, 0], 0.1, 8, 16),
-    },
-    backdrop: {
-      backgroundColor: colors.black,
-    },
-    hidedHandle: {
-      display: 'none',
-    },
-  });
 
 export default BottomSheet;

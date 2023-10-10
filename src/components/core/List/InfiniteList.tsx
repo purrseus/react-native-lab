@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { StyleCallbackParams } from '@core/interfaces';
-import { useStyle, useThrottle } from '@hooks';
+import { useTailwind, useThrottle } from '@hooks';
 import { FlashList } from '@shopify/flash-list';
 import {
   GetNextPageParamFunction,
@@ -8,9 +7,8 @@ import {
   QueryKey,
   useInfiniteQuery,
 } from '@tanstack/react-query';
-import { globalStyles } from '@themes';
 import { compareMemo } from '@utils';
-import { forwardRef, RefAttributes, useMemo, useState } from 'react';
+import { RefAttributes, forwardRef, useMemo, useState } from 'react';
 import { RefreshControlProps, View } from 'react-native';
 import ActivityIndicator from '../Loader/ActivityIndicator';
 import List, { ListProps } from './List';
@@ -39,7 +37,7 @@ const _InfiniteList = compareMemo<FlashList<any>, InfiniteListProps>(
       },
       ref,
     ) => {
-      const styles = useStyle(createStyles);
+      const { tw } = useTailwind();
       const [refreshing, setRefreshing] = useState(false);
 
       const { fetchNextPage, data, isError, hasNextPage, refetch, isLoading } = useInfiniteQuery({
@@ -53,20 +51,20 @@ const _InfiniteList = compareMemo<FlashList<any>, InfiniteListProps>(
       const FetchingComponent = useMemo(
         () =>
           ListFetchingComponent || (
-            <View style={globalStyles.flexFillCenter}>
+            <View style={tw`flex-fill-center`}>
               <ActivityIndicator size="large" />
             </View>
           ),
-        [ListFetchingComponent],
+        [ListFetchingComponent, tw],
       );
 
       const ListFooterComponent = useMemo(
         () => (
-          <View style={styles.footer}>
+          <View style={tw`py-2`}>
             <ActivityIndicator />
           </View>
         ),
-        [styles.footer],
+        [tw],
       );
 
       const handleOnRefresh = useThrottle(() => {
@@ -96,13 +94,6 @@ const _InfiniteList = compareMemo<FlashList<any>, InfiniteListProps>(
     },
   ),
 );
-
-const createStyles = ({ create }: StyleCallbackParams) =>
-  create({
-    footer: {
-      paddingVertical: 8,
-    },
-  });
 
 const InfiniteList = _InfiniteList as <T = any>(
   props: InfiniteListProps<T> & RefAttributes<FlashList<T>>,

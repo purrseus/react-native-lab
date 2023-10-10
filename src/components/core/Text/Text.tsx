@@ -1,13 +1,15 @@
 import { DEFAULT_FONT_SIZE } from '@core/constants';
-import { StyleCallbackParams } from '@core/interfaces';
-import { useStyle, useThrottle } from '@hooks';
+import { useTailwind, useThrottle } from '@hooks';
 import { compareMemo } from '@utils';
 import { Text as RNText, TextProps as RNTextProps } from 'react-native';
+import { Style } from 'twrnc/dist/esm/types';
 
-export interface TextProps extends RNTextProps {}
+export interface TextProps extends RNTextProps {
+  style?: Style;
+}
 
 const Text = compareMemo<TextProps>(({ style, onPress, ...props }) => {
-  const styles = useStyle(createStyles);
+  const { tw } = useTailwind();
   const handleOnPress = useThrottle(onPress || (() => null), [onPress], duration({ s: 0.5 }));
 
   return (
@@ -15,17 +17,9 @@ const Text = compareMemo<TextProps>(({ style, onPress, ...props }) => {
       allowFontScaling={false}
       onPress={onPress ? handleOnPress : undefined}
       {...props}
-      style={[styles.text, style]}
+      style={tw.style(`text-[${DEFAULT_FONT_SIZE}px] text-zinc-700 dark:text-white`, style)}
     />
   );
 });
-
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
-  create({
-    text: {
-      fontSize: DEFAULT_FONT_SIZE,
-      color: colors.primaryText,
-    },
-  });
 
 export default Text;

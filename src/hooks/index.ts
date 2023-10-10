@@ -13,6 +13,5 @@ export { default as useImagePicker } from './useImagePicker';
 export { default as useKeyboard } from './useKeyboard';
 export { default as useLayout } from './useLayout';
 export { default as useMeasure } from './useMeasure';
-export { default as useStyle } from './useStyle';
-export { default as useTheme } from './useTheme';
+export { default as useTailwind } from './useTailwind';
 export { default as useThrottle } from './useThrottle';

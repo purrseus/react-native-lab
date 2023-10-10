@@ -1,9 +1,8 @@
-import { DateTimePickerMethods, StyleCallbackParams } from '@core/interfaces';
-import { useStyle } from '@hooks';
+import { DateTimePickerMethods } from '@core/interfaces';
+import { useAppTranslation, useTailwind } from '@hooks';
 import { useCommonStore } from '@stores';
 import { compareMemo } from '@utils';
 import { forwardRef, useImperativeHandle, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Platform, useColorScheme } from 'react-native';
 import DateTimePickerModal, {
   ReactNativeModalDateTimePickerProps as Props,
@@ -26,8 +25,8 @@ const platformDisplay: PlatformDisplay = {
 const DateTimePicker = compareMemo<DateTimePickerMethods, Partial<Props>>(
   // @ts-ignore
   forwardRef(({ mode = 'date', onConfirm, ...props }, ref) => {
-    const { t } = useTranslation();
-    const styles = useStyle(createStyles);
+    const { tw } = useTailwind();
+    const { t } = useAppTranslation();
     const colorScheme = useColorScheme();
     const [isVisible, setIsVisible] = useState(false);
     const language = useCommonStore(state => state.language);
@@ -59,7 +58,7 @@ const DateTimePicker = compareMemo<DateTimePickerMethods, Partial<Props>>(
         onCancel={handleCancel}
         onConfirm={handleConfirm}
         isDarkModeEnabled={colorScheme === 'dark'}
-        accentColor={styles.selected.color}
+        accentColor={tw.color('emerald-500')}
         cancelTextIOS={t('common.cancel')}
         confirmTextIOS={t('common.confirm')}
         locale={language}
@@ -67,12 +66,5 @@ const DateTimePicker = compareMemo<DateTimePickerMethods, Partial<Props>>(
     );
   }),
 );
-
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
-  create({
-    selected: {
-      color: colors.primary,
-    },
-  });
 
 export default DateTimePicker;

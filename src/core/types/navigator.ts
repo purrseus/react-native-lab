@@ -21,7 +21,6 @@ export type ProtectedParamList = {
   [ProtectedScreenName.Touchable]: undefined;
   [ProtectedScreenName.Form]: undefined;
   [ProtectedScreenName.Images]: undefined;
-  [ProtectedScreenName.Layouts]: undefined;
   [ProtectedScreenName.List]: undefined;
   [ProtectedScreenName.Loader]: undefined;
   [ProtectedScreenName.Modals]: undefined;

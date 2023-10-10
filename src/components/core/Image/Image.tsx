@@ -1,24 +1,18 @@
-import { StyleCallbackParams } from '@core/interfaces';
 import { CommonSize } from '@core/types';
-import { useStyle } from '@hooks';
+import { useTailwind } from '@hooks';
 import { compareMemo } from '@utils';
 import { omit } from 'lodash';
 import { useCallback, useState } from 'react';
 import {
   AccessibilityProps,
-  Image as RNImage,
   ImageLoadEventData,
-  ImageProps as RNImageProps,
-  ImageStyle,
   NativeSyntheticEvent,
-  StyleProp,
+  Image as RNImage,
+  ImageProps as RNImageProps,
   ViewProps,
 } from 'react-native';
-import FastImage, {
-  FastImageProps,
-  ImageStyle as FastImageStyle,
-  OnLoadEvent,
-} from 'react-native-fast-image';
+import FastImage, { FastImageProps, OnLoadEvent } from 'react-native-fast-image';
+import { Style } from 'twrnc/dist/esm/types';
 
 type MixinImagePropKeys =
   | 'source'
@@ -26,8 +20,7 @@ type MixinImagePropKeys =
   | 'onLoadStart'
   | 'onLoad'
   | 'onError'
-  | 'onLoadEnd'
-  | 'style';
+  | 'onLoadEnd';
 
 type CachedImagePropKeys = 'fallback' | 'tintColor';
 
@@ -49,50 +42,38 @@ interface CommonImageProps<C extends boolean>
     AccessibilityProps,
     ViewProps {
   cached?: C;
+  style?: Style;
 }
 
 export type ImageProps<C extends boolean = false> = CommonImageProps<C> & MixinImageProps<C>;
 
 const _Image = compareMemo<ImageProps>(({ style, cached, onLoad, ...props }) => {
-  const styles = useStyle(createStyles);
+  const { tw } = useTailwind();
   const [size, setSize] = useState<CommonSize>({ width: 0, height: 0 });
-  const imageStyle = styles[!!size.width && !!size.height ? 'image' : 'progressImage'];
+  const hasSizes = !!size.width && !!size.height;
+  const imageStyle = tw.style(hasSizes ? 'bg-transparent' : 'bg-zinc-300 dark:bg-zinc-700', style);
 
   const handleOnLoad = useCallback(
     ({ nativeEvent }: NativeSyntheticEvent<ImageLoadEventData> | OnLoadEvent) => {
       onLoad?.({ nativeEvent } as Parameters<NonNullable<ImageProps['onLoad']>>[0]);
 
-      if (!!size.width && !!size.height) return;
+      if (hasSizes) return;
       setSize('source' in nativeEvent ? omit(nativeEvent.source, ['uri']) : nativeEvent);
     },
-    [size.width, size.height, onLoad],
+    [hasSizes, onLoad],
   );
 
   return cached ? (
-    <FastImage
-      {...(props as FastImageProps)}
-      onLoad={handleOnLoad}
-      style={[imageStyle, style as StyleProp<FastImageStyle>]}
-    />
+    <FastImage {...(props as FastImageProps)} onLoad={handleOnLoad} style={imageStyle} />
   ) : (
     <RNImage
       {...(props as RNImageProps)}
       onLoad={handleOnLoad}
       progressiveRenderingEnabled
-      style={[imageStyle, style as StyleProp<ImageStyle>]}
+      style={imageStyle}
     />
   );
 });
-
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
-  create({
-    progressImage: {
-      backgroundColor: colors.backgroundImage,
-    },
-    image: {
-      backgroundColor: colors.transparent,
-    },
-  });
 
 const Image = _Image as <T extends boolean = false>(props: ImageProps<T>) => JSX.Element;
 

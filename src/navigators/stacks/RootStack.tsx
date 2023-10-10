@@ -5,7 +5,6 @@ import {
   BottomSheetsScreen,
   FormScreen,
   ImagesScreen,
-  LayoutsScreen,
   ListScreen,
   LoaderScreen,
   ModalsScreen,
@@ -15,9 +14,8 @@ import {
   TextsScreen,
   TouchableScreen,
 } from '@features/showcase/screens';
-import { useStyle } from '@hooks';
+import { useTailwind } from '@hooks';
 import { stackScreenOptions } from '@navigators/options';
-import createStyles from '@navigators/styles';
 import BottomTabBar from '@navigators/tabs/BottomTabBar';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useAuthStore } from '@stores';
@@ -42,7 +40,6 @@ const ProtectedScreens = (
     <NativeStack.Screen name={ProtectedScreenName.Touchable} component={TouchableScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Form} component={FormScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Images} component={ImagesScreen} />
-    <NativeStack.Screen name={ProtectedScreenName.Layouts} component={LayoutsScreen} />
     <NativeStack.Screen name={ProtectedScreenName.List} component={ListScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Loader} component={LoaderScreen} />
     <NativeStack.Screen name={ProtectedScreenName.Modals} component={ModalsScreen} />
@@ -53,14 +50,14 @@ const ProtectedScreens = (
 );
 
 export default function RootNavigator() {
-  const styles = useStyle(createStyles);
+  const { tw } = useTailwind();
   const isAuthenticated = useAuthStore(
     ({ accessToken, refreshToken }) => accessToken?.isNotEmpty && refreshToken?.isNotEmpty,
   );
 
   return (
     <NativeStack.Navigator
-      screenOptions={{ ...stackScreenOptions, contentStyle: styles.screenStyle }}
+      screenOptions={{ ...stackScreenOptions, contentStyle: tw`background-color` }}
       initialRouteName={isAuthenticated ? PublicScreenName.Login : ProtectedScreenName.BottomTab}
     >
       {isAuthenticated ? ProtectedScreens : PublicScreens}

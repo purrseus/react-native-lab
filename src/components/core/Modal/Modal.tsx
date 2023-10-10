@@ -1,32 +1,22 @@
 import { DEFAULT_BACKDROP_OPACITY } from '@core/constants';
-import { StyleCallbackParams } from '@core/interfaces';
 import { CommonSize } from '@core/types';
-import { useStyle } from '@hooks';
+import { useTailwind } from '@hooks';
 import { compareMemo } from '@utils';
 import { useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 import RNModal, { ModalProps as RNModalProps } from 'react-native-modal';
+import { Style } from 'twrnc/dist/esm/types';
 
 type CombinedModalProps = Partial<RNModalProps> & Pick<RNModalProps, 'children' | 'isVisible'>;
 
 export interface ModalProps extends CombinedModalProps {
-  type?: 'modal' | 'bottomSheet';
+  style?: Style;
 }
-
-type AnimationType = Record<
-  NonNullable<ModalProps['type']>,
-  Pick<ModalProps, 'animationIn' | 'animationOut'>
->;
 
 const { width, height } = Dimensions.get('screen');
 
-const animationType: AnimationType = {
-  modal: { animationIn: 'fadeIn', animationOut: 'fadeOut' },
-  bottomSheet: { animationIn: 'slideInUp', animationOut: 'slideOutDown' },
-};
-
-const Modal = compareMemo<ModalProps>(({ type = 'modal', style, ...props }) => {
-  const styles = useStyle(createStyles);
+const Modal = compareMemo<ModalProps>(({ style, ...props }) => {
+  const { tw } = useTailwind();
   const [dimensions, setDimensions] = useState<CommonSize>({ width, height });
 
   useEffect(() => {
@@ -40,30 +30,17 @@ const Modal = compareMemo<ModalProps>(({ type = 'modal', style, ...props }) => {
 
   return (
     <RNModal
-      {...animationType[type]}
+      animationIn="fadeIn"
+      animationOut="fadeOut"
       backdropOpacity={DEFAULT_BACKDROP_OPACITY}
       {...props}
       avoidKeyboard
       statusBarTranslucent
       deviceWidth={dimensions.width}
       deviceHeight={dimensions.height}
-      style={[styles.common, styles[type], style]}
+      style={tw.style('p-0 m-0 justify-center', style)}
     />
   );
 });
-
-const createStyles = ({ create }: StyleCallbackParams) =>
-  create({
-    common: {
-      padding: 0,
-      margin: 0,
-    },
-    modal: {
-      justifyContent: 'center',
-    },
-    bottomSheet: {
-      justifyContent: 'flex-end',
-    },
-  });
 
 export default Modal;

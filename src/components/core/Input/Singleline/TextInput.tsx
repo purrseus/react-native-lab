@@ -1,43 +1,29 @@
 import { DEFAULT_FONT_SIZE, DEFAULT_HIT_SLOP, MIN_HEIGHT_INPUT } from '@core/constants';
-import { StyleCallbackParams } from '@core/interfaces';
-import { useStyle } from '@hooks';
+import { useTailwind } from '@hooks';
 import { compareMemo } from '@utils';
 import { forwardRef } from 'react';
 import { TextInput as RNTextInput, TextInputProps as RNTextInputProps } from 'react-native';
+import { Style } from 'twrnc/dist/esm/types';
 
-const TextInput = compareMemo<RNTextInput, RNTextInputProps>(
+const TextInput = compareMemo<RNTextInput, Omit<RNTextInputProps, 'style'> & { style?: Style }>(
   forwardRef(({ style, hitSlop = DEFAULT_HIT_SLOP, ...props }, ref) => {
-    const styles = useStyle(createStyles);
+    const { tw } = useTailwind();
 
     return (
       <RNTextInput
-        placeholderTextColor={styles.placeholder.color}
-        selectionColor={styles.selection.color}
+        placeholderTextColor={tw.color('zinc-400')}
+        selectionColor={tw.color('emerald-600')}
         {...props}
         ref={ref}
         allowFontScaling={false}
-        style={[styles.input, style]}
+        style={tw.style(
+          `p-0 m-0 text-zinc-700 dark:text-white text-[${DEFAULT_FONT_SIZE}px] h-[${MIN_HEIGHT_INPUT}px]`,
+          style,
+        )}
         hitSlop={hitSlop}
       />
     );
   }),
 );
-
-const createStyles = ({ create, colors }: StyleCallbackParams) =>
-  create({
-    input: {
-      padding: 0,
-      margin: 0,
-      color: colors.primaryText,
-      fontSize: DEFAULT_FONT_SIZE,
-      height: MIN_HEIGHT_INPUT,
-    },
-    placeholder: {
-      color: colors.darkGray,
-    },
-    selection: {
-      color: colors.primary,
-    },
-  });
 
 export default TextInput;

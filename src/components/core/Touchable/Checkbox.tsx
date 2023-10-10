@@ -1,79 +1,45 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Tick } from '@assets/icons';
-import { CheckboxItem, StyleCallbackParams } from '@core/interfaces';
-import { useStyle } from '@hooks';
+import { CheckboxItem } from '@core/interfaces';
 import { compareMemo } from '@utils';
-import { StyleProp, ViewProps, ViewStyle } from 'react-native';
-import Row from '../Layout/Row';
-import Spacer from '../Spacer/Spacer';
+import { View, ViewProps } from 'react-native';
+import { Style } from 'twrnc/dist/esm/types';
 import Text from '../Text/Text';
 import Touchable from './Touchable';
+import { useTailwind } from '@hooks';
 
 interface CheckboxProps<T = any> extends Omit<CheckboxItem<T>, 'value'>, Omit<ViewProps, 'style'> {
   isActive?: boolean;
   onPress: () => void;
-  containerStyle?: StyleProp<ViewStyle>;
+  containerStyle?: Style;
 }
 
 const _Checkbox = compareMemo<CheckboxProps>(
-  ({ label, isActive, onPress, disabled, containerStyle, ...props }) => {
-    const behaviorStyle = disabled ? 'Disabled' : 'Enabled';
-    const stateStyle = isActive ? 'Active' : 'Inactive';
-    const styles = useStyle(createStyles);
+  ({ label, isActive = false, onPress, disabled = false, containerStyle, ...props }) => {
+    const { tw } = useTailwind();
 
     return (
-      <Row {...props} style={[styles.container, containerStyle]}>
+      <View {...props} style={tw.style('flex-row items-center gap-x-2', containerStyle)}>
         <Touchable
           hitSlop={8}
-          style={[styles.checkbox, styles[`checkbox${behaviorStyle}${stateStyle}`]]}
+          style={tw.style('rounded-md border w-5 h-5 flex-center', {
+            'border-zinc-300': disabled && !isActive,
+            'bg-zinc-300 border-transparent': disabled && isActive,
+            'border-zinc-700 dark:border-white': !disabled && !isActive,
+            'bg-emerald-500 border-transparent': !disabled && isActive,
+          })}
           {...{ disabled, onPress }}
         >
-          <Tick stroke={styles.tick.tintColor} width={10} height={10} opacity={+!!isActive} />
+          <Tick stroke={tw.color('white')} width={10} height={10} opacity={+!!isActive} />
         </Touchable>
-        <Spacer w={6} />
-        <Text style={styles[`label${behaviorStyle}`]}>{label}</Text>
-      </Row>
+
+        <Text style={tw`${disabled ? 'text-zinc-300' : 'text-zinc-700 dark:text-white'}`}>
+          {label}
+        </Text>
+      </View>
     );
   },
 );
-
-const createStyles = ({ colors, create }: StyleCallbackParams) =>
-  create({
-    container: {
-      alignItems: 'center',
-    },
-    checkbox: {
-      borderRadius: 6,
-      borderWidth: 1,
-      width: 20,
-      height: 20,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    checkboxEnabledInactive: {
-      borderColor: colors.primaryText,
-    },
-    checkboxEnabledActive: {
-      backgroundColor: colors.primary,
-      borderColor: colors.transparent,
-    },
-    checkboxDisabledInactive: {
-      borderColor: colors.lightGray,
-    },
-    checkboxDisabledActive: {
-      backgroundColor: colors.lightGray,
-      borderColor: colors.transparent,
-    },
-    tick: {
-      tintColor: colors.white,
-    },
-    labelEnabled: {
-      color: colors.primaryText,
-    },
-    labelDisabled: {
-      color: colors.lightGray,
-    },
-  });
 
 const Checkbox = _Checkbox as <T = any>(props: CheckboxProps<T>) => JSX.Element;
 
