@@ -33,6 +33,6 @@ const setupCodePush = () => {
     return;
   }
   execScriptSync(
-    'yarn && git init && git branch -m main && git add . && git commit -m "chore: initial commit 🚀"',
+    'cp ./environments/.env.development .env && yarn && git init && git branch -m main && git add . && git commit -m "chore: initial commit 🚀"',
   );
 })();
