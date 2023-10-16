@@ -4,7 +4,7 @@ import { CheckboxItem } from '@core/interfaces';
 import { compareMemo } from '@utils';
 import { View, ViewProps } from 'react-native';
 import { Style } from 'twrnc/dist/esm/types';
-import Text from '../Text/Text';
+import Text from '../text/Text';
 import Touchable from './Touchable';
 import { useTailwind } from '@hooks';
 

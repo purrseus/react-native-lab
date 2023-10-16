@@ -3,7 +3,7 @@ import { compareMemo } from '@utils';
 import { forwardRef } from 'react';
 import { TextInput as RNTextInput, TextInputProps as RNTextInputProps, View } from 'react-native';
 import { Style } from 'twrnc/dist/esm/types';
-import TextInput from '../Singleline/TextInput';
+import TextInput from '../singleline/TextInput';
 import { useTailwind } from '@hooks';
 
 export interface MultilineTextInputProps extends RNTextInputProps {

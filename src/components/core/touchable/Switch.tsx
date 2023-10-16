@@ -8,7 +8,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import ActivityIndicator from '../Loader/ActivityIndicator';
+import ActivityIndicator from '../loader/ActivityIndicator';
 import Touchable from './Touchable';
 import { Style } from 'twrnc/dist/esm/types';
 import { useTailwind } from '@hooks';

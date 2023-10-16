@@ -10,7 +10,7 @@ import {
 import { compareMemo } from '@utils';
 import { RefAttributes, forwardRef, useMemo, useState } from 'react';
 import { RefreshControlProps, View } from 'react-native';
-import ActivityIndicator from '../Loader/ActivityIndicator';
+import ActivityIndicator from '../loader/ActivityIndicator';
 import List, { ListProps } from './List';
 
 interface InfiniteListProps<T = any>

@@ -2,7 +2,7 @@ import { OverlayLoadingMethods } from '@core/interfaces';
 import { compareMemo } from '@utils';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { View } from 'react-native';
-import Modal from '../Modal/Modal';
+import Modal from '../modal/Modal';
 import ActivityIndicator from './ActivityIndicator';
 import { useTailwind } from '@hooks';
 

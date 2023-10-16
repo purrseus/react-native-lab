@@ -5,8 +5,8 @@ import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { SvgProps } from 'react-native-svg';
 import { Style } from 'twrnc/dist/esm/types';
-import ActivityIndicator from '../Loader/ActivityIndicator';
-import Text from '../Text/Text';
+import ActivityIndicator from '../loader/ActivityIndicator';
+import Text from '../text/Text';
 import Touchable, { TouchableProps } from './Touchable';
 import { useTailwind } from '@hooks';
 

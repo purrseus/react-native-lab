@@ -4,7 +4,7 @@ import { createField } from '@utils';
 import { forwardRef, useCallback } from 'react';
 import { Text, View, ViewProps } from 'react-native';
 import { Style } from 'twrnc/dist/esm/types';
-import Checkbox from '../Touchable/Checkbox';
+import Checkbox from '../touchable/Checkbox';
 import { useTailwind } from '@hooks';
 
 export interface CheckboxesProps<T = any> extends Omit<ViewProps, 'style'>, CommonFieldProps<T[]> {

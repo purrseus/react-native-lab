@@ -3,8 +3,8 @@ import { FlashList, FlashListProps as RNFlashListProps } from '@shopify/flash-li
 import { compareMemo } from '@utils';
 import { forwardRef, RefAttributes, useCallback, useRef } from 'react';
 import { FlatList, FlatListProps as RNFlatListProps, RefreshControlProps } from 'react-native';
-import RefreshControl from '../Loader/RefreshControl';
-import BottomSpacer from '../Spacer/BottomSpacer';
+import RefreshControl from '../loader/RefreshControl';
+import BottomSpacer from '../spacer/BottomSpacer';
 
 interface FlatListProps<T = any, F = false>
   extends Omit<RNFlatListProps<T>, keyof RefreshControlProps>,

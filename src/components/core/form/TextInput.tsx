@@ -3,9 +3,9 @@ import { createField } from '@utils';
 import { RefAttributes, forwardRef } from 'react';
 import { TextInput as RNTextInput, View } from 'react-native';
 import { Style } from 'twrnc/dist/esm/types';
-import MultilineTextInput, { MultilineTextInputProps } from '../Input/Multiline/MultilineTextInput';
-import IconTextInput, { IconTextInputProps } from '../Input/Singleline/IconTextInput';
-import Text from '../Text/Text';
+import MultilineTextInput, { MultilineTextInputProps } from '../input/multiline/MultilineTextInput';
+import IconTextInput, { IconTextInputProps } from '../input/singleline/IconTextInput';
+import Text from '../text/Text';
 import { useTailwind } from '@hooks';
 
 type MixinTextInputProps<T extends boolean = false> = (T extends true
