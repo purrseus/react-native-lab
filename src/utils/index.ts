@@ -4,4 +4,4 @@ export * from './format';
 export * from './permission';
 export * from './screen';
 export * from './style';
-export * from './validate';
+export * from './validation';

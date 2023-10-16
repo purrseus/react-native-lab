@@ -12,7 +12,7 @@ const ListScreen = withHook(useListContainer, ({ photosQueryKey }) => {
       <InfiniteList
         renderItem={({ item }) => <Item {...item} />}
         queryKey={photosQueryKey}
-        queryFn={listAPI.getPhotos}
+        queryFn={listAPI.fetchPhotos}
         estimatedItemSize={200}
       />
     </StackContainer>

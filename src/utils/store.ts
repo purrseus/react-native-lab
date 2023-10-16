@@ -1,4 +1,4 @@
-import Config from 'react-native-config';
+import config from '@core/configs';
 import { MMKV } from 'react-native-mmkv';
 import { initializeMMKVFlipper } from 'react-native-mmkv-flipper-plugin';
 import { create, StateCreator } from 'zustand';
@@ -20,7 +20,7 @@ export const createPersistOptions = <T>(
   additionalOptions?: Partial<PersistOptions<T, T>>,
 ): PersistOptions<T, T> => ({
   version: 1,
-  name: `${Config.APP_NAME}/${name}-storage`,
+  name: `${config.appName}/${name}-storage`,
   storage: createJSONStorage(() => persistStorage),
   ...additionalOptions,
 });
