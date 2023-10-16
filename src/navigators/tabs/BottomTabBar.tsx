@@ -6,7 +6,7 @@ import {
   NotificationScreen,
   ProfileScreen,
 } from '@features/tab/screens';
-import { useTailwind } from '@hooks';
+import { useNetwork, useTailwind } from '@hooks';
 import { tabScreenOptions } from '@navigators/options';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomTabNavigationConfig } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
@@ -20,6 +20,7 @@ const TabBar: NonNullable<BottomTabNavigationConfig['tabBar']> = props => (
 
 export default function BottomTabBar() {
   const { tw } = useTailwind();
+  const onlineScreen = useNetwork();
 
   return (
     <BottomTab.Navigator
@@ -28,10 +29,13 @@ export default function BottomTabBar() {
       sceneContainerStyle={tw`background-color`}
       tabBar={TabBar}
     >
-      <BottomTab.Screen name={TabScreenName.Home} component={HomeScreen} />
-      <BottomTab.Screen name={TabScreenName.Messages} component={MessagesScreen} />
-      <BottomTab.Screen name={TabScreenName.Notification} component={NotificationScreen} />
-      <BottomTab.Screen name={TabScreenName.Profile} component={ProfileScreen} />
+      <BottomTab.Screen name={TabScreenName.Home} component={onlineScreen(HomeScreen)} />
+      <BottomTab.Screen name={TabScreenName.Messages} component={onlineScreen(MessagesScreen)} />
+      <BottomTab.Screen
+        name={TabScreenName.Notification}
+        component={onlineScreen(NotificationScreen)}
+      />
+      <BottomTab.Screen name={TabScreenName.Profile} component={onlineScreen(ProfileScreen)} />
     </BottomTab.Navigator>
   );
 }
