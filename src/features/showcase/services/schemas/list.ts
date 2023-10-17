@@ -2,11 +2,11 @@ import { z } from 'zod';
 
 export const PhotosSchema = z.array(
   z.object({
-    albumId: z.number().int().optional().nullable(),
-    id: z.number().int().optional().nullable(),
-    title: z.string().min(1).optional().nullable(),
-    url: z.string().url().optional().nullable(),
-    thumbnailUrl: z.string().url().optional().nullable(),
+    albumId: z.number().int().nullish(),
+    id: z.number().int().nullish(),
+    title: z.string().min(1).nullish(),
+    url: z.string().url().nullish(),
+    thumbnailUrl: z.string().url().nullish(),
   }),
 );
 

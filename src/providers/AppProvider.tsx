@@ -14,7 +14,7 @@ if (__DEV__) {
   const devSettingItems: { title: string; handler: () => void }[] = [
     {
       title: 'Clear MMKV Storage And Reload',
-      handler: async () => {
+      handler: () => {
         MMKVStorage.clearAll();
         DevSettings.reload();
       },
