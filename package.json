@@ -79,6 +79,7 @@
     "@tanstack/eslint-plugin-query": "^4.29.25",
     "@tsconfig/react-native": "^3.0.0",
     "@types/inquirer": "^9.0.3",
+    "@types/lint-staged": "^13.2.0",
     "@types/lodash": "^4.14.182",
     "@types/numeral": "^2.0.2",
     "@types/react": "^18.0.24",

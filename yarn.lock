@@ -2348,6 +2348,11 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.12.tgz#d70faba7039d5fca54c83c7dbab41051d2b6f6cb"
   integrity sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA==
 
+"@types/lint-staged@^13.2.0":
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/@types/lint-staged/-/lint-staged-13.2.0.tgz#d2fca51e4fec0f4088067acaa2d4843244b593dc"
+  integrity sha512-rYHDtOV4BHb1hRH5dA7P+jarU/YFmQ9CGgwYPZNVRoxhrsrm2exEETeIEB+EmBk2AXIKAaK9JDzjpNCkceDGFQ==
+
 "@types/lodash@^4.14.182":
   version "4.14.195"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.195.tgz#bafc975b252eb6cea78882ce8a7b6bf22a6de632"
