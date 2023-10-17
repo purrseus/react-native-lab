@@ -10,7 +10,7 @@ import { View } from 'react-native';
 const FormScreen = withHook(
   useFormContainer,
   ({ form, checkboxData, onSubmit, formNames, formLabels }) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
     const fieldStyle = tw`py-2`;
 
     return (

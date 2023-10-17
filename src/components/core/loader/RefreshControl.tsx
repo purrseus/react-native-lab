@@ -3,7 +3,7 @@ import { compareMemo } from '@utils';
 import { RefreshControl as RNRefreshControl, RefreshControlProps } from 'react-native';
 
 const RefreshControl = compareMemo<RefreshControlProps>(({ ...props }) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
 
   return (
     <RNRefreshControl

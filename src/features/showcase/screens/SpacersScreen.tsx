@@ -10,7 +10,7 @@ import useSpacerContainer from '../containers/useSpacerContainer';
 const SpacersScreen = withHook(
   useSpacerContainer,
   ({ showBottomTabSpacer, showSafeAreaSpacer, showHalfSafeAreaSpacer, status }) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
 
     return (
       <StackContainer title={ProtectedScreenName.Spacers}>

@@ -10,7 +10,7 @@ import { useModalContainer } from '../containers';
 const ModalsScreen = withHook(
   useModalContainer,
   ({ openModal, showAlert, isModalVisible, dismissModal, ModalTexts }) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
 
     return (
       <>

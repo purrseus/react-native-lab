@@ -37,7 +37,7 @@ const BottomSheet = compareMemo<BottomSheetMethods, BottomSheetProps>(
       },
       ref,
     ) => {
-      const { tw } = useTailwind();
+      const tw = useTailwind();
       const { top } = useSafeAreaInsets();
 
       const backdropComponent = useCallback(

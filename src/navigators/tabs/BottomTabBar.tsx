@@ -19,7 +19,7 @@ const TabBar: NonNullable<BottomTabNavigationConfig['tabBar']> = props => (
 );
 
 export default function BottomTabBar() {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
   const onlineScreen = useNetwork();
 
   return (

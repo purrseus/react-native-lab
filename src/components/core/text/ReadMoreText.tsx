@@ -5,7 +5,7 @@ import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
 import Text, { TextProps } from './Text';
 
 const ReadMoreText = compareMemo<TextProps>(({ children, numberOfLines = 3, ...props }) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
   const isFirstRender = useRef(true);
   const [expanded, setExpanded] = useState(false);
   const [truncatedText, setTruncatedText] = useState('');

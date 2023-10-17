@@ -16,7 +16,7 @@ interface StackContainerProps extends ViewProps {
 
 const StackContainer = compareMemo<StackContainerProps>(
   ({ title, wrapperType = 'view', appBarProps, wrapperStyle, style, children, ...props }) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
     const edgeInsets = useSafeAreaInsets();
     const Wrapper = wrapperType === 'scrollView' ? ScrollView : View;
 

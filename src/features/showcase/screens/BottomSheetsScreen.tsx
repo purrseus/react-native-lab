@@ -9,7 +9,7 @@ import { useBottomSheetContainer } from '../containers';
 const BottomSheetsScreen = withHook(
   useBottomSheetContainer,
   ({ showBottomSheet, showActionSheet, bottomSheetRef, bottomSheetSnapPoints }) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
 
     return (
       <>

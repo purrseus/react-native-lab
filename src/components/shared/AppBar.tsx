@@ -17,7 +17,7 @@ export interface AppBarProps extends ViewProps {
 
 const AppBar = compareMemo<AppBarProps>(
   ({ title, rightActions = [], actionSeparatorWidth = 8, ...props }) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
     const edgeInsets = useSafeAreaInsets();
     const { canGoBack, goBack } = useNavigation();
     const { layout: sideLayout, handleLayout: handleSideLayout } = useLayout({

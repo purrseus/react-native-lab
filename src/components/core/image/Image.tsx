@@ -48,7 +48,7 @@ interface CommonImageProps<C extends boolean>
 export type ImageProps<C extends boolean = false> = CommonImageProps<C> & MixinImageProps<C>;
 
 const _Image = compareMemo<ImageProps>(({ style, cached, onLoad, ...props }) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
   const [size, setSize] = useState<CommonSize>({ width: 0, height: 0 });
   const hasSizes = !!size.width && !!size.height;
   const imageStyle = tw.style(hasSizes ? 'bg-transparent' : 'bg-zinc-300 dark:bg-zinc-700', style);

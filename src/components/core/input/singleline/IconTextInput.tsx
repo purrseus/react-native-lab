@@ -15,7 +15,7 @@ export interface IconTextInputProps extends RNTextInputProps {
 
 const IconTextInput = compareMemo<RNTextInput, IconTextInputProps>(
   forwardRef(({ IconLeftComponent, IconRightComponent, containerStyle, style, ...props }, ref) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
 
     return (
       <View

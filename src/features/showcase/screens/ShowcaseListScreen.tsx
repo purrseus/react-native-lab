@@ -6,7 +6,7 @@ import { withHook } from '@utils';
 import useShowcaseListContainer from '../containers/useShowcaseListContainer';
 
 const ShowcaseListScreen = withHook(useShowcaseListContainer, ({ data, renderItem }) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
 
   return (
     <StackContainer title={ProtectedScreenName.ShowcaseList}>

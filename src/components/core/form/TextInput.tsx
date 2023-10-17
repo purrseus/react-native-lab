@@ -21,7 +21,7 @@ type TextInputProps<T extends boolean = false> = {
 const _TextInput = createField<RNTextInput, TextInputProps>(
   forwardRef(
     ({ label, errorText, placeholder, multiline, containerStyle, wrapperStyle, ...props }, ref) => {
-      const { tw } = useTailwind();
+      const tw = useTailwind();
       const TextInputComponent = multiline ? MultilineTextInput : IconTextInput;
 
       return (

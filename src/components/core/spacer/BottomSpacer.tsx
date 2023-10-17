@@ -15,7 +15,7 @@ const getHeights = (bottom: number): Record<BottomSpacerProps['type'], number> =
 });
 
 const BottomSpacer = compareMemo<BottomSpacerProps>(({ type }) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
 
   return <View style={tw`h-[${getHeights(useSafeAreaInsets().bottom)[type]}px]`} />;
 });

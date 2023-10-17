@@ -8,7 +8,7 @@ interface ShowcaseItemProps {
 }
 
 const ShowcaseItem = compareMemo<ShowcaseItemProps>(({ title, onPress }) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
 
   return (
     <Touchable

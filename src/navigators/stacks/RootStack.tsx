@@ -50,7 +50,7 @@ const ProtectedScreens = (
 );
 
 export default function RootNavigator() {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
   const isAuthenticated = useAuthStore(
     ({ accessToken, refreshToken }) => accessToken?.isNotEmpty && refreshToken?.isNotEmpty,
   );

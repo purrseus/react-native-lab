@@ -30,7 +30,7 @@ const _Checkboxes = createField<unknown, CheckboxesProps>(
       },
       _ref,
     ) => {
-      const { tw } = useTailwind();
+      const tw = useTailwind();
 
       const onPress = useCallback(
         (itemValue: CheckboxItem['value']) => () => {

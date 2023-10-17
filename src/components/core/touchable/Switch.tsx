@@ -42,7 +42,7 @@ const Switch = compareMemo<SwitchProps>(
     style,
     ...props
   }) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
     const isAndroidPlatform = isAndroid();
 
     const [trackActiveColor, trackInactiveColor] = [

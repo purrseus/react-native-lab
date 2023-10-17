@@ -6,7 +6,7 @@ import { ShowcaseItem } from '../components';
 import { useLoaderContainer } from '../containers';
 
 const LoaderScreen = withHook(useLoaderContainer, ({ handleOverlayLoading }) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
 
   return (
     <StackContainer title={ProtectedScreenName.Loader} wrapperStyle={tw`flex-fill-center`}>

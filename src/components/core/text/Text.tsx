@@ -9,7 +9,7 @@ export interface TextProps extends RNTextProps {
 }
 
 const Text = compareMemo<TextProps>(({ style, onPress, ...props }) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
   const handleOnPress = useThrottle(onPress || (() => null), [onPress], duration({ s: 0.5 }));
 
   return (

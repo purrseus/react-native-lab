@@ -20,7 +20,7 @@ interface TabUI {
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 
 export default function CustomizedTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
   const { t } = useAppTranslation('tab');
   const { keyboardShown } = useKeyboard();
 

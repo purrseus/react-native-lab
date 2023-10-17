@@ -16,7 +16,7 @@ interface CheckboxProps<T = any> extends Omit<CheckboxItem<T>, 'value'>, Omit<Vi
 
 const _Checkbox = compareMemo<CheckboxProps>(
   ({ label, isActive = false, onPress, disabled = false, containerStyle, ...props }) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
 
     return (
       <View {...props} style={tw.style('flex-row items-center gap-x-2', containerStyle)}>

@@ -53,7 +53,7 @@ const Button = compareMemo<ButtonProps>(
     disabled,
     ...props
   }) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
     const [buttonSize, titleSize] = sizes[size];
 
     const [typeStyle, contentTypeColor] = useMemo(() => {

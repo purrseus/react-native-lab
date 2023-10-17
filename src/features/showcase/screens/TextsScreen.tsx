@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { Separator } from '../components';
 
 export default function TextsScreen() {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
   const { t } = useTranslation();
 
   return (

@@ -37,7 +37,7 @@ const _InfiniteList = compareMemo<FlashList<any>, InfiniteListProps>(
       },
       ref,
     ) => {
-      const { tw } = useTailwind();
+      const tw = useTailwind();
       const [refreshing, setRefreshing] = useState(false);
 
       const { fetchNextPage, data, isError, hasNextPage, refetch, isLoading } = useInfiniteQuery({

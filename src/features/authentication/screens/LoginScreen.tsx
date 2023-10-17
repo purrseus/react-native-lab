@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import { useLoginContainer } from '../containers';
 
 const LoginScreen = withHook(useLoginContainer, ({ handleLogin, navigateToRegister }) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
 
   return (
     <View style={tw`flex-fill-center gap-y-4`}>

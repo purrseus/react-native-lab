@@ -8,7 +8,7 @@ import { View } from 'react-native';
 import { useImageContainer } from '../containers';
 
 const ImagesScreen = withHook(useImageContainer, ({ imageUrl }) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
 
   return (
     <StackContainer

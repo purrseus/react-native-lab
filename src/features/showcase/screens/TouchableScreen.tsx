@@ -11,7 +11,7 @@ import { useTouchableContainer } from '../containers';
 const TouchableScreen = withHook(
   useTouchableContainer,
   ({ isSwitchEnabled, onSwitchPress, onButtonPress }) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
 
     return (
       <StackContainer

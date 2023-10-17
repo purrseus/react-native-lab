@@ -5,7 +5,7 @@ import { Text, View } from 'react-native';
 import { useRegisterContainer } from '../containers';
 
 const RegisterScreen = withHook(useRegisterContainer, ({ goBack }) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
 
   return (
     <View style={tw`flex-fill-center gap-y-4`}>

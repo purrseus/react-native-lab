@@ -3,7 +3,7 @@ import { compareMemo } from '@utils';
 import { StatusBar as RNStatusBar, StatusBarProps } from 'react-native';
 
 const StatusBar = compareMemo<StatusBarProps>(({ ...props }) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
 
   return (
     <RNStatusBar

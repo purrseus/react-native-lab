@@ -7,7 +7,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function LayoutProvider({ children }: PropsWithChildren) {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
 
   return (
     <SafeAreaProvider>

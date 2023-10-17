@@ -16,7 +16,7 @@ export interface ModalProps extends CombinedModalProps {
 const { width, height } = Dimensions.get('screen');
 
 const Modal = compareMemo<ModalProps>(({ style, ...props }) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
   const [dimensions, setDimensions] = useState<CommonSize>({ width, height });
 
   useEffect(() => {

@@ -8,7 +8,7 @@ import { useTailwind } from '@hooks';
 
 const OverlayLoading = compareMemo<OverlayLoadingMethods, unknown>(
   forwardRef((_, ref) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
     const [isVisible, setIsVisible] = useState(false);
 
     useImperativeHandle(ref, () => ({ show: setIsVisible }), []);

@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { Photos } from '../services/schemas';
 
 const Item = (props: Photos[number]) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
   const handleOnPress = () => print(props);
 
   return (

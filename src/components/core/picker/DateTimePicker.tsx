@@ -25,7 +25,7 @@ const platformDisplay: PlatformDisplay = {
 const DateTimePicker = compareMemo<DateTimePickerMethods, Partial<Props>>(
   // @ts-ignore
   forwardRef(({ mode = 'date', onConfirm, ...props }, ref) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
     const { t } = useAppTranslation();
     const colorScheme = useColorScheme();
     const [isVisible, setIsVisible] = useState(false);

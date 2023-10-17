@@ -13,7 +13,7 @@ type UseActionSheet = (
 ) => () => void;
 
 const useAppActionSheet: UseActionSheet = (actionSheetOptions, callback) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
   const { showActionSheetWithOptions } = useActionSheet();
   const theme = useCommonStore(state => state.theme);
   const colorScheme = useColorScheme();

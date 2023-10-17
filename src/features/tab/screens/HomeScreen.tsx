@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import { useHomeContainer } from '../containers';
 
 const HomeScreen = withHook(useHomeContainer, ({ goToShowcase }) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
 
   return (
     <View style={tw`flex-fill-center gap-y-4`}>

@@ -9,7 +9,7 @@ import { useTailwind } from '@hooks';
 const PickersScreen = withHook(
   usePickerContainer,
   ({ dateTime, setDateTime, dateTimePickerRef, showImagePicker, showDateTimePicker }) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
 
     return (
       <StackContainer

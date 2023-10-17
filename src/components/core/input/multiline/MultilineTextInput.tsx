@@ -14,7 +14,7 @@ export interface MultilineTextInputProps extends RNTextInputProps {
 
 const MultilineTextInput = compareMemo<RNTextInput, MultilineTextInputProps>(
   forwardRef(({ dynamicHeight = false, style, containerStyle, ...props }, ref) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
 
     return (
       <View

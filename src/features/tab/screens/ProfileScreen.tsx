@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import { useProfileContainer } from '../containers';
 
 const ProfileScreen = withHook(useProfileContainer, ({ logout }) => {
-  const { tw } = useTailwind();
+  const tw = useTailwind();
 
   return (
     <View style={tw`flex-fill-center gap-y-4`}>

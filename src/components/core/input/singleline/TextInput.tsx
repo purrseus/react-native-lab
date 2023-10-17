@@ -7,7 +7,7 @@ import { Style } from 'twrnc/dist/esm/types';
 
 const TextInput = compareMemo<RNTextInput, Omit<RNTextInputProps, 'style'> & { style?: Style }>(
   forwardRef(({ style, hitSlop = DEFAULT_HIT_SLOP, ...props }, ref) => {
-    const { tw } = useTailwind();
+    const tw = useTailwind();
 
     return (
       <RNTextInput
