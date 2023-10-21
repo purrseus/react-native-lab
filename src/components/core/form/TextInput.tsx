@@ -1,48 +1,47 @@
-import { CommonFieldProps } from '@core/interfaces';
-import { createField } from '@utils';
-import { RefAttributes, forwardRef } from 'react';
-import { TextInput as RNTextInput, View } from 'react-native';
+import { FieldProps } from '@core/types';
+import { useTailwind } from '@hooks';
+import { View } from 'react-native';
 import { Style } from 'twrnc/dist/esm/types';
 import MultilineTextInput, { MultilineTextInputProps } from '../input/multiline/MultilineTextInput';
 import IconTextInput, { IconTextInputProps } from '../input/singleline/IconTextInput';
 import Text from '../text/Text';
-import { useTailwind } from '@hooks';
 
-type MixinTextInputProps<T extends boolean = false> = (T extends true
-  ? MultilineTextInputProps
-  : IconTextInputProps) &
-  CommonFieldProps<string, true>;
+type MixinTextInputProps<T> = T extends true ? MultilineTextInputProps : IconTextInputProps;
 
-type TextInputProps<T extends boolean = false> = {
+type TextInputProps<T> = MixinTextInputProps<T> & {
   multiline?: T;
   wrapperStyle?: Style;
-} & MixinTextInputProps<T>;
+};
 
-const _TextInput = createField<RNTextInput, TextInputProps>(
-  forwardRef(
-    ({ label, errorText, placeholder, multiline, containerStyle, wrapperStyle, ...props }, ref) => {
-      const tw = useTailwind();
-      const TextInputComponent = multiline ? MultilineTextInput : IconTextInput;
+export default function TextInput<T extends boolean = false>({
+  label,
+  name,
+  placeholder,
+  multiline,
+  containerStyle,
+  wrapperStyle,
+  _fieldProps,
+  ...props
+}: FieldProps<TextInputProps<T>>) {
+  const tw = useTailwind();
+  const { field, fieldState } = _fieldProps!;
+  const TextInputComponent = multiline ? MultilineTextInput : IconTextInput;
 
-      return (
-        <View style={containerStyle}>
-          {!!label && <Text style={tw`text-sm font-bold mb-1`}>{label}</Text>}
-          <TextInputComponent
-            {...props}
-            ref={ref}
-            placeholder={placeholder || label}
-            containerStyle={wrapperStyle}
-          />
-          {!!errorText && <Text style={tw`text-red-600 mt-1`}>{errorText}</Text>}
-        </View>
-      );
-    },
-  ),
-  true,
-);
-
-const TextInput = _TextInput as <T extends boolean = false>(
-  props: TextInputProps<T> & RefAttributes<RNTextInput>,
-) => JSX.Element;
-
-export default TextInput;
+  return (
+    <View id={name} style={tw.style('gap-y-0.5', containerStyle)}>
+      {!!label && <Text style={tw`text-sm font-bold`}>{label}</Text>}
+      <TextInputComponent
+        {...props}
+        ref={field.ref}
+        onChangeText={field.onChange}
+        onBlur={field.onBlur}
+        value={field.value}
+        placeholder={placeholder || label}
+        containerStyle={wrapperStyle}
+      />
+      {!!fieldState.error?.message && (
+        <Text style={tw`text-red-600`}>{fieldState.error.message}</Text>
+      )}
+    </View>
+  );
+}

@@ -2,15 +2,6 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import { SvgProps } from 'react-native-svg';
 
-export interface CommonFieldProps<T = any, I = false> {
-  name: string;
-  label?: string;
-  errorText?: string;
-  value?: T;
-  onChange?: I extends true ? unknown : (value: T) => void;
-  onChangeText?: I extends true ? (text: T) => void : unknown;
-}
-
 export interface AppBarAction {
   Icon: FC<SvgProps>;
   size?: number;
