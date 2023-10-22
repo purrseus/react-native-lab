@@ -14,32 +14,38 @@ interface StackContainerProps extends ViewProps {
   style?: Style;
 }
 
-const StackContainer = compareMemo<StackContainerProps>(
-  ({ title, wrapperType = 'view', appBarProps, wrapperStyle, style, children, ...props }) => {
-    const tw = useTailwind();
-    const edgeInsets = useSafeAreaInsets();
-    const Wrapper = wrapperType === 'scrollView' ? ScrollView : View;
+function StackContainer({
+  title,
+  wrapperType = 'view',
+  appBarProps,
+  wrapperStyle,
+  style,
+  children,
+  ...props
+}: StackContainerProps) {
+  const tw = useTailwind();
+  const edgeInsets = useSafeAreaInsets();
+  const Wrapper = wrapperType === 'scrollView' ? ScrollView : View;
 
-    const wrapperProps = useMemo(
-      () => ({
-        contentContainerStyle: tw.style(`px-4 pb-[${edgeInsets.bottom}px]`, wrapperStyle),
-        automaticallyAdjustsScrollIndicatorInsets: false,
-      }),
-      [edgeInsets.bottom, wrapperStyle, tw],
-    );
+  const wrapperProps = useMemo(
+    () => ({
+      contentContainerStyle: tw.style(`px-4 pb-[${edgeInsets.bottom}px]`, wrapperStyle),
+      automaticallyAdjustsScrollIndicatorInsets: false,
+    }),
+    [edgeInsets.bottom, wrapperStyle, tw],
+  );
 
-    return (
-      <View {...props} style={tw.style('flex-1', style)}>
-        {!!title && <AppBar title={title} {...appBarProps} />}
-        <Wrapper
-          style={tw.style('flex-1', wrapperType !== 'scrollView' && wrapperStyle)}
-          {...(wrapperType === 'scrollView' && wrapperProps)}
-        >
-          {children}
-        </Wrapper>
-      </View>
-    );
-  },
-);
+  return (
+    <View {...props} style={tw.style('flex-1', style)}>
+      {!!title && <AppBar title={title} {...appBarProps} />}
+      <Wrapper
+        style={tw.style('flex-1', wrapperType !== 'scrollView' && wrapperStyle)}
+        {...(wrapperType === 'scrollView' && wrapperProps)}
+      >
+        {children}
+      </Wrapper>
+    </View>
+  );
+}
 
-export default StackContainer;
+export default compareMemo(StackContainer);

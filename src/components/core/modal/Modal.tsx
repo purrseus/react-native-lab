@@ -1,7 +1,6 @@
 import { DEFAULT_BACKDROP_OPACITY } from '@core/constants';
 import { CommonSize } from '@core/types';
 import { useTailwind } from '@hooks';
-import { compareMemo } from '@utils';
 import { useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 import RNModal, { ModalProps as RNModalProps } from 'react-native-modal';
@@ -15,7 +14,7 @@ export interface ModalProps extends CombinedModalProps {
 
 const { width, height } = Dimensions.get('screen');
 
-const Modal = compareMemo<ModalProps>(({ style, ...props }) => {
+export default function Modal({ style, ...props }: ModalProps) {
   const tw = useTailwind();
   const [dimensions, setDimensions] = useState<CommonSize>({ width, height });
 
@@ -41,6 +40,4 @@ const Modal = compareMemo<ModalProps>(({ style, ...props }) => {
       style={tw.style('p-0 m-0 justify-center', style)}
     />
   );
-});
-
-export default Modal;
+}

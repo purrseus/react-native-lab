@@ -8,6 +8,12 @@ declare global {
   }
 }
 
+declare module 'react' {
+  function forwardRef<T, P = {}>(
+    render: (props: P, ref: ForwardedRef<T>) => ReactNode,
+  ): (props: PropsWithoutRef<P> & RefAttributes<T>) => ReactNode;
+}
+
 declare module 'react-native' {
   type StyleProp<T> =
     | T

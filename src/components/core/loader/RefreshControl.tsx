@@ -1,8 +1,7 @@
 import { useTailwind } from '@hooks';
-import { compareMemo } from '@utils';
 import { RefreshControl as RNRefreshControl, RefreshControlProps } from 'react-native';
 
-const RefreshControl = compareMemo<RefreshControlProps>(({ ...props }) => {
+export default function RefreshControl(props: RefreshControlProps) {
   const tw = useTailwind();
 
   return (
@@ -13,6 +12,4 @@ const RefreshControl = compareMemo<RefreshControlProps>(({ ...props }) => {
       tintColor={tw.color('emerald-500')}
     />
   );
-});
-
-export default RefreshControl;
+}

@@ -1,10 +1,9 @@
 import { useAppTranslation, useTailwind } from '@hooks';
-import { compareMemo } from '@utils';
 import { useMemo, useRef, useState } from 'react';
 import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
 import Text, { TextProps } from './Text';
 
-const ReadMoreText = compareMemo<TextProps>(({ children, numberOfLines = 3, ...props }) => {
+export default function ReadMoreText({ children, numberOfLines = 3, ...props }: TextProps) {
   const tw = useTailwind();
   const isFirstRender = useRef(true);
   const [expanded, setExpanded] = useState(false);
@@ -42,6 +41,4 @@ const ReadMoreText = compareMemo<TextProps>(({ children, numberOfLines = 3, ...p
       )}
     </Text>
   );
-});
-
-export default ReadMoreText;
+}

@@ -1,8 +1,7 @@
 import { useTailwind } from '@hooks';
-import { compareMemo } from '@utils';
 import { StatusBar as RNStatusBar, StatusBarProps } from 'react-native';
 
-const StatusBar = compareMemo<StatusBarProps>(({ ...props }) => {
+export default function StatusBar(props: StatusBarProps) {
   const tw = useTailwind();
 
   return (
@@ -13,6 +12,4 @@ const StatusBar = compareMemo<StatusBarProps>(({ ...props }) => {
       {...props}
     />
   );
-});
-
-export default StatusBar;
+}

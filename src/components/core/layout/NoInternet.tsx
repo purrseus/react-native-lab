@@ -1,7 +1,7 @@
 import { useTailwind } from '@hooks';
 import { Text, View } from 'react-native';
 
-const NoInternet = () => {
+export default function NoInternet() {
   const tw = useTailwind();
 
   return (
@@ -9,6 +9,4 @@ const NoInternet = () => {
       <Text>No internet connection!</Text>
     </View>
   );
-};
-
-export default NoInternet;
+}

@@ -1,12 +1,14 @@
 import { PADDING_VERTICAL_INPUT } from '@core/constants';
-import { compareMemo } from '@utils';
 import {
-  KeyboardAwareScrollView as RNKeyboardAwareScrollView,
   KeyboardAwareScrollViewProps,
+  KeyboardAwareScrollView as RNKeyboardAwareScrollView,
 } from 'react-native-keyboard-aware-scroll-view';
 
-const KeyboardAwareScrollView = compareMemo<KeyboardAwareScrollViewProps>(
-  ({ children, ...props }) => (
+export default function KeyboardAwareScrollView({
+  children,
+  ...props
+}: KeyboardAwareScrollViewProps) {
+  return (
     <RNKeyboardAwareScrollView
       automaticallyAdjustContentInsets={false}
       automaticallyAdjustsScrollIndicatorInsets={false}
@@ -16,7 +18,5 @@ const KeyboardAwareScrollView = compareMemo<KeyboardAwareScrollViewProps>(
     >
       {children}
     </RNKeyboardAwareScrollView>
-  ),
-);
-
-export default KeyboardAwareScrollView;
+  );
+}

@@ -1,6 +1,5 @@
 import { TAB_BAR_HEIGHT } from '@core/constants';
 import { useTailwind } from '@hooks';
-import { compareMemo } from '@utils';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -14,10 +13,8 @@ const getHeights = (bottom: number): Record<BottomSpacerProps['type'], number> =
   halfSafeArea: bottom / 2,
 });
 
-const BottomSpacer = compareMemo<BottomSpacerProps>(({ type }) => {
+export default function BottomSpacer({ type }: BottomSpacerProps) {
   const tw = useTailwind();
 
   return <View style={tw`h-[${getHeights(useSafeAreaInsets().bottom)[type]}px]`} />;
-});
-
-export default BottomSpacer;
+}

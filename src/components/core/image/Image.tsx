@@ -1,80 +1,49 @@
-import { CommonSize } from '@core/types';
 import { useTailwind } from '@hooks';
-import { compareMemo } from '@utils';
-import { omit } from 'lodash';
 import { useCallback, useState } from 'react';
-import {
-  AccessibilityProps,
-  ImageLoadEventData,
-  NativeSyntheticEvent,
-  Image as RNImage,
-  ImageProps as RNImageProps,
-  ViewProps,
-} from 'react-native';
-import FastImage, { FastImageProps, OnLoadEvent } from 'react-native-fast-image';
+import { Image as RNImage, ImageProps as RNImageProps } from 'react-native';
+import FastImage, { FastImageProps } from 'react-native-fast-image';
 import { Style } from 'twrnc/dist/esm/types';
 
-type MixinImagePropKeys =
-  | 'source'
-  | 'resizeMode'
-  | 'onLoadStart'
-  | 'onLoad'
-  | 'onError'
-  | 'onLoadEnd';
+type FactoryImageProps<C> = C extends true ? FastImageProps : RNImageProps;
 
-type CachedImagePropKeys = 'fallback' | 'tintColor';
-
-type ImageTypeProps<C, Key extends keyof FastImageProps & keyof RNImageProps> = {
-  [K in Key]: C extends true ? FastImageProps[K] : RNImageProps[K];
-};
-
-type CachedImageProps<C, Key extends keyof FastImageProps> = {
-  [K in Key]: C extends true ? FastImageProps[K] : undefined;
-};
-
-type MixinImageProps<C> = Partial<
-  ImageTypeProps<C, MixinImagePropKeys> & CachedImageProps<C, CachedImagePropKeys>
-> &
-  ImageTypeProps<C, 'source'>;
-
-interface CommonImageProps<C extends boolean>
-  extends Omit<RNImageProps, keyof FastImageProps>,
-    AccessibilityProps,
-    ViewProps {
+export type ImageProps<C> = Omit<FactoryImageProps<C>, 'style'> & {
   cached?: C;
   style?: Style;
-}
+};
 
-export type ImageProps<C extends boolean = false> = CommonImageProps<C> & MixinImageProps<C>;
-
-const _Image = compareMemo<ImageProps>(({ style, cached, onLoad, ...props }) => {
+export default function Image<C extends boolean>({
+  style,
+  cached,
+  onLoad,
+  ...props
+}: ImageProps<C>) {
   const tw = useTailwind();
-  const [size, setSize] = useState<CommonSize>({ width: 0, height: 0 });
-  const hasSizes = !!size.width && !!size.height;
+  const [hasSizes, setHasSizes] = useState(false);
   const imageStyle = tw.style(hasSizes ? 'bg-transparent' : 'bg-zinc-300 dark:bg-zinc-700', style);
 
   const handleOnLoad = useCallback(
-    ({ nativeEvent }: NativeSyntheticEvent<ImageLoadEventData> | OnLoadEvent) => {
-      onLoad?.({ nativeEvent } as Parameters<NonNullable<ImageProps['onLoad']>>[0]);
+    ({ nativeEvent }: Parameters<NonNullable<typeof onLoad>>[0]) => {
+      // @ts-ignore
+      onLoad?.({ nativeEvent });
 
       if (hasSizes) return;
-      setSize('source' in nativeEvent ? omit(nativeEvent.source, ['uri']) : nativeEvent);
+      const source = 'source' in nativeEvent ? nativeEvent.source : nativeEvent;
+      setHasSizes(!!source.width && !!source.height);
     },
     [hasSizes, onLoad],
   );
 
-  return cached ? (
-    <FastImage {...(props as FastImageProps)} onLoad={handleOnLoad} style={imageStyle} />
-  ) : (
+  if (cached)
+    return (
+      <FastImage {...(props as FactoryImageProps<true>)} onLoad={handleOnLoad} style={imageStyle} />
+    );
+
+  return (
     <RNImage
-      {...(props as RNImageProps)}
-      onLoad={handleOnLoad}
+      {...(props as FactoryImageProps<false>)}
       progressiveRenderingEnabled
+      onLoad={handleOnLoad}
       style={imageStyle}
     />
   );
-});
-
-const Image = _Image as <T extends boolean = false>(props: ImageProps<T>) => JSX.Element;
-
-export default Image;
+}

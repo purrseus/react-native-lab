@@ -1,11 +1,8 @@
 import { useTailwind } from '@hooks';
-import { compareMemo } from '@utils';
-import { ActivityIndicator as RNActivityIndicator, ActivityIndicatorProps } from 'react-native';
+import { ActivityIndicatorProps, ActivityIndicator as RNActivityIndicator } from 'react-native';
 
-const ActivityIndicator = compareMemo<ActivityIndicatorProps>(props => {
+export default function ActivityIndicator(props: ActivityIndicatorProps) {
   const tw = useTailwind();
 
   return <RNActivityIndicator color={tw.color('emerald-500')} {...props} />;
-});
-
-export default ActivityIndicator;
+}

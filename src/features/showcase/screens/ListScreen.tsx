@@ -10,6 +10,7 @@ const ListScreen = withHook(useListContainer, ({ photosQueryKey }) => {
   return (
     <StackContainer title={ProtectedScreenName.List}>
       <InfiniteList
+        flashed
         renderItem={({ item }) => <Item {...item} />}
         queryKey={photosQueryKey}
         queryFn={listAPI.fetchPhotos}

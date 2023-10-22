@@ -7,7 +7,7 @@ interface ShowcaseItemProps {
   onPress: () => void;
 }
 
-const ShowcaseItem = compareMemo<ShowcaseItemProps>(({ title, onPress }) => {
+function ShowcaseItem({ title, onPress }: ShowcaseItemProps) {
   const tw = useTailwind();
 
   return (
@@ -18,6 +18,6 @@ const ShowcaseItem = compareMemo<ShowcaseItemProps>(({ title, onPress }) => {
       <Text style={tw`text-base font-bold`}>{title}</Text>
     </Touchable>
   );
-});
+}
 
-export default ShowcaseItem;
+export default compareMemo(ShowcaseItem);

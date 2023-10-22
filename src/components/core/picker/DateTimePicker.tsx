@@ -1,70 +1,66 @@
 import { DateTimePickerMethods } from '@core/interfaces';
 import { useAppTranslation, useTailwind } from '@hooks';
 import { useCommonStore } from '@stores';
-import { compareMemo } from '@utils';
-import { forwardRef, useImperativeHandle, useState } from 'react';
-import { Platform, useColorScheme } from 'react-native';
+import { ForwardedRef, forwardRef, useImperativeHandle, useState } from 'react';
+import { Platform } from 'react-native';
 import DateTimePickerModal, {
-  ReactNativeModalDateTimePickerProps as Props,
+  ReactNativeModalDateTimePickerProps,
 } from 'react-native-modal-datetime-picker';
 
-type PlatformDisplayKey = NonNullable<Props['mode']>;
-type PlatformDisplayValue = NonNullable<Props['display']>;
-type PlatformDisplay = Record<PlatformDisplayKey, PlatformDisplayValue>;
+type PlatformDisplayKey = NonNullable<ReactNativeModalDateTimePickerProps['mode']>;
+type PlatformDisplayValue = NonNullable<ReactNativeModalDateTimePickerProps['display']>;
 
-function displaySelect<T extends PlatformDisplayValue>(specifics: { android: T; ios: T }): T {
-  return Platform.select<T>(specifics)!;
+function platformSelect(android: PlatformDisplayValue, ios: PlatformDisplayValue) {
+  return Platform.select({ android, ios })!;
 }
 
-const platformDisplay: PlatformDisplay = {
-  date: displaySelect({ android: 'calendar', ios: 'inline' }),
-  datetime: displaySelect({ android: 'default', ios: 'spinner' }),
-  time: displaySelect({ android: 'clock', ios: 'spinner' }),
+const platformDisplay: Record<PlatformDisplayKey, PlatformDisplayValue> = {
+  date: platformSelect('calendar', 'inline'),
+  datetime: platformSelect('default', 'spinner'),
+  time: platformSelect('clock', 'spinner'),
 };
 
-const DateTimePicker = compareMemo<DateTimePickerMethods, Partial<Props>>(
-  // @ts-ignore
-  forwardRef(({ mode = 'date', onConfirm, ...props }, ref) => {
-    const tw = useTailwind();
-    const { t } = useAppTranslation();
-    const colorScheme = useColorScheme();
-    const [isVisible, setIsVisible] = useState(false);
-    const language = useCommonStore(state => state.language);
+function DateTimePicker(
+  { mode = 'date', onConfirm, ...props }: Partial<ReactNativeModalDateTimePickerProps>,
+  ref: ForwardedRef<DateTimePickerMethods>,
+) {
+  const tw = useTailwind();
+  const { t } = useAppTranslation('common');
+  const [isVisible, setIsVisible] = useState(false);
+  const language = useCommonStore(state => state.language);
 
-    useImperativeHandle(
-      ref,
-      () => ({
-        show: () => {
-          setIsVisible(true);
-        },
-      }),
-      [],
-    );
+  useImperativeHandle(
+    ref,
+    () => ({
+      show: () => {
+        setIsVisible(true);
+      },
+    }),
+    [],
+  );
 
-    const handleCancel = () => setIsVisible(false);
+  const handleCancel = () => setIsVisible(false);
 
-    const handleConfirm: typeof onConfirm = date => {
-      handleCancel();
-      onConfirm?.(date);
-    };
+  const handleConfirm: typeof onConfirm = date => {
+    handleCancel();
+    onConfirm?.(date);
+  };
 
-    return (
-      // @ts-ignore
-      <DateTimePickerModal
-        {...props}
-        isVisible={isVisible}
-        mode={mode}
-        display={platformDisplay[mode]}
-        onCancel={handleCancel}
-        onConfirm={handleConfirm}
-        isDarkModeEnabled={colorScheme === 'dark'}
-        accentColor={tw.color('emerald-500')}
-        cancelTextIOS={t('common.cancel')}
-        confirmTextIOS={t('common.confirm')}
-        locale={language}
-      />
-    );
-  }),
-);
+  return (
+    <DateTimePickerModal
+      {...props}
+      isVisible={isVisible}
+      mode={mode}
+      display={platformDisplay[mode]}
+      onCancel={handleCancel}
+      onConfirm={handleConfirm}
+      isDarkModeEnabled={tw.prefixMatch('dark')}
+      accentColor={tw.color('emerald-500')}
+      cancelTextIOS={t('cancel')}
+      confirmTextIOS={t('confirm')}
+      locale={language}
+    />
+  );
+}
 
-export default DateTimePicker;
+export default forwardRef(DateTimePicker);
