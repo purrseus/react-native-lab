@@ -5,8 +5,6 @@ export { default as Image } from './image/Image';
 export { default as MultilineTextInput } from './input/multiline/MultilineTextInput';
 export { default as IconTextInput } from './input/singleline/IconTextInput';
 export { default as TextInput } from './input/singleline/TextInput';
-export { default as NoInternet } from './layout/NoInternet';
-export { default as StatusBar } from './layout/StatusBar';
 export { default as InfiniteList } from './list/InfiniteList';
 export { default as KeyboardAwareScrollView } from './list/KeyboardAwareScrollView';
 export { default as List } from './list/List';

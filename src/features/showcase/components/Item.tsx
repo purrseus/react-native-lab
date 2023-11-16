@@ -12,9 +12,7 @@ const Item = (props: Photos[number]) => {
       style={tw`p-4 my-2 mx-4 rounded-2xl bg-white dark:bg-zinc-700 flex-row shadow-md gap-x-4`}
       onPress={handleOnPress}
     >
-      {!!props.thumbnailUrl && (
-        <Image source={{ uri: props.thumbnailUrl }} style={tw`w-[100px] h-[100px] rounded-2xl`} />
-      )}
+      <Image source={{ uri: props.thumbnailUrl }} style={tw`w-[100px] h-[100px] rounded-2xl`} />
 
       <View style={tw`flex-1`}>
         <Text style={tw`font-bold`}>{formatReferenceType(props)}</Text>

@@ -1,3 +1,5 @@
+import { Alert } from '@components/core';
+import nativeConfig from '@core/configs';
 import { PromiseObject } from '@core/interfaces';
 import { useAuthStore } from '@stores';
 import axios, {
@@ -8,7 +10,7 @@ import axios, {
   HttpStatusCode,
   InternalAxiosRequestConfig,
 } from 'axios';
-import { ZodTypeAny, z } from 'zod';
+import { ZodError, ZodTypeAny, z } from 'zod';
 
 type OriginalRequest = (NonNullable<InternalAxiosRequestConfig> & { retry?: boolean }) | undefined;
 
@@ -125,14 +127,21 @@ export default class Http extends Axios {
     this.promiseQueue.length = 0;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public dataAdapter<Z extends ZodTypeAny, T extends (...args: any[]) => Promise<AxiosResponse>>(
-    schema: Z,
-    request: T,
-  ): (...args: Parameters<typeof request>) => Promise<z.infer<typeof schema>> {
+  public responseDataAdapter<
+    Z extends ZodTypeAny,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    T extends (...args: any[]) => Promise<AxiosResponse>,
+  >(schema: Z, request: T): (...args: Parameters<T>) => Promise<z.infer<Z>> {
     return async (...args) => {
       const response = await request(...args);
-      return schema.parse(response.data);
+      const result = schema.safeParse(response.data);
+
+      if (result.success) return result.data;
+
+      const title = `${response.config.method} ${response.config.url}`;
+      const message = JSON.stringify(result.error.format());
+      if (nativeConfig.env === 'development' && !__DEV__) Alert(title, message);
+      throw new ZodError(result.error.issues);
     };
   }
 }

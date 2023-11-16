@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { onlineManager } from '@tanstack/react-query';
 import NetInfo from '@react-native-community/netinfo';
-import { NoInternet } from '@components/core';
+import { NoInternet } from '@layouts';
 
 const useNetwork = () => {
   const [noInternet, setNoInternet] = useState(false);

@@ -2,7 +2,7 @@ import http from '@services';
 import { QueryFunctionContext } from '@tanstack/react-query';
 import { PhotosSchema } from '../schemas';
 
-const fetchPhotos = http.dataAdapter(
+const fetchPhotos = http.responseDataAdapter(
   PhotosSchema,
   ({ pageParam = 1, signal }: QueryFunctionContext) =>
     http.get('/photos', {

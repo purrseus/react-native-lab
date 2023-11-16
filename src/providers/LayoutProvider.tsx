@@ -1,6 +1,7 @@
-import { OverlayLoading, StatusBar } from '@components/core';
+import { OverlayLoading } from '@components/core';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { useTailwind } from '@hooks';
+import { StatusBar } from '@layouts';
 import { overlayLoadingRef } from '@utils';
 import { PropsWithChildren } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';

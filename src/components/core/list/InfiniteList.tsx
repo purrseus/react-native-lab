@@ -38,6 +38,7 @@ function InfiniteList<T = any, F = false>(
     queryKey,
     queryFn,
     getNextPageParam: getNextPageParam || ((_, allPages) => allPages.length + 1),
+    retry: false,
   });
 
   const isFetching = isLoading && !refreshing;
