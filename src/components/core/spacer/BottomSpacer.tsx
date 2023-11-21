@@ -1,5 +1,5 @@
-import { TAB_BAR_HEIGHT } from '@core/constants';
-import { useTailwind } from '@hooks';
+import { TAB_BAR_HEIGHT } from '@/core/constants';
+import { useTailwind } from '@/hooks';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 

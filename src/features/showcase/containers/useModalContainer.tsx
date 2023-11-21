@@ -1,4 +1,4 @@
-import { Alert, Text } from '@components/core';
+import { Alert, Text } from '@/components/core';
 import { useState } from 'react';
 
 const useModalContainer = () => {

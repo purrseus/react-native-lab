@@ -1,4 +1,4 @@
-import { useTailwind } from '@hooks';
+import { useTailwind } from '@/hooks';
 import { ActivityIndicatorProps, ActivityIndicator as RNActivityIndicator } from 'react-native';
 
 export default function ActivityIndicator(props: ActivityIndicatorProps) {

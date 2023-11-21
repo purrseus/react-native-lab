@@ -1,5 +1,5 @@
-import { OverlayLoadingMethods } from '@core/interfaces';
-import { useTailwind } from '@hooks';
+import { OverlayLoadingMethods } from '@/core/interfaces';
+import { useTailwind } from '@/hooks';
 import { ForwardedRef, forwardRef, useImperativeHandle, useState } from 'react';
 import { View } from 'react-native';
 import Modal from '../modal/Modal';

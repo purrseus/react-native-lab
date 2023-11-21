@@ -1,6 +1,6 @@
-import { DateTimePickerMethods } from '@core/interfaces';
-import { useAppTranslation, useTailwind } from '@hooks';
-import { useCommonStore } from '@stores';
+import { DateTimePickerMethods } from '@/core/interfaces';
+import { useAppTranslation, useTailwind } from '@/hooks';
+import { useCommonStore } from '@/stores';
 import { ForwardedRef, forwardRef, useImperativeHandle, useState } from 'react';
 import { Platform } from 'react-native';
 import DateTimePickerModal, {

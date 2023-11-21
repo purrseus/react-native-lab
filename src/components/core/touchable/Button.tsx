@@ -1,5 +1,5 @@
-import { HORIZONTAL_GRADIENT_COORDINATES } from '@core/constants';
-import { useTailwind } from '@hooks';
+import { HORIZONTAL_GRADIENT_COORDINATES } from '@/core/constants';
+import { useTailwind } from '@/hooks';
 import { FC, useMemo } from 'react';
 import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';

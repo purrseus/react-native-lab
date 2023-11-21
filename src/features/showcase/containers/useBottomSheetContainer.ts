@@ -1,5 +1,5 @@
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
-import { useAppActionSheet } from '@hooks';
+import { useAppActionSheet } from '@/hooks';
 import { useRef } from 'react';
 
 const useBottomSheetContainer = () => {

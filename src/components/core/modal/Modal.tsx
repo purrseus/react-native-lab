@@ -1,6 +1,6 @@
-import { DEFAULT_BACKDROP_OPACITY } from '@core/constants';
-import { CommonSize } from '@core/types';
-import { useTailwind } from '@hooks';
+import { DEFAULT_BACKDROP_OPACITY } from '@/core/constants';
+import { CommonSize } from '@/core/types';
+import { useTailwind } from '@/hooks';
 import { useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 import RNModal, { ModalProps as RNModalProps } from 'react-native-modal';

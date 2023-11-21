@@ -1,5 +1,5 @@
-import { CheckboxItem } from '@core/interfaces';
-import { useAppForm } from '@hooks';
+import { CheckboxItem } from '@/core/interfaces';
+import { useAppForm } from '@/hooks';
 import { useMemo } from 'react';
 import { z } from 'zod';
 

@@ -1,4 +1,4 @@
-import { useThrottle } from '@hooks';
+import { useThrottle } from '@/hooks';
 import { ForwardedRef, forwardRef, useCallback } from 'react';
 import { Pressable, PressableProps, PressableStateCallbackType, View } from 'react-native';
 import { Style } from 'twrnc/dist/esm/types';

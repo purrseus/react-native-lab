@@ -1,5 +1,5 @@
-import tailwind from '@libs/tailwind';
-import { useCommonStore } from '@stores';
+import tailwind from '@/libs/tailwind';
+import { useCommonStore } from '@/stores';
 import { useAppColorScheme } from 'twrnc';
 
 const useTouchableContainer = () => {

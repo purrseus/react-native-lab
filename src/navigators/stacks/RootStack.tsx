@@ -1,6 +1,6 @@
-import { ProtectedScreenName, PublicScreenName } from '@core/enums';
-import { RootStackParamList } from '@core/types';
-import { LoginScreen, RegisterScreen } from '@features/authentication/screens';
+import { ProtectedScreenName, PublicScreenName } from '@/core/enums';
+import { RootStackParamList } from '@/core/types';
+import { LoginScreen, RegisterScreen } from '@/features/authentication/screens';
 import {
   BottomSheetsScreen,
   FormScreen,
@@ -13,12 +13,12 @@ import {
   SpacersScreen,
   TextsScreen,
   TouchableScreen,
-} from '@features/showcase/screens';
-import { useTailwind } from '@hooks';
-import { stackScreenOptions } from '@navigators/options';
-import BottomTabBar from '@navigators/tabs/BottomTabBar';
+} from '@/features/showcase/screens';
+import { useTailwind } from '@/hooks';
+import { stackScreenOptions } from '@/navigators/options';
+import BottomTabBar from '@/navigators/tabs/BottomTabBar';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useAuthStore } from '@stores';
+import { useAuthStore } from '@/stores';
 
 const NativeStack = createNativeStackNavigator<RootStackParamList>();
 

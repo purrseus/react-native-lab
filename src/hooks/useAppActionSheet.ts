@@ -3,7 +3,7 @@ import {
   ActionSheetProps,
   useActionSheet,
 } from '@expo/react-native-action-sheet';
-import { useCommonStore } from '@stores';
+import { useCommonStore } from '@/stores';
 import { useCallback } from 'react';
 import { useColorScheme } from 'react-native';
 import useTailwind from './useTailwind';

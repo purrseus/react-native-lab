@@ -1,8 +1,8 @@
-import { Button, Field, Form, KeyboardAwareScrollView } from '@components/core';
-import { StackContainer } from '@components/shared';
-import { ProtectedScreenName } from '@core/enums';
-import { useTailwind } from '@hooks';
-import { withHook } from '@utils';
+import { Button, Field, Form, KeyboardAwareScrollView } from '@/components/core';
+import { StackContainer } from '@/components/shared';
+import { ProtectedScreenName } from '@/core/enums';
+import { useTailwind } from '@/hooks';
+import { withHook } from '@/utils';
 import { View } from 'react-native';
 import { useFormContainer } from '../containers';
 

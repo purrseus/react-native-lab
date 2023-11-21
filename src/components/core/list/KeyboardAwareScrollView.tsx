@@ -1,4 +1,4 @@
-import { PADDING_VERTICAL_INPUT } from '@core/constants';
+import { PADDING_VERTICAL_INPUT } from '@/core/constants';
 import {
   KeyboardAwareScrollViewProps,
   KeyboardAwareScrollView as RNKeyboardAwareScrollView,

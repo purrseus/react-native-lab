@@ -1,4 +1,4 @@
-import http from '@services';
+import http from '@/services';
 import { QueryFunctionContext } from '@tanstack/react-query';
 import { PhotosSchema } from '../schemas';
 

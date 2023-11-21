@@ -1,4 +1,4 @@
-import { Language } from '@core/types';
+import { Language } from '@/core/types';
 import { getLocales } from 'react-native-localize';
 
 export const getCurrentLanguage = (): Language => {

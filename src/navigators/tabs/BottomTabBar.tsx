@@ -1,13 +1,13 @@
-import { TabScreenName } from '@core/enums';
-import { BottomTabParamList } from '@core/types';
+import { TabScreenName } from '@/core/enums';
+import { BottomTabParamList } from '@/core/types';
 import {
   HomeScreen,
   MessagesScreen,
   NotificationScreen,
   ProfileScreen,
-} from '@features/tab/screens';
-import { useNetwork, useTailwind } from '@hooks';
-import { tabScreenOptions } from '@navigators/options';
+} from '@/features/tab/screens';
+import { useNetwork, useTailwind } from '@/hooks';
+import { tabScreenOptions } from '@/navigators/options';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomTabNavigationConfig } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 import CustomizedTabBar from './CustomizedTabBar';

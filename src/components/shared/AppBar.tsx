@@ -1,10 +1,10 @@
-import { ArrowLeft } from '@assets/icons';
-import { Text, Touchable } from '@components/core';
-import { APP_BAR_HEIGHT, DEFAULT_HORIZONTAL_EDGE_SPACING } from '@core/constants';
-import { AppBarAction } from '@core/interfaces';
-import { useLayout, useTailwind } from '@hooks';
+import { ArrowLeft } from '@/assets/icons';
+import { Text, Touchable } from '@/components/core';
+import { APP_BAR_HEIGHT, DEFAULT_HORIZONTAL_EDGE_SPACING } from '@/core/constants';
+import { AppBarAction } from '@/core/interfaces';
+import { useLayout, useTailwind } from '@/hooks';
 import { useNavigation } from '@react-navigation/native';
-import { compareMemo } from '@utils';
+import { compareMemo } from '@/utils';
 import { useMemo } from 'react';
 import { View, ViewProps } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

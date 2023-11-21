@@ -1,5 +1,5 @@
-import { Text } from '@components/core';
-import { useTailwind } from '@hooks';
+import { Text } from '@/components/core';
+import { useTailwind } from '@/hooks';
 import { View } from 'react-native';
 
 export default function MessagesScreen() {

@@ -1,5 +1,5 @@
-import { ProtectedScreenName } from '@core/enums';
-import { ProtectedScreenProps } from '@core/types';
+import { ProtectedScreenName } from '@/core/enums';
+import { ProtectedScreenProps } from '@/core/types';
 import { ListRenderItem } from 'react-native';
 import { ShowcaseItem } from '../components';
 

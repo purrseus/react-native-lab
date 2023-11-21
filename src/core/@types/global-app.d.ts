@@ -1,4 +1,4 @@
-import { RootStackParamList } from '@core/types';
+import { RootStackParamList } from '@/core/types';
 import { Falsy, RecursiveArray, RegisteredStyle } from 'react-native';
 import { Style } from 'twrnc/dist/esm/types';
 

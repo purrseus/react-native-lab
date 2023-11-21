@@ -1,5 +1,5 @@
-import { PADDING_VERTICAL_INPUT } from '@core/constants';
-import { useTailwind } from '@hooks';
+import { PADDING_VERTICAL_INPUT } from '@/core/constants';
+import { useTailwind } from '@/hooks';
 import { ForwardedRef, forwardRef, ReactNode } from 'react';
 import { TextInput as RNTextInput, TextInputProps as RNTextInputProps, View } from 'react-native';
 import { Style } from 'twrnc/dist/esm/types';

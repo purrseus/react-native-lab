@@ -1,6 +1,6 @@
-import { Language } from '@core/types';
-import i18n from '@libs/i18n';
-import { createPersistenceStore } from '@utils/store';
+import { Language } from '@/core/types';
+import i18n from '@/libs/i18n';
+import { createPersistenceStore } from '@/utils/store';
 
 type Theme = 'auto' | 'light' | 'dark';
 

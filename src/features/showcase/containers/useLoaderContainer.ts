@@ -1,4 +1,4 @@
-import { overlayLoading } from '@utils';
+import { overlayLoading } from '@/utils';
 
 const useLoaderContainer = () => {
   const handleOverlayLoading = async () => {

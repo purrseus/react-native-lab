@@ -1,7 +1,7 @@
-import { Alert } from '@components/core';
-import nativeConfig from '@core/configs';
-import { PromiseObject } from '@core/interfaces';
-import { useAuthStore } from '@stores';
+import { Alert } from '@/components/core';
+import nativeConfig from '@/core/configs';
+import { PromiseObject } from '@/core/interfaces';
+import { useAuthStore } from '@/stores';
 import axios, {
   Axios,
   AxiosError,

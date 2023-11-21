@@ -1,6 +1,6 @@
-import { Text, Touchable } from '@components/core';
-import { useTailwind } from '@hooks';
-import { compareMemo } from '@utils';
+import { Text, Touchable } from '@/components/core';
+import { useTailwind } from '@/hooks';
+import { compareMemo } from '@/utils';
 
 interface ShowcaseItemProps {
   title: string;

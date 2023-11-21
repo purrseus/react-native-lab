@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { OverlayLoadingMethods } from '@core/interfaces';
+import { OverlayLoadingMethods } from '@/core/interfaces';
 import { ComponentType, createRef, memo } from 'react';
 import isEqual from 'react-fast-compare';
 

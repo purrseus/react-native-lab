@@ -1,4 +1,4 @@
-import { ONE_SECOND } from '@core/constants';
+import { ONE_SECOND } from '@/core/constants';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface Options {

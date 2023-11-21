@@ -1,4 +1,4 @@
-import { useTailwind } from '@hooks';
+import { useTailwind } from '@/hooks';
 import { ReactNode, useLayoutEffect } from 'react';
 import { ColorValue, View, ViewProps } from 'react-native';
 import Animated, {

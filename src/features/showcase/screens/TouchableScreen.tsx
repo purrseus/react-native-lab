@@ -1,9 +1,9 @@
-import { ArrowLeft, Home } from '@assets/icons';
-import { Button, Switch } from '@components/core';
-import { StackContainer } from '@components/shared';
-import { ProtectedScreenName } from '@core/enums';
-import { useTailwind } from '@hooks';
-import { withHook } from '@utils';
+import { ArrowLeft, Home } from '@/assets/icons';
+import { Button, Switch } from '@/components/core';
+import { StackContainer } from '@/components/shared';
+import { ProtectedScreenName } from '@/core/enums';
+import { useTailwind } from '@/hooks';
+import { withHook } from '@/utils';
 import { View } from 'react-native';
 import { Separator } from '../components';
 import { useTouchableContainer } from '../containers';

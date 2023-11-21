@@ -1,4 +1,4 @@
-import { createPersistenceStore } from '@utils/store';
+import { createPersistenceStore } from '@/utils/store';
 
 type AuthState = {
   accessToken: string | null;

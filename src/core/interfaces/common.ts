@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CommonSize } from '@core/types';
+import { CommonSize } from '@/core/types';
 
 export interface Measure extends CommonSize {
   x: number;

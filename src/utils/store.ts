@@ -1,4 +1,4 @@
-import config from '@core/configs';
+import config from '@/core/configs';
 import { MMKV } from 'react-native-mmkv';
 import { initializeMMKVFlipper } from 'react-native-mmkv-flipper-plugin';
 import { create, StateCreator } from 'zustand';

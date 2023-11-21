@@ -1,4 +1,4 @@
-import { QueryKey } from '@core/enums';
+import { QueryKey } from '@/core/enums';
 
 const useListContainer = () => {
   const photosQueryKey = [QueryKey.Photos];

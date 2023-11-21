@@ -1,4 +1,4 @@
-import { Home } from '@assets/icons';
+import { Home } from '@/assets/icons';
 import {
   IconTextInput,
   KeyboardAwareScrollView,
@@ -6,10 +6,10 @@ import {
   ReadMoreText,
   Text,
   TextInput,
-} from '@components/core';
-import { StackContainer } from '@components/shared';
-import { ProtectedScreenName } from '@core/enums';
-import { useTailwind } from '@hooks';
+} from '@/components/core';
+import { StackContainer } from '@/components/shared';
+import { ProtectedScreenName } from '@/core/enums';
+import { useTailwind } from '@/hooks';
 import { useTranslation } from 'react-i18next';
 import { Separator } from '../components';
 

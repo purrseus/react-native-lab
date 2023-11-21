@@ -1,8 +1,8 @@
-import { List } from '@components/core';
-import { StackContainer } from '@components/shared';
-import { ProtectedScreenName } from '@core/enums';
-import { useTailwind } from '@hooks';
-import { withHook } from '@utils';
+import { List } from '@/components/core';
+import { StackContainer } from '@/components/shared';
+import { ProtectedScreenName } from '@/core/enums';
+import { useTailwind } from '@/hooks';
+import { withHook } from '@/utils';
 import useShowcaseListContainer from '../containers/useShowcaseListContainer';
 
 const ShowcaseListScreen = withHook(useShowcaseListContainer, ({ data, renderItem }) => {

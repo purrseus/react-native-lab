@@ -1,4 +1,4 @@
-import { useTailwind } from '@hooks';
+import { useTailwind } from '@/hooks';
 import { useCallback, useState } from 'react';
 import { Image as RNImage, ImageProps as RNImageProps } from 'react-native';
 import FastImage, { FastImageProps } from 'react-native-fast-image';

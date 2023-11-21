@@ -1,4 +1,4 @@
-import { CommonSize } from '@core/types';
+import { CommonSize } from '@/core/types';
 
 export const randomColor = () => `#${Math.random().toString(16).slice(-6)}`;
 

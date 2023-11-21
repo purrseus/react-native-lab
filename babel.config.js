@@ -9,20 +9,7 @@ module.exports = {
       {
         root: ['.'],
         extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
-        alias: {
-          '@assets': './src/assets',
-          '@components': './src/components',
-          '@core': './src/core',
-          '@features': './src/features',
-          '@hooks': './src/hooks',
-          '@libs': './src/libs',
-          '@layouts': './src/layouts',
-          '@navigators': './src/navigators',
-          '@providers': './src/providers',
-          '@services': './src/services',
-          '@stores': './src/stores',
-          '@utils': './src/utils',
-        },
+        alias: { '@': './src' },
       },
     ],
     [

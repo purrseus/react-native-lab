@@ -1,6 +1,6 @@
-import { Tick } from '@assets/icons';
-import { CheckboxItem } from '@core/interfaces';
-import { useTailwind } from '@hooks';
+import { Tick } from '@/assets/icons';
+import { CheckboxItem } from '@/core/interfaces';
+import { useTailwind } from '@/hooks';
 import { View, ViewProps } from 'react-native';
 import { Style } from 'twrnc/dist/esm/types';
 import Text from '../text/Text';

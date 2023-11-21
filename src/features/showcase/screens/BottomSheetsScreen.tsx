@@ -1,8 +1,8 @@
-import { BottomSheet, Text } from '@components/core';
-import { StackContainer } from '@components/shared';
-import { ProtectedScreenName } from '@core/enums';
-import { useTailwind } from '@hooks';
-import { withHook } from '@utils';
+import { BottomSheet, Text } from '@/components/core';
+import { StackContainer } from '@/components/shared';
+import { ProtectedScreenName } from '@/core/enums';
+import { useTailwind } from '@/hooks';
+import { withHook } from '@/utils';
 import { Separator, ShowcaseItem } from '../components';
 import { useBottomSheetContainer } from '../containers';
 

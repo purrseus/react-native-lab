@@ -1,8 +1,8 @@
-import * as Icons from '@assets/icons';
-import { BottomSpacer, Text, Touchable } from '@components/core';
-import { HORIZONTAL_SAFETY_EDGES, TAB_BAR_HEIGHT } from '@core/constants';
-import { TabScreenName } from '@core/enums';
-import { useAppTranslation, useKeyboard, useTailwind } from '@hooks';
+import * as Icons from '@/assets/icons';
+import { BottomSpacer, Text, Touchable } from '@/components/core';
+import { HORIZONTAL_SAFETY_EDGES, TAB_BAR_HEIGHT } from '@/core/constants';
+import { TabScreenName } from '@/core/enums';
+import { useAppTranslation, useKeyboard, useTailwind } from '@/hooks';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { FC, useMemo } from 'react';
 import { View } from 'react-native';

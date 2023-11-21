@@ -1,11 +1,11 @@
-import { DEFAULT_BACKDROP_OPACITY } from '@core/constants';
+import { DEFAULT_BACKDROP_OPACITY } from '@/core/constants';
 import RNBottomSheet, {
   BottomSheetBackdrop,
   BottomSheetProps as RNBottomSheetProps,
 } from '@gorhom/bottom-sheet';
 import { BottomSheetDefaultBackdropProps } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
-import { useTailwind } from '@hooks';
+import { useTailwind } from '@/hooks';
 import { ForwardedRef, forwardRef, useCallback } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Style } from 'twrnc/dist/esm/types';

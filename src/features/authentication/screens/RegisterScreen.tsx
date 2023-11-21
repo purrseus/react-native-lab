@@ -1,6 +1,6 @@
-import { Button } from '@components/core';
-import { useTailwind } from '@hooks';
-import { withHook } from '@utils';
+import { Button } from '@/components/core';
+import { useTailwind } from '@/hooks';
+import { withHook } from '@/utils';
 import { Text, View } from 'react-native';
 import { useRegisterContainer } from '../containers';
 

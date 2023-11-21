@@ -1,6 +1,6 @@
-import { Alert } from '@components/core';
-import { DateTimePickerMethods } from '@core/interfaces';
-import { useImagePicker } from '@hooks';
+import { Alert } from '@/components/core';
+import { DateTimePickerMethods } from '@/core/interfaces';
+import { useImagePicker } from '@/hooks';
 import { useEffect, useRef, useState } from 'react';
 
 const usePickerContainer = () => {

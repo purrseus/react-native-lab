@@ -1,4 +1,4 @@
-import { RootStackParamList } from '@core/types';
+import { RootStackParamList } from '@/core/types';
 import {
   createNavigationContainerRef,
   NavigationHelpers,

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { LANGUAGE_MAP, ONE_SECOND } from '@core/constants';
+import { LANGUAGE_MAP, ONE_SECOND } from '@/core/constants';
 import dayjs from 'dayjs';
 import { Platform } from 'react-native';
 

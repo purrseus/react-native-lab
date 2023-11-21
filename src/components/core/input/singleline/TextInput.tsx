@@ -1,5 +1,5 @@
-import { DEFAULT_FONT_SIZE, DEFAULT_HIT_SLOP, MIN_HEIGHT_INPUT } from '@core/constants';
-import { useTailwind } from '@hooks';
+import { DEFAULT_FONT_SIZE, DEFAULT_HIT_SLOP, MIN_HEIGHT_INPUT } from '@/core/constants';
+import { useTailwind } from '@/hooks';
 import { ForwardedRef, forwardRef } from 'react';
 import { TextInput as RNTextInput, TextInputProps as RNTextInputProps } from 'react-native';
 import { Style } from 'twrnc/dist/esm/types';

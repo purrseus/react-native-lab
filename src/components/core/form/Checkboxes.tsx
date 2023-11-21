@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CheckboxItem } from '@core/interfaces';
-import { FieldProps } from '@core/types';
-import { useTailwind } from '@hooks';
+import { CheckboxItem } from '@/core/interfaces';
+import { FieldProps } from '@/core/types';
+import { useTailwind } from '@/hooks';
 import { useCallback, useMemo } from 'react';
 import { Text, View, ViewProps } from 'react-native';
 import { Style } from 'twrnc/dist/esm/types';

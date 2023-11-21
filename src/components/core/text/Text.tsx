@@ -1,5 +1,5 @@
-import { DEFAULT_FONT_SIZE } from '@core/constants';
-import { useTailwind, useThrottle } from '@hooks';
+import { DEFAULT_FONT_SIZE } from '@/core/constants';
+import { useTailwind, useThrottle } from '@/hooks';
 import { Text as RNText, TextProps as RNTextProps } from 'react-native';
 import { Style } from 'twrnc/dist/esm/types';
 

@@ -1,5 +1,5 @@
-import { FieldProps } from '@core/types';
-import { useTailwind } from '@hooks';
+import { FieldProps } from '@/core/types';
+import { useTailwind } from '@/hooks';
 import { View } from 'react-native';
 import { Style } from 'twrnc/dist/esm/types';
 import MultilineTextInput, { MultilineTextInputProps } from '../input/multiline/MultilineTextInput';

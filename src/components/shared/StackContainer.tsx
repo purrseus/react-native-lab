@@ -1,5 +1,5 @@
-import { useTailwind } from '@hooks';
-import { compareMemo } from '@utils';
+import { useTailwind } from '@/hooks';
+import { compareMemo } from '@/utils';
 import { useMemo } from 'react';
 import { ScrollView, View, ViewProps } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

@@ -1,4 +1,4 @@
-import { useAppTranslation, useTailwind } from '@hooks';
+import { useAppTranslation, useTailwind } from '@/hooks';
 import { useMemo, useRef, useState } from 'react';
 import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
 import Text, { TextProps } from './Text';

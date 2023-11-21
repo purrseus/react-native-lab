@@ -1,4 +1,4 @@
-import { useTailwind } from '@hooks';
+import { useTailwind } from '@/hooks';
 import { StyleSheet, View } from 'react-native';
 
 export default function Separator() {

@@ -1,4 +1,4 @@
-import { useTailwind } from '@hooks';
+import { useTailwind } from '@/hooks';
 import { StatusBar as RNStatusBar, StatusBarProps } from 'react-native';
 
 export default function StatusBar(props: StatusBarProps) {

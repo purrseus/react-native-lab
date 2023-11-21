@@ -1,4 +1,4 @@
-import { DEFAULT_NAMESPACE } from '@core/constants';
+import { DEFAULT_NAMESPACE } from '@/core/constants';
 import { FlatNamespace, KeyPrefix } from 'i18next';
 import { FallbackNs, useTranslation } from 'react-i18next';
 import { $Tuple } from 'react-i18next/helpers';

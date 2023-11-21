@@ -1,4 +1,4 @@
-import { ProtectedScreenName, TabScreenName, PublicScreenName } from '@core/enums';
+import { ProtectedScreenName, TabScreenName, PublicScreenName } from '@/core/enums';
 import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type PublicParamList = {

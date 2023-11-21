@@ -1,5 +1,8 @@
-import { DEFAULT_DATE_TIME_FORMAT_TEMPLATE, DEFAULT_NUMBER_FORMAT_TEMPLATE } from '@core/constants';
-import { DateTimeFormatTemplate, NumberFormatTemplate } from '@core/types';
+import {
+  DEFAULT_DATE_TIME_FORMAT_TEMPLATE,
+  DEFAULT_NUMBER_FORMAT_TEMPLATE,
+} from '@/core/constants';
+import { DateTimeFormatTemplate, NumberFormatTemplate } from '@/core/types';
 import dayjs from 'dayjs';
 import numeral from 'numeral';
 

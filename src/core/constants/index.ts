@@ -1,4 +1,4 @@
-import { LanguageMap, Locale } from '@core/types';
+import { LanguageMap, Locale } from '@/core/types';
 import { Insets } from 'react-native';
 import { LinearGradientProps } from 'react-native-linear-gradient';
 import { Edge } from 'react-native-safe-area-context';

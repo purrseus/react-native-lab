@@ -1,4 +1,4 @@
-import { Measure } from '@core/interfaces';
+import { Measure } from '@/core/interfaces';
 import { useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
 

@@ -1,5 +1,5 @@
-import { Image, Text, Touchable } from '@components/core';
-import { useTailwind } from '@hooks';
+import { Image, Text, Touchable } from '@/components/core';
+import { useTailwind } from '@/hooks';
 import { View } from 'react-native';
 import { Photos } from '../services/schemas';
 

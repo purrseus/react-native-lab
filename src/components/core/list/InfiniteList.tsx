@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useTailwind, useThrottle } from '@hooks';
+import { useTailwind, useThrottle } from '@/hooks';
 import {
   GetNextPageParamFunction,
   QueryFunction,

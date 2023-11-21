@@ -1,7 +1,7 @@
-import { StackContainer } from '@components/shared';
-import { ProtectedScreenName } from '@core/enums';
-import { useTailwind } from '@hooks';
-import { withHook } from '@utils';
+import { StackContainer } from '@/components/shared';
+import { ProtectedScreenName } from '@/core/enums';
+import { useTailwind } from '@/hooks';
+import { withHook } from '@/utils';
 import { ShowcaseItem } from '../components';
 import { useLoaderContainer } from '../containers';
 

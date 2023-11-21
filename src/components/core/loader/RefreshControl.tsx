@@ -1,4 +1,4 @@
-import { useTailwind } from '@hooks';
+import { useTailwind } from '@/hooks';
 import { RefreshControl as RNRefreshControl, RefreshControlProps } from 'react-native';
 
 export default function RefreshControl(props: RefreshControlProps) {
