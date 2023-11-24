@@ -17,11 +17,6 @@ export const DEFAULT_HORIZONTAL_EDGE_SPACING = 16;
 export const DEFAULT_HIT_SLOP: Readonly<Insets> = { top: 8, bottom: 8, left: 8, right: 8 };
 //#endregion
 
-//#region formats
-export const DEFAULT_DATE_TIME_FORMAT_TEMPLATE = 'DD/MMM/YYYY HH:mm';
-export const DEFAULT_NUMBER_FORMAT_TEMPLATE = '0,0';
-//#endregion
-
 //#region styles
 export const DEFAULT_BACKDROP_OPACITY = 0.2;
 export const HORIZONTAL_GRADIENT_COORDINATES: Readonly<
