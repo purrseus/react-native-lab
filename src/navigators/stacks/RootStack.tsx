@@ -17,8 +17,13 @@ import {
 import { useTailwind } from '@/hooks';
 import { stackScreenOptions } from '@/navigators/options';
 import BottomTabBar from '@/navigators/tabs/BottomTabBar';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useAuthStore } from '@/stores';
+import { useFlipper } from '@react-navigation/devtools';
+import { createNavigationContainerRef } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const useNavigationFlipper = __DEV__ ? useFlipper : null;
+export const navigationRef = createNavigationContainerRef<RootStackParamList>();
 
 const NativeStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -54,6 +59,7 @@ export default function RootNavigator() {
   const isAuthenticated = useAuthStore(
     ({ accessToken, refreshToken }) => accessToken?.isNotEmpty && refreshToken?.isNotEmpty,
   );
+  useNavigationFlipper?.(navigationRef);
 
   return (
     <NativeStack.Navigator

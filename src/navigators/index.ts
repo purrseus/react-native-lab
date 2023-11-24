@@ -1,10 +1,6 @@
 import { RootStackParamList } from '@/core/types';
-import {
-  createNavigationContainerRef,
-  NavigationHelpers,
-  StackActions,
-} from '@react-navigation/native';
-import RootNavigator from './stacks/RootStack';
+import { NavigationHelpers, StackActions } from '@react-navigation/native';
+import RootNavigator, { navigationRef } from './stacks/RootStack';
 
 type ActionName = keyof typeof StackActions;
 type ActionType<T extends ActionName> = (...args: Parameters<(typeof StackActions)[T]>) => void;
@@ -27,9 +23,7 @@ interface Navigation<T extends RootStackParamList>
   popToTop: ActionType<'popToTop'>;
 }
 
-export const navigationRef = createNavigationContainerRef<RootStackParamList>();
-
-export const RootNavigation: Navigation<RootStackParamList> = {
+const RootNavigation: Navigation<RootStackParamList> = {
   ready(callback) {
     if (navigationRef.isReady()) callback();
   },
@@ -62,3 +56,4 @@ export const RootNavigation: Navigation<RootStackParamList> = {
 };
 
 export default RootNavigator;
+export { RootNavigation, navigationRef };
