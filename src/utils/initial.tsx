@@ -1,6 +1,8 @@
 import { ComponentProps, JSXElementConstructor, PropsWithChildren } from 'react';
-import { DevSettings, UIManager } from 'react-native';
+import { Appearance, DevSettings, UIManager } from 'react-native';
 import { MMKVStorage } from './store';
+import { useCommonStore } from '@/stores';
+import { changeKeyboardAppearance, configureKeyboard } from '@/libs/keyboard-manager';
 
 //#region buildProvidersTree
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,6 +32,13 @@ export const onAppBootstrap = () => {
 
   if (isAndroid() && UIManager.setLayoutAnimationEnabledExperimental)
     UIManager.setLayoutAnimationEnabledExperimental(true);
+
+  if (isIos()) {
+    configureKeyboard();
+    Appearance.addChangeListener(({ colorScheme }) => {
+      if (useCommonStore.getState().theme === 'auto') changeKeyboardAppearance(colorScheme);
+    });
+  }
 
   if (__DEV__) {
     const devSettingItems: { title: string; handler: () => void }[] = [
