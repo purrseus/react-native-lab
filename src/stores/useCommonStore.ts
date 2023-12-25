@@ -1,9 +1,11 @@
 import { Language } from '@/core/types';
-import i18n from '@/libs/i18n';
-import { changeKeyboardAppearance } from '@/libs/keyboard-manager';
-import tailwind from '@/libs/tailwind';
-import { getCurrentLanguage } from '@/utils';
-import { createPersistenceStore } from '@/utils/store';
+import i18n from '@/i18n';
+import {
+  changeKeyboardAppearance,
+  createPersistenceStore,
+  getCurrentLanguage,
+  tailwind,
+} from '@/utils';
 import { Appearance } from 'react-native';
 
 type Theme = 'auto' | 'light' | 'dark';
