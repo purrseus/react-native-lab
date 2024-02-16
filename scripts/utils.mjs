@@ -85,7 +85,7 @@ export const commands = {
     return `cd android && ./gradlew clean && ./gradlew ${buildVariant} && cd ..`;
   },
   runIos(env, buildType, envShort) {
-    return `ENVFILE=environments/.env.${env} yarn react-native run-ios --configuration '${buildType} (${envShort})' --scheme '${appInfo.name} (${envShort})'`;
+    return `ENVFILE=environments/.env.${env} yarn react-native run-ios --configuration '${buildType} (${envShort})' --scheme '${appInfo.name} (${envShort})' --simulator 'iPhone 15 Pro Max'`;
   },
   openXCode() {
     return 'xed -b ios';

@@ -16,7 +16,7 @@
     "lint:fix": "eslint \"{src,scripts,__tests__}/**/*.{ts,tsx,js,jsx,mjs}\" --fix",
     "format": "prettier --check \"{src,scripts,__tests__}/**/*.{ts,tsx,js,mjs,jsx,svg,md}\" --write",
     "commit": "cz",
-    "postinstall": "patch-package && react-native setup-ios-permissions && pod-install",
+    "postinstall": "patch-package && pod-install",
     "prepare": "husky install",
     "test": "jest"
   },
@@ -57,7 +57,7 @@
     "react-native-mmkv": "^2.10.1",
     "react-native-modal": "^13.0.1",
     "react-native-modal-datetime-picker": "^17.0.0",
-    "react-native-permissions": "^3.8.4",
+    "react-native-permissions": "^4.1.1",
     "react-native-reanimated": "^3.3.0",
     "react-native-safe-area-context": "^4.7.1",
     "react-native-screens": "^3.22.1",
@@ -65,7 +65,7 @@
     "twrnc": "^3.6.4",
     "use-immer": "^0.9.0",
     "zod": "^3.21.4",
-    "zustand": "^4.3.9"
+    "zustand": "^4.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -95,7 +95,7 @@
     "lint-staged": "^13.2.3",
     "metro-react-native-babel-preset": "0.76.8",
     "patch-package": "^7.0.2",
-    "pod-install": "^0.1.39",
+    "pod-install": "^0.2.0",
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.4.1",
     "react-native-flipper": "^0.207.0",
