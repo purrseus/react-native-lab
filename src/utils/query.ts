@@ -6,5 +6,4 @@ class AppQueryClient extends QueryClient {
   };
 }
 
-// TODO
 export const queryClient = new AppQueryClient();
