@@ -10,6 +10,7 @@ module.exports = {
   plugins: [
     plugin(({ addUtilities }) => {
       addUtilities({
+        debug: 'border border-red-500',
         'flex-center': 'justify-center items-center',
         'flex-fill-center': 'flex-1 justify-center items-center',
         'abs-fill': 'absolute top-0 left-0 right-0 bottom-0',

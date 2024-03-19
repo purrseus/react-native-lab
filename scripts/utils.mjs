@@ -80,7 +80,7 @@ export const commands = {
   },
   runAndroid(buildVariant, suffixAppId) {
     // FIXME: Code push workaround, see: https://github.com/microsoft/react-native-code-push/issues/2442
-    return `rm -r ./android/app/build/generated/assets/createBundle* && yarn react-native run-android --mode ${buildVariant} --appId com.${appInfo.name.toLowerCase()}${suffixAppId}`;
+    return `rm -r ./android/app/build/generated/assets/createBundle*; yarn react-native run-android --mode ${buildVariant} --appId com.${appInfo.name.toLowerCase()}${suffixAppId}`;
   },
   generateAndroidFile(buildVariant) {
     return `cd android && ./gradlew clean && ./gradlew ${buildVariant} && cd ..`;

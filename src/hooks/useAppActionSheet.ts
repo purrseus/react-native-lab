@@ -3,7 +3,7 @@ import {
   ActionSheetProps,
   useActionSheet,
 } from '@expo/react-native-action-sheet';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import useTailwind from './useTailwind';
 
 type UseActionSheet = (
@@ -14,17 +14,23 @@ const useAppActionSheet: UseActionSheet = (actionSheetOptions, callback) => {
   const tw = useTailwind();
   const { showActionSheetWithOptions } = useActionSheet();
 
+  const [options, cancelButtonIndex] = useMemo(() => {
+    const shouldReorderOptions =
+      isAndroid() && Number.isInteger(actionSheetOptions.cancelButtonIndex);
+
+    if (!shouldReorderOptions) {
+      return [actionSheetOptions.options, actionSheetOptions.cancelButtonIndex];
+    }
+
+    const reorderOptions = actionSheetOptions.options.swap(
+      actionSheetOptions.cancelButtonIndex!,
+      actionSheetOptions.options.lastIndex,
+    );
+
+    return [reorderOptions, reorderOptions.lastIndex];
+  }, [actionSheetOptions.cancelButtonIndex, actionSheetOptions.options]);
+
   const showActionSheet = useCallback(() => {
-    const keepOriginalValue = !Number.isInteger(actionSheetOptions.cancelButtonIndex) || isIos();
-
-    const options = keepOriginalValue
-      ? actionSheetOptions.options
-      : actionSheetOptions.options.slice(1).concat(actionSheetOptions.options.slice(0, 1));
-
-    const cancelButtonIndex = keepOriginalValue
-      ? actionSheetOptions.cancelButtonIndex
-      : options.lastIndex;
-
     const additionalOptions: ActionSheetOptions = {
       options,
       cancelButtonIndex,
@@ -40,13 +46,15 @@ const useAppActionSheet: UseActionSheet = (actionSheetOptions, callback) => {
       ),
       textStyle: tw`shrink text-zinc-700 dark:text-white`,
       showSeparators: false,
+      autoFocus: true,
+      useModal: true,
       destructiveColor: tw.color('red-500'),
     };
 
     return showActionSheetWithOptions({ ...actionSheetOptions, ...additionalOptions }, index =>
-      callback(keepOriginalValue ? index : index === options.lastIndex ? 0 : (index ?? -1) + 1),
+      callback(!index ? index : actionSheetOptions.options.indexOf(options[index])),
     );
-  }, [actionSheetOptions, tw, showActionSheetWithOptions, callback]);
+  }, [options, cancelButtonIndex, tw, actionSheetOptions, showActionSheetWithOptions, callback]);
 
   return showActionSheet;
 };
